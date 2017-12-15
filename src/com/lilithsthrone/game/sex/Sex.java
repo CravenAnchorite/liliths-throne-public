@@ -611,13 +611,11 @@ public enum Sex {
 		
 
 		// Player pregnancy:
-		if (!areasCummedInPlayer.isEmpty()) {
-			if (areasCummedInPlayer.contains(OrificeType.VAGINA_PLAYER))
+		if ( (!areasCummedInPlayer.isEmpty() && areasCummedInPlayer.contains(OrificeType.VAGINA_PLAYER)) || wetOrificeTypes.get(OrificeType.VAGINA_PLAYER).contains(LubricationType.PARTNER_NATURAL_LUBRICATION) ){
 				sexSB.append(Main.game.getPlayer().rollForPregnancy(partner));
 		}
 		// Partner pregnancy:
-		if (!areasCummedInPartner.isEmpty() && partner.isAbleToBeImpregnated()) {
-			if (areasCummedInPartner.contains(OrificeType.VAGINA_PARTNER))
+		if ( (!areasCummedInPartner.isEmpty() && partner.isAbleToBeImpregnated() && areasCummedInPartner.contains(OrificeType.VAGINA_PARTNER)) || wetOrificeTypes.get(OrificeType.VAGINA_PARTNER).contains(LubricationType.PLAYER_NATURAL_LUBRICATION) ){
 				sexSB.append(partner.rollForPregnancy(Main.game.getPlayer()));
 		}
 		
