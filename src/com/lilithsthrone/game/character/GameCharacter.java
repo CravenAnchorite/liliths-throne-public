@@ -7862,7 +7862,11 @@ public abstract class GameCharacter implements Serializable, XMLSaving {
 			
 		} else {
 			pregnancyChance = 0;
-			pregnancyChance += (partner.getAttributeValue(Attribute.VIRILITY)/100f) * partner.getPenisCumProduction().getPregnancyModifier();
+			if (partner.hasPenis()){
+				pregnancyChance += (partner.getAttributeValue(Attribute.VIRILITY)/100f) * partner.getPenisCumProduction().getPregnancyModifier();
+			} else {
+				pregnancyChance += (partner.getAttributeValue(Attribute.VIRILITY)/100f);
+			}
 			pregnancyChance += (getAttributeValue(Attribute.FERTILITY)/100f);
 		}
 		
@@ -7904,8 +7908,13 @@ public abstract class GameCharacter implements Serializable, XMLSaving {
 				int maximumNumberOfChildren = 1;
 				
 				if(getVaginaType()==VaginaType.HUMAN) {
-					minimumNumberOfChildren = partner.getPenisType().getRace().getNumberOfOffspringLow();
-					maximumNumberOfChildren = partner.getPenisType().getRace().getNumberOfOffspringHigh();
+					if( partner.hasPenis() ){
+						minimumNumberOfChildren = partner.getPenisType().getRace().getNumberOfOffspringLow();
+						maximumNumberOfChildren = partner.getPenisType().getRace().getNumberOfOffspringHigh();
+					} else {
+						minimumNumberOfChildren = partner.getVaginaType().getRace().getNumberOfOffspringLow();
+						maximumNumberOfChildren = partner.getVaginaType().getRace().getNumberOfOffspringHigh();
+					}
 					
 				} else {
 					minimumNumberOfChildren = getVaginaType().getRace().getNumberOfOffspringLow();

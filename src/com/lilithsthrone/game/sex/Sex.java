@@ -727,16 +727,14 @@ public enum Sex {
 		}
 		
 
-//		// Player pregnancy:
-//		if (!areasCummedIn.get(Main.game.getPlayer()).isEmpty()) {
-//			if (areasCummedIn.get(Main.game.getPlayer()).contains(OrificeType.VAGINA))
-//				sexSB.append(Main.game.getPlayer().rollForPregnancy(activePartner));
-//		}
-//		// Partner pregnancy:
-//		if (!areasCummedIn.get(Sex.getActivePartner()).isEmpty() && activePartner.isAbleToBeImpregnated()) {
-//			if (areasCummedIn.get(Sex.getActivePartner()).contains(OrificeType.VAGINA))
-//				sexSB.append(activePartner.rollForPregnancy(Main.game.getPlayer()));
-//		}
+		// Player pregnancy:
+		if ( (!areasCummedInPlayer.isEmpty() && areasCummedInPlayer.contains(OrificeType.VAGINA_PLAYER)) || wetOrificeTypes.get(OrificeType.VAGINA_PLAYER).contains(LubricationType.PARTNER_NATURAL_LUBRICATION) ){
+				sexSB.append(Main.game.getPlayer().rollForPregnancy(partner));
+		}
+		// Partner pregnancy:
+		if ( (!areasCummedInPartner.isEmpty() && partner.isAbleToBeImpregnated() && areasCummedInPartner.contains(OrificeType.VAGINA_PARTNER)) || wetOrificeTypes.get(OrificeType.VAGINA_PARTNER).contains(LubricationType.PLAYER_NATURAL_LUBRICATION) ){
+				sexSB.append(partner.rollForPregnancy(Main.game.getPlayer()));
+		}
 		
 		if(getNumberOfOrgasms(Main.game.getPlayer())==0) {
 			if(Sex.getSexPace(Main.game.getPlayer())!=SexPace.SUB_RESISTING) {
