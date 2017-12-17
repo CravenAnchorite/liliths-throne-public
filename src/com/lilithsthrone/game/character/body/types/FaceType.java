@@ -26,7 +26,7 @@ public enum FaceType implements BodyPartTypeInterface {
 
 	SQUIRREL_MORPH(BodyCoveringType.SQUIRREL_FUR, MouthType.SQUIRREL_MORPH, TongueType.SQUIRREL_MORPH, Race.SQUIRREL_MORPH),
 
-	ALLIGATOR_MORPH(BodyCoveringType.SCALES_ALLIGATOR, MouthType.ALLIGATOR_MORPH, TongueType.ALLIGATOR_MORPH, Race.ALLIGATOR_MORPH),
+	ALLIGATOR_MORPH(BodyCoveringType.ALLIGATOR_SCALES, MouthType.ALLIGATOR_MORPH, TongueType.ALLIGATOR_MORPH, Race.ALLIGATOR_MORPH),
 
 	HORSE_MORPH(BodyCoveringType.HORSE_HAIR, MouthType.HORSE_MORPH, TongueType.HORSE_MORPH, Race.HORSE_MORPH),
 
@@ -104,7 +104,7 @@ public enum FaceType implements BodyPartTypeInterface {
 			case SQUIRREL_MORPH:
 				return UtilText.returnStringAtRandom("anthropomorphic squirrel-like", "squirrel-like", "rodent");
 			case ALLIGATOR_MORPH:
-				return UtilText.returnStringAtRandom("anthropomorphic gator-like", "gator-like", "reptile");
+				return UtilText.returnStringAtRandom("anthropomorphic alligator-like", "gator-like", "reptile");
 			case HARPY:
 				return UtilText.returnStringAtRandom("anthropomorphic bird-like", "bird-like");
 			case HORSE_MORPH:
