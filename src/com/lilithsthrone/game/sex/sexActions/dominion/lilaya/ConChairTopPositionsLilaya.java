@@ -5,6 +5,7 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.sex.ArousalIncrease;
 import com.lilithsthrone.game.sex.Sex;
 import com.lilithsthrone.game.sex.managers.dominion.lilaya.SMChairBottomLilaya;
+import com.lilithsthrone.game.sex.managers.dominion.lilaya.SMChairKneelingLilaya;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 
@@ -52,4 +53,44 @@ public class ConChairTopPositionsLilaya {
 			Sex.setSexManager(new SMChairBottomLilaya());
 		}
 	};
+	
+	public static final SexAction PLAYER_KNEEL = new SexAction(
+			SexActionType.PLAYER_POSITIONING,
+			ArousalIncrease.ZERO_NONE,
+			ArousalIncrease.ZERO_NONE,
+			CorruptionLevel.ZERO_PURE,
+			null,
+			null) {
+
+		@Override
+		public boolean isBaseRequirementsMet() {
+			return !Sex.isAnyNonSelfPenetrationHappening();
+		}
+		
+		@Override
+		public String getActionTitle() {
+			return "Kneel on Floor";
+		}
+
+		@Override
+		public String getActionDescription() {
+			return UtilText.genderParsing(Sex.getPartner(),
+					"Kneel down on the floor in front of "+Sex.getPartner().getName("the")+".");
+		}
+
+		@Override
+		public String getDescription() {
+			return UtilText.genderParsing(Sex.getPartner(),
+					"You slide of of "+Sex.getPartner().getName("the")+"'s lap, and with a playful little grin you get to your knees in front of <herPro>."
+					+ " You lick your lips and gaze up at <her> eyes while your hands spread her legs apart."
+					+ " Looking down at you, <she> smiles, "
+					+ UtilText.parseSpeech("You're looking to lick some pussy, sweetie, huh?", Sex.getPartner()));
+		}
+
+		@Override
+		public void applyEffects() {
+			Sex.setSexManager(new SMChairKneelingLilaya());
+		}
+	};
+	
 }
