@@ -5,15 +5,8 @@ import com.lilithsthrone.game.sex.SexPosition;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
 import com.lilithsthrone.game.sex.sexActions.baseActionsMisc.GenericActions;
 import com.lilithsthrone.game.sex.sexActions.baseActionsMisc.GenericOrgasms;
-import com.lilithsthrone.game.sex.sexActions.baseActionsPartner.PartnerFingerUrethra;
-import com.lilithsthrone.game.sex.sexActions.baseActionsPartner.PartnerFingerVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActionsPartner.PartnerTongueBreasts;
-import com.lilithsthrone.game.sex.sexActions.baseActionsPartner.PartnerTongueNipple;
-import com.lilithsthrone.game.sex.sexActions.baseActionsPartner.PartnerTongueVagina;
 import com.lilithsthrone.game.sex.sexActions.baseActionsPlayer.PlayerFingerUrethra;
 import com.lilithsthrone.game.sex.sexActions.baseActionsPlayer.PlayerFingerVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActionsPlayer.PlayerPenisMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActionsPlayer.PlayerPenisNipple;
 import com.lilithsthrone.game.sex.sexActions.baseActionsPlayer.PlayerTongueBreasts;
 import com.lilithsthrone.game.sex.sexActions.baseActionsPlayer.PlayerTongueNipple;
 import com.lilithsthrone.game.sex.sexActions.baseActionsPlayer.PlayerTongueVagina;
@@ -77,17 +70,12 @@ public class SMChairKneelingLilaya extends SexManagerDefault {
 
 				PlayerTongueBreasts.class,
 				PlayerTongueNipple.class,
-				PartnerTongueBreasts.class,
-				PartnerTongueNipple.class,
-				
+								
 				// Scene-specific:
 				
 				ConChairBottom.class,
 				SALilayaSpecials.class,
 				
-				PlayerPenisMouth.class,
-				PlayerPenisNipple.class,
-
 				PlayerFingerUrethra.class,
 				PlayerFingerVagina.class,
 				PlayerTongueVagina.class,
@@ -138,7 +126,7 @@ public class SMChairKneelingLilaya extends SexManagerDefault {
 	
 	@Override
 	public boolean isPartnerCanRemovePlayersClothes(){
-		return true;
+		return false;
 	}
 
 	@Override
