@@ -76,6 +76,22 @@ public enum LubricationType {
 			}
 		}
 	},
+	PLAYER_GIRLCUM(false) {
+		@Override
+		public String getName() {
+			return "your "+Main.game.getPlayer().getGirlcumName();
+		}
+	},
+	PARTNER_GIRLCUM(false) {
+		@Override
+		public String getName() {
+			if(Sex.getPartner()!=null) {
+				return Sex.getPartner().getName("the")+"'s "+Sex.getPartner().getGirlcumName();
+			} else {
+				return "cum";
+			}
+		}
+	},
 	OTHER_CUM(false) {
 		@Override
 		public String getName() {

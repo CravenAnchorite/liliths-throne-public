@@ -218,7 +218,7 @@ public class SARalphOrgasms {
 					}
 					
 				} else { // No penetration:
-					UtilText.nodeContentSB.append(" Your [pc.pussy+] clenches down hard, and the wave of disappointment upon finding itself empty almost overwhelms the pleasure that radiates up through your groin.");
+					UtilText.nodeContentSB.append(" Your [pc.pussy+] clenches down hard, your body overwhelmed with waves of the pleasure that radiates up through your groin.");
 				}
 
 				UtilText.nodeContentSB.append(" With a final, ear-splitting scream of pure arousal, your climax crashes over you, and after a few moments, leaves you as a panting, thoroughly-satisfied wreck.");

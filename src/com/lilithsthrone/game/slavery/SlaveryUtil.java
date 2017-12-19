@@ -289,12 +289,12 @@ public class SlaveryUtil implements Serializable {
 											new ListValue<>("[style.boldGood(+5)] [style.boldAffection(Affection towards Lilaya)]")));
 							
 						} else {
-						slave.incrementAffection(Main.game.getPlayer(), -1);
-						slave.incrementAffection(Main.game.getLilaya(), -5);
-						return new SlaveryEventLogEntry(hour, slave, "Testing", UtilText.parse(slave, "Lilaya ran some rather intrusive tests on [npc.name]."),
-								Util.newArrayListOfValues(
-										new ListValue<>("[style.boldBad(-1)] [style.boldAffection(Affection)]"),
-										new ListValue<>("[style.boldBad(-5)] [style.boldAffection(Affection towards Lilaya)]")));
+							slave.incrementAffection(Main.game.getPlayer(), -1);
+							slave.incrementAffection(Main.game.getLilaya(), -5);
+							return new SlaveryEventLogEntry(hour, slave, "Testing", UtilText.parse(slave, "Lilaya ran some rather intrusive tests on [npc.name]."),
+									Util.newArrayListOfValues(
+											new ListValue<>("[style.boldBad(-1)] [style.boldAffection(Affection)]"),
+											new ListValue<>("[style.boldBad(-5)] [style.boldAffection(Affection towards Lilaya)]")));
 						}
 						
 						

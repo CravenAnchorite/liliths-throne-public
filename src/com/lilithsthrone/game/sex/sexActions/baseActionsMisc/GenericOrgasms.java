@@ -517,7 +517,7 @@ public class GenericOrgasms {
 					
 				} else { // No penetration:
 					descriptionSB.append(" Your [pc.pussy+]"
-							+" clenches down hard, and the wave of disappointment upon finding itself empty almost overwhelms the pleasure that radiates up through your groin.");
+							+" clenches down hard, your body overwhelmed with waves of the pleasure that radiates up through your groin.");
 				}
 
 				descriptionSB.append(" With a final, ear-splitting scream of pure arousal, your climax crashes over you, and after a few moments, leaves you as a panting, thoroughly-satisfied wreck.");
@@ -839,7 +839,7 @@ public class GenericOrgasms {
 					}
 					
 				} else { // No penetration:
-					descriptionSB.append(" Your [pc.pussy+] clenches down hard, and the wave of disappointment upon finding itself empty almost overwhelms the pleasure that radiates up through your groin.");
+					descriptionSB.append(" Your [pc.pussy+] clenches down hard, consuming your body in wave after wave of the pleasure that radiates up through your groin.");
 				}
 
 				descriptionSB.append(" With a final, ear-splitting scream of pure arousal, your climax crashes over you, and after a few moments, leaves you as a panting, thoroughly-satisfied wreck.");
@@ -1723,7 +1723,7 @@ public class GenericOrgasms {
 					
 				} else { // No penetration:
 					descriptionSB.append(" [npc.Her] [npc.pussy+]"
-							+" clenches down hard, and the wave of disappointment upon finding itself empty almost overwhelms the pleasure that radiates up through [npc.her] groin.");
+							+" clenches down hard, your body overwhelmed with waves of the pleasure that radiates up through [npc.her] groin.");
 				}
 				
 				descriptionSB.append(" With a final, ear-splitting scream of pure arousal, [npc.her] climax crashes over [npc.herHim], and after a few moments, leaves [npc.herHim] as a panting, thoroughly-satisfied wreck.");

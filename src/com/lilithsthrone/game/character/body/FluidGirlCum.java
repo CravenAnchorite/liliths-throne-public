@@ -44,7 +44,7 @@ public class FluidGirlCum implements BodyPartInterface, Serializable {
 
 	@Override
 	public String getName(GameCharacter gc) {
-		return type.getName(gc);
+		return UtilText.returnStringAtRandom("cream", "pussy juice", "cunt juice", "girl cum", "nectar");
 	}
 	
 	@Override
