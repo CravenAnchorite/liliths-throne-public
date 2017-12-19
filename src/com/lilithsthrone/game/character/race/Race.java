@@ -365,7 +365,11 @@ public enum Race {
 
 	
 	 REINDEER_MORPH(
+<<<<<<< Upstream, based on upstream/master
 			 "reindeer-morph", "reindeer-morphs",
+=======
+			 "reindeer morph", "reindeer-morphs",
+>>>>>>> 78d186e upstream
 				
 			"reindeer-boy",
 			"reindeer-girl",

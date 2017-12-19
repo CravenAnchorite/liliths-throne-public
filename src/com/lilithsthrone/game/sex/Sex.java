@@ -1,12 +1,9 @@
 package com.lilithsthrone.game.sex;
 
 import java.util.AbstractMap.SimpleEntry;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -16,8 +13,6 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.PlayerCharacter;
 import com.lilithsthrone.game.character.QuestLine;
 import com.lilithsthrone.game.character.attributes.ArousalLevel;
-import com.lilithsthrone.game.character.attributes.CorruptionLevel;
-import com.lilithsthrone.game.character.attributes.LustLevel;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.types.PenisType;
 import com.lilithsthrone.game.character.body.types.TailType;
@@ -728,11 +723,11 @@ public enum Sex {
 		
 
 		// Player pregnancy:
-		if ( (!areasCummedInPlayer.isEmpty() && areasCummedInPlayer.contains(OrificeType.VAGINA_PLAYER)) || wetOrificeTypes.get(OrificeType.VAGINA_PLAYER).contains(LubricationType.PARTNER_NATURAL_LUBRICATION) ){
+		if ( (!areasCummedInPlayer.isEmpty() && areasCummedInPlayer.contains(OrificeType.VAGINA_PLAYER)) || wetOrificeTypes.get(OrificeType.VAGINA_PLAYER).contains(LubricationType.PARTNER_GIRLCUM) ){
 				sexSB.append(Main.game.getPlayer().rollForPregnancy(partner));
 		}
 		// Partner pregnancy:
-		if ( (!areasCummedInPartner.isEmpty() && partner.isAbleToBeImpregnated() && areasCummedInPartner.contains(OrificeType.VAGINA_PARTNER)) || wetOrificeTypes.get(OrificeType.VAGINA_PARTNER).contains(LubricationType.PLAYER_NATURAL_LUBRICATION) ){
+		if ( (!areasCummedInPartner.isEmpty() && partner.isAbleToBeImpregnated() && areasCummedInPartner.contains(OrificeType.VAGINA_PARTNER)) || wetOrificeTypes.get(OrificeType.VAGINA_PARTNER).contains(LubricationType.PLAYER_GIRLCUM) ){
 				sexSB.append(partner.rollForPregnancy(Main.game.getPlayer()));
 		}
 		

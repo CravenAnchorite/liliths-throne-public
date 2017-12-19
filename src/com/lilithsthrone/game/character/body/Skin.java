@@ -183,6 +183,7 @@ public class Skin implements BodyPartInterface, Serializable {
 				if (owner.isPlayer()) {
 					UtilText.transformationContentSB.append(
 								" After just a few moments, the transformation comes to an end, and you let out a deep sigh as the itching finally stops, leaving your torso covered with short, reindeer-like hair."
+<<<<<<< Upstream, based on upstream/master
 								+ " Your new fur looks very sleek, and helps to show off your figure, although it's a little coarse to the touch."
 								+ "</br>"
 								+ "You now have [style.boldReindeerMorph(rangiferine)], [pc.skinFullDescription]."
@@ -191,6 +192,16 @@ public class Skin implements BodyPartInterface, Serializable {
 					UtilText.transformationContentSB.append(
 								" After just a few moments, the transformation comes to an end, and [npc.she] lets out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with short, reindeer-like hair."
 								+ " [npc.Her] new fur looks very sleek, and helps to show off [npc.her] figure, although it's a little coarse to the touch."
+=======
+								+ " Your new hair looks very sleek, and helps to show off your figure, although it's a little coarse to the touch."
+								+ "</br>"
+								+ "You now have [style.boldReindeerMorph(rangiferine)], [pc.skinFullDescription]."
+							+ "</p>");
+				} else {
+					UtilText.transformationContentSB.append(
+								" After just a few moments, the transformation comes to an end, and [npc.she] lets out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with short, reindeer-like hair."
+								+ " [npc.Her] new hair looks very sleek, and helps to show off [npc.her] figure, although it's a little coarse to the touch."
+>>>>>>> 78d186e upstream
 								+ "</br>"
 								+ "[npc.Name] now has [style.boldReindeerMorph(rangiferine)], [npc.skinFullDescription]."
 							+ "</p>");
