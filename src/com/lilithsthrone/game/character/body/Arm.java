@@ -220,6 +220,26 @@ public class Arm implements BodyPartInterface, Serializable {
 							+ "</p>");
 				}
 				break;
+<<<<<<< Upstream, based on upstream/master
+			case REINDEER_MORPH:
+				if (owner.isPlayer()) {
+					UtilText.transformationContentSB.append(
+								" Within a matter of moments, a layer of [pc.armFullDescription] has quickly grown over them, and, looking down,"
+										+ " you see your fur growing over the backs of your new hands as tough, hoof-like nails push out in place of regular, human-like ones."
+								+ " Despite their appearance, you're relieved to discover that your hands have lost none of their dexterity."
+								+ " As the transformation comes to an end, you see that at your upper-biceps, your new fur smoothly transitions into the [pc.skin] that's covering the rest of your body.</br>"
+								+ "You're left with anthropomorphic, [style.boldReindeerMorph(reindeer-like arms and hands)], which are covered in [pc.armFullDescription]."
+							+ "</p>");
+				} else {
+					UtilText.transformationContentSB.append(
+								" Within a matter of moments, a layer of [npc.armFullDescription] has quickly grown over them, and, looking down,"
+										+ " [npc.she] sees [npc.her] fur growing over the backs of [npc.her] new hands as tough, hoof-like nails push out in place of regular, human-like ones."
+								+ " Despite their appearance, [npc.she]'s relieved to discover that [npc.her] hands have lost none of their dexterity."
+								+ " As the transformation comes to an end, [npc.she] sees that at [npc.her] upper-biceps, [npc.her] new fur smoothly transitions into the [npc.skin] that's covering the rest of [npc.her] body.</br>"
+								+ "[npc.Name] is left with anthropomorphic, [style.boldReindeerMorph(reindeer-like arms and hands)], which are covered in [npc.armFullDescription]."
+							+ "</p>");
+				}
+				break;
 			case COW_MORPH:
 				if (owner.isPlayer()) {
 					UtilText.transformationContentSB.append(
@@ -454,3 +474,239 @@ public class Arm implements BodyPartInterface, Serializable {
 		return UtilText.transformationContentSB.toString();
 	}
 }
+=======
+			case COW_MORPH:
+				if (owner.isPlayer()) {
+					UtilText.transformationContentSB.append(
+								" Within a matter of moments, a layer of [pc.armFullDescription] has quickly grown over them, and, looking down,"
+										+ " you see your hair growing over the backs of your new hands as tough, hoof-like nails push out in place of regular, human-like ones."
+								+ " Despite their appearance, you're relieved to discover that your hands have lost none of their dexterity."
+								+ " As the transformation comes to an end, you see that at your upper-biceps, your new hair smoothly transitions into the [pc.skin] that's covering the rest of your body.</br>"
+								+ "You're left with anthropomorphic, [style.boldCowMorph(cow-like arms and hands)], which are covered in [pc.armFullDescription]."
+							+ "</p>");
+				} else {
+					UtilText.transformationContentSB.append(
+								" Within a matter of moments, a layer of [npc.armFullDescription] has quickly grown over them, and, looking down,"
+										+ " [npc.she] sees [npc.her] hair growing over the backs of [npc.her] new hands as tough, hoof-like nails push out in place of regular, human-like ones."
+								+ " Despite their appearance, [npc.she]'s relieved to discover that [npc.her] hands have lost none of their dexterity."
+								+ " As the transformation comes to an end, [npc.she] sees that at [npc.her] upper-biceps, [npc.her] new hair smoothly transitions into the [npc.skin] that's covering the rest of [npc.her] body.</br>"
+								+ "[npc.Name] is left with anthropomorphic, [style.boldCowMorph(cow-like arms and hands)], which are covered in [npc.armFullDescription]."
+							+ "</p>");
+				}
+				break;
+			case SQUIRREL_MORPH:
+				if (owner.isPlayer()) {
+					UtilText.transformationContentSB.append(
+								" Within a matter of moments, a layer of [pc.armFullDescription] has quickly grown over them, and, looking down,"
+										+ " you see your fur growing over the backs of your new hands as sharp little claws push out to replace your fingernails."
+								+ " Your palms rapidly transform to be covered in little pink pads, and at your upper-biceps, your new fur smoothly transitions into the [pc.skin] that's covering the rest of your body.</br>"
+								+ "As the transformation comes to an end, you're left with anthropomorphic, [style.boldSquirrelMorph(squirrel-like arms and hands)], which are covered in [pc.armFullDescription]."
+							+ "</p>");
+				} else {
+					UtilText.transformationContentSB.append(
+								" Within a matter of moments, a layer of [npc.armFullDescription] has quickly grown over them, and, looking down,"
+										+ " [npc.she] sees [npc.her] fur growing over the backs of [npc.her] hands as sharp little claws push out to replace [npc.her] fingernails."
+								+ " [npc.Her] palms rapidly transform to be covered in little pink pads, and at [npc.her] upper-biceps, [npc.her] new fur smoothly transitions into the [npc.skin] that's covering the rest of [npc.her] body.</br>"
+								+ "As the transformation comes to an end, [npc.name] is left with anthropomorphic, [style.boldSquirrelMorph(squirrel-like arms and hands)], which are covered in [npc.armFullDescription]."
+							+ "</p>");
+				}
+				break;
+			case HARPY:
+				if (owner.isPlayer()) {
+					UtilText.transformationContentSB.append(
+								" Within a matter of moments, a layer of [pc.armFullDescription] quickly sprout out all over them, and, looking down, you see your feathers growing over the backs of your hands as well."
+								+ " Just as you think that the transformation has finished, you cry out in shock as you feel your bones growing and snapping into a new form."
+								+ " Thankfully, the transformation is quickly over, leaving you with a pair of huge, feathered wings in place of arms."
+								+ " Where your hands once were, your outer two fingers have shrunk down into the middle-joint of your new appendages, leaving you with two feathered forefingers and an opposable thumb,"
+									+ " each of which ends in a blunt claw."
+								+ " Where your new wings meet your body at the shoulder, your feathers smoothly cover the transition into the [pc.skin] that's covering the rest of your torso.</br>"
+								+ "You now have huge [style.boldHarpy(harpy wings)] in place of arms, which are covered in [pc.armFullDescription]."
+							+ "</p>");
+				} else {
+					UtilText.transformationContentSB.append(
+								" Within a matter of moments, a layer of [npc.armFullDescription] quickly sprout out all over them, and, looking down, [npc.she] sees [npc.her] feathers growing over the backs of [npc.her] hands as well."
+								+ " Just as [npc.she] thinks that the transformation has finished, [npc.she] cries out in shock as [npc.her] bones grow and snap into a new form."
+								+ " Thankfully for [npc.herHim], the transformation is quickly over, leaving [npc.herHim] with a pair of huge, feathered wings in place of arms."
+								+ " Where [npc.her] hands once were, [npc.her] outer two fingers have shrunk down into the middle-joint of [npc.her] appendages, leaving [npc.herHim] with two feathered forefingers and an opposable thumb,"
+									+ " each of which ends in a blunt claw."
+								+ " Where [npc.her] new wings meet [npc.her] body at the shoulder, [npc.her] feathers smoothly cover the transition into the [npc.skin] that's covering the rest of [npc.her] torso.</br>"
+								+ "[npc.Name] now has huge [style.boldHarpy(harpy wings)] in place of arms, which are covered in [npc.armFullDescription]."
+							+ "</p>");
+				}
+				break;
+			default:
+				if (owner.isPlayer()) {
+					UtilText.transformationContentSB.append(
+								" Within a matter of moments, a layer of [pc.armFullDescription] has quickly grown over them, and, looking down, you see that your arms have transformed into a new form.</br>"
+								+ "As the transformation comes to an end, you're left with [style.boldTfLesser([pc.arms+])], which are covered in [pc.armFullDescription]."
+							+ "</p>");
+				} else {
+					UtilText.transformationContentSB.append(
+								" Within a matter of moments, a layer of [npc.armFullDescription] has quickly grown over them, and, looking down, [npc.she] sees that [npc.her] arms have transformed into a new form.</br>"
+								+ "As the transformation comes to an end, [npc.name] is left with [style.boldTfLesser([npc.arms+])], which are covered in [npc.armFullDescription]."
+							+ "</p>");
+				}
+		}
+		return UtilText.parse(owner, UtilText.transformationContentSB.toString())
+				+ "</br></br>"
+				+ owner.postTransformationCalculation()
+				+ "</p>";
+	}
+
+	public int getArmRows() {
+		return armRows;
+	}
+
+	public String setArmRows(GameCharacter owner, int armRows) {
+		int currentArmRows = getArmRows();
+		armRows = Math.max(1, Math.min(armRows, 3));
+		if (armRows == currentArmRows) {
+			return "<p style='text-align:center;'>[style.colourDisabled(Nothing happens...)]</p>";
+		}
+		
+		UtilText.transformationContentSB.setLength(0);
+		
+		if (armRows < currentArmRows) {
+			boolean losesTwoPairs = (armRows + 2) == currentArmRows;
+			if (owner.isPlayer()) {
+				UtilText.transformationContentSB.append(
+						"<p>"
+							+ "You feel a strange pressure building up around the base of "
+							+ (losesTwoPairs
+								? "your two extra pairs"
+								: (armRows == 2 
+									? "the lowest of your extra pairs" 
+									: "your extra pair"))
+							+ " of [pc.arms], and before you can react, they rapidly shrink away into the [pc.skin] of your torso.</br>" 
+							+ "You now have [style.boldTfLesser(" + Util.intToString(armRows) + " pair"+ (armRows > 1 ? "s" : "") + " of [pc.arms])], covered in [pc.armFullDescriptionColour]."
+						+ "</p>");
+			} else {
+				UtilText.transformationContentSB.append(UtilText.parse(owner,
+						"<p>"
+							+ "[npc.Name] glances worriedly down at "
+							+ (losesTwoPairs
+								? "[npc.her] two extra pairs"
+								: (armRows == 2 
+									? "the lowest of [npc.her] extra pairs" 
+									: "[npc.her] extra pair"))
+							+ " of [npc.arms], and before [npc.she] can react, they rapidly shrink away into the [npc.skin] of [npc.her] torso.</br>" 
+							+ "[npc.She] now has [style.boldTfLesser(" + Util.intToString(armRows) + " pair"+ (armRows > 1 ? "s" : "") + " of [npc.arms])], covered in [npc.armFullDescriptionColour]."
+						+ "</p>"));
+			}
+			
+		} else {
+			boolean gainsTwoPairs = (armRows - 2) == currentArmRows;
+			if (owner.isPlayer()) {
+				UtilText.transformationContentSB.append(
+						"<p>"
+							+ "You feel a strange pressure building up down the sides of your torso, and before you have time to react, "
+								+ (gainsTwoPairs
+									? "two extra pairs"
+									: "an extra pair")
+							+ " of [pc.arms] rapidly grow out of the [pc.skin] of your lower torso.</br>"
+							+ "You now have [style.boldTfLesser(" + Util.intToString(armRows) + " pair"+ (armRows > 1 ? "s" : "") + " of [pc.arms])], covered in [pc.armFullDescriptionColour]."
+						+ "</p>");
+			} else {
+				UtilText.transformationContentSB.append(UtilText.parse(owner,
+						"<p>"
+							+ "[npc.Name] glances worriedly down at [npc.her] torso, and before [npc.she] can react, "
+								+ (gainsTwoPairs
+									? "two extra pairs"
+									: "an extra pair")
+							+ " of [npc.arms] rapidly grow out of the [npc.skin] of [npc.her] lower torso.</br>"
+							+ "[npc.She] now has [style.boldTfLesser(" + Util.intToString(armRows) + " pair"+ (armRows > 1 ? "s" : "") + " of [npc.arms])], covered in [npc.armFullDescriptionColour]."
+						+ "</p>"));
+			}
+		}
+		
+		this.armRows = armRows;
+		
+		return UtilText.transformationContentSB.toString();
+	}
+
+	public BodyHair getUnderarmHair() {
+		return underarmHair;
+	}
+
+	public Covering getUnderarmHairType(GameCharacter owner) {
+		return owner.getCovering(owner.getBodyHairCoveringType(owner.getArmType().getRace()));
+	}
+
+	public String setUnderarmHair(GameCharacter owner, BodyHair underarmHair) {
+		if(owner==null) {
+			this.underarmHair = underarmHair;
+			return "";
+		}
+		
+		if(getUnderarmHair() == underarmHair) {
+			return "<p style='text-align:center;'>[style.colourDisabled(Nothing happens...)]</p>";
+			
+		} else {
+			UtilText.transformationContentSB.setLength(0);
+			
+			switch(underarmHair) {
+				case ZERO_NONE:
+					if(owner.isPlayer()) {
+						UtilText.transformationContentSB.append("<p>There is no longer any trace of "+getUnderarmHairType(owner).getFullDescription(owner, true)+" in your armpits.</p>");
+					} else {
+						UtilText.transformationContentSB.append(UtilText.parse(owner, "<p>There is no longer any trace of "+getUnderarmHairType(owner).getFullDescription(owner, true)+" in [npc.her] armpits.</p>"));
+					}
+					break;
+				case ONE_STUBBLE:
+					if(owner.isPlayer()) {
+						UtilText.transformationContentSB.append("<p>You now have stubbly patches of "+getUnderarmHairType(owner).getFullDescription(owner, true)+" in your armpits.</p>");
+					} else {
+						UtilText.transformationContentSB.append(UtilText.parse(owner, "<p>[npc.Name] now has stubbly patches of "+getUnderarmHairType(owner).getFullDescription(owner, true)+" in [npc.her] armpits.</p>"));
+					}
+					break;
+				case TWO_MANICURED:
+					if(owner.isPlayer()) {
+						UtilText.transformationContentSB.append("<p>You now have a well-manicured patch of "+getUnderarmHairType(owner).getFullDescription(owner, true)+" in your armpits.</p>");
+					} else {
+						UtilText.transformationContentSB.append(UtilText.parse(owner, "<p>[npc.Name] now has a well-manicured patch of "+getUnderarmHairType(owner).getFullDescription(owner, true)+" in [npc.her] armpits.</p>"));
+					}
+					break;
+				case THREE_TRIMMED:
+					if(owner.isPlayer()) {
+						UtilText.transformationContentSB.append("<p>You now have trimmed patches of "+getUnderarmHairType(owner).getFullDescription(owner, true)+" in your armpits.</p>");
+					} else {
+						UtilText.transformationContentSB.append(UtilText.parse(owner, "<p>[npc.Name] now has trimmed patches of "+getUnderarmHairType(owner).getFullDescription(owner, true)+" in [npc.her] armpits.</p>"));
+					}
+					break;
+				case FOUR_NATURAL:
+					if(owner.isPlayer()) {
+						UtilText.transformationContentSB.append("<p>You now have a natural amount of "+getUnderarmHairType(owner).getFullDescription(owner, true)+" in your armpits.</p>");
+					} else {
+						UtilText.transformationContentSB.append(UtilText.parse(owner, "<p>[npc.Name] now has a natural amount of "+getUnderarmHairType(owner).getFullDescription(owner, true)+" in [npc.her] armpits.</p>"));
+					}
+					break;
+				case FIVE_UNKEMPT:
+					if(owner.isPlayer()) {
+						UtilText.transformationContentSB.append("<p>You now have an unkempt mass of "+getUnderarmHairType(owner).getFullDescription(owner, true)+" in your armpits.</p>");
+					} else {
+						UtilText.transformationContentSB.append(UtilText.parse(owner, "<p>[npc.Name] now has an unkempt mass of "+getUnderarmHairType(owner).getFullDescription(owner, true)+" in [npc.her] armpits.</p>"));
+					}
+					break;
+				case SIX_BUSHY:
+					if(owner.isPlayer()) {
+						UtilText.transformationContentSB.append("<p>You now have thick, bushy masses of "+getUnderarmHairType(owner).getFullDescription(owner, true)+" in your armpits.</p>");
+					} else {
+						UtilText.transformationContentSB.append(UtilText.parse(owner, "<p>[npc.Name] now has thick, bushy masses of "+getUnderarmHairType(owner).getFullDescription(owner, true)+" in [npc.her] armpits.</p>"));
+					}
+					break;
+				case SEVEN_WILD:
+					if(owner.isPlayer()) {
+						UtilText.transformationContentSB.append("<p>You now have wild, bushy masses of "+getUnderarmHairType(owner).getFullDescription(owner, true)+" in your armpits.</p>");
+					} else {
+						UtilText.transformationContentSB.append(UtilText.parse(owner, "<p>[npc.Name] now has wild, bushy masses of "+getUnderarmHairType(owner).getFullDescription(owner, true)+" in [npc.her] armpits.</p>"));
+					}
+					break;
+			}
+		}
+		
+		this.underarmHair = underarmHair;
+
+		return UtilText.transformationContentSB.toString();
+	}
+}
+>>>>>>> 78d186e upstream

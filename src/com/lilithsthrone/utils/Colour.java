@@ -527,6 +527,13 @@ public enum Colour {
 			new ListValue<Colour>(Colour.ANTLER_DARK_GREY),
 			new ListValue<Colour>(Colour.ANTLER_BLACK));
 	
+	public static List<Colour> antlerColours = Util.newArrayListOfValues(
+			new ListValue<Colour>(Colour.ANTLER_WHITE),
+			new ListValue<Colour>(Colour.ANTLER_TAN),
+			new ListValue<Colour>(Colour.ANTLER_GREY),
+			new ListValue<Colour>(Colour.ANTLER_DARK_GREY),
+			new ListValue<Colour>(Colour.ANTLER_BLACK));
+	
 
 	// Orifices:
 	

@@ -499,6 +499,7 @@ public class OptionsDialogue {
 					+ "</div>";
 			
 		} else {
+<<<<<<< Upstream, based on upstream/master
 			return "<div class='container-full-width' style='padding:0; margin:0 0 4px 0;"+(altColour?"background:#222;":"")+"'>"
 						+ "<div class='container-quarter-width' style='background:transparent;'>"
 							+ "-"
@@ -513,6 +514,27 @@ public class OptionsDialogue {
 						+ "</div>"
 					+ "</div>";
 				
+=======
+			return "<tr>"
+					+ "<td>"
+					+ "-"
+					+ "</td>"
+					+ "<td style='min-width:200px;'>"
+						+"<form style='padding:0;margin:0;text-align:center;'><input type='text' id='new_save_name' value='New Save'>"
+						+ "</form>"
+					+ "</td>"
+					+ "<td>"
+						+ "<div class='saveLoadButton' id='new_saved' style='color:"+Colour.GENERIC_EXCELLENT.toWebHexString()+";'>Save</div>"
+					+ "</td>"
+					+ "<td>"
+						+ "<div class='saveLoadButton disabled'>-</div>"
+					+ "</td>"
+					+ "<td>"
+						+ "<div class='saveLoadButton disabled'>-</div>"
+					+ "</td>"
+					+ "</tr>";
+			
+>>>>>>> 78d186e upstream
 		}
 	}
 

@@ -462,10 +462,16 @@ public class DominionSuccubusAttacker extends NPC {
 	
 	// Losing virginity:
 	private static StringBuilder StringBuilderSB;
+<<<<<<< Upstream, based on upstream/master
 	@Override
 	public String getVirginityLossDescription(GameCharacter characterPenetrating, PenetrationType penetrationType, GameCharacter characterPenetrated, OrificeType orifice){
 		if(!characterPenetrated.isPlayer() || penetrationType!=PenetrationType.PENIS) {
 			return super.getVirginityLossDescription(characterPenetrating, penetrationType, characterPenetrated, orifice);
+=======
+	public String getPlayerVaginaVirginityLossDescription(PenetrationType penetration){
+		if(penetration!=PenetrationType.PENIS_PARTNER) {
+			return super.getPlayerVaginaVirginityLossDescription(penetration);
+>>>>>>> 78d186e upstream
 		}
 		
 		StringBuilderSB = new StringBuilder();
