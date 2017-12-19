@@ -2623,7 +2623,7 @@ public class Body implements Serializable, XMLSaving {
 						}
 						break;
 					case REINDEER_MORPH:
-						if (owner.isPlayer()) {
+		if(owner.isPlayer()) {
 							sb.append("a short, [pc.tailColour(true)] reindeer-like tail.");
 						} else {
 							sb.append("a short, [npc.tailColour(true)] reindeer-like tail.");
