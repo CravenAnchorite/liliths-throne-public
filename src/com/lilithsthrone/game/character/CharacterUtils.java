@@ -989,7 +989,7 @@ public class CharacterUtils {
 					true);
 		}
 		if(character.getHairRawLengthValue()!=0 || (character.getFaceType() == FaceType.ALLIGATOR_MORPH && Math.random()<=0.2f)) {
-		character.setHairLength(character.getHairLength().getMinimumValue() + Util.random.nextInt(character.getHairLength().getMaximumValue() - character.getHairLength().getMinimumValue()) +1);
+			character.setHairLength(character.getHairLength().getMinimumValue() + Util.random.nextInt(character.getHairLength().getMaximumValue() - character.getHairLength().getMinimumValue()) +1);
 		}
 		
 		// Penis:
