@@ -1827,7 +1827,7 @@ public class Game implements Serializable, XMLSaving {
 		dialogueTitle = UtilText.parse(savedDialogueNode.getLabel());
 		
 		currentDialogueNode = savedDialogueNode;
-
+		
 		if(Main.game.isInSex()) {
 			Sex.recalculateSexActions();
 		}
@@ -1838,25 +1838,25 @@ public class Game implements Serializable, XMLSaving {
 			
 			currentDialogue = "<body onLoad='scrollToElement()'>"
 					+ "<script>function scrollToElement() {document.getElementById('content-block').scrollTop = document.getElementById('position" + (positionAnchor) + "').offsetTop -64;}</script>"
-								+ "<div id='main-content'>"
-									+ getTitleDiv(dialogueTitle)
-										+ "<div class='div-center' id='content-block'>"
-											+ getMapDiv()
-											+ (headerContent != null
-												? "<div id='header-content' style='font-size:" + Main.getProperties().fontSize + "px; line-height:" + (Main.getProperties().fontSize + 6) + "px;-webkit-user-select: none;'>"
-													+ (currentDialogueNode.disableHeaderParsing() ? headerContent : UtilText.parse(headerContent))
-													+ "</div>"
-												: "")
-											+ (content != null
-												? "<div "+(Main.getProperties().fadeInText?"id='text-content'":"")+" style='font-size:" + Main.getProperties().fontSize + "px; line-height:" + (Main.getProperties().fontSize + 6) + "px;'>"
-														+ content
-													+ "</div>"
-												: "")
+					+ "<div id='main-content'>"
+						+ getTitleDiv(dialogueTitle)
+						+ "<div class='div-center' id='content-block'>"
+								+ getMapDiv()
+								+ (headerContent != null
+									? "<div id='header-content' style='font-size:" + Main.getProperties().fontSize + "px; line-height:" + (Main.getProperties().fontSize + 6) + "px;-webkit-user-select: none;'>"
+										+ (currentDialogueNode.disableHeaderParsing() ? headerContent : UtilText.parse(headerContent))
 										+ "</div>"
-									+"<div id='bottom-text'>Game saved!</div>"
+									: "")
+								+ (content != null
+										? "<div "+(Main.getProperties().fadeInText?"id='text-content'":"")+" style='font-size:" + Main.getProperties().fontSize + "px; line-height:" + (Main.getProperties().fontSize + 6) + "px;'>"
+												+ content
+											+ "</div>"
+										: "")
+						+ "</div>"
+						+"<div id='bottom-text'>Game saved!</div>"
 						+ getResponsesDiv(currentDialogueNode)
-								+ "</div>"
-							+ "</body>";
+					+ "</div>"
+				+ "</body>";
 			
 			
 //			currentDialogue = "<body onLoad='scrollBack()'>"
@@ -1888,6 +1888,7 @@ public class Game implements Serializable, XMLSaving {
 		} else {
 			currentDialogue = savedDialogue;
 		}
+		
 		pastDialogueSB.setLength(0);
 		pastDialogueSB.append(previousPastDialogueSBContents);
 
