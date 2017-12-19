@@ -28,7 +28,6 @@ import org.w3c.dom.Element;
 
 import com.lilithsthrone.controller.MainController;
 import com.lilithsthrone.controller.TooltipUpdateThread;
-import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.CharacterUtils;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.History;
@@ -68,7 +67,6 @@ import com.lilithsthrone.game.character.npc.dominion.Nyan;
 import com.lilithsthrone.game.character.npc.dominion.Pazu;
 import com.lilithsthrone.game.character.npc.dominion.Pix;
 import com.lilithsthrone.game.character.npc.dominion.Ralph;
-import com.lilithsthrone.game.character.npc.dominion.ReindeerOverseer;
 import com.lilithsthrone.game.character.npc.dominion.Rose;
 import com.lilithsthrone.game.character.npc.dominion.Scarlett;
 import com.lilithsthrone.game.character.npc.dominion.SlaveInStocks;
@@ -124,7 +122,7 @@ import com.lilithsthrone.world.places.PlaceType;
 public class Game implements Serializable, XMLSaving {
 	private static final long serialVersionUID = 1L;
 
-	public static final int FONT_SIZE_MINIMUM = 12, FONT_SIZE_NORMAL = 18, FONT_SIZE_LARGE = 24, FONT_SIZE_HUGE = 36;
+	public static final int FONT_SIZE_NORMAL = 18, FONT_SIZE_LARGE = 24, FONT_SIZE_HUGE = 30;
 
 	private PlayerCharacter player;
 	
@@ -132,6 +130,7 @@ public class Game implements Serializable, XMLSaving {
 	private NPC activeNPC;
 	private int npcTally = 0;
 	private Map<String, NPC> NPCMap;
+	private List<NPC> slavesInStocks;
 	
 	private Map<WorldType, World> worlds;
 	private long minutesPassed;
@@ -186,6 +185,7 @@ public class Game implements Serializable, XMLSaving {
 		inNewWorld = false;
 
 		NPCMap = new HashMap<>();
+		slavesInStocks = new ArrayList<>();
 
 		// Start in clouds:
 		currentWeather = Weather.CLOUD;
@@ -283,7 +283,7 @@ public class Game implements Serializable, XMLSaving {
 				
 				// Load NPCs:
 				SlaveImport importedSlave = new SlaveImport();
-				importedSlave.loadFromXML(characterElement, doc);
+				importedSlave = importedSlave.loadFromXML(characterElement, doc);
 				importedSlave.applyNewlyImportedSlaveVariables();
 				Main.game.addNPC(importedSlave, false);
 				
@@ -295,31 +295,7 @@ public class Game implements Serializable, XMLSaving {
 		return null;
 	}
 	
-	public static void exportGame(String exportFileName, boolean allowOverwrite) {
-		
-		File dir = new File("data/");
-		dir.mkdir();
-
-		dir = new File("data/saves");
-		dir.mkdir();
-		
-		boolean overwrite = false;
-		if (dir.isDirectory()) {
-			File[] directoryListing = dir.listFiles((path, filename) -> filename.endsWith(".xml"));
-			if (directoryListing != null) {
-				for (File child : directoryListing) {
-					if (child.getName().equals(exportFileName+".xml")){
-						if(!allowOverwrite) {
-							Main.game.flashMessage(Colour.GENERIC_BAD, "Name already exists!");
-							return;
-						} else {
-							overwrite = true;
-						}
-					}
-				}
-			}
-		}
-		
+	public static void exportGame() {
 		try {
 			if(timeLog) {
 				timeStart = System.nanoTime();
@@ -407,19 +383,26 @@ public class Game implements Serializable, XMLSaving {
 			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 			DOMSource source = new DOMSource(doc);
 			
-			String saveLocation = "data/saves/"+exportFileName+".xml";
+			File dir = new File("data/");
+			dir.mkdir();
+			
+			File dirCharacter = new File("data/saves/");
+			dirCharacter.mkdir();
+			
+			int saveNumber = 0;
+			String saveLocation = "data/saves/game_export_"+Main.game.getPlayer().getName()+"_day"+Main.game.getDayNumber()+".xml";
+			if(new File("data/saves/game_export_"+Main.game.getPlayer().getName()+"_day"+Main.game.getDayNumber()+".xml").exists()) {
+				saveLocation = "data/saves/game_export_"+Main.game.getPlayer().getName()+"_day"+Main.game.getDayNumber()+"("+saveNumber+").xml";
+			}
+			
+			while(new File("data/saves/game_export_"+Main.game.getPlayer().getName()+"_day"+Main.game.getDayNumber()+"("+saveNumber+").xml").exists()) {
+				saveNumber++;
+				saveLocation = "data/saves/game_export_"+Main.game.getPlayer().getName()+"_day"+Main.game.getDayNumber()+"("+saveNumber+").xml";
+			}
 			StreamResult result = new StreamResult(new File(saveLocation));
 			
 			transformer.transform(source, result);
 
-			if(overwrite) {
-				if(!exportFileName.startsWith("AutoSave")) {
-					Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()), Colour.GENERIC_GOOD, "Save game overwritten!");
-				}
-			} else {
-				Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()), Colour.GENERIC_GOOD, "Game saved!");
-			}
-			
 			if(timeLog) {
 				System.out.println("Difference: "+(System.nanoTime()-timeStart)/1000000000f);
 			}
@@ -499,19 +482,21 @@ public class Game implements Serializable, XMLSaving {
 				for(int i=0; i<gameElement.getElementsByTagName("NPC").getLength(); i++) {
 					Element e = (Element) gameElement.getElementsByTagName("NPC").item(i);
 					
+					//TODO this is just a huge mess. It needs to be remade.
 					if(!addedIds.contains(((Element)e.getElementsByTagName("id").item(0)).getAttribute("value"))) {
 						@SuppressWarnings("unchecked")
 						Class<? extends NPC> npcClass = (Class<? extends NPC>) Class.forName(((Element)e.getElementsByTagName("pathName").item(0)).getAttribute("value"));
-						Method m = npcClass.getMethod("loadFromXML", Element.class, Document.class, CharacterImportSetting[].class);
+						Method m = npcClass.getMethod("loadFromXML", Element.class, Document.class);
 						
-						NPC npc = npcClass.getDeclaredConstructor(boolean.class).newInstance(true);
-						m.invoke(npc, e, doc, new CharacterImportSetting[] {});
+						//npcClass.getConstructor(Boolean.class).newInstance(true)
+						NPC npcClassDefault = npcClass.newInstance();
+						NPC npc = (NPC) m.invoke(npcClassDefault, e, doc); //TODO You're loading the class twice!!!
 						newGame.addNPC(npc, true);
 						addedIds.add(npc.getId());
 						
 						// To fix issues with older versions hair length:
 						if(Main.isVersionOlderThan(version, "0.1.90.5")) {
-							npc.getBody().getHair().setLength(null, npc.isFeminine()?RacialBody.valueOfRace(npc.getRace()).getFemaleHairLength():RacialBody.valueOfRace(npc.getRace()).getMaleHairLength());
+							npc.getBody().getHair().setLength(null, npcClassDefault.getHairRawLengthValue());
 						}
 						
 						if(npc instanceof SlaveImport) {
@@ -778,15 +763,6 @@ public class Game implements Serializable, XMLSaving {
 			updateResponses();
 		}
 		
-		if(Main.game.getCurrentWeather()!=Weather.SNOW && Main.game.getSeason()!=Season.WINTER) {
-			Main.game.getDialogueFlags().values.remove(DialogueFlagValue.hasSnowedThisWinter);
-			for(NPC npc : Main.game.getReindeerOverseers()) {
-				if(npc.getLocation()!=Main.game.getPlayer().getLocation()) {
-					npc.setLocation(WorldType.EMPTY, PlaceType.GENERIC_EMPTY_TILE, true);
-				}
-			}
-		}
-		
 		// Slavery: TODO
 		int hoursPassed = (int) (getHour() - startHour);
 		int hourStartTo24 = (int) (startHour%24);
@@ -804,14 +780,6 @@ public class Game implements Serializable, XMLSaving {
 			}
 			
 			pendingSlaveInStocksReset = true;
-			
-			// Reindeer:
-			for(NPC npc : Main.game.getReindeerOverseers()) {
-				if(npc.getLocationPlace().getPlaceType()==PlaceType.DOMINION_STREET && !npc.getLocation().equals(Main.game.getPlayer().getLocation())) {
-					npc.moveToAdjacentMatchingCellType();
-					Main.game.getDialogueFlags().dailyReindeerReset(npc.getId());
-				}
-			}
 		}
 		
 		if(pendingSlaveInStocksReset && Main.game.getPlayer().getLocationPlace().getPlaceType()!=PlaceType.SLAVER_ALLEY_PUBLIC_STOCKS) {
@@ -833,6 +801,7 @@ public class Game implements Serializable, XMLSaving {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				slavesInStocks.add(slave);
 			}
 			
 			pendingSlaveInStocksReset = false;
@@ -852,11 +821,6 @@ public class Game implements Serializable, XMLSaving {
 					&& !Main.game.getPlayer().getLocation().equals(npc.getLocation())) {
 						banishNPC(npc);
 					}
-			if(!Main.game.getPlayer().getLocation().equals(npc.getLocation())) {
-				npc.setHealthPercentage(1);
-				npc.setManaPercentage(1);
-				npc.setStaminaPercentage(1);
-			}
 		}
 		
 		for (NPC npc : NPCMap.values()) {
@@ -949,9 +913,8 @@ public class Game implements Serializable, XMLSaving {
 		Main.mainController.getTooltip().hide();
 		
 		if(!Main.game.getPlayer().getStatusEffectDescriptions().isEmpty() && Main.game.getCurrentDialogueNode()!=MiscDialogue.STATUS_EFFECTS){
-			if(Main.game.getCurrentDialogueNode().getMapDisplay()==MapDisplay.NORMAL) {
+			if(Main.game.getCurrentDialogueNode().getMapDisplay()==MapDisplay.NORMAL)
 				Main.game.saveDialogueNode();
-			}
 			
 			Main.game.setContent(new Response("", "", MiscDialogue.STATUS_EFFECTS){
 				
@@ -969,11 +932,7 @@ public class Game implements Serializable, XMLSaving {
 			Main.game.getPlayer().getStatusEffectDescriptions().clear();
 		}
 	}
-	
-	public Season getSeason() {
-		return Season.getSeasonFromMonth(getDateNow().getMonth());
-	}
-	
+
 	// Set weather and time remaining.
 	// Handles Lilith's Lust build up.
 	// Appends description of storm gathering and breaking to mainController.
@@ -1000,11 +959,7 @@ public class Game implements Serializable, XMLSaving {
 						weatherTimeRemaining = 4 * 60 + Util.random.nextInt(2 * 60); // Gathering storm lasts for 4-6 hours
 					} else {
 						if (Math.random() > 0.4) { // 40% chance that will start raining
-							if(getSeason()==Season.WINTER) {
-								currentWeather = Weather.SNOW;
-							} else {
-								currentWeather = Weather.RAIN;
-							}
+							currentWeather = Weather.RAIN;
 							weatherTimeRemaining = 1 * 60 + Util.random.nextInt(5 * 60); // Rain lasts for 1-6 hours
 						} else {
 							currentWeather = Weather.CLEAR;
@@ -1025,7 +980,7 @@ public class Game implements Serializable, XMLSaving {
 					weatherTimeRemaining = 8 * 60 + Util.random.nextInt(4 * 60); // Storm lasts 8-12 hours
 					break;
 					
-				case RAIN: case SNOW:
+				case RAIN:
 					if(minutesPassed >= nextStormTime) {
 						currentWeather = Weather.MAGIC_STORM_GATHERING;
 						weatherTimeRemaining = 4 * 60 + Util.random.nextInt(2 * 60); // Gathering storm lasts for 4-6 hours
@@ -1872,7 +1827,7 @@ public class Game implements Serializable, XMLSaving {
 		dialogueTitle = UtilText.parse(savedDialogueNode.getLabel());
 		
 		currentDialogueNode = savedDialogueNode;
-		
+
 		if(Main.game.isInSex()) {
 			Sex.recalculateSexActions();
 		}
@@ -1883,25 +1838,25 @@ public class Game implements Serializable, XMLSaving {
 			
 			currentDialogue = "<body onLoad='scrollToElement()'>"
 					+ "<script>function scrollToElement() {document.getElementById('content-block').scrollTop = document.getElementById('position" + (positionAnchor) + "').offsetTop -64;}</script>"
-					+ "<div id='main-content'>"
-						+ getTitleDiv(dialogueTitle)
-						+ "<div class='div-center' id='content-block'>"
-								+ getMapDiv()
-								+ (headerContent != null
-									? "<div id='header-content' style='font-size:" + Main.getProperties().fontSize + "px; line-height:" + (Main.getProperties().fontSize + 6) + "px;-webkit-user-select: none;'>"
-										+ (currentDialogueNode.disableHeaderParsing() ? headerContent : UtilText.parse(headerContent))
+								+ "<div id='main-content'>"
+									+ getTitleDiv(dialogueTitle)
+										+ "<div class='div-center' id='content-block'>"
+											+ getMapDiv()
+											+ (headerContent != null
+												? "<div id='header-content' style='font-size:" + Main.getProperties().fontSize + "px; line-height:" + (Main.getProperties().fontSize + 6) + "px;-webkit-user-select: none;'>"
+													+ (currentDialogueNode.disableHeaderParsing() ? headerContent : UtilText.parse(headerContent))
+													+ "</div>"
+												: "")
+											+ (content != null
+												? "<div "+(Main.getProperties().fadeInText?"id='text-content'":"")+" style='font-size:" + Main.getProperties().fontSize + "px; line-height:" + (Main.getProperties().fontSize + 6) + "px;'>"
+														+ content
+													+ "</div>"
+												: "")
 										+ "</div>"
-									: "")
-								+ (content != null
-										? "<div "+(Main.getProperties().fadeInText?"id='text-content'":"")+" style='font-size:" + Main.getProperties().fontSize + "px; line-height:" + (Main.getProperties().fontSize + 6) + "px;'>"
-												+ content
-											+ "</div>"
-										: "")
-						+ "</div>"
-						+"<div id='bottom-text'>Game saved!</div>"
+									+"<div id='bottom-text'>Game saved!</div>"
 						+ getResponsesDiv(currentDialogueNode)
-					+ "</div>"
-				+ "</body>";
+								+ "</div>"
+							+ "</body>";
 			
 			
 //			currentDialogue = "<body onLoad='scrollBack()'>"
@@ -1933,7 +1888,6 @@ public class Game implements Serializable, XMLSaving {
 		} else {
 			currentDialogue = savedDialogue;
 		}
-		
 		pastDialogueSB.setLength(0);
 		pastDialogueSB.append(previousPastDialogueSBContents);
 
@@ -2010,34 +1964,29 @@ public class Game implements Serializable, XMLSaving {
 	public String getWeatherImage() {
 		if (isDayTime()) {
 			switch (currentWeather) {
-				case CLEAR:
-					return SVGImages.SVG_IMAGE_PROVIDER.getWeatherDayClear();
-				case CLOUD:
-					return SVGImages.SVG_IMAGE_PROVIDER.getWeatherDayCloud();
-				case RAIN:
-					return SVGImages.SVG_IMAGE_PROVIDER.getWeatherDayRain();
-				case SNOW:
-					return SVGImages.SVG_IMAGE_PROVIDER.getWeatherDaySnow();
-				case MAGIC_STORM_GATHERING:
-					return SVGImages.SVG_IMAGE_PROVIDER.getWeatherDayStormIncoming();
-				case MAGIC_STORM:
-					return SVGImages.SVG_IMAGE_PROVIDER.getWeatherDayStorm();
+			case CLEAR:
+				return SVGImages.SVG_IMAGE_PROVIDER.getWeatherDayClear();
+			case CLOUD:
+				return SVGImages.SVG_IMAGE_PROVIDER.getWeatherDayCloud();
+			case RAIN:
+				return SVGImages.SVG_IMAGE_PROVIDER.getWeatherDayRain();
+			case MAGIC_STORM_GATHERING:
+				return SVGImages.SVG_IMAGE_PROVIDER.getWeatherDayStormIncoming();
+			case MAGIC_STORM:
+				return SVGImages.SVG_IMAGE_PROVIDER.getWeatherDayStorm();
 			}
-			
 		} else {
 			switch (currentWeather) {
-				case CLEAR:
-					return SVGImages.SVG_IMAGE_PROVIDER.getWeatherNightClear();
-				case CLOUD:
-					return SVGImages.SVG_IMAGE_PROVIDER.getWeatherNightCloud();
-				case RAIN:
-					return SVGImages.SVG_IMAGE_PROVIDER.getWeatherNightRain();
-				case SNOW:
-					return SVGImages.SVG_IMAGE_PROVIDER.getWeatherNightSnow();
-				case MAGIC_STORM_GATHERING:
-					return SVGImages.SVG_IMAGE_PROVIDER.getWeatherNightStormIncoming();
-				case MAGIC_STORM:
-					return SVGImages.SVG_IMAGE_PROVIDER.getWeatherNightStorm();
+			case CLEAR:
+				return SVGImages.SVG_IMAGE_PROVIDER.getWeatherNightClear();
+			case CLOUD:
+				return SVGImages.SVG_IMAGE_PROVIDER.getWeatherNightCloud();
+			case RAIN:
+				return SVGImages.SVG_IMAGE_PROVIDER.getWeatherNightRain();
+			case MAGIC_STORM_GATHERING:
+				return SVGImages.SVG_IMAGE_PROVIDER.getWeatherNightStormIncoming();
+			case MAGIC_STORM:
+				return SVGImages.SVG_IMAGE_PROVIDER.getWeatherNightStorm();
 			}
 		}
 		return "";
@@ -2347,20 +2296,8 @@ public class Game implements Serializable, XMLSaving {
 		return offspringSpawned;
 	}
 	
-	public List<NPC> getReindeerOverseers() {
-		List<NPC> reindeerOverseers = new ArrayList<>(getAllNPCs());
-		
-		reindeerOverseers.removeIf(npc -> !npc.getClass().equals(ReindeerOverseer.class));
-		
-		return reindeerOverseers;
-	}
-	
 	public List<NPC> getAllNPCs() {
 		return new ArrayList<NPC>(NPCMap.values());
-	}
-	
-	public boolean isCharacterExisting(String id) {
-		return NPCMap.containsKey(id);
 	}
 	
 	public GameCharacter getNPCById(String id) {
