@@ -611,11 +611,11 @@ public enum Sex {
 		
 
 		// Player pregnancy:
-		if ( (!areasCummedInPlayer.isEmpty() && areasCummedInPlayer.contains(OrificeType.VAGINA_PLAYER)) || wetOrificeTypes.get(OrificeType.VAGINA_PLAYER).contains(LubricationType.PARTNER_NATURAL_LUBRICATION) ){
+		if ( (!areasCummedInPlayer.isEmpty() && areasCummedInPlayer.contains(OrificeType.VAGINA_PLAYER)) || wetOrificeTypes.get(OrificeType.VAGINA_PLAYER).contains(LubricationType.PARTNER_GIRLCUM) ){
 				sexSB.append(Main.game.getPlayer().rollForPregnancy(partner));
 		}
 		// Partner pregnancy:
-		if ( (!areasCummedInPartner.isEmpty() && partner.isAbleToBeImpregnated() && areasCummedInPartner.contains(OrificeType.VAGINA_PARTNER)) || wetOrificeTypes.get(OrificeType.VAGINA_PARTNER).contains(LubricationType.PLAYER_NATURAL_LUBRICATION) ){
+		if ( (!areasCummedInPartner.isEmpty() && partner.isAbleToBeImpregnated() && areasCummedInPartner.contains(OrificeType.VAGINA_PARTNER)) || wetOrificeTypes.get(OrificeType.VAGINA_PARTNER).contains(LubricationType.PLAYER_GIRLCUM) ){
 				sexSB.append(partner.rollForPregnancy(Main.game.getPlayer()));
 		}
 		
@@ -1076,6 +1076,10 @@ public enum Sex {
 		repeatActionsPlayer.remove(SexActionUtility.PLAYER_USE_ITEM);
 	}
 
+	public static void recalculateSexActions() {
+		populatePlayerSexLists();
+	}
+	
 	private static void populatePlayerSexLists() {
 		// Populate available SexActions from the current SexPosition.
 		availableSexActionsPlayer.clear();
@@ -1461,6 +1465,9 @@ public enum Sex {
 		
 		// Handle player orgasms:
 		if(sexAction.getActionType()==SexActionType.PLAYER_ORGASM) {
+			if(Main.game.getPlayer().hasVagina()){
+				addOrificeLubrication(OrificeType.VAGINA_PLAYER, LubricationType.PLAYER_GIRLCUM);
+			}
 			// Condom removal:
 			if(Main.game.getPlayer().isWearingCondom()){
 				Main.game.getPlayer().getClothingInSlot(ClothingType.PENIS_CONDOM.getSlot()).setSealed(false);
@@ -1481,6 +1488,9 @@ public enum Sex {
 		}
 		// Handle partner orgasms:
 		if(sexAction.getActionType()==SexActionType.PARTNER_ORGASM) {
+			if(partner.hasVagina()){
+				addOrificeLubrication(OrificeType.VAGINA_PARTNER, LubricationType.PARTNER_GIRLCUM);
+			}
 			// Condom removal:
 			if(partner.isWearingCondom()){
 				partner.getClothingInSlot(ClothingType.PENIS_CONDOM.getSlot()).setSealed(false);
@@ -1501,6 +1511,12 @@ public enum Sex {
 		}
 		// Handle mutual orgasms:
 		if(sexAction.getActionType()==SexActionType.MUTUAL_ORGASM) {
+			if(Main.game.getPlayer().hasVagina()){
+				addOrificeLubrication(OrificeType.VAGINA_PLAYER, LubricationType.PLAYER_GIRLCUM);
+			}
+			if(partner.hasVagina()){
+				addOrificeLubrication(OrificeType.VAGINA_PARTNER, LubricationType.PARTNER_GIRLCUM);
+			}
 			// Condom removal:
 			if(Main.game.getPlayer().isWearingCondom()){
 				Main.game.getPlayer().getClothingInSlot(ClothingType.PENIS_CONDOM.getSlot()).setSealed(false);
@@ -1948,7 +1964,7 @@ public enum Sex {
 		
 		if (penetrationType == PenetrationType.PENIS_PLAYER) {
 			if(Main.game.getPlayer().isPenisVirgin()) {
-				sexSB.append(partner.getPlayerPenileVirginityLossDescription());
+				// Do not need to append virginity loss description here, as it will be handled in the orifice virginity loss description.
 				if(partner.hasFetish(Fetish.FETISH_DEFLOWERING)) {
 					partner.incrementExperience(Fetish.getExperienceGainFromTakingOtherVirginity(partner));
 				}
@@ -1958,7 +1974,7 @@ public enum Sex {
 			
 		} else if (penetrationType == PenetrationType.PENIS_PARTNER) {
 			if(partner.isPenisVirgin()) {
-				sexSB.append(partner.getPartnerPenileVirginityLossDescription());
+				// Do not need to append virginity loss description here, as it will be handled in the orifice virginity loss description.
 				if(Main.game.getPlayer().hasFetish(Fetish.FETISH_DEFLOWERING)) {
 					Main.game.getPlayer().incrementExperience(Fetish.getExperienceGainFromTakingOtherVirginity(Main.game.getPlayer()));
 				}
@@ -1974,7 +1990,7 @@ public enum Sex {
 				
 				if (Main.game.getPlayer().isAssVirgin()) {
 					if (penetrationType.isTakesVirginity()) {
-						sexSB.append(partner.getPlayerAnalVirginityLossDescription());
+						sexSB.append(partner.getVirginityLossDescription(penetrationType, OrificeType.ANUS_PLAYER));
 						if(partner.hasFetish(Fetish.FETISH_DEFLOWERING)) {
 							partner.incrementExperience(Fetish.getExperienceGainFromTakingOtherVirginity(partner));
 						}
@@ -1993,7 +2009,7 @@ public enum Sex {
 				
 				if (partner.isAssVirgin()) {
 					if (penetrationType.isTakesVirginity()) {
-						sexSB.append(partner.getPartnerAnalVirginityLossDescription());
+						sexSB.append(partner.getVirginityLossDescription(penetrationType, OrificeType.ANUS_PARTNER));
 						if(Main.game.getPlayer().hasFetish(Fetish.FETISH_DEFLOWERING)) {
 							Main.game.getPlayer().incrementExperience(Fetish.getExperienceGainFromTakingOtherVirginity(Main.game.getPlayer()));
 						}
@@ -2011,7 +2027,7 @@ public enum Sex {
 				
 				if (Main.game.getPlayer().isVaginaVirgin()) {
 						if (penetrationType.isTakesVirginity()) {
-							sexSB.append(partner.getPlayerVaginaVirginityLossDescription(isPlayerDom()));
+							sexSB.append(partner.getVirginityLossDescription(penetrationType, OrificeType.VAGINA_PLAYER));
 							if(partner.hasFetish(Fetish.FETISH_DEFLOWERING)) {
 								partner.incrementExperience(Fetish.getExperienceGainFromTakingVaginalVirginity(partner));
 							}
@@ -2030,7 +2046,7 @@ public enum Sex {
 				
 				if (partner.isVaginaVirgin()) {
 					if (penetrationType.isTakesVirginity()) {
-						sexSB.append(partner.getPartnerVaginaVirginityLossDescription());
+						sexSB.append(partner.getVirginityLossDescription(penetrationType, OrificeType.VAGINA_PARTNER));
 						if(Main.game.getPlayer().hasFetish(Fetish.FETISH_DEFLOWERING)) {
 							Main.game.getPlayer().incrementExperience(Fetish.getExperienceGainFromTakingVaginalVirginity(Main.game.getPlayer()));
 						}
@@ -2049,7 +2065,7 @@ public enum Sex {
 					
 					if (Main.game.getPlayer().isNippleVirgin()) {
 						if (penetrationType.isTakesVirginity()) {
-							sexSB.append(partner.getPlayerNippleVirginityLossDescription());
+							sexSB.append(partner.getVirginityLossDescription(penetrationType, OrificeType.NIPPLE_PLAYER));
 							if(partner.hasFetish(Fetish.FETISH_DEFLOWERING)) {
 								partner.incrementExperience(Fetish.getExperienceGainFromTakingOtherVirginity(partner));
 							}
@@ -2068,7 +2084,7 @@ public enum Sex {
 				
 				if (partner.isNippleVirgin()) {
 					if (penetrationType.isTakesVirginity()) {
-						sexSB.append(partner.getPartnerNippleVirginityLossDescription());
+						sexSB.append(partner.getVirginityLossDescription(penetrationType, OrificeType.NIPPLE_PARTNER));
 						if(Main.game.getPlayer().hasFetish(Fetish.FETISH_DEFLOWERING)) {
 							Main.game.getPlayer().incrementExperience(Fetish.getExperienceGainFromTakingOtherVirginity(Main.game.getPlayer()));
 						}
@@ -2087,7 +2103,7 @@ public enum Sex {
 					
 					if (Main.game.getPlayer().isUrethraVirgin()) {
 						if (penetrationType.isTakesVirginity()) {
-							sexSB.append(partner.getPlayerUrethraVirginityLossDescription());
+							sexSB.append(partner.getVirginityLossDescription(penetrationType, OrificeType.URETHRA_PLAYER));
 							if(partner.hasFetish(Fetish.FETISH_DEFLOWERING)) {
 								partner.incrementExperience(Fetish.getExperienceGainFromTakingOtherVirginity(partner));
 							}
@@ -2106,7 +2122,7 @@ public enum Sex {
 				
 				if (partner.isUrethraVirgin()) {
 					if (penetrationType.isTakesVirginity()) {
-						sexSB.append(partner.getPartnerUrethraVirginityLossDescription());
+						sexSB.append(partner.getVirginityLossDescription(penetrationType, OrificeType.URETHRA_PARTNER));
 						if(Main.game.getPlayer().hasFetish(Fetish.FETISH_DEFLOWERING)) {
 							Main.game.getPlayer().incrementExperience(Fetish.getExperienceGainFromTakingOtherVirginity(Main.game.getPlayer()));
 						}
@@ -2125,7 +2141,7 @@ public enum Sex {
 					
 					if (Main.game.getPlayer().isFaceVirgin()) {
 						if (penetrationType.isTakesVirginity()) {
-							sexSB.append(partner.getPlayerMouthVirginityLossDescription());
+							sexSB.append(partner.getVirginityLossDescription(penetrationType, OrificeType.MOUTH_PLAYER));
 							if(partner.hasFetish(Fetish.FETISH_DEFLOWERING)) {
 								partner.incrementExperience(Fetish.getExperienceGainFromTakingOtherVirginity(partner));
 							}
@@ -2144,7 +2160,7 @@ public enum Sex {
 				
 				if (partner.isFaceVirgin()) {
 					if (penetrationType.isTakesVirginity()) {
-						sexSB.append(partner.getPartnerMouthVirginityLossDescription());
+						sexSB.append(partner.getVirginityLossDescription(penetrationType, OrificeType.MOUTH_PARTNER));
 						if(Main.game.getPlayer().hasFetish(Fetish.FETISH_DEFLOWERING)) {
 							Main.game.getPlayer().incrementExperience(Fetish.getExperienceGainFromTakingOtherVirginity(Main.game.getPlayer()));
 						}

@@ -55,6 +55,7 @@ public class Ralph extends NPC {
 			ItemType.RACE_INGREDIENT_WOLF_MORPH,
 			ItemType.RACE_INGREDIENT_SQUIRREL_MORPH,
 			ItemType.RACE_INGREDIENT_ALLIGATOR_MORPH,
+			ItemType.RACE_INGREDIENT_REINDEER_MORPH,
 			ItemType.RACE_INGREDIENT_COW_MORPH,
 			ItemType.RACE_INGREDIENT_HUMAN,
 			ItemType.RACE_INGREDIENT_DEMON,
@@ -65,6 +66,7 @@ public class Ralph extends NPC {
 			ItemType.STR_INGREDIENT_SWAMP_WATER,
 			ItemType.INT_INGREDIENT_FELINE_FANCY,
 			ItemType.FIT_INGREDIENT_CANINE_CRUSH,
+			ItemType.FIT_INGREDIENT_EGG_NOG,
 			ItemType.SEX_INGREDIENT_HARPY_PERFUME,
 			ItemType.COR_INGREDIENT_LILITHS_GIFT,
 			ItemType.FIT_INGREDIENT_SQUIRREL_JAVA,
@@ -354,15 +356,6 @@ public class Ralph extends NPC {
 	// Vagina:
 	
 	@Override
-	public String getPlayerVaginaVirginityLossDescription(boolean isPlayerDom){
-		return formatVirginityLoss("Ralph's massive black horse-cock tears through your hymen as he takes your virginity!")
-				+ 
-				(Main.game.getPlayer().hasFetish(Fetish.FETISH_PURE_VIRGIN)
-						?losingPureVirginity()
-						:"");
-	}
-	
-	@Override
 	public String getPlayerVaginaStretchingDescription(PenetrationType penetrationType) {
 		if(Math.random()<0.3) {
 			return super.getPlayerVaginaStretchingDescription(penetrationType);
@@ -383,11 +376,6 @@ public class Ralph extends NPC {
 	
 	// Mouth:
 
-	@Override
-	public String getPlayerMouthVirginityLossDescription(){
-		return formatVirginityLoss("You'd never have thought that your first time sucking cock would be like this!");
-	}
-	
 	@Override
 	public String getPlayerMouthStretchingDescription(PenetrationType penetrationType) {
 		if(Math.random()<0.3) {

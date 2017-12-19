@@ -1888,6 +1888,44 @@ public enum StatusEffect {
 			return true;
 		}
 	},
+	
+	REINDEER_MORPH(
+			90,
+			"reindeer-morph",
+			"raceReindeerMorph",
+			Colour.RACE_REINDEER_MORPH,
+			true,
+			Util.newHashMapOfValues(
+					new Value<Attribute, Float>(Attribute.FITNESS, 5f),
+					new Value<Attribute, Float>(Attribute.STRENGTH, 5f),
+					new Value<Attribute, Float>(Attribute.RESISTANCE_ICE, 10f)),
+			null) {
+
+		@Override
+		public String applyEffect(GameCharacter target, int minutesPassed) {
+			return "";
+		}
+
+		@Override
+		public String getDescription(GameCharacter target) {
+			if (target.isPlayer()) {
+				return "Your reindeer-like body grants you significant resistance to the cold, as well as an increase in strength and fitness.";
+			} else {
+				return UtilText.parse(target, "[npc.Name]'s reindeer-like body grants [npc.herHim] significant resistance to the cold, as well as an increase in strength and fitness.");
+			}
+		}
+
+		@Override
+		public boolean isConditionsMet(GameCharacter target) {
+			return target.getRace() == Race.REINDEER_MORPH
+					&& target.getRaceStage() == RaceStage.GREATER;
+		}
+		
+		@Override
+		protected boolean needsDesaturated() {
+			return true;
+		}
+	},
 
 	// BOVINE:
 	COW_MORPH(
@@ -1932,9 +1970,10 @@ public enum StatusEffect {
 			"raceGatorMorph",
 			Colour.RACE_ALLIGATOR_MORPH,
 			true,
-			Util.newHashMapOfValues(new Value<Attribute, Float>(Attribute.RESISTANCE_PHYSICAL, 10f),
-			new Value<Attribute, Float>(Attribute.DAMAGE_PHYSICAL, -10f),
-			new Value<Attribute, Float>(Attribute.FITNESS, 15f)),
+			Util.newHashMapOfValues(new Value<Attribute, Float>(Attribute.RESISTANCE_PHYSICAL, 15f),
+			new Value<Attribute, Float>(Attribute.DAMAGE_PHYSICAL, 5f),
+			new Value<Attribute, Float>(Attribute.STRENGTH, 5f),
+			new Value<Attribute, Float>(Attribute.FITNESS, 5f)),
 			null) {
 
 		@Override
@@ -1954,6 +1993,11 @@ public enum StatusEffect {
 		public boolean isConditionsMet(GameCharacter target) {
 			return target.getRace() == Race.ALLIGATOR_MORPH
 					&& target.getRaceStage() == RaceStage.GREATER;
+		}
+		
+		@Override
+		protected boolean needsDesaturated() {
+			return true;
 		}
 	},
 
@@ -4662,6 +4706,38 @@ public enum StatusEffect {
 				return "After absorbing a specially-enchanted arcane essence, you find that you're able to accurately predict how horse-morphs will behave.";
 			} else {
 				return UtilText.parse(target, "After absorbing a specially-enchanted arcane essence, [npc.name] is able to accurately predict how horse-morphs will behave.");
+			}
+		}
+		@Override
+		public boolean isConditionsMet(GameCharacter target) {
+			return false;
+		}
+	},
+	
+	COMBAT_BONUS_REINDEER_MORPH(
+			80,
+			"reindeer-morph intuition",
+			"combatBonusReindeerMorph",
+			Colour.RACE_REINDEER_MORPH,
+			true,
+			Util.newHashMapOfValues(
+					new Value<Attribute, Float>(Attribute.STRENGTH, 2f),
+					new Value<Attribute, Float>(Attribute.DAMAGE_REINDEER_MORPH, 25f),
+					new Value<Attribute, Float>(Attribute.RESISTANCE_REINDEER_MORPH, 25f)),
+			null) {
+		@Override
+		public String applyEffect(GameCharacter target, int minutesPassed) {
+			return "";
+		}
+		@Override
+		public String getDescription(GameCharacter target) {
+			if(target == null) {
+				return "";
+			}
+			if (target.isPlayer()) {
+				return "After absorbing a specially-enchanted arcane essence, you find that you're able to accurately predict how reindeer-morphs will behave.";
+			} else {
+				return UtilText.parse(target, "After absorbing a specially-enchanted arcane essence, [npc.name] is able to accurately predict how reindeer-morphs will behave.");
 			}
 		}
 		@Override

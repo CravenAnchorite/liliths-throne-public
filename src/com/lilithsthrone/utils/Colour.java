@@ -89,6 +89,7 @@ public enum Colour {
 	RACE_CAT_MORPH(BaseColour.VIOLET, "violet", Util.newArrayListOfValues(new ListValue<>("catMorph"), new ListValue<>("cat"))),
 	RACE_COW_MORPH(BaseColour.TAN, "tan", Util.newArrayListOfValues(new ListValue<>("cowMorph"), new ListValue<>("cow"))),
 	RACE_HORSE_MORPH(BaseColour.ORANGE, "orange", Util.newArrayListOfValues(new ListValue<>("horseMorph"), new ListValue<>("horse"))),
+	RACE_REINDEER_MORPH(BaseColour.BROWN_DARK, "dark brown", Util.newArrayListOfValues(new ListValue<>("reindeerMorph"), new ListValue<>("reindeer"))),
 	RACE_WOLF_MORPH(BaseColour.BLACK, "black", Util.newArrayListOfValues(new ListValue<>("wolfMorph"), new ListValue<>("wolf"))),
 	RACE_HARPY(BaseColour.PINK_LIGHT, "light pink", Util.newArrayListOfValues(new ListValue<>("harpy"))),
 	RACE_SLIME(BaseColour.PINK, "pink", Util.newArrayListOfValues(new ListValue<>("slime"))),
@@ -282,12 +283,14 @@ public enum Colour {
 	
 	SKIN_RED(BaseColour.CRIMSON, "scarlet"),
 	SKIN_BROWN(BaseColour.BROWN, "brown"),
+	SKIN_AMBER(BaseColour.AMBER, "amber"),
 	SKIN_PINK(BaseColour.PINK_LIGHT, "light pink"),
 	SKIN_GREEN(BaseColour.GREEN, "green"),
 	SKIN_BLUE(BaseColour.BLUE_LIGHT, "light blue"),
 	SKIN_LILAC(BaseColour.LILAC, "lilac"),
 	SKIN_PURPLE(BaseColour.PURPLE, "purple"),
 	SKIN_IVORY(BaseColour.WHITE, "ivory"),
+	SKIN_GREY(BaseColour.GREY, "grey"),
 
 	// Slime types:
 	SLIME_BLUE(BaseColour.BLUE, "translucent blue"),
@@ -315,6 +318,13 @@ public enum Colour {
 	HORN_GREY(BaseColour.RED, "grey"),
 	HORN_DARK_GREY(BaseColour.RED, "dark-grey"),
 	HORN_BLACK(BaseColour.BLACK, "black"),
+
+	// Antlers:
+	ANTLER_WHITE(BaseColour.WHITE, "ivory"),
+	ANTLER_TAN(BaseColour.TAN, "tan"),
+	ANTLER_GREY(BaseColour.RED, "grey"),
+	ANTLER_DARK_GREY(BaseColour.RED, "dark-grey"),
+	ANTLER_BLACK(BaseColour.BLACK, "black"),
 
 	// Orifices:
 	ORIFICE_INTERIOR(BaseColour.ROSE, "fleshy-pink"),
@@ -434,12 +444,14 @@ public enum Colour {
 	public static List<Colour> demonSkinColours = Util.newArrayListOfValues(
 			new ListValue<Colour>(Colour.SKIN_RED),
 			new ListValue<Colour>(Colour.SKIN_BROWN),
+			new ListValue<Colour>(Colour.SKIN_AMBER),
 			new ListValue<Colour>(Colour.SKIN_PINK),
 			new ListValue<Colour>(Colour.SKIN_GREEN),
 			new ListValue<Colour>(Colour.SKIN_BLUE),
 			new ListValue<Colour>(Colour.SKIN_LILAC),
 			new ListValue<Colour>(Colour.SKIN_PURPLE),
 			new ListValue<Colour>(Colour.SKIN_IVORY),
+			new ListValue<Colour>(Colour.SKIN_GREY),
 			new ListValue<Colour>(Colour.SKIN_EBONY));
 
 	public static List<Colour> allSkinColours = Util.newArrayListOfValues(
@@ -448,8 +460,10 @@ public enum Colour {
 			new ListValue<Colour>(Colour.SKIN_OLIVE),
 			new ListValue<Colour>(Colour.SKIN_DARK),
 			new ListValue<Colour>(Colour.SKIN_EBONY),
+			new ListValue<Colour>(Colour.SKIN_GREY),
 			new ListValue<Colour>(Colour.SKIN_RED),
 			new ListValue<Colour>(Colour.SKIN_BROWN),
+			new ListValue<Colour>(Colour.SKIN_AMBER),
 			new ListValue<Colour>(Colour.SKIN_PINK),
 			new ListValue<Colour>(Colour.SKIN_GREEN),
 			new ListValue<Colour>(Colour.SKIN_BLUE),
@@ -497,6 +511,13 @@ public enum Colour {
 			new ListValue<Colour>(Colour.HORN_GREY),
 			new ListValue<Colour>(Colour.HORN_DARK_GREY),
 			new ListValue<Colour>(Colour.HORN_BLACK));
+	
+	public static List<Colour> antlerColours = Util.newArrayListOfValues(
+			new ListValue<Colour>(Colour.ANTLER_WHITE),
+			new ListValue<Colour>(Colour.ANTLER_TAN),
+			new ListValue<Colour>(Colour.ANTLER_GREY),
+			new ListValue<Colour>(Colour.ANTLER_DARK_GREY),
+			new ListValue<Colour>(Colour.ANTLER_BLACK));
 	
 
 	// Orifices:

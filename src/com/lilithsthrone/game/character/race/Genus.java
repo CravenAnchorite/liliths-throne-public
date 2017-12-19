@@ -4,7 +4,7 @@ import com.lilithsthrone.utils.Colour;
 
 /**
  * @since 0.1.0
- * @version 0.1.82
+ * @version 0.1.96
  * @author Innoxia
  */
 public enum Genus {
@@ -21,6 +21,8 @@ public enum Genus {
 			Colour.RACE_CAT_MORPH),
 	EQUINE("equine",
 			Colour.RACE_HORSE_MORPH),
+	RANGIFERINE("rangiferine",
+			Colour.RACE_REINDEER_MORPH),
 	VULPINE("vulpine",
 			Colour.CLOTHING_RED), //TODO
 	BOVINE("bovine",

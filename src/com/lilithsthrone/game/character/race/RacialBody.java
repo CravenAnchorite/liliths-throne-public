@@ -140,8 +140,8 @@ public enum RacialBody {
 			BreastType.DEMON_COMMON,
 			CupSize.FLAT, 1, Lactation.ZERO_NONE, Capacity.ZERO_IMPENETRABLE, OrificeElasticity.SEVEN_ELASTIC, OrificePlasticity.ZERO_RUBBERY, NippleSize.ZERO_TINY, NippleShape.NORMAL, AreolaeSize.ZERO_TINY, 1,
 			CupSize.F, 3, Lactation.ZERO_NONE, Capacity.ONE_EXTREMELY_TIGHT, OrificeElasticity.SEVEN_ELASTIC, OrificePlasticity.ZERO_RUBBERY, NippleSize.ZERO_TINY, NippleShape.VAGINA, AreolaeSize.TWO_BIG, 1,
-			190, 10, BodySize.THREE_LARGE.getMedianValue(), Muscle.FOUR_RIPPED.getMedianValue(),
-			180, 90, BodySize.ONE_SLENDER.getMedianValue(), Muscle.FOUR_RIPPED.getMedianValue(),
+			190, 10, BodySize.TWO_AVERAGE.getMedianValue(), Muscle.THREE_MUSCULAR.getMedianValue(),
+			180, 90, BodySize.TWO_AVERAGE.getMedianValue(), Muscle.THREE_MUSCULAR.getMedianValue(),
 			EarType.DEMON_COMMON,
 			EyeType.DEMON_COMMON,
 			FaceType.DEMON_COMMON, LipSize.ONE_AVERAGE, LipSize.TWO_FULL,
@@ -348,6 +348,40 @@ public enum RacialBody {
 		}
 	},
 
+	REINDEER_MORPH(Util.newHashMapOfValues(
+				new Value<Attribute, Float>(Attribute.STRENGTH, 30f),
+				new Value<Attribute, Float>(Attribute.INTELLIGENCE, 10f),
+				new Value<Attribute, Float>(Attribute.FITNESS, 40f),
+				new Value<Attribute, Float>(Attribute.CORRUPTION, 20f)),
+			AntennaType.NONE,
+			ArmType.REINDEER_MORPH, 1,
+			AssType.REINDEER_MORPH, AssSize.TWO_SMALL, AssSize.THREE_NORMAL, Wetness.ZERO_DRY, Capacity.ONE_EXTREMELY_TIGHT, OrificeElasticity.THREE_FLEXIBLE, OrificePlasticity.THREE_RESILIENT,
+			BreastType.REINDEER_MORPH,
+			CupSize.FLAT, 1, Lactation.ZERO_NONE, Capacity.ZERO_IMPENETRABLE, OrificeElasticity.THREE_FLEXIBLE, OrificePlasticity.THREE_RESILIENT, NippleSize.ZERO_TINY, NippleShape.NORMAL, AreolaeSize.ZERO_TINY, 1,
+			CupSize.D, 3, Lactation.ZERO_NONE, Capacity.ZERO_IMPENETRABLE, OrificeElasticity.THREE_FLEXIBLE, OrificePlasticity.THREE_RESILIENT, NippleSize.ONE_SMALL, NippleShape.NORMAL, AreolaeSize.TWO_BIG, 1,
+			185, 10, BodySize.FOUR_HUGE.getMedianValue(), Muscle.FOUR_RIPPED.getMedianValue(),
+			175, 70, BodySize.TWO_AVERAGE.getMedianValue(), Muscle.FOUR_RIPPED.getMedianValue(),
+			EarType.REINDEER_MORPH,
+			EyeType.REINDEER_MORPH,
+			FaceType.REINDEER_MORPH, LipSize.ONE_AVERAGE, LipSize.TWO_FULL,
+			HairType.REINDEER_MORPH, HairLength.TWO_SHORT, HairLength.TWO_SHORT,
+			LegType.REINDEER_MORPH,
+			SkinType.REINDEER_MORPH, BodyMaterial.FLESH,
+			HornLength.THREE_HUGE, HornLength.TWO_LONG, Util.newArrayListOfValues(new ListValue<>(HornType.REINDEER_RACK)),
+			PenisType.REINDEER_MORPH, PenisSize.THREE_LARGE,
+			PenisType.NONE, PenisSize.TWO_AVERAGE,
+			TesticleSize.THREE_LARGE, 2, CumProduction.THREE_AVERAGE,
+			TailType.REINDEER_MORPH,
+			VaginaType.REINDEER_MORPH, Wetness.TWO_MOIST, Capacity.FOUR_LOOSE, ClitorisSize.ONE_BIG, OrificeElasticity.FOUR_LIMBER, OrificePlasticity.THREE_RESILIENT,
+			WingType.NONE, WingSize.ZERO_TINY, WingSize.ZERO_TINY,
+			GenitalArrangement.NORMAL) {
+	
+		@Override
+		public Personality getPersionality() {
+			return generatePersonality(30, 30, 20, 20);
+		}
+	},
+
 	// REPTILE:
 	ALLIGATOR_MORPH(Util.newHashMapOfValues(
 	            new Value<Attribute, Float>(Attribute.STRENGTH, 60f),
@@ -375,7 +409,18 @@ public enum RacialBody {
 		    TailType.ALLIGATOR_MORPH,
 		    VaginaType.ALLIGATOR_MORPH, Wetness.SEVEN_DROOLING, Capacity.ONE_EXTREMELY_TIGHT, ClitorisSize.ZERO_AVERAGE, OrificeElasticity.SEVEN_ELASTIC, OrificePlasticity.ZERO_RUBBERY,
 		    WingType.NONE, WingSize.ZERO_TINY, WingSize.ZERO_TINY,
-		    GenitalArrangement.CLOACA),
+		    GenitalArrangement.CLOACA) {
+
+		@Override
+		public Personality getPersionality() {
+			return generatePersonality(10, 40, 40, 10);
+		}
+		
+		@Override
+		public boolean isHairTypeLinkedToFaceType() {
+			return true;
+		}
+	},
 			
 	// SLIMES:
 	SLIME(Util.newHashMapOfValues(
@@ -661,6 +706,8 @@ public enum RacialBody {
 				return RacialBody.HARPY;
 			case HORSE_MORPH:
 				return RacialBody.HORSE_MORPH;
+			case REINDEER_MORPH:
+				return RacialBody.REINDEER_MORPH;
 			case HUMAN:
 				return RacialBody.HUMAN;
 			case WOLF_MORPH:
@@ -799,6 +846,13 @@ public enum RacialBody {
 
 	public HairType getHairType() {
 		return hairType;
+	}
+	
+	/**
+	 * @return true if this RacialBody requires FaceType to not be human in order to apply hair settings.
+	 */
+	public boolean isHairTypeLinkedToFaceType() {
+		return false;
 	}
 
 	public LegType getLegType() {
