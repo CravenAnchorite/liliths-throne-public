@@ -1,4 +1,5 @@
 <<<<<<< Upstream, based on upstream/master
+<<<<<<< Upstream, based on upstream/master
 package com.lilithsthrone.game.character;
 
 import java.util.ArrayList;
@@ -242,13 +243,106 @@ public enum Name {
 			Util.newArrayListOfValues(
 					new ListValue<>(new NameTriplet("Amber", "Amber", "Amber")),
 >>>>>>> 78d186e upstream
+=======
+package com.lilithsthrone.game.character;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.lilithsthrone.game.character.body.valueEnums.Femininity;
+import com.lilithsthrone.game.character.race.Race;
+import com.lilithsthrone.utils.Util;
+import com.lilithsthrone.utils.Util.ListValue;
+
+/**
+ * @since 0.1.0
+ * @version 0.1.75
+ * @author Innoxia
+ */
+public enum Name {
+
+	HUMAN(Race.HUMAN,
+			Util.newArrayListOfValues(
+					new ListValue<>(new NameTriplet("Alexander", "Alex", "Alexandria")),
+					new ListValue<>(new NameTriplet("Alexius", "Alex", "Alexia")),
+					new ListValue<>(new NameTriplet("Alex", "Alex", "Alex")),
+					new ListValue<>(new NameTriplet("Ash", "Ashe", "Ashley")),
+					
+					new ListValue<>(new NameTriplet("Bart", "Bailey", "Bridget")),
+					new ListValue<>(new NameTriplet("Ben", "Beverly", "Bella")),
+					
+					new ListValue<>(new NameTriplet("Carl", "Casey", "Cadence")),
+					new ListValue<>(new NameTriplet("Charlie", "Charlie", "Charlie")),
+					
+					new ListValue<>(new NameTriplet("Daniel", "Danny", "Dani")),
+					new ListValue<>(new NameTriplet("Dale", "Devon", "Diana")),
+					
+					new ListValue<>(new NameTriplet("Edward", "Ed", "Elaine")),
+					new ListValue<>(new NameTriplet("Eli", "Emery", "Evelyn")),
+					
+					new ListValue<>(new NameTriplet("Fred", "Frankie", "Felicity")),
+					
+					new ListValue<>(new NameTriplet("George", "Georgie", "Grace")),
+					
+					new ListValue<>(new NameTriplet("Harry", "Harley", "Hailey")),
+					new ListValue<>(new NameTriplet("Hank", "Haiden", "Holly")),
+					
+					new ListValue<>(new NameTriplet("Ian", "Izzy", "Isabelle")),
+
+					new ListValue<>(new NameTriplet("James", "Jackie", "Jasmine")),
+					new ListValue<>(new NameTriplet("Jack", "Jay", "Jennifer")),
+					new ListValue<>(new NameTriplet("Jean", "Jess", "Jessica")),
+
+					new ListValue<>(new NameTriplet("Kevin", "Kel", "Katie")),
+					new ListValue<>(new NameTriplet("Ken", "Kelly", "Katherine")),
+
+					new ListValue<>(new NameTriplet("Lee", "Louie", "Lauren")),
+					new ListValue<>(new NameTriplet("Leonard", "Linden", "Leah")),
+					new ListValue<>(new NameTriplet("Len", "Lumi", "Laura")),
+					
+					new ListValue<>(new NameTriplet("Micheal", "Maddy", "Maria")),
+					new ListValue<>(new NameTriplet("Mike", "Max", "Miranda")),
+					
+					new ListValue<>(new NameTriplet("Nicholas", "Nat", "Natalia")),
+					
+					new ListValue<>(new NameTriplet("Oliver", "Oli", "Olivia")),
+					
+					new ListValue<>(new NameTriplet("Peter", "Parker", "Paige")),
+					new ListValue<>(new NameTriplet("Pete", "Phoenix", "Penelope")),
+					
+					new ListValue<>(new NameTriplet("Quentin", "Quinn", "Quinta")),
+					
+					new ListValue<>(new NameTriplet("Richard", "Robby", "Rachel")),
+					
+					new ListValue<>(new NameTriplet("Stanley", "Sam", "Stephanie")),
+					new ListValue<>(new NameTriplet("Stan", "Sacha", "Summer")),
+					
+					new ListValue<>(new NameTriplet("Thomas", "Toni", "Tracy")),
+
+					new ListValue<>(new NameTriplet("Ulysses", "Umber", "Ursula")),
+
+					new ListValue<>(new NameTriplet("Vincent", "Val", "Violet")),
+					new ListValue<>(new NameTriplet("Vinn", "Vic", "Vixen")),
+
+					new ListValue<>(new NameTriplet("William", "Winter", "Whitney")),
+					new ListValue<>(new NameTriplet("Will", "Wynne", "Willow")))),
+	
+	// No offence if your name is on here... x_x
+	PROSTITUTE(Race.HUMAN,
+			Util.newArrayListOfValues(
+					new ListValue<>(new NameTriplet("Amber", "Amber", "Amber")),
+>>>>>>> 6aa839f merge
 					new ListValue<>(new NameTriplet("Autumn", "Autumn", "Autumn")),
 
+<<<<<<< Upstream, based on upstream/master
 <<<<<<< Upstream, based on upstream/master
 					new ListValue<>(new NameTriplet("Bambi", "Bambi", "Bambi")),
 =======
 					new ListValue<>(new NameTriplet("Bambi", "Bambi", "Bambi")),
 >>>>>>> 78d186e upstream
+=======
+					new ListValue<>(new NameTriplet("Bambi", "Bambi", "Bambi")),
+>>>>>>> 6aa839f merge
 					new ListValue<>(new NameTriplet("Ben", "Brandy", "Brandy")),
 					new ListValue<>(new NameTriplet("Brian", "Brianna", "Brianna")),
 
@@ -290,6 +384,7 @@ public enum Name {
 					
 					new ListValue<>(new NameTriplet("Ruby", "Ruby", "Ruby")),
 					new ListValue<>(new NameTriplet("Reba", "Reba", "Reba")),
+<<<<<<< Upstream, based on upstream/master
 
 					new ListValue<>(new NameTriplet("Savannah", "Savannah", "Savannah")),
 					new ListValue<>(new NameTriplet("Sam", "Samantha", "Samantha")),
@@ -467,6 +562,8 @@ public enum Name {
 					
 					new ListValue<>(new NameTriplet("Ruby", "Ruby", "Ruby")),
 					new ListValue<>(new NameTriplet("Reba", "Reba", "Reba")),
+=======
+>>>>>>> 6aa839f merge
 
 					new ListValue<>(new NameTriplet("Savannah", "Savannah", "Savannah")),
 					new ListValue<>(new NameTriplet("Sam", "Samantha", "Samantha")),
