@@ -28,6 +28,7 @@ import com.lilithsthrone.game.character.body.BodyPartInterface;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.Covering;
 import com.lilithsthrone.game.character.body.FluidCum;
+import com.lilithsthrone.game.character.body.FluidGirlCum;
 import com.lilithsthrone.game.character.body.types.AntennaType;
 import com.lilithsthrone.game.character.body.types.ArmType;
 import com.lilithsthrone.game.character.body.types.AssType;
@@ -3014,7 +3015,11 @@ public abstract class GameCharacter implements Serializable, XMLSaving {
 			
 		} else {
 			pregnancyChance = 0;
+			if (partner.hasPenis()){
 			pregnancyChance += (partner.getAttributeValue(Attribute.VIRILITY)/100f) * partner.getPenisCumProduction().getPregnancyModifier();
+			} else {
+				pregnancyChance += (partner.getAttributeValue(Attribute.VIRILITY)/100f);
+			}
 			pregnancyChance += (getAttributeValue(Attribute.FERTILITY)/100f);
 		}
 		
@@ -3056,8 +3061,13 @@ public abstract class GameCharacter implements Serializable, XMLSaving {
 				int maximumNumberOfChildren = 1;
 				
 				if(getVaginaType()==VaginaType.HUMAN) {
+					if( partner.hasPenis() ){
 					minimumNumberOfChildren = partner.getPenisType().getRace().getNumberOfOffspringLow();
 					maximumNumberOfChildren = partner.getPenisType().getRace().getNumberOfOffspringHigh();
+					} else {
+						minimumNumberOfChildren = partner.getVaginaType().getRace().getNumberOfOffspringLow();
+						maximumNumberOfChildren = partner.getVaginaType().getRace().getNumberOfOffspringHigh();
+					}
 					
 				} else {
 					minimumNumberOfChildren = getVaginaType().getRace().getNumberOfOffspringLow();
@@ -7140,11 +7150,21 @@ public abstract class GameCharacter implements Serializable, XMLSaving {
 	}
 	
 	// Cum:
+	public FluidGirlCum getGirlCum() {
+		return body.getVagina().getGirlcum();
+	}
+	public String getGirlCumName(){
+		return body.getVagina().getGirlcum().getName(this);
+	}
 	public FluidCum getCum() {
 		return body.getPenis().getTesticle().getCum();
 	}
 	public String getCumName() {
+		if (body.getPenis() == null) {
+				return body.getVagina().getGirlcum().getName(this);
+		}else{
 		return body.getPenis().getTesticle().getCum().getName(this);
+	}
 	}
 	// Flavour:
 	public FluidFlavour getCumFlavour() {
