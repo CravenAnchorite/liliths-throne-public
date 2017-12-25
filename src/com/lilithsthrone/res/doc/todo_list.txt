@@ -15,62 +15,154 @@
 	
 	Patch notes:
 	
-	<b>There were several bug reports (mainly the game's options locking up) that I was unable to reproduce. If you're having issues like that, please try exporting, then importing your game.</b>
 	
-	Gameplay:
-		Added weather type snow, which only occurs during winter (December, January, & February).
-		Added reindeer-morph encounters in alleyways during winter (they'll start appearing after it's snowed for the first time).
 	
 	Contributors:
-		Minor fix to Gator's Gumbo usage text. (by Rfpnj)
-		<b>Added reindeer morphs.</b> (by Rfpnj)
-		
+		Minor typo fixes. (by Rfnpj)
+		Fixed instances of wings being described as allowing flight when they shouldn't. (by tukaima)
+		Fixed integer to string parsing error, as well as correcting the 'times fought' value on NPC-occupied city street squares. (by Lucasvdlaan)
+	
+	Clothing:
+		Added: Men's kimono (masculine, torso slot, Ronin set).
+		Added: Haori (masculine, over-torso slot, Ronin set).
+		Added: Men's geta (masculine, foot slot, Ronin set).
+	
 	Other:
-		Nyan's hair and fur colours are now black.
-		Reduced maximum prostitute spawn chance from 50% to 30%.
-		Added a 20% chance for NPCs to have unusual hair colours.
-		Changed hair length calculation to make alligator-morphs naturally bald, but only if their face type is that of an alligator-morph's (i.e. partial/lesser alligator-morphs will have human hair lengths).
-		NPCs will no longer generate new clothes while you're still interacting with them.
-		Added in (basic, to be expanded upon later) self-virginity-loss variants.
-		Made all self-actions in sex have the masturbation fetish associated with them.
-		Added amber & grey colours for demon skin.
-		Added cock length to selfie/character viewer screens.
-		Updated all weather status effect icons.
+		Added option to have submissive sex with geisha Lilaya.
+		Reverted prostitutes not being able to be pure virgins (3% chance of pure virgins to be prostitutes).
+		You can now give Yuletide Gifts to slaves and offspring.
+		Added options to change the current month in the debug menu.
 	
 	Bugs:
-		Fixed another cause of game imports not working.
-		Fixed leg skin/fur colour not being displayed properly in selfie view.
-		Fixed bug where NPCs trying to pull down the Milk Maid's dress would cause a game crash (by fixing bug where the top couldn't be pulled down).
-		Gator's Gumbo TF menu now shows correct number modifiers for TF descriptions in enchantment menu.
-		Alligator-morph items can now be fed to NPCs like other consumables.
-		Fixed form input fields not displaying apostrophes and quotation marks correctly.
-		Minor typo fixes.
-		Changing your body (using the demonic transformation menu) during sex will now correctly update sex actions accordingly.
-		Fixed cause of UI bugs where the bottom response bar would not be anchored to the bottom of the screen.
-		Fixed some incorrect stats for the 'alligator-morph' status effect.
-		Fixed more causes of crashes in game importing.
-		Fixed male prostitute names.
-		Time will now pass in the Enforcer HQ area.
-		Fixed bug where highlighted hair was being treated as a natural colour.
-		Fixed rarity of alligator-morph's bottled essence.
-		NPC's body preferences (what they want to TF you into after beating you) should now be correctly loaded on game import.
-		Fixed forced TF bug (where all NPCs would keep giving you human penis or vagina parts even if they wanted to turn you into something else).
-		Slaves with the transformation fetish which are assigned as a test subject, but without feminine or masculine transformation specified, now correctly receive a gain in affection when Lilaya performs tests on them.
-		Having furry encounters enabled while having "forced TF racial limits" set to "Human Only" should no longer have the problem of the characters not giving you any genitals when you are transformed.
-		Prostitutes should no longer be able to spawn in as virgins.
+		Yuletide Gifts, mince pies, egg nog, and sugar cookies will no longer spawn in alleyways.
+		Fixed antler headband being able to be dyed multiple colours.
+		You can no longer use NPCs' items during sex.
+		Fixed the cause of several strange issues where thigh sex would be treated as a self action.
+		Fixed some slave room values displaying '/day' instead of '/hour'.
+		Fixed rounding errors in the slave management screen.
+		Ending Lilaya's geisha sex scene now correctly moves you back to your room.
+		Moved Lilaya's and Kate's 'Grow cock' action to all sex scenes (available if your partner is a demon).
+		Chemise should no longer be able to be pulled up without first removing/displacing appropriate clothing.
+		Fixed bug where both NPCs and the player would be able to lose penile virginity multiple times.
+		Fixed bug where changing body-part colours in Kate's shop would charge you double (most cases were of being charged 400 instead of 200).
+		Fixed bug in Kate's shop where recolouring body hair wouldn't work.
+		Fixed major display bugs in the light theme (although the colours are still not great...).
+		Fixed some bugs in character creation's sex experience options (you now correctly start having lost penile and anal virginities if you select the appropriate choices).
+		Scarlett should now be able to be fed items during sex (some of the text might not be correct, but the effects should work).
+		Fixed major (and quite specific) bug which was causing both trader and player inventory to become unresponsive.
+	
+	
+	
+
+	
+	
+	Add in player-NPC variations for all item usages.
+	
+	
+
+	2) "Fixed forced TF bug (where all NPCs would keep giving you human penis or vagina parts even if they wanted to turn you into something else)."
+		This one seems to still be around, unfortunately. Unless it's tied to me keeping my preferences file from the 0.1.95.
+		The workaround seems to be to give yourself the right genitals (species and sex) for what the NPC was trying to turn you into, at which point they'll start TFing you again.
+	 Sorry to report, but the forced transformation bug with human parts is still happening.
 	
 	
 	
 	
 	
-	8chan bugs
-	TFGS response & update
+	
+	
+	FINISH NEW KATE MENU & USE FOR SLAVE CUSTOMISATION
+	Slave customisation
+	
+	
+	
+	have big red text in the main menu if the java version being used is different from what the game was coded for
+	
+	
+	thigh sex NPCs will incessantly do it
+	I get issues with constant tail and thigh sex
+		[remake sex AI: assign weights to each action. Actions performed can alter weights.]
+	
+	also, with the changes to orgasms I had 96 arousal but when brax was the dominant partner I ended up not orgasming at all (The problem is that arousal that high should have triggered a simultanious orgasm)
+	
+	
+	
+	While I'm at it, NPCs don't seem to have any kind of preference for body weight - would be nice if they did and adjusted body weight to suit their tastes when force TFing you. :)
+	
+	
+	add in strutter and leg lover
+	
+	
+	Slaves without the “Exhibitionist” fetish should probably lose affection if you make them go naked.
+	
+	Likewise, alley encounters don’t react to storm conditions. Not such a big deal with muggers, since all they do is attack you anyway, but prostitutes probably shouldn’t still be working.
+	
+	
+	I'll see about adding a small variation to NPC's levels when using a level-scaling difficulty (+/- 3 sounds good).
+	
+	There’s some sort of problem with the public stocks. The scenes are fine, but the first intro line (You decide to have some fun with the <Insert Race Here> in the stocks nearest you) is buggy. At first I thought it was just going off the first one regardless of which one you picked, but subsequently I realised it was more than that when it told me I was fucking a wolf-girl when there wasn’t a wolf-girl there.
+
+Well, I say the scenes are fine, but they obviously need a lot more work; they use the same actions as the regular scenes, leading to such things as non-con slaves “trying to pull away from you, but you easily stop them”, or willing slaves masturbating despite being restrained.
+
+I had completely explored the main Dominion area in 1.90, but some cells in the southwest were hidden again after import to 1.95. NPCs in them were still there, just the “explored” information was missing. This happened with two different saves, both lost some cells in the southwest.
+
+I just met a trap, and despite never having seen her naked, I apparently just knew she was a trap and what her cock and ass look like. If it’s relevant, she was in one of the cells that was obfuscated on import.
+
+NPCs with the “Transformer” fetish don’t respect gender content options. They don’t need to follow the same frequency or anything, but if I’ve completely disabled a body-type from being in the game, it might be an idea to filter it from NPC TF preferences too.
+	
+	
+	The slave management UI is not very good at the moment... x_x
+I'll improve it as soon as I can! :3
+
+I'll also definitely add bunk beds and other higher capacity room modifications.
+
+I'll add an upgrade for stocks in the garden at some point too; good idea
+	
+other bug is that it say that brax and kate are pregnant with my children despite it not showing on there appearance page and they don't have the pregnant effect.
+
+	
+	I'm planning on adding a special orgasm denial action, which I'll then allow NPCs with the denial fetish to use (I might split up the fetish into 'being denied' and 'denying others' variants).
+	
+	i dunno if this is a bug,so here i go:i spawn some item to dress scarlet. 2 of the item are the weapon. i dress scarlet and pick up the weapon last. here is the thing: for some reason the weapon duplicate. when i pick them it was 8 of them stacked .i spawn the item in 1 of the slave room.
+	
+	When I next work on improving the slave UI, I'll see if I can add a "quick view" icon to the slave list, which you'll be able to hover over to see their status effects. :3
+	
+	
+	
+	
+	
+	
+	
+	
+	Add 'Find new Overseer'
+	
+	FINISH NEW ORGASM ACTIONS
+	
+	
+	The start tf menu is describing me as a succubus (Which was the last NPC I used this menu in)
+	And you can access your phone despite the fact it's blocked by clicking "Level 1 Woman" in the top left
+	
+	
+	6:32] NoFratChicks: System.setProperty("prism.lcdtext", "false"); near-doubled the speed for me, so it does seem to be rendering related
+	[06:34] NoFratChicks: Not sure what it does, renders text with greyscale rather than LCD subpixels? Anyway might be worth adding an option to turn that off, I'll tell you if I find something else that has a signficant effect. I'm sure there's something to disable general anti-aliasing that would help as well.
+	[06:34] NoFratChicks: The 10 other people with this kind of setup will thank you :weary:
+	[07:11] NoFratChicks: Removing the fade-in effect on tooltips has improved my experience, might be worth disabling that if the menu fade option is disabled, the same people are going to want tooltip fade off.
+	
+	dirty talk for thigh sex is "How best to use you, I wonder..."
+	
+	can receive paizuri while having oral sex
+	
+	
 	Jam commission
 	
+	add Mega Milk pose as a special attack
+		It better scale with boob size
 	
+	eggplant usable
 	
 During arcane storm facing a random encounter on generic title and winning by dismissal, (just leave not using removal option), bug out the map and stop listening to mouse commands, keyboard still work and restore functionality after moving
 
+Thigh sex, paizuri, butt jobs, and blowjobs shouldn't count for losing penile virginity.
 
 Is there a bug where if you attempt to get a submissive partner to fuck you in the ass, they'll do thigh sex and not stop no matter what you do?  Or are the characters in my game just scared of buttholes?
 
@@ -78,8 +170,7 @@ Feline Fancy now open the enchanting screen for strength instead of intelligence
 
  Contrary to my hopes and dreams, you cannot use your tail to penetrate as a gator. Hopefully this is a bug. (Magic ought to be able to add prehensibility(?)!)
 	
-	"Morph difficulty": Enemies level up alongside your character and do normal (100%) damage.
-	
+	If i import my character, im stuck at the "survive the evening" quest.
 	
 A small problem I just noticed, I tried to enable 'Light Theme' out of curiosity and everything displayed badly, White buttons on a white background, a list of shortcut key vertically on the left. It seemed to be in mobile device display mode but still with white text on a white background, except for the shortcut key references.
 
@@ -129,7 +220,7 @@ Npc's are doing that black magic voodoo thing where they're pulling up my chemis
 	
 	
 	
-	
+	"you have fought her times"
 	
 	If you scroll down the room list menu and click to manage a room, the new menu remains scrolled down accordingly instead of being reset to the top of the menu.
 	
@@ -275,11 +366,6 @@ BlobHyperSweats1
 	
 	
 	get cloacas working
-	
-	Clothing:
-		Default primary colours
-		Default secondary colours
-		+ Dye for both
 	
 	Apparently, it doesn't like it when you ride the 19 inch succubi cock analy like a slut, tail peg her ass, and finger her pussy.. at the same time
 	

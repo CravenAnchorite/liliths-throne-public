@@ -259,12 +259,28 @@ public class DebugDialogue {
 					}
 				};
 				
-			}
-			 else if (index == 20) {
+			} else if (index == 20) {
 					return new Response("Offspring", "View available offspring", OFFSPRING);
 					
-				}
-			else {
+			} else if (index == 21) {
+				return new Response("[style.boldBad(Month -)]", "Reduce current month by 1.", DEBUG_MENU){
+					@Override
+					public void effects() {
+						Main.game.setStartingDateMonth(Main.game.getStartingDate().getMonth().minus(1));
+						
+					}
+				};
+				
+			} else if (index == 22) {
+					return new Response("[style.boldGood(Month +)]", "Increase current month by 1.", DEBUG_MENU){
+						@Override
+						public void effects() {
+							Main.game.setStartingDateMonth(Main.game.getStartingDate().getMonth().plus(1));
+							
+						}
+					};
+					
+			} else {
 				return null;
 			}
 		}
@@ -404,7 +420,12 @@ public class DebugDialogue {
 				for(AbstractClothingType clothingType : clothingTotal) {
 					if(clothingType.getSlot()==activeSlot) {
 						inventorySB.append("<div class='inventory-item-slot unequipped "+ clothingType.getRarity().getName() + "'>"
-												+ "<div class='inventory-icon-content'>"+clothingType.getSVGImage(clothingType.getAvailableColours().get(0))+"</div>"
+												+ "<div class='inventory-icon-content'>"
+													+clothingType.getSVGImage(
+														clothingType.getAllAvailablePrimaryColours().get(0),
+														clothingType.getAvailableSecondaryColours().isEmpty()?null:clothingType.getAvailableSecondaryColours().get(0),
+														clothingType.getAvailableTertiaryColours().isEmpty()?null:clothingType.getAvailableTertiaryColours().get(0))
+												+"</div>"
 												+ "<div class='overlay' id='" + clothingType.getId() + "_SPAWN'></div>"
 											+ "</div>");
 						count++;

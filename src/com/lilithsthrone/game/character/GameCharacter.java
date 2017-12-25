@@ -133,6 +133,7 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.world.Cell;
+import com.lilithsthrone.world.World;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.GenericPlace;
 import com.lilithsthrone.world.places.PlaceType;
@@ -1596,14 +1597,14 @@ public abstract class GameCharacter implements Serializable, XMLSaving {
 	public float getHourlyObedienceChange(int hour) {
 		if(this.workHours[hour]) {
 			if(this.getSlaveJob()==SlaveJob.IDLE) {
-				return this.getHomeLocationPlace().getObedienceChange();
+				return this.getHomeLocationPlace().getHourlyObedienceChange();
 			}
 			// To get rid of e.g. 2.3999999999999999999999:
 			return Math.round(this.getSlaveJob().getObedienceGain(this)*100)/100f;
 		}
 		
 		// To get rid of e.g. 2.3999999999999999999999:
-		return Math.round(this.getHomeLocationPlace().getObedienceChange()*100)/100f;
+		return Math.round(this.getHomeLocationPlace().getHourlyObedienceChange()*100)/100f;
 	}
 	
 	public float getDailyObedienceChange() {
@@ -1611,14 +1612,14 @@ public abstract class GameCharacter implements Serializable, XMLSaving {
 		
 		for (int workHour = 0; workHour < this.getTotalHoursWorked(); workHour++) {
 			if(this.getSlaveJob()==SlaveJob.IDLE) {
-				totalObedienceChange+=this.getHomeLocationPlace().getObedienceChange();
+				totalObedienceChange+=this.getHomeLocationPlace().getHourlyObedienceChange();
 			}
 			totalObedienceChange+=this.getSlaveJob().getObedienceGain(this);
 			
 		}
 		
 		for (int homeHour = 0; homeHour < 24-this.getTotalHoursWorked(); homeHour++) {
-			totalObedienceChange+=this.getHomeLocationPlace().getObedienceChange();
+			totalObedienceChange+=this.getHomeLocationPlace().getHourlyObedienceChange();
 		}
 		// To get rid of e.g. 2.3999999999999999999999:
 		return Math.round(totalObedienceChange*100)/100f;
@@ -1777,7 +1778,7 @@ public abstract class GameCharacter implements Serializable, XMLSaving {
 	public float getAffection(GameCharacter character) {
 		affectionMap.putIfAbsent(character.getId(), 0f);
 		
-		return affectionMap.get(character.getId());
+		return Math.round(affectionMap.get(character.getId())*100)/100f;
 	}
 	
 	public AffectionLevel getAffectionLevel(GameCharacter character) {
@@ -3256,9 +3257,43 @@ public abstract class GameCharacter implements Serializable, XMLSaving {
 			setHomeLocation(worldType, location);
 		}
 	}
+
+	public void setRandomLocation(WorldType worldType, PlaceType placeType, boolean setAsHomeLocation) {
+		setLocation(worldType, Main.game.getWorlds().get(worldType).getRandomCell(placeType).getLocation(), setAsHomeLocation);
+	}
 	
 	public void setLocation(WorldType worldType, PlaceType placeType, boolean setAsHomeLocation) {
 		setLocation(worldType, Main.game.getWorlds().get(worldType).getCell(placeType).getLocation(), setAsHomeLocation);
+	}
+	
+	/**
+	 * Moves this character to an adjoining Cell which shares the PlaceType of the Cell that the character is already in.
+	 * @return True if the character was moved.
+	 */
+	public boolean moveToAdjacentMatchingCellType() {
+		World world = Main.game.getWorlds().get(this.getWorldLocation());
+		List<Vector2i> availableLocations = new ArrayList<>();
+		PlaceType currentlyOccupiedCellPlaceType = getLocationPlace().getPlaceType();
+		
+		if(world.getCell(this.getLocation().getX()+1, this.getLocation().getY())!=null && world.getCell(this.getLocation().getX()+1, this.getLocation().getY()).getPlace().getPlaceType()==currentlyOccupiedCellPlaceType) {
+			availableLocations.add(new Vector2i(this.getLocation().getX()+1, this.getLocation().getY()));
+		}
+		if(world.getCell(this.getLocation().getX()-1, this.getLocation().getY())!=null && world.getCell(this.getLocation().getX()-1, this.getLocation().getY()).getPlace().getPlaceType()==currentlyOccupiedCellPlaceType) {
+			availableLocations.add(new Vector2i(this.getLocation().getX()-1, this.getLocation().getY()));
+		}
+		if(world.getCell(this.getLocation().getX(), this.getLocation().getY()+1)!=null && world.getCell(this.getLocation().getX(), this.getLocation().getY()+1).getPlace().getPlaceType()==currentlyOccupiedCellPlaceType) {
+			availableLocations.add(new Vector2i(this.getLocation().getX(), this.getLocation().getY()+1));
+		}
+		if(world.getCell(this.getLocation().getX(), this.getLocation().getY()-1)!=null && world.getCell(this.getLocation().getX(), this.getLocation().getY()-1).getPlace().getPlaceType()==currentlyOccupiedCellPlaceType) {
+			availableLocations.add(new Vector2i(this.getLocation().getX(), this.getLocation().getY()-1));
+		}
+		
+		if(availableLocations.isEmpty()) {
+			return false;
+		} else {
+			this.setLocation(availableLocations.get(Util.random.nextInt(availableLocations.size())));
+			return true;
+		}
 	}
 	
 	public void setHomeLocation(WorldType homeWorldLocation, PlaceType placeType) {
