@@ -338,8 +338,6 @@ public class Body implements Serializable, XMLSaving {
 			bodyCore.appendChild(element);
 			
 			CharacterUtils.addAttribute(doc, element, "type", bct.toString());
-			System.out.println(bct.toString());
-			if (this.coverings.get(bct) != null) {
 				CharacterUtils.addAttribute(doc, element, "pattern", this.coverings.get(bct).getPattern().toString());
 				CharacterUtils.addAttribute(doc, element, "colourPrimary", this.coverings.get(bct).getPrimaryColour().toString());
 				CharacterUtils.addAttribute(doc, element, "glowPrimary", String.valueOf(this.coverings.get(bct).isPrimaryGlowing()));
@@ -347,7 +345,6 @@ public class Body implements Serializable, XMLSaving {
 				CharacterUtils.addAttribute(doc, element, "glowSecondary", String.valueOf(this.coverings.get(bct).isSecondaryGlowing()));
 				CharacterUtils.addAttribute(doc, element, "discovered", String.valueOf(this.getBodyCoveringTypesDiscovered().contains(bct)));
 			}
-		}
 		
 
 		// Antennae:
