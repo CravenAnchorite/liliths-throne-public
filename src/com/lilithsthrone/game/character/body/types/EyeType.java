@@ -33,8 +33,6 @@ public enum EyeType implements BodyPartTypeInterface {
 
 	REINDEER_MORPH(BodyCoveringType.EYE_REINDEER_MORPH, Race.REINDEER_MORPH, 1, EyeShape.ROUND, EyeShape.HORIZONTAL),
 
-	REINDEER_MORPH(BodyCoveringType.EYE_REINDEER_MORPH, Race.REINDEER_MORPH, 1, EyeShape.ROUND, EyeShape.HORIZONTAL),
-
 	HARPY(BodyCoveringType.EYE_HARPY, Race.HARPY, 1, EyeShape.ROUND, EyeShape.ROUND),
 
 	SLIME(BodyCoveringType.EYE_SLIME, Race.SLIME, 1, EyeShape.ROUND, EyeShape.ROUND);

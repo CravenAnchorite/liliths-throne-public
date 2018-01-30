@@ -357,7 +357,6 @@ public class Ralph extends NPC {
 	// Vagina:
 	
 	@Override
-<<<<<<< Upstream, based on upstream/master
 	public String getStretchingDescription(PenetrationType penetrationType, OrificeType orifice) {
 		switch(orifice) {
 			case MOUTH:
@@ -382,22 +381,10 @@ public class Ralph extends NPC {
 				}
 			default:
 				return super.getStretchingDescription(penetrationType, orifice);
-=======
-	public String getPlayerVaginaStretchingDescription(PenetrationType penetrationType) {
-		if(Math.random()<0.3) {
-			return super.getPlayerVaginaStretchingDescription(penetrationType);
-		} else {
-			return formatStretching(UtilText.returnStringAtRandom(
-					"You squirm about uncomfortably on the counter-top as Ralph's " +Sex.getPartner().getPenisName(true)+" struggles to fit in your "+Main.game.getPlayer().getVaginaCapacity().getDescriptor()+" "+Main.game.getPlayer().getVaginaName(false)+".",
-					"Ralph's " +Sex.getPartner().getPenisName(true)+" painfully stretches you out as it rams its way in and out of your "+Main.game.getPlayer().getVaginaCapacity().getDescriptor()+" "+Main.game.getPlayer().getVaginaName(false)+".",
-					"Ralph's "+Sex.getPartner().getPenisName(true)+" is too large for your "+Main.game.getPlayer().getVaginaCapacity().getDescriptor()+" "+Main.game.getPlayer().getVaginaName(false)+", and you let out an uncomfortable whine as it stretches you out.",
-					"Your "+Main.game.getPlayer().getVaginaCapacity().getDescriptor()+" little "+Main.game.getPlayer().getVaginaName(false)+" struggles to accommodate the sheer size of Ralph's "+Sex.getPartner().getPenisName(true)+"."));
->>>>>>> 78d186e upstream
 		}
 	}
 	
 	@Override
-<<<<<<< Upstream, based on upstream/master
 	public String getStretchingFinishedDescription(OrificeType orifice) {
 		switch(orifice) {
 			case MOUTH:
@@ -408,25 +395,6 @@ public class Ralph extends NPC {
 						+ " you realise that you're now able to comfortably fit Ralph's massive black horse-cock in your "+Main.game.getPlayer().getVaginaName(true)+"!");
 			default:
 				return super.getStretchingFinishedDescription(orifice);
-=======
-	public String getPlayerVaginaStretchingFinishedDescription() {
-		return formatStretching("The next time Ralph slams forwards, you feel your pussy easily stretching out to accommodate his flared equine member, and with a squeal of delight,"
-				+ " you realise that you're now able to comfortably fit Ralph's massive black horse-cock in your "+Main.game.getPlayer().getVaginaName(true)+"!");
-	}
-	
-	// Mouth:
-
-	@Override
-	public String getPlayerMouthStretchingDescription(PenetrationType penetrationType) {
-		if(Math.random()<0.3) {
-			return super.getPlayerMouthStretchingDescription(penetrationType);
-		} else {
-			return formatStretching(UtilText.returnStringAtRandom(
-					"You feel tears streaming down your face as you force the "+Sex.getPartner().getPenisName(true)+" down your throat.",
-					"You aren't skilled enough at giving head to be able to comfortably handle Ralph's "+Sex.getPartner().getPenisName(true)+".",
-					"You squirm and choke as you do your best to fit the "+Sex.getPartner().getPenisName(true)+" down your throat.",
-					"You struggle to fit Ralph's "+Sex.getPartner().getPenisName(true)+" down your throat."));
->>>>>>> 78d186e upstream
 		}
 	}
 	

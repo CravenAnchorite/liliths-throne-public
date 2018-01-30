@@ -2319,7 +2319,6 @@ public class DominionOffspringDialogue {
 							new SMStanding(
 									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexPositionSlot.STANDING_DOMINANT)),
 									Util.newHashMapOfValues(new Value<>(offspring(), SexPositionSlot.STANDING_SUBMISSIVE))) {
-<<<<<<< Upstream, based on upstream/master
 								@Override
 								public SexPace getStartingSexPaceModifier(GameCharacter character) {
 									if(character.isPlayer()) {
@@ -2327,15 +2326,6 @@ public class DominionOffspringDialogue {
 									}
 									return null;
 								}	
-=======
-						@Override
-								public SexPace getStartingSexPaceModifier(GameCharacter character) {
-									if(character.isPlayer()) {
-										return SexPace.DOM_GENTLE;
-									}
-									return null;
-						}
->>>>>>> b6593f3 merge 1
 							},
 							AFTER_SEX_VICTORY,
 							"<p>"
@@ -2387,7 +2377,6 @@ public class DominionOffspringDialogue {
 							new SMStanding(
 									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexPositionSlot.STANDING_DOMINANT)),
 									Util.newHashMapOfValues(new Value<>(offspring(), SexPositionSlot.STANDING_SUBMISSIVE))) {
-<<<<<<< Upstream, based on upstream/master
 								@Override
 								public SexPace getStartingSexPaceModifier(GameCharacter character) {
 									if(character.isPlayer()) {
@@ -2395,15 +2384,6 @@ public class DominionOffspringDialogue {
 									}
 									return null;
 								}	
-=======
-						@Override
-								public SexPace getStartingSexPaceModifier(GameCharacter character) {
-									if(character.isPlayer()) {
-										return SexPace.DOM_ROUGH;
-									}
-									return null;
-						}
->>>>>>> b6593f3 merge 1
 							},
 							AFTER_SEX_VICTORY,
 							"<p>"

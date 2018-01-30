@@ -362,7 +362,6 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"Unscrewing the lid, you bring the bottle of 'Equine Cider' to your lips before tilting your head back and quickly gulping down the golden liquid."
 						+ " As the last few drops slide down your throat, you notice a faint, musky dryness permeating through the sweet liquid, which lingers for some time as a slightly unpleasant aftertaste.",
@@ -375,18 +374,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return true;
-=======
-			if (user!=null && user.isPlayer())
-				return "<p>"
-							+ "Unscrewing the lid, you bring the bottle of 'Equine Cider' to your lips before tilting your head back and quickly gulping down the golden liquid."
-							+ " As the last few drops slide down your throat, you notice a faint, musky dryness permeating through the sweet liquid, which lingers for some time as a slightly unpleasant aftertaste."
-						+ "</p>";
-			else
-				return UtilText.parse(user,
-						"<p>"
-								+ "[npc.Name] pulls out a bottle of 'Equine Cider', and, after quickly unscrewing the cap, [npc.she] promptly downs the entire bottle."
-						+ "</p>");
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -422,7 +409,6 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"Unscrewing the cap, you bring the bottle of Bubble Milk up to your [pc.lips+], before tilting your head back and quickly gulping down the creamy liquid."
 						+ " Despite its name and the appearance of being carbonated, the mellow taste lacks any sort of fizz, and, after draining the entire bottle, a soft, pleasant aftertaste lingers in your mouth.",
@@ -435,19 +421,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return true;
-=======
-			if (user!=null && user.isPlayer()) {
-				return "<p>"
-							+ "Unscrewing the cap, you bring the bottle of Bubble Milk up to your [pc.lips+], before tilting your head back and quickly gulping down the creamy liquid."
-							+ " Despite its name and the appearance of being carbonated, the mellow taste lacks any sort of fizz, and, after draining the entire bottle, a soft, pleasant aftertaste lingers in your mouth."
-						+ "</p>";
-			} else {
-				return UtilText.parse(user,
-						"<p>"
-							+ "[npc.Name] pulls out a bottle of 'Bubble Milk', and, after quickly unscrewing the cap, [npc.she] promptly downs the entire bottle."
-						+ "</p>");
-			}
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -483,7 +456,6 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"Popping off the cap, you bring the bottle of 'Wolf Whiskey' up to your lips."
 						+ " A thick, musky scent rises from the opening, and with a gulp, you start downing the liquid, discovering that the liquid's taste is almost identical to its pungent aroma.",
@@ -496,18 +468,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return true;
-=======
-			if (user!=null && user.isPlayer())
-				return "<p>"
-							+ "Popping off the cap, you bring the bottle of 'Wolf Whiskey' up to your lips."
-							+ " A thick, musky scent rises from the opening, and with a gulp, you start downing the liquid, discovering that the liquid's taste is almost identical to its pungent aroma."
-						+ "</p>";
-			else
-				return UtilText.parse(user,
-						"<p>"
-								+ "[npc.Name] pulls out a bottle of 'Wolf Whiskey', and, after quickly popping off the cap, [npc.she] promptly downs the entire bottle."
-						+ "</p>");
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -544,7 +504,6 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"Pulling out the stopper, you take a large swig of 'Swamp Water'."
 						+ " Thankfully, the liquid within isn't a literal version of its label, and turns out to be a strong liquor, which burns your throat a little as you gulp it down."
@@ -559,21 +518,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return true;
-=======
-			if (user!=null && user.isPlayer() && target.isPlayer()) {
-				return "<p>"
-							+ "You pull out the stopper and take a large swig of the 'Swamp Water'."
-							+ " Thankfully, the liquid within isn't a literal version of its label, and turns out to be a strong liquor, which burns your throat a little as you gulp it down."
-							+ " Despite its intense potency, you find that the alcoholic taste is very different to anything you've tried before, and can't help but greedily finish the entire bottle, leaving a strange, tangy aftertaste lingering on your tongue."
-						+ "</p>";
-				
-			} else {
-				return UtilText.parse(target,
-						"<p>"
-							+ "[npc.Name] pulls out a bottle of 'Swamp Water', and, after quickly pulling out the stopper, [npc.she] promptly gulps downs the entire bottle."
-						+ "</p>");
-			}
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -612,7 +556,6 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"Opening the bottle of 'Feline's Fancy', you eagerly bring it up to your waiting lips."
 						+ " A rich, creamy smell rises from the opening, and as you greedily drink down the cool liquid, you're delighted to discover that it tastes every bit as good as its delicious aroma suggested it would.",
@@ -625,20 +568,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return true;
-=======
-			if (user!=null && user.isPlayer() && target.isPlayer()) {
-				return "<p>"
-							+ "Opening the bottle, you eagerly bring it up to your waiting lips."
-							+ " A rich, creamy smell rises from the opening, and as you greedily drink down the cool liquid, you're delighted to discover that it tastes every bit as good as its delicious aroma suggested it would."
-						+ "</p>";
-				
-			} else {
-				return UtilText.parse(user,
-						"<p>"
-							+ "[npc.Name] pulls out a bottle of 'Feline's Fancy', and, after quickly unscrewing the cap, [npc.she] promptly downs the entire bottle."
-						+ "</p>");
-			}
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -675,7 +604,6 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"After first unscrewing the cap, you bring the plastic bottle of 'Vanilla Water' up to your [pc.mouth]."
 						+ " A faint smell of vanilla informs you that this isn't any ordinary water, and as you tilt your head back and start drinking the cool liquid, the taste of vanilla overwhelms your senses.",
@@ -688,20 +616,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return true;
-=======
-			if (user!=null && user.isPlayer() && target.isPlayer()) {
-				return "<p>"
-							+ "After first unscrewing the cap, you bring the plastic bottle up to your mouth."
-							+ " A faint smell of vanilla informs you that this isn't any ordinary water, and as you tilt your head back and start drinking the cool liquid, the taste of vanilla overwhelms your senses."
-						+ "</p>";
-				
-			} else {
-				return UtilText.parse(user,
-						"<p>"
-							+ "[npc.Name] pulls out a bottle of 'Vanilla Water', and, after quickly unscrewing the cap, [npc.she] promptly downs the entire bottle."
-						+ "</p>");
-			}
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -740,7 +654,6 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"You pop off the cap and start drinking the bottle of 'Canine Crush'."
 						+ " It doesn't taste anything like any other beer you've ever drank, and it reminds you more of a sugary energy drink rather than any alcoholic beverage."
@@ -755,21 +668,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return true;
-=======
-			if (user!=null && user.isPlayer() && target.isPlayer()) {
-				return "<p>"
-							+ "You pop off the cap and start drinking the bottle of 'Canine Crush'."
-							+ " It doesn't taste anything like any other beer you've ever drank, and it reminds you more of a sugary energy drink rather than any alcoholic beverage."
-							+ " As the last few drops slide down your throat, a strange, musky aftertaste lingers on your tongue."
-						+ "</p>";
-				
-			} else {
-				return UtilText.parse(target,
-						"<p>"
-							+ "[npc.Name] pulls out a bottle of 'Canine Crush', and, after quickly popping off the cap, [npc.she] promptly downs the entire bottle."
-						+ "</p>");
-			}
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -806,7 +704,6 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"You unscrew the cap and start drinking the bottle of 'Squirrel Java'."
 						+ " The taste is quite unlike that of any other coffee you've ever drunk, and it reminds you more of a sugary energy drink rather than any caffeinated beverage."
@@ -871,70 +768,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return false; // Seasonal item
-=======
-			if (user!=null && user.isPlayer() && target.isPlayer()) {
-				return "<p>"
-							+ "You unscrew the cap and start drinking the bottle of 'Squirrel Java'."
-							+ " Its taste is quite unlike that of any other coffee you've ever drunk, and it reminds you more of a sugary energy drink rather than any caffeinated beverage."
-							+ " As the last few drops slide down your throat, a strange, sweet aftertaste lingers on your tongue."
-						+ "</p>";
-				
-			} else {
-				return UtilText.parse(target,
-						"<p>"
-							+ "[npc.Name] pulls out a bottle of 'Squirrel Java', and, after quickly popping off the cap, [npc.she] promptly downs the entire bottle."
-						+ "</p>");
-			}
-		}
-	};
-	
-	public static AbstractItemType FIT_INGREDIENT_EGG_NOG = new AbstractItemType(
-			"a bottle of",
-			false,
-			"Rudolph's Egg nog",
-			"Rudolph's Egg nogs",
-			"A carton of 'Rudolph's Egg Nog'."
-				+ " A label on the front shows the drink's namesake, a buff, stark-naked reindeer-boy, drinking a glass of this carton's contents while receiving oral sex from three enraptured reindeer-girls.",
-			"attributeReindeerMorphDrink",
-			Colour.ATTRIBUTE_FITNESS,
-			25,
-			Rarity.UNCOMMON,
-			TFEssence.ARCANE,
-			Util.newArrayListOfValues(new ListValue<>(new ItemEffect(ItemEffectType.FIT_EGG_NOG, null, null, null, 0)))) {
-
-		private static final long serialVersionUID = 1L;
-
-		@Override
-		public ItemEffectType getEnchantmentEffect() {
-			return ItemEffectType.ATTRIBUTE_FITNESS;
-		}
-
-		@Override
-		public AbstractItemType getEnchantmentItemType() {
-			return POTION;
-		}
-
-		@Override
-		public String getUseName() {
-			return "drink";
-		}
-
-		@Override
-		public String getUseDescription(GameCharacter user, GameCharacter target) {
-			if (user!=null && user.isPlayer() && target.isPlayer()) {
-				return "<p>"
-							+ "You open the carton and start drinking the bottle of 'Rudolph's Egg Nog'."
-							+ " Although the creamy, sweet taste is similar to that of the egg nog you remember drinking in your old world,"
-								+ " as you finish gulping down the last of the carton's contents, you find that a strange, slightly salty aftertaste lingers on your tongue."
-						+ "</p>";
-				
-			} else {
-				return UtilText.parse(target,
-						"<p>"
-							+ "[npc.Name] pulls out a carton of 'Rudolph's Egg Nog', and, after quickly opening the top, [npc.she] promptly gulps down all of the contents."
-						+ "</p>");
-			}
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -971,7 +804,6 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"You take in a deep breath of an intoxicating feminine scent as you spray a little squirt of the 'Harpy Perfume' onto your neck."
 						+ " Looking down at the curiously now-empty bottle of perfume, you feel a bubbly wave of excitement running through you, and without thinking, you find yourself letting out a very girly giggle.",
@@ -1032,20 +864,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return false; // Seasonal item
-=======
-			if (user!=null && user.isPlayer() && target.isPlayer()) {
-				return "<p>"
-							+ "You take in a deep breath of an intoxicating feminine scent as you spray a little squirt of the 'Harpy Perfume' onto your neck."
-							+ " Looking down at the curiously now-empty bottle of perfume, you feel a bubbly wave of excitement running through you, and without thinking, you find yourself letting out a very girly giggle."
-						+ "</p>";
-				
-			} else {
-				return UtilText.parse(target,
-						"<p>"
-							+ "[npc.Name] pulls out a bottle of 'Harpy Perfume', and, after quickly popping off the cap, [npc.she] promptly sprays a little squirt onto [npc.her] neck."
-						+ "</p>");
-			}
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -1084,7 +902,6 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"The moment you pull the stopper out from the top of the bottle of 'Lilith's Gift', you're filled with a desperate need to drink the bubbling pink liquid contained within."
 							+ " Instantly, you bring the bottle to your lips and gulp it all down, suppressing your gag reflex as your senses are overwhelmed by how sickeningly sweet it is.",
@@ -1097,18 +914,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return true;
-=======
-			if (user!=null && user.isPlayer())
-				return "<p>"
-							+ "The moment you pull the stopper out from the top of the bottle of 'Lilith's Gift', you're filled with a desperate need to drink the bubbling pink liquid contained within."
-							+ " Instantly, you bring the bottle to your lips and gulp it all down, suppressing your gag reflex as your senses are overwhelmed by how sickeningly sweet it is."
-						+ "</p>";
-			else
-				return UtilText.parse(user,
-						"<p>"
-								+ "[npc.Name] pulls out a bottle of 'Lilith's Gift', and, after quickly pulling out the stopper, [npc.she] promptly downs the entire bottle."
-						+ "</p>");
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -1144,7 +949,6 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"You pull the stopper out from the top of the bottle of 'Mystery Kink', before bringing it to your lips and gulping down the thick pink liquid that's contained within.",
 					"You pull the stopper out from the top of the bottle of 'Mystery Kink', before bringing it to [npc.name]'s lips and forcing [npc.herHim] to drink down the liquid within.",
@@ -1156,24 +960,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return true;
-=======
-			if (user!=null && user.isPlayer()) {
-				if(target.isPlayer()) {
-					return "<p>"
-								+ "You unscrew the bottle's cap, before lifting it to your lips and gulping down the thick pink liquid that's contained within..."
-							+ "</p>";
-				} else {
-					return UtilText.parse(target,"<p>"
-							+ "You unscrew the bottle's cap, before lifting it to [npc.name]'s [npc.lips] and making [npc.herHim] drink down all of the thick pink liquid that's contained within..."
-						+ "</p>");
-				}
-			} else {
-				return UtilText.parse(user,
-						"<p>"
-								+ "[npc.Name] pulls out a bottle of 'Lilith's Gift', and, after quickly pulling out the stopper, [npc.she] promptly downs the entire bottle."
-						+ "</p>");
-			}
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -1214,7 +1000,6 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"You pull the stopper out from the top of the glass vial of 'Fetish Endowment', before bringing it to your lips and gulping down the sickly sweet liquid that's contained within.",
 					"You pull the stopper out from the top of the glass vial of 'Fetish Endowment', before bringing it to [npc.name]'s lips and forcing [npc.herHim] to drink down the liquid within.",
@@ -1226,19 +1011,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return false;
-=======
-			if (target.isPlayer()) {
-				return "<p>"
-							+ "You pull out the little stopper from the top of the glass vial, and quickly gulp down the sickly sweet liquid contained within..."
-						+ "</p>";
-				
-			} else {
-				return UtilText.parse(target,
-						"<p>"
-							+ "You pull out the little stopper from the top of the glass vial, and make [npc.name] gulp down the sickly sweet liquid contained within..."
-						+ "</p>");
-			}
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -1274,7 +1046,6 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"You pull the crystal stopper out from the top of the bottle of 'Angel's Nectar', before bringing it to your lips and gulping down the tasteless liquid that's contained within.",
 					"You pull the crystal stopper out from the top of the bottle of 'Angel's Nectar', before bringing it to [npc.name]'s lips and forcing [npc.herHim] to drink down the liquid within.",
@@ -1286,19 +1057,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return true;
-=======
-			if (target.isPlayer()) {
-				return "<p>"
-							+ "You pull out the crystal stopper from the top of the bottle, before quickly gulping down the tasteless liquid contained within..."
-						+ "</p>";
-				
-			} else {
-				return UtilText.parse(target,
-						"<p>"
-							+ "You pull out the little stopper from the top of the glass vial, and make [npc.name] gulp down the tasteless liquid contained within..."
-						+ "</p>");
-			}
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -1337,7 +1095,6 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"The moment you pull the stopper out from the top of the bottle of 'Innoxia's Gift', you're filled with a desperate need to drink the bubbling pink liquid contained within."
 							+ " Instantly, you bring the bottle to your lips and gulp it all down, suppressing your gag reflex as your senses are overwhelmed by how sickeningly sweet it is.",
@@ -1350,20 +1107,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return true;
-=======
-			if (user!=null && user.isPlayer()) {
-				return "<p>"
-							+ "The moment you pull the stopper out from the top of the bottle of 'Innoxia's Gift', you're filled with a desperate need to drink the bubbling golden liquid contained within."
-							+ " Instantly, you bring the bottle to your lips and gulp it all down, suppressing your gag reflex as your senses are overwhelmed by how sickeningly sweet it is."
-						+ "</p>";
-			} else {
-				return UtilText.parse(user,
-						"<p>"
-							+ "[npc.Name] pulls out a bottle of 'Innoxia's Gift', and, after quickly pulling out the stopper, [npc.she] promptly downs the entire bottle."
-							+ " <i>How did [npc.she] get this?!</i>"
-						+ "</p>");
-			}
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -1400,7 +1143,6 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"You pull out the little glass stopper and bring the vial of 'Angel's Tears' to your lips."
 							+ " The faint scent of roses rises up from the opening, and you find yourself letting out a gentle sigh as you tilt back your head before drinking down the cool liquid.",
@@ -1413,20 +1155,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return true;
-=======
-			if (user!=null && user.isPlayer() && target.isPlayer()) {
-				return "<p>"
-							+ "You pull out the little glass stopper and bring the vial to your lips."
-							+ " The faint scent of roses rises up from the opening, and you find yourself letting out a gentle sigh as you tilt back your head before drinking down the cool liquid."
-						+ "</p>";
-				
-			} else {
-				return UtilText.parse(target,
-						"<p>"
-						+ "[npc.Name] pulls out a vial of 'Angel's Tears', and, pulling out the little glass stopper, quickly gulps down the pale turquoise liquid contained within."
-						+ "</p>");
-			}
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -1463,7 +1191,6 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"You pull back the ring-pull and peel off the lid to the can of 'Kitty's Reward'."
 						+ " A rich, fishy smell accompanies the sight of what looks to be tinned salmon, and you find yourself unable to resist the delicious-looking meat."
@@ -1477,21 +1204,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return true;
-=======
-			if (user!=null && user.isPlayer() && target.isPlayer()) {
-				return "<p>"
-							+ "You pull back the ring-pull and peel off the can's lid."
-							+ " A rich, fishy smell accompanies the sight of what looks to be tinned salmon, and you find yourself unable to resist the delicious-looking meat."
-							+ " You quickly wolf down the can's contents, finding that it was as delicious as it looked."
-						+ "</p>";
-				
-			} else {
-				return UtilText.parse(target,
-						"<p>"
-						+ "[npc.Name] pulls out a can of 'Kitty's Reward', and, peeling off the lid, quickly devours the contents."
-						+ "</p>");
-			}
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -1529,7 +1241,6 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"You peel back the foil lid to reveal the pot's contents."
 						+ " Despite this product being called 'Cream', it's actually a thick yoghurt that's contained within."
@@ -1546,22 +1257,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return true;
-=======
-			if (user!=null && user.isPlayer() && target.isPlayer()) {
-				return "<p>"
-							+ "You peel back the foil lid to reveal the pot's contents."
-							+ " Despite this product being called 'Cream', it's actually a thick yoghurt that's contained within."
-							+ " Detaching the tiny wooden spoon that was stuck to one side, you eagerly dig in to the creamy mixture,"
-								+ " letting out satisfied little humming noises as you discover that it's quite possibly the most delicious yoghurt that you've ever tasted."
-						+ "</p>";
-				
-			} else {
-				return UtilText.parse(target,
-						"<p>"
-							+ "[npc.Name] pulls out a pot of Bubble Cream, and, after tearing off the foil lid, [npc.she] quickly wolfs down the thick yoghurt contained within."
-						+ "</p>");
-			}
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -1598,7 +1293,6 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"You pull at the sides of one end of the bag, and open the package."
 						+ " A rich, earthy smell accompanies the sight of the nuts inside, and you find yourself unable to resist the delicious-looking display."
@@ -1613,21 +1307,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return true;
-=======
-			if (user!=null && user.isPlayer() && target.isPlayer()) {
-				return "<p>"
-							+ "You pull at the sides of one end of the bag, and open the package."
-							+ " A rich, earthy smell accompanies the sight of the round nights inside, and you find yourself unable to resist the delicious-looking display."
-							+ " You quickly wolf down the bag's contents, finding that the nuts are as delicious as they look."
-						+ "</p>";
-				
-			} else {
-				return UtilText.parse(target,
-						"<p>"
-								+ "[npc.Name] pulls out a bag of 'Round Nuts', and, opening the bag, quickly devours the contents."
-						+ "</p>");
-			}
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -1663,7 +1342,6 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"You peel back the paper packaging and pop the 'Canine Crunch' into your mouth."
 						+ " As you crunch down on the dry biscuit, you find that it's quite bland and salty.",
@@ -1676,20 +1354,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return true;
-=======
-			if (user!=null && user.isPlayer() && target.isPlayer()) {
-				return "<p>"
-						+ "You peel back the paper packaging and pop the Canine Crunch into your mouth."
-						+ " As you crunch down on the dry biscuit, you find that it's quite bland and salty."
-						+ "</p>";
-				
-			} else {
-				return UtilText.parse(target,
-						"<p>"
-						+ "[npc.Name] pulls out a Canine Crunch, and, quickly unwrapping the paper packaging, proceeds to wolf down the bone-shaped biscuit."
-						+ "</p>");
-			}
->>>>>>> 78d186e upstream
 		}
 	};
 
@@ -1725,7 +1389,6 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"You peel off the paper packaging and pop the 'Sugar Carrot Cube' into your mouth."
 							+ " The strong taste of carrots instantly fills your mouth, but before you have any time to relish the flavour, you find that it's dissolved in your saliva, and you've gulped down the sugary mess.",
@@ -1787,68 +1450,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return false; // Seasonal item
-=======
-			if (user!=null && user.isPlayer() && target.isPlayer()) {
-				return "<p>"
-							+ "You peel off the paper packaging and pop the Sugar Carrot Cube into your mouth."
-							+ " The strong taste of carrots instantly fills your mouth, but before you have any time to relish the flavour, you find that it's dissolved in your saliva, and you've gulped down the sugary mess."
-						+ "</p>";
-				
-			} else {
-				return UtilText.parse(target,
-						"<p>"
-						+ "[npc.Name] pulls out a Sugar Carrot Cube, and, quickly peeling off the paper packaging, pops it into [npc.her] mouth and swallows it down."
-						+ "</p>");
-			}
-		}
-	};
-	
-	public static AbstractItemType RACE_INGREDIENT_REINDEER_MORPH = new AbstractItemType(
-			"a",
-			false,
-			"Sugar Cookie",
-			"Sugar Cookies",
-			"An individually-wrapped, icing-and-sprinkles-topped sugar cookie, which looks, rather surprisingly, extremely normal.",
-			"raceReindeerMorphSugarCookie",
-			Colour.RACE_REINDEER_MORPH,
-			40,
-			Rarity.RARE,
-			TFEssence.ARCANE,
-			Util.newArrayListOfValues(new ListValue<>(new ItemEffect(ItemEffectType.RACE_SUGAR_COOKIE, null, null, null, 0)))) {
-
-		private static final long serialVersionUID = 1L;
-
-		@Override
-		public ItemEffectType getEnchantmentEffect() {
-			return ItemEffectType.RACE_REINDEER_MORPH;
-		}
-
-		@Override
-		public AbstractItemType getEnchantmentItemType() {
-			return ELIXIR;
-		}
-
-		@Override
-		public String getUseName() {
-			return "eat";
-		}
-
-		@Override
-		public String getUseDescription(GameCharacter user, GameCharacter target) {
-			if (user!=null && user.isPlayer() && target.isPlayer()) {
-				return "<p>"
-							+ "You unwrap the Sugar Cookie from its protective packaging and pop it into your mouth."
-							+ " Although it looked normal enough, you soon discover that the taste is anything but, being both extremely sweet and salty at the same time."
-							+ " Despite the unusual combination of flavours, it's tasty enough, and you soon find yourself having eaten the whole cookie."
-						+ "</p>";
-				
-			} else {
-				return UtilText.parse(target,
-						"<p>"
-								+ "[npc.Name] pulls out a Sugar Cookie, and, quickly unwrapping it from its protective packaging, pops it into [npc.her] mouth and swallows it down."
-						+ "</p>");
-			}
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -1885,7 +1486,6 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"You remove the lid from the bowl of 'Gator's Gumbo' and start eating the rich meal contained within."
 							+ " The delicious, slightly spicy taste of seafood instantly fills your mouth, but you don't take any time to really relish the flavour,"
@@ -1900,20 +1500,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return true;
-=======
-			if (user!=null && user.isPlayer() && target.isPlayer()) {
-				return "<p>"
-							+ "You remove the bowl's lid and start eating the rich gumbo contained within."
-							+ " The delicious, slightly spicy taste of seafood instantly fills your mouth, but you don't take any time to really relish the flavour, as you can't help but greedily gulp down the tangy mess and move on to your next mouthful."
-						+ "</p>";
-				
-			} else {
-				return UtilText.parse(target,
-						"<p>"
-						+ "[npc.Name] pulls out a bowl of Gator's Gumbo, and, quickly removing the lid, shovels it onto [npc.her] mouth and swallows it down."
-						+ "</p>");
-			}
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -1949,7 +1535,6 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"You untie the brown string, and, peeling back the grease-proof paper, bring the now-exposed slab of meat to your mouth."
 						+ " A rich, bloody smell rises to fill your nostrils, but instead of repulsing you, you find yourself drooling at the thought of eating the raw meat."
@@ -1964,21 +1549,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return true;
-=======
-			if (user!=null && user.isPlayer() && target.isPlayer()) {
-				return "<p>"
-							+ "You untie the brown string, and, peeling back the grease-proof paper, bring the now-exposed slab of meat to your mouth."
-							+ " A rich, bloody smell rises to fill your nostrils, but instead of repulsing you, you find yourself drooling at the thought of eating the raw meat."
-							+ " Without further thought, you greedily devour the dripping flesh, licking your fingers clean after rapidly finishing your impromptu meal."
-						+ "</p>";
-				
-			} else {
-				return UtilText.parse(target,
-						"<p>"
-								+ "[npc.Name] pulls out a package of 'Meat & Marrow', and, tearing off the paper packaging, quickly devours the slab of raw meat that was stored within."
-						+ "</p>");
-			}
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -2015,7 +1585,6 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"The moment you push the bright pink lollipop past your lips, your taste buds are overwhelmed by the sweet, sugary flavour of bubblegum."
 						+ " Before you know what you're doing, you're letting out soft little feminine moans,"
@@ -2030,20 +1599,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return true;
-=======
-			if (user!=null && user.isPlayer() && target.isPlayer()) {
-				return "<p>"
-						+ "The moment you push the bright pink lollipop past your lips, your taste buds are overwhelmed by the sweet, sugary flavour of bubblegum."
-						+ " Before you know what you're doing, you're letting out soft little feminine moans, which soon turn into desperate whines as you find yourself unable to think about anything other than wildly sucking on the object in your mouth."
-						+ "</p>";
-				
-			} else {
-				return UtilText.parse(target,
-						"<p>"
-						+ "[npc.Name] pulls out a bright pink lollipop, and quickly shoves it into [npc.her] mouth."
-						+ "</p>");
-			}
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -2525,66 +2080,7 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getEssenceAbsorbtionText(Colour.RACE_HORSE_MORPH, user, target);
-=======
-			if (target.isPlayer()) {
-				return getEssenceAbsorbtionText(Colour.RACE_HORSE_MORPH);
-				
-			} else {
-				return UtilText.parse(target,
-						"<p>"
-							+ "Pulling the cork stopper out from the top of the little bottle, you release the arcane essence from its glass prison."
-							+ " Drawn towards [npc.name]'s powerful arcane aura, the essence immediately darts towards [npc.herHim], and with a little "
-								+Colour.RACE_HORSE_MORPH.getName()+" flash, it disappears from sight as it's absorbed into [npc.her] aura."
-						+ "</p>");
-			}
-		}
-		
-		public boolean isAbleToBeUsed(GameCharacter target) {
-			return target.getRace()==Race.DEMON || target.isPlayer();
-		}
-		
-		public String getUnableToBeUsedDescription(GameCharacter target) {
-			return "Only people with a demonic-strength aura are able to absorb arcane essences!";
-		}
-	};
-	
-	public static AbstractItemType BOTTLED_ESSENCE_REINDEER_MORPH = new AbstractItemType(
-			null,
-			false,
-			"Bottled Reindeer-morph Essence",
-			"Bottled Reindeer-morph Essences",
-			"A small glass bottle, with a little cork stopper wedged firmly in the top."
-					+ " Inside, the swirling "+Colour.RACE_REINDEER_MORPH.getName()+" glow of an arcane essence, imbued with the energy of a reindeer-morph, flickers and swirls about in a mesmerising, cyclical pattern.",
-			"bottledEssenceReindeerMorph",
-			Colour.RACE_REINDEER_MORPH,
-			50,
-			Rarity.EPIC,
-			null,
-			Util.newArrayListOfValues(new ListValue<>(new ItemEffect(ItemEffectType.BOTTLED_ESSENCE_REINDEER_MORPH, null, null, null, 0)))) {
-
-		private static final long serialVersionUID = 1L;
-
-		@Override
-		public String getUseName() {
-			return "absorb";
-		}
-
-		@Override
-		public String getUseDescription(GameCharacter user, GameCharacter target) {
-			if (target.isPlayer()) {
-				return getEssenceAbsorbtionText(Colour.RACE_REINDEER_MORPH);
-				
-			} else {
-				return UtilText.parse(target,
-						"<p>"
-							+ "Pulling the cork stopper out from the top of the little bottle, you release the arcane essence from its glass prison."
-							+ " Drawn towards [npc.name]'s powerful arcane aura, the essence immediately darts towards [npc.herHim], and with a little "
-								+Colour.RACE_REINDEER_MORPH.getName()+" flash, it disappears from sight as it's absorbed into [npc.her] aura."
-						+ "</p>");
-			}
->>>>>>> 78d186e upstream
 		}
 		
 		public boolean isAbleToBeUsed(GameCharacter target) {
@@ -2910,7 +2406,6 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"First removing the bottle's stopper, you then bring the potion up to your waiting lips."
 						+ " A sweet smell rises from the opening, and, after gulping down the delicious liquid, you feel a strange tingling feeling spreading throughout your body as the potion's effects start to make themselves known...",
@@ -2923,19 +2418,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return false;
-=======
-			if (target.isPlayer()) {
-				return "<p>"
-							+ "After gulping down the sweet liquid, you feel a strange tingling feeling spreading throughout your body as the potion's effects start to make themselves known..."
-						+ "</p>";
-				
-			} else {
-				return UtilText.parse(target,
-						"<p>"
-							+ "After gulping down the sweet liquid, a strange tingling feeling spreads throughout [npc.name]'s body as the potion's effects start to make themselves known..."
-						+ "</p>");
-			}
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -2975,7 +2457,6 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"First removing the bottle's stopper, you then bring the elixir up to your waiting lips."
 						+ " A sweet smell rises from the opening, and, after gulping down the delicious liquid, you feel a strange tingling feeling spreading throughout your body as the elixir's effects start to make themselves known...",
@@ -2988,19 +2469,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return false;
-=======
-			if (target.isPlayer()) {
-				return "<p>"
-							+ "After gulping down the sweet liquid, you feel a strange tingling feeling spreading throughout your body as the elixir's effects start to make themselves known..."
-						+ "</p>";
-				
-			} else {
-				return UtilText.parse(target,
-						"<p>"
-							+ "After gulping down the sweet liquid, a strange tingling feeling spreads throughout [npc.name]'s body as the elixir's effects start to make themselves known..."
-						+ "</p>");
-			}
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -3079,27 +2547,11 @@ public class ItemType {
 
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"Untying the top of the used condom, you bring it up to your lips and swallow the slimy contents.",
 					"Untying the top of the used condom, you bring it up to [npc.name]'s [npc.lips], and force [npc.her] to swallow the slimy contents.",
 					"Untying the top of the used condom, [npc.name] brings it up to [npc.her] [npc.lips], and swallows the slimy contents.",
 					"Untying the top of the used condom, [npc.name] brings it up to your [pc.lips], and forces you to swallow the slimy contents.");
-=======
-			if(user!=null && user.isPlayer()) {
-				if(target.isPlayer()) {
-					return "Untying the top of the used condom, you bring it up to your lips and swallow the slimy contents.";
-				} else {
-					return UtilText.parse(target, "Untying the top of the used condom, you bring it up to [npc.name]'s [npc.lips], and force [npc.her] to swallow the slimy contents.");
-				}
-			} else {
-				if(target.isPlayer()) {
-					return UtilText.parse(target, "Untying the top of the used condom, [npc.name] brings it up to your [pc.lips], and forces you to swallow the slimy contents.");
-				} else {
-					return UtilText.parse(target, "Untying the top of the used condom, [npc.name] brings it up to [npc.her] [npc.lips], and swallows the slimy contents.");
-				}
-			}
->>>>>>> 78d186e upstream
 		}
 
 		@Override
@@ -3257,7 +2709,6 @@ public class ItemType {
 		
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"Popping the little pink pill out of its foil wrapper, you quickly put it in your mouth and swallow it down.",
 					"Popping the little pink pill out of its foil wrapper, you bring it up to [npc.name]'s [npc.lips], before forcing it into [npc.her] mouth and making sure that [npc.she] swallows it down.",
@@ -3268,17 +2719,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return true;
-=======
-			if (user!=null && user.isPlayer())
-				return "<p>"
-							+ "Popping the little pink pill out of its foil wrapper, you quickly put it in your mouth and swallow it down."
-						+ "</p>";
-			else
-				return UtilText.parse(user,
-						"<p>"
-							+ "[npc.Name] pops a <i>Vixen's Virility</i> pill out of its little foil wrapper, before quickly placing it in [npc.her] mouth and swallowing it down."
-						+ "</p>");
->>>>>>> 78d186e upstream
 		}
 
 	};
@@ -3306,7 +2746,6 @@ public class ItemType {
 		
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"Popping the little blue pill out of its foil wrapper, you quickly put it in your mouth and swallow it down.",
 					"Popping the little blue pill out of its foil wrapper, you bring it up to [npc.name]'s [npc.lips], before forcing it into [npc.her] mouth and making sure that [npc.she] swallows it down.",
@@ -3317,17 +2756,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return true;
-=======
-			if (user!=null && user.isPlayer())
-				return "<p>"
-							+ "Popping the little blue pill out of its foil wrapper, you quickly put it in your mouth and swallow it down."
-						+ "</p>";
-			else
-				return UtilText.parse(user,
-						"<p>"
-							+ "[npc.Name] pops a <i>Promiscuity Pill</i> pill out of its little foil wrapper, before quickly placing it in [npc.her] mouth and swallowing it down."
-						+ "</p>");
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -3353,7 +2781,6 @@ public class ItemType {
 		
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"Bringing the bottle up to your [pc.lips], you take the teat-like opening into your mouth, before greedily starting to suckle down the creamy liquid within.",
 					"Bringing the bottle up to [npc.name]'s [npc.lips], you push the teat-like opening into [npc.her] mouth, before forcing [npc.herHim] to suckle down the creamy liquid within.",
@@ -3364,17 +2791,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return true;
-=======
-			if (user!=null && user.isPlayer())
-				return "<p>"
-							+ "Bringing the bottle up to your [pc.lips], you take the teat-like opening into your mouth, before greedily starting to suckle down the creamy liquid within."
-						+ "</p>";
-			else
-				return UtilText.parse(user,
-						"<p>"
-							+ "[npc.Name] produces a bottle of <i>Mother's Milk</i>, and, taking the teat-like opening into [npc.her] mouth, [npc.she] greedily starts to suckle down the creamy liquid within."
-						+ "</p>");
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -3740,44 +3156,6 @@ public class ItemType {
 		}
 	};
 	
-	public static AbstractItemType BOOK_REINDEER_MORPH = new AbstractItemType(
-			null,
-			false,
-			"The Eight",
-			"The Eight",
-			"A book all about reindeer-morphs.",
-			"book_race_reindeer_morph",
-			Colour.RACE_REINDEER_MORPH,
-			10,
-			Rarity.LEGENDARY,
-			null,
-			Util.newArrayListOfValues(new ListValue<>(new ItemEffect(ItemEffectType.BOOK_READ_REINDEER_MORPH, null, null, null, 0)))) {
-		
-		private static final long serialVersionUID = 1L;
-
-		@Override
-		public boolean isAbleToBeUsed(GameCharacter target) {
-			return !Main.getProperties().isAdvancedRaceKnowledgeDiscovered(Race.REINDEER_MORPH);
-		}
-
-		@Override
-		public String getUnableToBeUsedDescription(GameCharacter target) {
-			return "You've already added this book to Lilaya's library! It would be best to just sell it...";
-		}
-		
-		@Override
-		public String getUseName() {
-			return "read";
-		}
-		
-		@Override
-		public String getUseDescription(GameCharacter user, GameCharacter target) {
-			return "<p>"
-						+ "Opening the book, you read its contents..."
-					+ "</p>";
-		}
-	};
-	
 	public static AbstractItemType BOOK_HUMAN = new AbstractItemType(
 			null,
 			false,
@@ -3986,7 +3364,6 @@ public class ItemType {
 		
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
-<<<<<<< Upstream, based on upstream/master
 			return getGenericUseDescription(user, target,
 					"You eat the eggplant. The bitter taste of disappointment overwhelmes you.",
 					"You force [npc.name] to eat the eggplant. The bitter taste of disappointment overwhelmes you both.",
@@ -3997,19 +3374,6 @@ public class ItemType {
 		@Override
 		public boolean isCommonItem() {
 			return false;
-=======
-			if (user!=null && user.isPlayer() && target.isPlayer()) {
-				return "<p>"
-							+ "You eat the eggplant."
-						+ "</p>";
-				
-			} else {
-				return UtilText.parse(user,
-						"<p>"
-							+ "[npc.Name] eats an eggplant."
-						+ "</p>");
-			}
->>>>>>> 78d186e upstream
 		}
 	};
 	
@@ -4345,19 +3709,7 @@ public class ItemType {
 					
 					allItems.add(item);
 					
-<<<<<<< Upstream, based on upstream/master
 					if(item.isCommonItem()) {
-=======
-					if(item!=ItemType.POTION && item!=ItemType.ELIXIR && item!=ItemType.FETISH_REFINED
-							&& item!=ItemType.HARPY_MATRIARCH_BIMBO_LOLLIPOP && item!=ItemType.HARPY_MATRIARCH_DOMINANT_PERFUME && item!=ItemType.HARPY_MATRIARCH_NYMPHO_LOLLIPOP
-							&& item!=ItemType.BOOK_CAT_MORPH && item!=ItemType.BOOK_DEMON && item!=ItemType.BOOK_DOG_MORPH
-							&& item!=ItemType.BOOK_HARPY && item!=ItemType.BOOK_HORSE_MORPH && item!=ItemType.BOOK_HUMAN && item!=ItemType.BOOK_WOLF_MORPH && item!=ItemType.BOOK_REINDEER_MORPH && item!=ItemType.BOOK_ALLIGATOR_MORPH
-							&& item!=ItemType.BOTTLED_ESSENCE_ARCANE && item!=ItemType.BOTTLED_ESSENCE_CAT_MORPH && item!=ItemType.BOTTLED_ESSENCE_DEMON && item!=ItemType.BOTTLED_ESSENCE_REINDEER_MORPH
-							&& item!=ItemType.BOTTLED_ESSENCE_DOG_MORPH && item!=ItemType.BOTTLED_ESSENCE_HARPY && item!=ItemType.BOTTLED_ESSENCE_HORSE_MORPH && item!=ItemType.BOTTLED_ESSENCE_ALLIGATOR_MORPH
-							&& item!=ItemType.BOTTLED_ESSENCE_HUMAN && item!=ItemType.BOTTLED_ESSENCE_WOLF_MORPH && item!=ItemType.BOTTLED_ESSENCE_COW_MORPH && item!=ItemType.BOTTLED_ESSENCE_SQUIRREL_MORPH
-							&& item!=ItemType.EGGPLANT
-							) {
->>>>>>> 600d4dc merge and chair update
 						commonItems.add(item);
 						
 					} else if(item==ItemType.BOTTLED_ESSENCE_ARCANE
