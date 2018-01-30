@@ -255,11 +255,7 @@ public class InventoryTooltipEventListener implements EventListener {
 								clothingBlockingThisSlot.add(c.getName());
 							}
 						}
-<<<<<<< Upstream, based on upstream/master
 						
-=======
-
->>>>>>> b6593f3 merge 1
 						if (!clothingBlockingThisSlot.isEmpty()) {
 							setBlockedTooltipContent("This slot is currently <b style='color:" + Colour.SEALED.toWebHexString() + ";'>blocked</b> by your " + Util.stringsToStringList(clothingBlockingThisSlot, false) + ".");
 							

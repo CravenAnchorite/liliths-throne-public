@@ -159,10 +159,6 @@ public enum InventorySlot {
 			return Race.REINDEER_MORPH;
 		}
 		
-		if (character.getLegType() == LegType.REINDEER_MORPH && this == InventorySlot.FOOT) {
-			return Race.REINDEER_MORPH;
-		}
-		
 		if (character.getLegType() == LegType.HARPY && this == InventorySlot.FOOT) {
 			return Race.HARPY;
 		}

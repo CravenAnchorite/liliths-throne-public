@@ -593,11 +593,7 @@ public enum SpecialAttack {
 			return owner.hasFetish(Fetish.FETISH_BREASTS_OTHERS)
 					&& (!Main.game.isInCombat()
 						|| (owner.isPlayer()
-<<<<<<< Upstream, based on upstream/master
 							? Combat.getOpponent().hasBreasts()
-=======
-									?Combat.getOpponent().hasBreasts()
->>>>>>> b6593f3 merge 1
 							: Main.game.getPlayer().hasBreasts()));
 		}
 	},

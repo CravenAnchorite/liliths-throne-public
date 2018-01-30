@@ -117,17 +117,8 @@ public class Nyan extends NPC {
 	}
 	
 	@Override
-<<<<<<< Upstream, based on upstream/master
 	public Element saveAsXML(Element parentElement, Document doc) {
 		Element properties = super.saveAsXML(parentElement, doc);
-=======
-	public Nyan loadFromXML(Element parentElement, Document doc) {
-		Nyan npc = new Nyan(true);
-
-		loadNPCVariablesFromXML(npc, null, parentElement, doc);
-		this.setHairCovering(new Covering(BodyCoveringType.HAIR_FELINE_FUR, Colour.COVERING_BLACK), true);
-		this.setSkinCovering(new Covering(BodyCoveringType.FELINE_FUR, Colour.COVERING_BLACK), true);
->>>>>>> 78d186e upstream
 		
 		for(Entry<String, List<AbstractClothing>> entry : getAllClothingListsMap().entrySet()) {
 			Element clothingElement = doc.createElement(entry.getKey());
