@@ -708,13 +708,19 @@ public class MainController implements Initializable {
 									enterConsumed = true;
 									Main.mainController.getWebEngine().executeScript("document.getElementById('hiddenPField').innerHTML=document.getElementById('new_save_name').value;");
 									if(Main.isSaveGameAvailable()) {
+<<<<<<< Upstream, based on upstream/master
 										Main.saveGame(Main.mainController.getWebEngine().getDocument().getElementById("hiddenPField").getTextContent(), false);
 									}
 									Main.game.setContent(new Response("Save", "", Main.game.getCurrentDialogueNode()));
+=======
+									Main.saveGame(Main.mainController.getWebEngine().getDocument().getElementById("hiddenPField").getTextContent(), false);
+>>>>>>> b6593f3 merge 1
 								}
+								Main.game.setContent(new Response("Save", "", Main.game.getCurrentDialogueNode()));
 							}
 						}
-						if(Main.game.getCurrentDialogueNode() == SlaveryManagementDialogue.SLAVE_MANAGEMENT_INSPECT
+					}
+					if(Main.game.getCurrentDialogueNode() == SlaveryManagementDialogue.SLAVE_MANAGEMENT_INSPECT
 								|| Main.game.getCurrentDialogueNode() == SlaveryManagementDialogue.SLAVE_MANAGEMENT_JOBS
 								|| Main.game.getCurrentDialogueNode() == SlaveryManagementDialogue.SLAVE_MANAGEMENT_PERMISSIONS){
 							if((boolean) Main.mainController.getWebEngine().executeScript("document.getElementById('slaveToPlayerNameInput') === document.activeElement")) {
@@ -781,10 +787,17 @@ public class MainController implements Initializable {
 								if((boolean) Main.mainController.getWebEngine().executeScript("document.getElementById('feminine_" + gp + "') === document.activeElement")
 									|| (boolean) Main.mainController.getWebEngine().executeScript("document.getElementById('masculine_" + gp + "') === document.activeElement")) {
 									allowInput = false;
+<<<<<<< Upstream, based on upstream/master
 									if (event.getCode() == KeyCode.ENTER) {
 										enterConsumed = true;
 										Main.game.setContent(1);
 									}
+=======
+								if (event.getCode() == KeyCode.ENTER) {
+										enterConsumed = true;
+									Main.game.setContent(1);
+								}
+>>>>>>> b6593f3 merge 1
 								}
 							}
 							for(GenderNames genderName : GenderNames.values()) {
@@ -792,10 +805,17 @@ public class MainController implements Initializable {
 									|| (boolean) Main.mainController.getWebEngine().executeScript("document.getElementById('GENDER_NAME_ANDROGYNOUS_" + genderName + "') === document.activeElement")
 									|| (boolean) Main.mainController.getWebEngine().executeScript("document.getElementById('GENDER_NAME_FEMININE_" + genderName + "') === document.activeElement")) {
 									allowInput = false;
+<<<<<<< Upstream, based on upstream/master
 									if (event.getCode() == KeyCode.ENTER) {
 										enterConsumed = true;
 										Main.game.setContent(1);
 									}
+=======
+								if (event.getCode() == KeyCode.ENTER) {
+										enterConsumed = true;
+									Main.game.setContent(1);
+								}
+>>>>>>> b6593f3 merge 1
 								}
 							}
 						}
@@ -1868,6 +1888,7 @@ public class MainController implements Initializable {
 					if (((EventTarget) document.getElementById(id)) != null) {
 						((EventTarget) document.getElementById(id)).addEventListener("click", e -> {
 							if(placeUpgrade!=PlaceUpgrade.LILAYA_ARTHUR_ROOM) {
+<<<<<<< Upstream, based on upstream/master
 								Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()){
 									@Override
 									public void effects() {
@@ -1875,6 +1896,15 @@ public class MainController implements Initializable {
 										Main.game.getPlayer().incrementMoney(-placeUpgrade.getInstallCost());
 									}
 								});
+=======
+							Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()){
+								@Override
+								public void effects() {
+									SlaveryManagementDialogue.cellToInspect.getPlace().addPlaceUpgrade(placeUpgrade);
+									Main.game.getPlayer().incrementMoney(-placeUpgrade.getInstallCost());
+								}
+							});
+>>>>>>> b6593f3 merge 1
 							} else {
 								Main.game.setContent(new Response("", "", LilayaHomeGeneric.ROOM_ARTHUR_INSTALLATION){
 									@Override
@@ -2367,10 +2397,17 @@ public class MainController implements Initializable {
 							public void effects() {
 								Main.game.getDialogueFlags().setSlaveryManagerSlaveSelected(slave);
 								BodyChanging.setTarget(slave);
+<<<<<<< Upstream, based on upstream/master
 							}
 						});
 					}, false);
 					
+=======
+			}
+						});
+					}, false);
+			
+>>>>>>> b6593f3 merge 1
 					addEventListener(document, id, "mousemove", moveTooltipListener, false);
 					addEventListener(document, id, "mouseleave", hideTooltipListener, false);
 
@@ -3336,6 +3373,7 @@ public class MainController implements Initializable {
 								@Override
 								public void effects() {
 									if(CharacterModificationUtils.getCoveringsToBeApplied().containsKey(bct)) {
+<<<<<<< Upstream, based on upstream/master
 										if(!noCost) {
 											Main.game.getPlayer().incrementMoney(-SuccubisSecrets.getBodyCoveringTypeCost(bct));
 										}
@@ -3347,7 +3385,23 @@ public class MainController implements Initializable {
 												BodyChanging.getTarget().getBody().updateCoverings(false, false, false, true);
 											}
 										}
+=======
+									if(!noCost) {
+										Main.game.getPlayer().incrementMoney(-SuccubisSecrets.getBodyCoveringTypeCost(bct));
+>>>>>>> b6593f3 merge 1
 									}
+<<<<<<< Upstream, based on upstream/master
+=======
+									
+										BodyChanging.getTarget().setSkinCovering(new Covering(CharacterModificationUtils.getCoveringsToBeApplied().get(bct)), false);
+									
+										if(noCost) {
+											if(bct == BodyCoveringType.HUMAN) {
+												BodyChanging.getTarget().getBody().updateCoverings(false, false, false, true);
+											}
+										}
+									}
+>>>>>>> b6593f3 merge 1
 								}
 							});
 						}
@@ -3370,6 +3424,22 @@ public class MainController implements Initializable {
 					}, false);
 				}
 				
+				
+				id = bct+"_PRIMARY_GLOW_OFF";
+				
+				if (((EventTarget) document.getElementById(id)) != null) {
+					
+					((EventTarget) document.getElementById(id)).addEventListener("click", e -> {
+							Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()){
+								@Override
+								public void effects() {
+								CharacterModificationUtils.getCoveringsToBeApplied().putIfAbsent(bct, new Covering(BodyChanging.getTarget().getCovering(bct)));
+								CharacterModificationUtils.getCoveringsToBeApplied().get(bct).setPrimaryGlowing(false);
+							}
+						});
+					}, false);
+									}
+									
 				id = bct+"_PRIMARY_GLOW_ON";
 				
 				if (((EventTarget) document.getElementById(id)) != null) {
@@ -3380,9 +3450,15 @@ public class MainController implements Initializable {
 							public void effects() {
 								CharacterModificationUtils.getCoveringsToBeApplied().putIfAbsent(bct, new Covering(BodyChanging.getTarget().getCovering(bct)));
 								CharacterModificationUtils.getCoveringsToBeApplied().get(bct).setPrimaryGlowing(true);
+<<<<<<< Upstream, based on upstream/master
 								
 							}
 						});
+=======
+									
+								}
+							});
+>>>>>>> b6593f3 merge 1
 					}, false);
 				}
 				
@@ -3391,6 +3467,7 @@ public class MainController implements Initializable {
 				if (((EventTarget) document.getElementById(id)) != null) {
 					
 					((EventTarget) document.getElementById(id)).addEventListener("click", e -> {
+<<<<<<< Upstream, based on upstream/master
 						Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()){
 							@Override
 							public void effects() {
@@ -3398,6 +3475,15 @@ public class MainController implements Initializable {
 								CharacterModificationUtils.getCoveringsToBeApplied().get(bct).setSecondaryGlowing(false);
 							}
 						});
+=======
+							Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()){
+								@Override
+								public void effects() {
+								CharacterModificationUtils.getCoveringsToBeApplied().putIfAbsent(bct, new Covering(BodyChanging.getTarget().getCovering(bct)));
+								CharacterModificationUtils.getCoveringsToBeApplied().get(bct).setSecondaryGlowing(false);
+								}
+							});
+>>>>>>> b6593f3 merge 1
 					}, false);
 				}
 				
@@ -3406,6 +3492,7 @@ public class MainController implements Initializable {
 				if (((EventTarget) document.getElementById(id)) != null) {
 					
 					((EventTarget) document.getElementById(id)).addEventListener("click", e -> {
+<<<<<<< Upstream, based on upstream/master
 						Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()){
 							@Override
 							public void effects() {
@@ -3413,6 +3500,15 @@ public class MainController implements Initializable {
 								CharacterModificationUtils.getCoveringsToBeApplied().get(bct).setSecondaryGlowing(true);
 							}
 						});
+=======
+							Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()){
+								@Override
+								public void effects() {
+								CharacterModificationUtils.getCoveringsToBeApplied().putIfAbsent(bct, new Covering(BodyChanging.getTarget().getCovering(bct)));
+								CharacterModificationUtils.getCoveringsToBeApplied().get(bct).setSecondaryGlowing(true);
+								}
+							});
+>>>>>>> b6593f3 merge 1
 					}, false);
 				}
 				
@@ -3422,6 +3518,7 @@ public class MainController implements Initializable {
 					if (((EventTarget) document.getElementById(id)) != null) {
 						
 						((EventTarget) document.getElementById(id)).addEventListener("click", e -> {
+<<<<<<< Upstream, based on upstream/master
 							Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()){
 								@Override
 								public void effects() {
@@ -3429,6 +3526,15 @@ public class MainController implements Initializable {
 									CharacterModificationUtils.getCoveringsToBeApplied().get(bct).setPattern(pattern);
 								}
 							});
+=======
+								Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()){
+									@Override
+									public void effects() {
+									CharacterModificationUtils.getCoveringsToBeApplied().putIfAbsent(bct, new Covering(BodyChanging.getTarget().getCovering(bct)));
+									CharacterModificationUtils.getCoveringsToBeApplied().get(bct).setPattern(pattern);
+										}
+								});
+>>>>>>> b6593f3 merge 1
 						}, false);
 					}
 				}
@@ -3438,6 +3544,7 @@ public class MainController implements Initializable {
 					
 					if (((EventTarget) document.getElementById(id)) != null) {
 						((EventTarget) document.getElementById(id)).addEventListener("click", e -> {
+<<<<<<< Upstream, based on upstream/master
 							Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()){
 								@Override
 								public void effects() {
@@ -3446,6 +3553,16 @@ public class MainController implements Initializable {
 									CharacterModificationUtils.getCoveringsToBeApplied().get(bct).setPrimaryGlowing((colour != Colour.COVERING_NONE && BodyChanging.getTarget().getCovering(bct).isPrimaryGlowing()));
 								}
 							});
+=======
+								Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()){
+									@Override
+									public void effects() {
+									CharacterModificationUtils.getCoveringsToBeApplied().putIfAbsent(bct, new Covering(BodyChanging.getTarget().getCovering(bct)));
+									CharacterModificationUtils.getCoveringsToBeApplied().get(bct).setPrimaryColour(colour);
+									CharacterModificationUtils.getCoveringsToBeApplied().get(bct).setPrimaryGlowing((colour != Colour.COVERING_NONE && BodyChanging.getTarget().getCovering(bct).isPrimaryGlowing()));
+										}
+								});
+>>>>>>> b6593f3 merge 1
 						}, false);
 					}
 				}
@@ -3454,6 +3571,7 @@ public class MainController implements Initializable {
 					
 					if (((EventTarget) document.getElementById(id)) != null) {
 						((EventTarget) document.getElementById(id)).addEventListener("click", e -> {
+<<<<<<< Upstream, based on upstream/master
 							Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()){
 								@Override
 								public void effects() {
@@ -3462,6 +3580,16 @@ public class MainController implements Initializable {
 									CharacterModificationUtils.getCoveringsToBeApplied().get(bct).setSecondaryGlowing(colour != Colour.COVERING_NONE && BodyChanging.getTarget().getCovering(bct).isSecondaryGlowing());
 								}
 							});
+=======
+								Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()){
+									@Override
+									public void effects() {
+									CharacterModificationUtils.getCoveringsToBeApplied().putIfAbsent(bct, new Covering(BodyChanging.getTarget().getCovering(bct)));
+									CharacterModificationUtils.getCoveringsToBeApplied().get(bct).setSecondaryColour(colour);
+									CharacterModificationUtils.getCoveringsToBeApplied().get(bct).setSecondaryGlowing(colour != Colour.COVERING_NONE && BodyChanging.getTarget().getCovering(bct).isSecondaryGlowing());
+										}
+								});
+>>>>>>> b6593f3 merge 1
 						}, false);
 					}
 				}
@@ -3777,7 +3905,11 @@ public class MainController implements Initializable {
 					}
 				}
 			}
+<<<<<<< Upstream, based on upstream/master
 			
+=======
+	
+>>>>>>> b6593f3 merge 1
 			// Level up dialogue:
 			if (((EventTarget) document.getElementById("strength-increase")) != null)
 				addEventListener(document, "strength-increase", "click", new LevelUpButtonsEventListener().increaseStrength(), false);
@@ -4468,6 +4600,7 @@ public class MainController implements Initializable {
 				addEventListener(document, id, "mouseleave", hideTooltipListener, false);
 				TooltipInformationEventListener el2 = new TooltipInformationEventListener().setInformation("Save", "");
 				addEventListener(document, id, "mouseenter", el2, false);
+<<<<<<< Upstream, based on upstream/master
 			}
 			id = "new_saved_disabled";
 			if (((EventTarget) document.getElementById(id)) != null) {
@@ -4478,7 +4611,19 @@ public class MainController implements Initializable {
 								?"You need to have started a game before you can save!"
 								:"You cannot save the game unless you are in a tile's default scene!"));
 				addEventListener(document, id, "mouseenter", el2, false);
+=======
+>>>>>>> b6593f3 merge 1
 			}
+			id = "new_saved_disabled";
+			if (((EventTarget) document.getElementById(id)) != null) {
+				addEventListener(document, id, "mousemove", moveTooltipListener, false);
+				addEventListener(document, id, "mouseleave", hideTooltipListener, false);
+				TooltipInformationEventListener el2 = new TooltipInformationEventListener().setInformation("Save (Disabled)",
+						(!Main.game.isStarted()
+								?"You need to have started a game before you can save!"
+								:"You cannot save the game unless you are in a tile's default scene!"));
+				addEventListener(document, id, "mouseenter", el2, false);
+		}
 		}
 		
 		// Import:
@@ -4785,6 +4930,7 @@ public class MainController implements Initializable {
 				charactersBeingRendered.add(Main.game.getPlayer());
 			}
 		}
+<<<<<<< Upstream, based on upstream/master
 		
 		for(GameCharacter character : charactersBeingRendered) {
 			String idModifier = (character.isPlayer()?"PLAYER_":"NPC_"+character.getId()+"_");
@@ -4793,6 +4939,35 @@ public class MainController implements Initializable {
 				if (((EventTarget) documentAttributes.getElementById(idModifier+a.getName())) != null) {
 					if(a == Attribute.EXPERIENCE) {
 						((EventTarget) documentAttributes.getElementById(idModifier+a.getName())).addEventListener("click", e -> {
+=======
+
+		for(GameCharacter character : charactersBeingRendered) {
+			String idModifier = (character.isPlayer()?"PLAYER_":"NPC_"+character.getId()+"_");
+				
+			for (Attribute a : attributes) {
+				if (((EventTarget) documentAttributes.getElementById(idModifier+a.getName())) != null) {
+				if(a==Attribute.EXPERIENCE) {
+						((EventTarget) documentAttributes.getElementById(idModifier+a.getName())).addEventListener("click", e -> {
+						
+							if(character.isPlayer()) {
+						//TODO block when in character creation
+						
+						if (Main.game.getCurrentDialogueNode().getMapDisplay() == MapDisplay.PHONE) {
+							if(Main.game.getCurrentDialogueNode() == PhoneDialogue.CHARACTER_LEVEL_UP) {
+								openPhone();
+							} else {
+								Main.game.setContent(new Response("", "", PhoneDialogue.CHARACTER_LEVEL_UP){
+									@Override
+									public void effects() {
+										PhoneDialogue.strengthPoints = 0;
+										PhoneDialogue.intelligencePoints = 0;
+										PhoneDialogue.fitnessPoints = 0;
+										PhoneDialogue.spendingPoints = Main.game.getPlayer().getPerkPoints();
+										PhoneDialogue.levelUpPerks.clear();
+									}
+								});
+							}
+>>>>>>> b6593f3 merge 1
 							
 							if(character.isPlayer()) {
 								//TODO block when in character creation
@@ -4828,6 +5003,7 @@ public class MainController implements Initializable {
 										}
 									});
 								}
+<<<<<<< Upstream, based on upstream/master
 								
 							} else {
 								openCharactersPresent(Main.game.getNPCById(Main.game.getActiveNPC().getId()));
@@ -4839,7 +5015,17 @@ public class MainController implements Initializable {
 					
 					TooltipInformationEventListener el = new TooltipInformationEventListener().setAttribute(a, character);
 					addEventListener(documentAttributes, idModifier+a.getName(), "mouseenter", el, false);
+=======
+							});
+						}
+						
+							} else {
+								openCharactersPresent(Main.game.getNPCById(Main.game.getActiveNPC().getId()));
+							}
+					}, false);
+>>>>>>> b6593f3 merge 1
 				}
+<<<<<<< Upstream, based on upstream/master
 			}
 			
 			
@@ -4852,7 +5038,15 @@ public class MainController implements Initializable {
 	
 				TooltipInformationEventListener el = new TooltipInformationEventListener().setExtraAttributes(character);
 				addEventListener(documentAttributes, idModifier+"ATTRIBUTES", "mouseenter", el, false);
+=======
+					addEventListener(documentAttributes, idModifier+a.getName(), "mousemove", moveTooltipListener, false);
+					addEventListener(documentAttributes, idModifier+a.getName(), "mouseleave", hideTooltipListener, false);
+
+					TooltipInformationEventListener el = new TooltipInformationEventListener().setAttribute(a, character);
+					addEventListener(documentAttributes, idModifier+a.getName(), "mouseenter", el, false);
+>>>>>>> b6593f3 merge 1
 			}
+<<<<<<< Upstream, based on upstream/master
 			
 			// For status effect slots:
 			for (StatusEffect se : character.getStatusEffects()) {
@@ -4860,9 +5054,32 @@ public class MainController implements Initializable {
 					addEventListener(documentAttributes, "SE_"+idModifier + se, "mousemove", moveTooltipListener, false);
 					addEventListener(documentAttributes, "SE_"+idModifier + se, "mouseleave", hideTooltipListener, false);
 	
+=======
+		}
+		
+
+			if(((EventTarget) documentAttributes.getElementById(idModifier+"ATTRIBUTES"))!=null){
+//				((EventTarget) documentAttributes.getElementById(idModifier+"ATTRIBUTES")).addEventListener("click", e -> {
+//					openCharactersPresent(Main.game.getNPCById(Main.game.getActiveNPC().getId()));
+//				}, false);
+				addEventListener(documentAttributes, idModifier+"ATTRIBUTES", "mousemove", moveTooltipListener, false);
+				addEventListener(documentAttributes, idModifier+"ATTRIBUTES", "mouseleave", hideTooltipListener, false);
+	
+				TooltipInformationEventListener el = new TooltipInformationEventListener().setExtraAttributes(character);
+				addEventListener(documentAttributes, idModifier+"ATTRIBUTES", "mouseenter", el, false);
+		}
+		
+		// For status effect slots:
+			for (StatusEffect se : character.getStatusEffects()) {
+				if (((EventTarget) documentAttributes.getElementById("SE_"+idModifier + se)) != null) {
+					addEventListener(documentAttributes, "SE_"+idModifier + se, "mousemove", moveTooltipListener, false);
+					addEventListener(documentAttributes, "SE_"+idModifier + se, "mouseleave", hideTooltipListener, false);
+					
+>>>>>>> b6593f3 merge 1
 					TooltipInformationEventListener el = new TooltipInformationEventListener().setStatusEffect(se, character);
 					addEventListener(documentAttributes, "SE_"+idModifier + se, "mouseenter", el, false);
 				}
+<<<<<<< Upstream, based on upstream/master
 			}
 			
 			// For perk slots:
@@ -4879,6 +5096,38 @@ public class MainController implements Initializable {
 				if (((EventTarget) documentAttributes.getElementById("FETISH_"+idModifier + f)) != null) {
 					addEventListener(documentAttributes, "FETISH_"+idModifier + f, "mousemove", moveTooltipListener, false);
 					addEventListener(documentAttributes, "FETISH_"+idModifier + f, "mouseleave", hideTooltipListener, false);
+=======
+		}
+
+		// For perk slots:
+			for (PerkInterface p : character.getPerks()) {
+				if (((EventTarget) documentAttributes.getElementById("PERK_"+idModifier + p)) != null) {
+					addEventListener(documentAttributes, "PERK_"+idModifier + p, "mousemove", moveTooltipListener, false);
+					addEventListener(documentAttributes, "PERK_"+idModifier + p, "mouseleave", hideTooltipListener, false);
+>>>>>>> b6593f3 merge 1
+
+<<<<<<< Upstream, based on upstream/master
+					TooltipInformationEventListener el = new TooltipInformationEventListener().setFetish(f, character);
+					addEventListener(documentAttributes, "FETISH_"+idModifier + f, "mouseenter", el, false);
+=======
+					TooltipInformationEventListener el = new TooltipInformationEventListener().setPerk(p, character);
+					addEventListener(documentAttributes, "PERK_"+idModifier + p, "mouseenter", el, false);
+>>>>>>> b6593f3 merge 1
+				}
+			}
+<<<<<<< Upstream, based on upstream/master
+			for (SpecialAttack sa : character.getSpecialAttacks()) {
+				if (((EventTarget) documentAttributes.getElementById("SA_"+idModifier + sa)) != null) {
+					addEventListener(documentAttributes, "SA_"+idModifier + sa, "mousemove", moveTooltipListener, false);
+					addEventListener(documentAttributes, "SA_"+idModifier + sa, "mouseleave", hideTooltipListener, false);
+	
+					TooltipInformationEventListener el = new TooltipInformationEventListener().setSpecialAttack(sa, character);
+					addEventListener(documentAttributes, "SA_"+idModifier + sa, "mouseenter", el, false);
+=======
+			for (Fetish f : character.getFetishes()) {
+				if (((EventTarget) documentAttributes.getElementById("FETISH_"+idModifier + f)) != null) {
+					addEventListener(documentAttributes, "FETISH_"+idModifier + f, "mousemove", moveTooltipListener, false);
+					addEventListener(documentAttributes, "FETISH_"+idModifier + f, "mouseleave", hideTooltipListener, false);
 
 					TooltipInformationEventListener el = new TooltipInformationEventListener().setFetish(f, character);
 					addEventListener(documentAttributes, "FETISH_"+idModifier + f, "mouseenter", el, false);
@@ -4888,7 +5137,7 @@ public class MainController implements Initializable {
 				if (((EventTarget) documentAttributes.getElementById("SA_"+idModifier + sa)) != null) {
 					addEventListener(documentAttributes, "SA_"+idModifier + sa, "mousemove", moveTooltipListener, false);
 					addEventListener(documentAttributes, "SA_"+idModifier + sa, "mouseleave", hideTooltipListener, false);
-	
+
 					TooltipInformationEventListener el = new TooltipInformationEventListener().setSpecialAttack(sa, character);
 					addEventListener(documentAttributes, "SA_"+idModifier + sa, "mouseenter", el, false);
 				}
@@ -4898,11 +5147,37 @@ public class MainController implements Initializable {
 					if (((EventTarget) documentAttributes.getElementById("SPELL_MAIN_"+idModifier + s)) != null) {
 						addEventListener(documentAttributes, "SPELL_MAIN_"+idModifier + s, "mousemove", moveTooltipListener, false);
 						addEventListener(documentAttributes, "SPELL_MAIN_"+idModifier + s, "mouseleave", hideTooltipListener, false);
+
+						TooltipInformationEventListener el = new TooltipInformationEventListener().setSpell(s, character.getLevel(), character);
+						addEventListener(documentAttributes, "SPELL_MAIN_"+idModifier + s, "mouseenter", el, false);
+>>>>>>> b6593f3 merge 1
+				}
+			}
+<<<<<<< Upstream, based on upstream/master
+			if (character.getMainWeapon() != null) {
+				for (Spell s : character.getMainWeapon().getSpells()) {
+					if (((EventTarget) documentAttributes.getElementById("SPELL_MAIN_"+idModifier + s)) != null) {
+						addEventListener(documentAttributes, "SPELL_MAIN_"+idModifier + s, "mousemove", moveTooltipListener, false);
+						addEventListener(documentAttributes, "SPELL_MAIN_"+idModifier + s, "mouseleave", hideTooltipListener, false);
 	
 						TooltipInformationEventListener el = new TooltipInformationEventListener().setSpell(s, character.getLevel(), character);
 						addEventListener(documentAttributes, "SPELL_MAIN_"+idModifier + s, "mouseenter", el, false);
+=======
+		}
+			if (character.getOffhandWeapon() != null) {
+				for (Spell s : character.getOffhandWeapon().getSpells()) {
+					if (((EventTarget) documentAttributes.getElementById("SPELL_OFFHAND_"+idModifier + s)) != null) {
+						addEventListener(documentAttributes, "SPELL_OFFHAND_"+idModifier + s, "mousemove", moveTooltipListener, false);
+						addEventListener(documentAttributes, "SPELL_OFFHAND_"+idModifier + s, "mouseleave", hideTooltipListener, false);
+
+						TooltipInformationEventListener el = new TooltipInformationEventListener().setSpell(s, character.getLevel(), character);
+						addEventListener(documentAttributes, "SPELL_OFFHAND_"+idModifier + s, "mouseenter", el, false);
+				}
+			}
+>>>>>>> b6593f3 merge 1
 					}
 				}
+<<<<<<< Upstream, based on upstream/master
 			}
 			if (character.getOffhandWeapon() != null) {
 				for (Spell s : character.getOffhandWeapon().getSpells()) {
@@ -4912,7 +5187,190 @@ public class MainController implements Initializable {
 	
 						TooltipInformationEventListener el = new TooltipInformationEventListener().setSpell(s, character.getLevel(), character);
 						addEventListener(documentAttributes, "SPELL_OFFHAND_"+idModifier + s, "mouseenter", el, false);
+=======
+
+		
+		
+		
+//		Attribute[] attributes = {
+//				Attribute.HEALTH_MAXIMUM,
+//				Attribute.MANA_MAXIMUM,
+//				Attribute.STAMINA_MAXIMUM,
+//				Attribute.EXPERIENCE,
+//				Attribute.STRENGTH,
+//				Attribute.INTELLIGENCE,
+//				Attribute.CORRUPTION,
+//				Attribute.FITNESS,
+//				Attribute.AROUSAL,
+//				Attribute.LUST };
+//		for (Attribute a : attributes) {
+//			if (((EventTarget) documentAttributes.getElementById("PLAYER_"+a.getName())) != null) {
+//				addEventListener(documentAttributes, "PLAYER_"+a.getName(), "mousemove", moveTooltipListener, false);
+//				addEventListener(documentAttributes, "PLAYER_"+a.getName(), "mouseleave", hideTooltipListener, false);
+//
+//				TooltipInformationEventListener el = new TooltipInformationEventListener().setAttribute(a, Main.game.getPlayer());
+//				addEventListener(documentAttributes, "PLAYER_"+a.getName(), "mouseenter", el, false);
+//				
+//				if(a==Attribute.EXPERIENCE) {
+//					((EventTarget) documentAttributes.getElementById("PLAYER_"+a.getName())).addEventListener("click", e -> {
+//						
+//						//TODO block when in character creation
+//						
+//						if (Main.game.getCurrentDialogueNode().getMapDisplay() == MapDisplay.PHONE) {
+//							if(Main.game.getCurrentDialogueNode() == PhoneDialogue.CHARACTER_LEVEL_UP) {
+//								openPhone();
+//							} else {
+//								Main.game.setContent(new Response("", "", PhoneDialogue.CHARACTER_LEVEL_UP){
+//									@Override
+//									public void effects() {
+//										PhoneDialogue.strengthPoints = 0;
+//										PhoneDialogue.intelligencePoints = 0;
+//										PhoneDialogue.fitnessPoints = 0;
+//										PhoneDialogue.spendingPoints = Main.game.getPlayer().getPerkPoints();
+//										PhoneDialogue.levelUpPerks.clear();
+//									}
+//								});
+//							}
+//							
+//						} else if (!Main.game.getCurrentDialogueNode().isOptionsDisabled()) {
+//							if (Main.game.getCurrentDialogueNode().getMapDisplay() == MapDisplay.NORMAL)
+//								Main.game.saveDialogueNode();
+//
+//							Main.game.setContent(new Response("", "", PhoneDialogue.CHARACTER_LEVEL_UP){
+//								@Override
+//								public void effects() {
+//									PhoneDialogue.strengthPoints = 0;
+//									PhoneDialogue.intelligencePoints = 0;
+//									PhoneDialogue.fitnessPoints = 0;
+//									PhoneDialogue.spendingPoints = Main.game.getPlayer().getPerkPoints();
+//									PhoneDialogue.levelUpPerks.clear();
+//								}
+//							});
+//						}
+//						
+//					}, false);
+//				}
+//			}
+//			if (((EventTarget) documentAttributes.getElementById("PARTNER_"+a.getName())) != null) {
+//				addEventListener(documentAttributes, "PARTNER_"+a.getName(), "mousemove", moveTooltipListener, false);
+//				addEventListener(documentAttributes, "PARTNER_"+a.getName(), "mouseleave", hideTooltipListener, false);
+//
+//				TooltipInformationEventListener el = new TooltipInformationEventListener().setAttribute(a, Sex.getActivePartner());
+//				addEventListener(documentAttributes, "PARTNER_"+a.getName(), "mouseenter", el, false);
+//			}
+//		}
+//		
+//		// Extra attribute info:
+//		if(((EventTarget) documentAttributes.getElementById("EXTRA_ATTRIBUTES"))!=null){
+//			addEventListener(documentAttributes, "EXTRA_ATTRIBUTES", "mousemove", moveTooltipListener, false);
+//			addEventListener(documentAttributes, "EXTRA_ATTRIBUTES", "mouseleave", hideTooltipListener, false);
+//
+//			TooltipInformationEventListener el = new TooltipInformationEventListener().setExtraAttributes(Main.game.getPlayer());
+//			addEventListener(documentAttributes, "EXTRA_ATTRIBUTES", "mouseenter", el, false);
+//		}
+//		
+//		// For status effect slots:
+//		if(Main.game.getPlayer()!=null) {
+//			for (StatusEffect se : Main.game.getPlayer().getStatusEffects()) {
+//				if (((EventTarget) documentAttributes.getElementById("SE_PLAYER_" + se)) != null) {
+//					addEventListener(documentAttributes, "SE_PLAYER_" + se, "mousemove", moveTooltipListener, false);
+//					addEventListener(documentAttributes, "SE_PLAYER_" + se, "mouseleave", hideTooltipListener, false);
+//
+//					TooltipInformationEventListener el = new TooltipInformationEventListener().setStatusEffect(se, Main.game.getPlayer());
+//					addEventListener(documentAttributes, "SE_PLAYER_" + se, "mouseenter", el, false);
+//				}
+//			}
+//		}
+//		if(Main.game.isInSex()) {
+//			for (StatusEffect se : Sex.getActivePartner().getStatusEffects()) {
+//				if (((EventTarget) documentAttributes.getElementById("SE_PARTNER_" + se)) != null) {
+//					addEventListener(documentAttributes, "SE_PARTNER_" + se, "mousemove", moveTooltipListener, false);
+//					addEventListener(documentAttributes, "SE_PARTNER_" + se, "mouseleave", hideTooltipListener, false);
+//
+//					TooltipInformationEventListener el = new TooltipInformationEventListener().setStatusEffect(se, Sex.getActivePartner());
+//					addEventListener(documentAttributes, "SE_PARTNER_" + se, "mouseenter", el, false);
+//				}
+//			}
+//		}
+//		
+//		// For perk slots:
+//		if(Main.game.getPlayer()!=null) {
+//			for (PerkInterface p : Main.game.getPlayer().getPerks()) {
+//				if (((EventTarget) documentAttributes.getElementById("PERK_PLAYER_" + p)) != null) {
+//					addEventListener(documentAttributes, "PERK_PLAYER_" + p, "mousemove", moveTooltipListener, false);
+//					addEventListener(documentAttributes, "PERK_PLAYER_" + p, "mouseleave", hideTooltipListener, false);
+//
+//					TooltipInformationEventListener el = new TooltipInformationEventListener().setPerk(p, Main.game.getPlayer());
+//					addEventListener(documentAttributes, "PERK_PLAYER_" + p, "mouseenter", el, false);
+//				}
+//			}
+//			for (Fetish f : Main.game.getPlayer().getFetishes()) {
+//				if (((EventTarget) documentAttributes.getElementById("FETISH_PLAYER_" + f)) != null) {
+//					addEventListener(documentAttributes, "FETISH_PLAYER_" + f, "mousemove", moveTooltipListener, false);
+//					addEventListener(documentAttributes, "FETISH_PLAYER_" + f, "mouseleave", hideTooltipListener, false);
+//
+//					TooltipInformationEventListener el = new TooltipInformationEventListener().setFetish(f, Main.game.getPlayer());
+//					addEventListener(documentAttributes, "FETISH_PLAYER_" + f, "mouseenter", el, false);
+//				}
+//			}
+//		}
+//		if(Main.game.isInSex()) {
+//			for (PerkInterface p : Sex.getActivePartner().getPerks()) {
+//				if (((EventTarget) documentAttributes.getElementById("PERK_PARTNER_" + p)) != null) {
+//					addEventListener(documentAttributes, "PERK_PARTNER_" + p, "mousemove", moveTooltipListener, false);
+//					addEventListener(documentAttributes, "PERK_PARTNER_" + p, "mouseleave", hideTooltipListener, false);
+//
+//					TooltipInformationEventListener el = new TooltipInformationEventListener().setPerk(p, Sex.getActivePartner());
+//					addEventListener(documentAttributes, "PERK_PARTNER_" + p, "mouseenter", el, false);
+//				}
+//			}
+//			for (Fetish f : Sex.getActivePartner().getFetishes()) {
+//				if (((EventTarget) documentAttributes.getElementById("FETISH_PARTNER_" + f)) != null) {
+//					addEventListener(documentAttributes, "FETISH_PARTNER_" + f, "mousemove", moveTooltipListener, false);
+//					addEventListener(documentAttributes, "FETISH_PARTNER_" + f, "mouseleave", hideTooltipListener, false);
+//
+//					TooltipInformationEventListener el = new TooltipInformationEventListener().setFetish(f, Sex.getActivePartner());
+//					addEventListener(documentAttributes, "FETISH_PARTNER_" + f, "mouseenter", el, false);
+//				}
+//			}
+//		}
+//		if(Main.game.getPlayer()!=null)
+//			for (SpecialAttack sa : Main.game.getPlayer().getSpecialAttacks()) {
+//				if (((EventTarget) documentAttributes.getElementById("SA_" + sa)) != null) {
+//					addEventListener(documentAttributes, "SA_" + sa, "mousemove", moveTooltipListener, false);
+//					addEventListener(documentAttributes, "SA_" + sa, "mouseleave", hideTooltipListener, false);
+//
+//					TooltipInformationEventListener el = new TooltipInformationEventListener().setSpecialAttack(sa, Main.game.getPlayer());
+//					addEventListener(documentAttributes, "SA_" + sa, "mouseenter", el, false);
+//				}
+//			}
+//		if(Main.game.getPlayer()!=null)
+//			if (Main.game.getPlayer().getMainWeapon() != null) {
+//				for (Spell s : Main.game.getPlayer().getMainWeapon().getSpells()) {
+//					if (((EventTarget) documentAttributes.getElementById("SPELL_MAIN_" + s)) != null) {
+//						addEventListener(documentAttributes, "SPELL_MAIN_" + s, "mousemove", moveTooltipListener, false);
+//						addEventListener(documentAttributes, "SPELL_MAIN_" + s, "mouseleave", hideTooltipListener, false);
+//
+//						TooltipInformationEventListener el = new TooltipInformationEventListener().setSpell(s, Main.game.getPlayer().getLevel(), Main.game.getPlayer());
+//						addEventListener(documentAttributes, "SPELL_MAIN_" + s, "mouseenter", el, false);
+//					}
+//				}
+//			}
+//		if(Main.game.getPlayer()!=null)
+//			if (Main.game.getPlayer().getOffhandWeapon() != null) {
+//				for (Spell s : Main.game.getPlayer().getOffhandWeapon().getSpells()) {
+//					if (((EventTarget) documentAttributes.getElementById("SPELL_OFFHAND_" + s)) != null) {
+//						addEventListener(documentAttributes, "SPELL_OFFHAND_" + s, "mousemove", moveTooltipListener, false);
+//						addEventListener(documentAttributes, "SPELL_OFFHAND_" + s, "mouseleave", hideTooltipListener, false);
+//
+//						TooltipInformationEventListener el = new TooltipInformationEventListener().setSpell(s, Main.game.getPlayer().getLevel(), Main.game.getPlayer());
+//						addEventListener(documentAttributes, "SPELL_OFFHAND_" + s, "mouseenter", el, false);
+//					}
+//				}
+//			}
+>>>>>>> b6593f3 merge 1
 					}
+<<<<<<< Upstream, based on upstream/master
 				}
 			}
 		}
@@ -5097,6 +5555,8 @@ public class MainController implements Initializable {
 //				}
 //			}
 	}
+=======
+>>>>>>> b6593f3 merge 1
 	
 	private void manageRightListeners() {
 		documentRight = (Document) webEngineRight.executeScript("document");
@@ -5192,6 +5652,8 @@ public class MainController implements Initializable {
 					Attribute.FITNESS,
 					Attribute.AROUSAL,
 					Attribute.LUST };
+<<<<<<< Upstream, based on upstream/master
+=======
 			
 			List<GameCharacter> charactersBeingRendered = new ArrayList<>();
 			if(Main.game.isInSex()) {
@@ -5202,6 +5664,48 @@ public class MainController implements Initializable {
 			}
 			charactersBeingRendered.remove(Main.game.getPlayer());
 			
+			for(GameCharacter character : charactersBeingRendered) {
+				String idModifier = character.getId()+"_";
+				
+			for (Attribute a : attributes) {
+					if (((EventTarget) documentRight.getElementById("NPC_"+idModifier+a.getName())) != null) {
+					if(a == Attribute.EXPERIENCE) {
+							((EventTarget) documentRight.getElementById("NPC_"+idModifier+a.getName())).addEventListener("click", e -> {
+								openCharactersPresent(character);
+						}, false);
+					}
+						addEventListener(documentRight, "NPC_"+idModifier+a.getName(), "mousemove", moveTooltipListener, false);
+						addEventListener(documentRight, "NPC_"+idModifier+a.getName(), "mouseleave", hideTooltipListener, false);
+	
+						TooltipInformationEventListener el = new TooltipInformationEventListener().setAttribute(a, character);
+						addEventListener(documentRight, "NPC_"+idModifier+a.getName(), "mouseenter", el, false);
+				}
+			}
+>>>>>>> b6593f3 merge 1
+			
+<<<<<<< Upstream, based on upstream/master
+			List<GameCharacter> charactersBeingRendered = new ArrayList<>();
+			if(Main.game.isInSex()) {
+				charactersBeingRendered.addAll(Sex.getDominantParticipants().keySet());
+				charactersBeingRendered.addAll(Sex.getSubmissiveParticipants().keySet());
+			} else {
+				charactersBeingRendered.add(RenderingEngine.getCharacterToRender());
+=======
+			// Extra attribute info:
+				if(((EventTarget) documentRight.getElementById("NPC_"+idModifier+"ATTRIBUTES"))!=null){
+	//				((EventTarget) documentRight.getElementById("NPC_"+idModifier+"ATTRIBUTES")).addEventListener("click", e -> {
+//					openCharactersPresent(Main.game.getNPCById(Main.game.getActiveNPC().getId()));
+//				}, false);
+					addEventListener(documentRight, "NPC_"+idModifier+"ATTRIBUTES", "mousemove", moveTooltipListener, false);
+					addEventListener(documentRight, "NPC_"+idModifier+"ATTRIBUTES", "mouseleave", hideTooltipListener, false);
+	
+					TooltipInformationEventListener el = new TooltipInformationEventListener().setExtraAttributes(character);
+					addEventListener(documentRight, "NPC_"+idModifier+"ATTRIBUTES", "mouseenter", el, false);
+>>>>>>> b6593f3 merge 1
+			}
+			charactersBeingRendered.remove(Main.game.getPlayer());
+			
+<<<<<<< Upstream, based on upstream/master
 			for(GameCharacter character : charactersBeingRendered) {
 				String idModifier = character.getId()+"_";
 				
@@ -5217,8 +5721,58 @@ public class MainController implements Initializable {
 						
 						TooltipInformationEventListener el = new TooltipInformationEventListener().setAttribute(a, character);
 						addEventListener(documentRight, "NPC_"+idModifier+a.getName(), "mouseenter", el, false);
+=======
+			// For status effect slots:
+				for (StatusEffect se : character.getStatusEffects()) {
+					if (((EventTarget) documentRight.getElementById("SE_NPC_"+idModifier + se)) != null) {
+						addEventListener(documentRight, "SE_NPC_"+idModifier + se, "mousemove", moveTooltipListener, false);
+						addEventListener(documentRight, "SE_NPC_"+idModifier + se, "mouseleave", hideTooltipListener, false);
+	
+						TooltipInformationEventListener el = new TooltipInformationEventListener().setStatusEffect(se, character);
+						addEventListener(documentRight, "SE_NPC_"+idModifier + se, "mouseenter", el, false);
+				}
+			}
+			
+			// For perk slots:
+				for (PerkInterface p : character.getPerks()) {
+					if (((EventTarget) documentRight.getElementById("PERK_NPC_"+idModifier + p)) != null) {
+						addEventListener(documentRight, "PERK_NPC_"+idModifier + p, "mousemove", moveTooltipListener, false);
+						addEventListener(documentRight, "PERK_NPC_"+idModifier + p, "mouseleave", hideTooltipListener, false);
+	
+						TooltipInformationEventListener el = new TooltipInformationEventListener().setPerk(p, character);
+						addEventListener(documentRight, "PERK_NPC_"+idModifier + p, "mouseenter", el, false);
+				}
+			}
+				for (Fetish f : character.getFetishes()) {
+					if (((EventTarget) documentRight.getElementById("FETISH_NPC_"+idModifier + f)) != null) {
+						addEventListener(documentRight, "FETISH_NPC_"+idModifier + f, "mousemove", moveTooltipListener, false);
+						addEventListener(documentRight, "FETISH_NPC_"+idModifier + f, "mouseleave", hideTooltipListener, false);
+
+						TooltipInformationEventListener el = new TooltipInformationEventListener().setFetish(f, character);
+						addEventListener(documentRight, "FETISH_NPC_"+idModifier + f, "mouseenter", el, false);
+				}
+			}
+				for (SpecialAttack sa : character.getSpecialAttacks()) {
+					if (((EventTarget) documentRight.getElementById("SA_NPC_"+idModifier + sa)) != null) {
+						addEventListener(documentRight, "SA_NPC_"+idModifier + sa, "mousemove", moveTooltipListener, false);
+						addEventListener(documentRight, "SA_NPC_"+idModifier + sa, "mouseleave", hideTooltipListener, false);
+	
+						TooltipInformationEventListener el = new TooltipInformationEventListener().setSpecialAttack(sa, character);
+						addEventListener(documentRight, "SA_NPC_"+idModifier + sa, "mouseenter", el, false);
+				}
+			}
+				if (character.getMainWeapon() != null) {
+					for (Spell s : character.getMainWeapon().getSpells()) {
+						if (((EventTarget) documentRight.getElementById("SPELL_MAIN_NPC_"+idModifier + s)) != null) {
+							addEventListener(documentRight, "SPELL_MAIN_NPC_"+idModifier + s, "mousemove", moveTooltipListener, false);
+							addEventListener(documentRight, "SPELL_MAIN_NPC_"+idModifier + s, "mouseleave", hideTooltipListener, false);
+	
+							TooltipInformationEventListener el = new TooltipInformationEventListener().setSpell(s, character.getLevel(), character);
+							addEventListener(documentRight, "SPELL_MAIN_NPC_"+idModifier + s, "mouseenter", el, false);
+>>>>>>> b6593f3 merge 1
 					}
 				}
+<<<<<<< Upstream, based on upstream/master
 				
 				// Extra attribute info:
 				if(((EventTarget) documentRight.getElementById("NPC_"+idModifier+"ATTRIBUTES"))!=null){
@@ -5257,7 +5811,16 @@ public class MainController implements Initializable {
 					if (((EventTarget) documentRight.getElementById("FETISH_NPC_"+idModifier + f)) != null) {
 						addEventListener(documentRight, "FETISH_NPC_"+idModifier + f, "mousemove", moveTooltipListener, false);
 						addEventListener(documentRight, "FETISH_NPC_"+idModifier + f, "mouseleave", hideTooltipListener, false);
+=======
+			}
+				if (character.getOffhandWeapon() != null) {
+					for (Spell s : character.getOffhandWeapon().getSpells()) {
+						if (((EventTarget) documentRight.getElementById("SPELL_OFFHAND_NPC_"+idModifier + s)) != null) {
+							addEventListener(documentRight, "SPELL_OFFHAND_NPC_"+idModifier + s, "mousemove", moveTooltipListener, false);
+							addEventListener(documentRight, "SPELL_OFFHAND_NPC_"+idModifier + s, "mouseleave", hideTooltipListener, false);
+>>>>>>> b6593f3 merge 1
 	
+<<<<<<< Upstream, based on upstream/master
 						TooltipInformationEventListener el = new TooltipInformationEventListener().setFetish(f, character);
 						addEventListener(documentRight, "FETISH_NPC_"+idModifier + f, "mouseenter", el, false);
 					}
@@ -5288,6 +5851,8 @@ public class MainController implements Initializable {
 							addEventListener(documentRight, "SPELL_OFFHAND_NPC_"+idModifier + s, "mousemove", moveTooltipListener, false);
 							addEventListener(documentRight, "SPELL_OFFHAND_NPC_"+idModifier + s, "mouseleave", hideTooltipListener, false);
 		
+=======
+>>>>>>> b6593f3 merge 1
 							TooltipInformationEventListener el = new TooltipInformationEventListener().setSpell(s, character.getLevel(), character);
 							addEventListener(documentRight, "SPELL_OFFHAND_NPC_"+idModifier + s, "mouseenter", el, false);
 						}

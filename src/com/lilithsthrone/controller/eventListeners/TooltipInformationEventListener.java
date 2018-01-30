@@ -677,12 +677,17 @@ public class TooltipInformationEventListener implements EventListener {
 						"<div class='title'>"+title+"</div>"));
 				
 			} else {
+<<<<<<< Upstream, based on upstream/master
 				Main.mainController.setTooltipSize(360, 175);
+=======
+			Main.mainController.setTooltipSize(360, 175);
+>>>>>>> b6593f3 merge 1
 
 				Main.mainController.setTooltipContent(UtilText.parse(
 						"<div class='title'>"+title+"</div>"
 						+ "<div class='description'>" + description + "</div>"));
 			}
+		}
 		}
 
 		(new Thread(new TooltipUpdateThread())).start();

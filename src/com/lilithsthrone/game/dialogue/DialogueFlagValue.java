@@ -43,7 +43,11 @@ public enum DialogueFlagValue {
 	
 	arthursRoomInstalled,
 	arthursPackageObtained,
+<<<<<<< Upstream, based on upstream/master
 	
+=======
+
+>>>>>>> b6593f3 merge 1
 	givenLilayaPresent1,
 	givenLilayaPresent2,
 	givenLilayaPresent3,
