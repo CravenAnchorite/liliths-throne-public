@@ -289,6 +289,7 @@ public class SlaveDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(responseTab == 0) {
+<<<<<<< Upstream, based on upstream/master
 				if (index == 1) {
 					if(!slave().NPCFlagValues.contains(NPCFlagValue.flagSlaveBackground)) {
 						return new Response("Background", "Ask [npc.name] about [npc.her] past life.", SLAVE_PROGRESSION) {
@@ -296,6 +297,37 @@ public class SlaveDialogue {
 							public void effects() {
 								slave().NPCFlagValues.add(NPCFlagValue.flagSlaveBackground);
 								Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementAffection(Main.game.getPlayer(), 3));
+=======
+			if (index == 1) {
+				if(!slave().NPCFlagValues.contains(NPCFlagValue.flagSlaveBackground)) {
+					return new Response("Background", "Ask [npc.name] about [npc.her] past life.", SLAVE_PROGRESSION) {
+						@Override
+						public void effects() {
+							slave().NPCFlagValues.add(NPCFlagValue.flagSlaveBackground);
+							Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementAffection(Main.game.getPlayer(), 3));
+						}
+					};
+				} else {
+					return new Response("Background", "You've already talked with [npc.name] about [npc.her] past life today.", null);
+				}
+				
+			} else if (index == 2) {
+				if(!slave().NPCFlagValues.contains(NPCFlagValue.flagSlaveSmallTalk)) {
+					return new Response("Small talk", "Chat about this and that with [npc.name].", SLAVE_MINOR) {
+						@Override
+						public void effects() {
+							slave().NPCFlagValues.add(NPCFlagValue.flagSlaveSmallTalk);
+							switch(AffectionLevelBasic.getAffectionLevelFromValue(Main.game.getActiveNPC().getAffection(Main.game.getPlayer()))) {
+								case DISLIKE:
+									Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementAffection(Main.game.getPlayer(), -1f));
+									break;
+								case NEUTRAL:
+									Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementAffection(Main.game.getPlayer(), 2f));
+									break;
+								case LIKE:
+									Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementAffection(Main.game.getPlayer(), 4f));
+									break;
+>>>>>>> b6593f3 merge 1
 							}
 						};
 					} else {
@@ -504,11 +536,113 @@ public class SlaveDialogue {
 				} else if (index == 0) {
 					return new Response("Leave", "Tell [npc.name] that you'll catch up with [npc.herHim] some other time.", SLAVE_START) {
 						@Override
+<<<<<<< Upstream, based on upstream/master
 						public DialogueNodeOld getNextDialogue() {
 							return DebugDialogue.getDefaultDialogueNoEncounter();
 						}
 					};
 					
+=======
+						public void effects() {
+							Main.game.saveDialogueNode();
+							BodyChanging.setTarget(slave());
+						}
+					};
+				}
+				
+			} else if (index == 6) {
+				if(!slave().NPCFlagValues.contains(NPCFlagValue.flagSlaveEncourage)) {
+					return new Response("Work", "Ask [npc.name] about how [npc.her] work's going.", SLAVE_ENCOURAGE) {
+						@Override
+						public void effects() {
+							slave().NPCFlagValues.add(NPCFlagValue.flagSlaveEncourage);
+							switch(AffectionLevelBasic.getAffectionLevelFromValue(Main.game.getActiveNPC().getAffection(Main.game.getPlayer()))) {
+								case DISLIKE:
+									Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementAffection(Main.game.getPlayer(), 0.5f));
+									Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementObedience(0.1f));
+									break;
+								case NEUTRAL:
+									Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementAffection(Main.game.getPlayer(), 2f));
+									Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementObedience(1f));
+									break;
+								case LIKE:
+									Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementAffection(Main.game.getPlayer(), 4f));
+									Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementObedience(2f));
+									break;
+							}
+						}
+					};
+				} else {
+					return new Response("Work", "You've talked to [npc.name] about [npc.her] work today.", null);
+				}
+				
+			} else if (index == 7) {
+				if(!slave().NPCFlagValues.contains(NPCFlagValue.flagSlaveHug)) {
+					return new Response("Hug", "Hug [npc.name].", SLAVE_HUG) {
+						@Override
+						public void effects() {
+							slave().NPCFlagValues.add(NPCFlagValue.flagSlaveHug);
+							
+							switch(AffectionLevelBasic.getAffectionLevelFromValue(Main.game.getActiveNPC().getAffection(Main.game.getPlayer()))) {
+								case DISLIKE:
+									Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementAffection(Main.game.getPlayer(), -2));
+									Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementObedience(-1f));
+									break;
+								case NEUTRAL:
+									Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementAffection(Main.game.getPlayer(), 2));
+									Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementObedience(-1));
+									break;
+								case LIKE:
+									Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementAffection(Main.game.getPlayer(), 5));
+									Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementObedience(-2));
+									break;
+							}
+							
+						}
+					};
+				} else {
+					return new Response("Hug", "You've already spent time hugging [npc.name] today.", null);
+				}
+				
+			} else if (index == 8) {
+				if(!slave().NPCFlagValues.contains(NPCFlagValue.flagSlavePettings)) {
+					return new Response("Pettings", "Give [npc.name] some loving pettings.", SLAVE_PETTINGS) {
+						@Override
+						public void effects() {
+							slave().NPCFlagValues.add(NPCFlagValue.flagSlavePettings);
+
+							switch(AffectionLevelBasic.getAffectionLevelFromValue(Main.game.getActiveNPC().getAffection(Main.game.getPlayer()))) {
+								case DISLIKE:
+									Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementAffection(Main.game.getPlayer(), -2));
+									Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementObedience(-1f));
+									break;
+								case NEUTRAL:
+									Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementAffection(Main.game.getPlayer(), 2));
+									Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementObedience(-1));
+									break;
+								case LIKE:
+									Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementAffection(Main.game.getPlayer(), 5));
+									Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementObedience(-2));
+									break;
+							}
+						}
+					};
+				} else {
+					return new Response("Pettings", "You've already spent time petting [npc.name] today.", null);
+				}
+				
+			} else if (index == 9) {
+				if(Main.game.getPlayer().hasItemType(ItemType.PRESENT)) {
+					return new Response("Give Present", "Give [npc.name] the present that you're carrying.", SLAVE_PRESENT) {
+						@Override
+						public void effects() {
+							Main.game.getPlayer().removeItem(AbstractItemType.generateItem(ItemType.PRESENT));
+							
+							Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementAffection(Main.game.getPlayer(), 10));
+							Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementObedience(-2));
+						}
+					};
+>>>>>>> b6593f3 merge 1
 				} else {
 					return null;
 				}
@@ -607,10 +741,120 @@ public class SlaveDialogue {
 				} else  {
 					return null;
 				}
+<<<<<<< Upstream, based on upstream/master
+=======
+				
+			} else if (index == 0) {
+					return new Response("Leave", "Tell [npc.name] that you'll catch up with [npc.herHim] some other time.", SLAVE_START) {
+						@Override
+						public DialogueNodeOld getNextDialogue() {
+							return DebugDialogue.getDefaultDialogueNoEncounter();
+						}
+					};
+					
+				} else {
+					return null;
+				}
+			
+			} else if(responseTab == 1) {
+				List<NPC> charactersPresent = Main.game.getCharactersPresent();
+				
+				if (index == 1) { //TODO improve descriptions and affection hit from rape
+					if(Main.game.isNonConEnabled() && !Main.game.getActiveNPC().isAttractedTo(Main.game.getPlayer())) {
+						return new ResponseSex("Rape", "[npc.Name] is definitely not interested in having sex with you, but it's not like [npc.she] has a choice in the matter...", 
+								false, false,
+								new SMStanding(
+										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexPositionSlot.STANDING_DOMINANT)),
+										Util.newHashMapOfValues(new Value<>(Main.game.getActiveNPC(), SexPositionSlot.STANDING_SUBMISSIVE))),
+								AFTER_SEX,
+								"<p>"
+									+ "Grinning, you step forwards and pull [npc.name] into a passionate kiss."
+									+ " [npc.She] desperately tries to push you away, [npc.moaning],"
+									+ " [npc.speech(No! Stop!)]"
+								+ "</p>") {
+							@Override
+							public void effects() {
+								Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementAffection(Main.game.getPlayer(), -15));
+							}
+						};
+						
+					} else {
+						return new ResponseSex("Sex", "Have sex with [npc.name].", 
+								true, false,
+								new SMStanding(
+										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexPositionSlot.STANDING_DOMINANT)),
+										Util.newHashMapOfValues(new Value<>(Main.game.getActiveNPC(), SexPositionSlot.STANDING_SUBMISSIVE))),
+								AFTER_SEX,
+								"<p>"
+									+ "Grinning, you step forwards and pull [npc.name] into a passionate kiss."
+									+ " [npc.She] desperately leans into you, [npc.moaning],"
+									+ " [npc.speech(~Mmm!~ Yes!)]"
+								+ "</p>") {
+							@Override
+							public void effects() {
+								Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementAffection(Main.game.getPlayer(), 5));
+							}
+						};
+					}
+					
+				} else if (index == 2) {
+					if(Main.game.getActiveNPC().isAttractedTo(Main.game.getPlayer())) {
+						return new ResponseSex("Submissive sex", "Have submissive sex with [npc.name].", 
+								Util.newArrayListOfValues(new ListValue<>(Fetish.FETISH_SUBMISSIVE)), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
+								true, true,
+								new SMStanding(
+										Util.newHashMapOfValues(new Value<>(Main.game.getActiveNPC(), SexPositionSlot.STANDING_DOMINANT)),
+										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexPositionSlot.STANDING_SUBMISSIVE))),
+								AFTER_SEX,
+								"<p>"
+									+ "Taking hold of [npc.name]'s [npc.arms], you take a step forwards, guiding [npc.her] [npc.hands] around your body as you press forwards into a passionate kiss."
+									+ " [npc.She] eagerly pulls you into [npc.herHim], [npc.moaning],"
+									+ " [npc.speech(Looking for some fun, hmm?)]"
+								+ "</p>") {
+							@Override
+							public void effects() {
+								Main.game.getTextEndStringBuilder().append(Main.game.getActiveNPC().incrementAffection(Main.game.getPlayer(), 5));
+							}
+						};
+					} else {
+						return new Response("Submissive sex", "[npc.Name] is not too keen on having sex with you, so you'd need to be the dom...", null);
+					}
+					
+				} else if (index == 3) {
+					if(charactersPresent.size()==2) {
+						return new ResponseSex("Spitroast",
+								UtilText.parse(charactersPresent.get(0), charactersPresent.get(1), "Let [npc1.name] and [npc2.name] spitroast you."),
+								null, null, null, null, null, null,
+								true, true,
+								new SMDoggy(
+										Util.newHashMapOfValues(
+												new Value<>(charactersPresent.get(1), SexPositionSlot.DOGGY_INFRONT),
+												new Value<>(charactersPresent.get(0), SexPositionSlot.DOGGY_BEHIND)),
+										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexPositionSlot.DOGGY_ON_ALL_FOURS))),
+								AFTER_SEX,
+								"<p>"
+									+ ""//TODO
+								+ "</p>");
+					} else {
+						return new Response("Spitroast", "Another slave needs to be present for this...",null);
+					}
+				
+				} else if (index == 0) {
+					return new Response("Leave", "Tell [npc.name] that you'll catch up with [npc.herHim] some other time.", SLAVE_START) {
+					@Override
+					public DialogueNodeOld getNextDialogue() {
+						return DebugDialogue.getDefaultDialogueNoEncounter();
+					}
+				};
+>>>>>>> b6593f3 merge 1
 				
 			} else {
 				return null;
 			}
+				
+			} else {
+				return null;
+		}
 		}
 	};
 	

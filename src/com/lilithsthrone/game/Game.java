@@ -1,3 +1,4 @@
+<<<<<<< Upstream, based on upstream/master
 package com.lilithsthrone.game;
 
 import java.io.File;
@@ -97,6 +98,108 @@ import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
+=======
+package com.lilithsthrone.game;
+
+import java.io.File;
+import java.io.Serializable;
+import java.io.StringWriter;
+import java.lang.reflect.Method;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import com.lilithsthrone.controller.MainController;
+import com.lilithsthrone.controller.TooltipUpdateThread;
+import com.lilithsthrone.game.character.CharacterImportSetting;
+import com.lilithsthrone.game.character.CharacterUtils;
+import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.character.History;
+import com.lilithsthrone.game.character.PlayerCharacter;
+import com.lilithsthrone.game.character.Quest;
+import com.lilithsthrone.game.character.QuestLine;
+import com.lilithsthrone.game.character.attributes.AffectionLevel;
+import com.lilithsthrone.game.character.attributes.Attribute;
+import com.lilithsthrone.game.character.attributes.ObedienceLevel;
+import com.lilithsthrone.game.character.body.CoverableArea;
+import com.lilithsthrone.game.character.effects.StatusEffect;
+import com.lilithsthrone.game.character.gender.GenderPreference;
+import com.lilithsthrone.game.character.npc.GenericAndrogynousNPC;
+import com.lilithsthrone.game.character.npc.GenericFemaleNPC;
+import com.lilithsthrone.game.character.npc.GenericMaleNPC;
+import com.lilithsthrone.game.character.npc.NPC;
+import com.lilithsthrone.game.character.npc.PrologueFemale;
+import com.lilithsthrone.game.character.npc.PrologueMale;
+import com.lilithsthrone.game.character.npc.SlaveImport;
+import com.lilithsthrone.game.character.npc.dominion.Alexa;
+import com.lilithsthrone.game.character.npc.dominion.Amber;
+import com.lilithsthrone.game.character.npc.dominion.Arthur;
+import com.lilithsthrone.game.character.npc.dominion.Brax;
+import com.lilithsthrone.game.character.npc.dominion.CandiReceptionist;
+import com.lilithsthrone.game.character.npc.dominion.Cultist;
+import com.lilithsthrone.game.character.npc.dominion.DominionAlleywayAttacker;
+import com.lilithsthrone.game.character.npc.dominion.Finch;
+import com.lilithsthrone.game.character.npc.dominion.HarpyBimbo;
+import com.lilithsthrone.game.character.npc.dominion.HarpyBimboCompanion;
+import com.lilithsthrone.game.character.npc.dominion.HarpyDominant;
+import com.lilithsthrone.game.character.npc.dominion.HarpyDominantCompanion;
+import com.lilithsthrone.game.character.npc.dominion.HarpyNympho;
+import com.lilithsthrone.game.character.npc.dominion.HarpyNymphoCompanion;
+import com.lilithsthrone.game.character.npc.dominion.Kate;
+import com.lilithsthrone.game.character.npc.dominion.Lilaya;
+import com.lilithsthrone.game.character.npc.dominion.Nyan;
+import com.lilithsthrone.game.character.npc.dominion.Pazu;
+import com.lilithsthrone.game.character.npc.dominion.Pix;
+import com.lilithsthrone.game.character.npc.dominion.Ralph;
+import com.lilithsthrone.game.character.npc.dominion.Rose;
+import com.lilithsthrone.game.character.npc.dominion.Scarlett;
+import com.lilithsthrone.game.character.npc.dominion.SlaveInStocks;
+import com.lilithsthrone.game.character.npc.dominion.TestNPC;
+import com.lilithsthrone.game.character.npc.dominion.Vicky;
+import com.lilithsthrone.game.character.npc.dominion.Zaranix;
+import com.lilithsthrone.game.character.npc.dominion.ZaranixMaidKatherine;
+import com.lilithsthrone.game.character.npc.dominion.ZaranixMaidKelly;
+import com.lilithsthrone.game.character.race.RacialBody;
+import com.lilithsthrone.game.dialogue.DialogueFlagValue;
+import com.lilithsthrone.game.dialogue.DialogueFlags;
+import com.lilithsthrone.game.dialogue.DialogueNodeOld;
+import com.lilithsthrone.game.dialogue.MapDisplay;
+import com.lilithsthrone.game.dialogue.encounters.Encounter;
+import com.lilithsthrone.game.dialogue.eventLog.EventLogEntry;
+import com.lilithsthrone.game.dialogue.places.dominion.zaranixHome.ZaranixHomeGroundFloor;
+import com.lilithsthrone.game.dialogue.responses.Response;
+import com.lilithsthrone.game.dialogue.responses.ResponseCombat;
+import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
+import com.lilithsthrone.game.dialogue.responses.ResponseSex;
+import com.lilithsthrone.game.dialogue.responses.ResponseTrade;
+import com.lilithsthrone.game.dialogue.utils.CharactersPresentDialogue;
+import com.lilithsthrone.game.dialogue.utils.MiscDialogue;
+import com.lilithsthrone.game.dialogue.utils.PhoneDialogue;
+import com.lilithsthrone.game.dialogue.utils.UtilText;
+import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
+import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
+import com.lilithsthrone.game.inventory.clothing.ClothingType;
+import com.lilithsthrone.game.inventory.item.AbstractItemType;
+import com.lilithsthrone.game.inventory.item.ItemType;
+>>>>>>> 581c954 merge 1
 import com.lilithsthrone.game.sex.Sex;
 import com.lilithsthrone.game.slavery.SlaveJobSetting;
 import com.lilithsthrone.game.slavery.SlaveryUtil;
@@ -122,7 +225,7 @@ import com.lilithsthrone.world.places.PlaceType;
 public class Game implements Serializable, XMLSaving {
 	private static final long serialVersionUID = 1L;
 
-	public static final int FONT_SIZE_NORMAL = 18, FONT_SIZE_LARGE = 24, FONT_SIZE_HUGE = 30;
+	public static final int FONT_SIZE_MINIMUM = 12, FONT_SIZE_NORMAL = 18, FONT_SIZE_LARGE = 24, FONT_SIZE_HUGE = 36;
 
 	private PlayerCharacter player;
 	
@@ -130,7 +233,6 @@ public class Game implements Serializable, XMLSaving {
 	private NPC activeNPC;
 	private int npcTally = 0;
 	private Map<String, NPC> NPCMap;
-	private List<NPC> slavesInStocks;
 	
 	private Map<WorldType, World> worlds;
 	private long minutesPassed;
@@ -185,7 +287,6 @@ public class Game implements Serializable, XMLSaving {
 		inNewWorld = false;
 
 		NPCMap = new HashMap<>();
-		slavesInStocks = new ArrayList<>();
 
 		// Start in clouds:
 		currentWeather = Weather.CLOUD;
@@ -283,7 +384,7 @@ public class Game implements Serializable, XMLSaving {
 				
 				// Load NPCs:
 				SlaveImport importedSlave = new SlaveImport();
-				importedSlave = importedSlave.loadFromXML(characterElement, doc);
+				importedSlave.loadFromXML(characterElement, doc);
 				importedSlave.applyNewlyImportedSlaveVariables();
 				Main.game.addNPC(importedSlave, false);
 				
@@ -295,7 +396,31 @@ public class Game implements Serializable, XMLSaving {
 		return null;
 	}
 	
-	public static void exportGame() {
+	public static void exportGame(String exportFileName, boolean allowOverwrite) {
+		
+		File dir = new File("data/");
+		dir.mkdir();
+
+		dir = new File("data/saves");
+		dir.mkdir();
+		
+		boolean overwrite = false;
+		if (dir.isDirectory()) {
+			File[] directoryListing = dir.listFiles((path, filename) -> filename.endsWith(".xml"));
+			if (directoryListing != null) {
+				for (File child : directoryListing) {
+					if (child.getName().equals(exportFileName+".xml")){
+						if(!allowOverwrite) {
+							Main.game.flashMessage(Colour.GENERIC_BAD, "Name already exists!");
+							return;
+						} else {
+							overwrite = true;
+						}
+					}
+				}
+			}
+		}
+		
 		try {
 			if(timeLog) {
 				timeStart = System.nanoTime();
@@ -383,11 +508,26 @@ public class Game implements Serializable, XMLSaving {
 			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 			DOMSource source = new DOMSource(doc);
 			
+<<<<<<< Upstream, based on upstream/master
 			File dir = new File("data/");
 			dir.mkdir();
 			
 			File dirCharacter = new File("data/saves/");
 			dirCharacter.mkdir();
+=======
+			String saveLocation = "data/saves/"+exportFileName+".xml";
+			StreamResult result = new StreamResult(new File(saveLocation));
+			
+			transformer.transform(source, result);
+			
+			if(overwrite) {
+				if(!exportFileName.startsWith("AutoSave")) {
+					Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()), Colour.GENERIC_GOOD, "Save game overwritten!");
+			}
+			} else {
+				Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()), Colour.GENERIC_GOOD, "Game saved!");
+			}
+>>>>>>> 581c954 merge 1
 
 			if(!exportFileName.startsWith("AutoSave")) {
 				if(overwrite) {
@@ -477,26 +617,28 @@ public class Game implements Serializable, XMLSaving {
 				for(int i=0; i<gameElement.getElementsByTagName("NPC").getLength(); i++) {
 					Element e = (Element) gameElement.getElementsByTagName("NPC").item(i);
 					
-					//TODO this is just a huge mess. It needs to be remade.
 					if(!addedIds.contains(((Element)e.getElementsByTagName("id").item(0)).getAttribute("value"))) {
 						@SuppressWarnings("unchecked")
 						Class<? extends NPC> npcClass = (Class<? extends NPC>) Class.forName(((Element)e.getElementsByTagName("pathName").item(0)).getAttribute("value"));
-						Method m = npcClass.getMethod("loadFromXML", Element.class, Document.class);
+						Method m = npcClass.getMethod("loadFromXML", Element.class, Document.class, CharacterImportSetting[].class);
 						
-						//npcClass.getConstructor(Boolean.class).newInstance(true)
-						NPC npcClassDefault = npcClass.newInstance();
-						NPC npc = (NPC) m.invoke(npcClassDefault, e, doc); //TODO You're loading the class twice!!!
+						NPC npc = npcClass.getDeclaredConstructor(boolean.class).newInstance(true);
+						m.invoke(npc, e, doc, new CharacterImportSetting[] {});
 						newGame.addNPC(npc, true);
 						addedIds.add(npc.getId());
 						
 						// To fix issues with older versions hair length:
 						if(Main.isVersionOlderThan(version, "0.1.90.5")) {
+<<<<<<< Upstream, based on upstream/master
 							npc.getBody().getHair().setLength(null, npcClassDefault.getHairRawLengthValue());
 						}
 
 						// Generate desires in non-unique NPCs:
 						if(Main.isVersionOlderThan(version, "0.1.98.5") && !npc.isUnique()) {
 							CharacterUtils.generateDesires(npc);
+=======
+							npc.getBody().getHair().setLength(null, npc.isFeminine()?RacialBody.valueOfRace(npc.getRace()).getFemaleHairLength():RacialBody.valueOfRace(npc.getRace()).getMaleHairLength());
+>>>>>>> 581c954 merge 1
 						}
 						
 						if(npc instanceof SlaveImport) {
@@ -802,7 +944,6 @@ public class Game implements Serializable, XMLSaving {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				slavesInStocks.add(slave);
 			}
 			
 			pendingSlaveInStocksReset = false;
@@ -822,6 +963,11 @@ public class Game implements Serializable, XMLSaving {
 					&& !Main.game.getPlayer().getLocation().equals(npc.getLocation())) {
 						banishNPC(npc);
 					}
+			if(!Main.game.getPlayer().getLocation().equals(npc.getLocation())) {
+				npc.setHealthPercentage(1);
+				npc.setManaPercentage(1);
+				npc.setStaminaPercentage(1);
+		}
 		}
 		
 		for (NPC npc : NPCMap.values()) {
@@ -3617,6 +3763,7 @@ public class Game implements Serializable, XMLSaving {
 //							+ "</body>";
 			
 			
+<<<<<<< Upstream, based on upstream/master
 		} else {
 			currentDialogue = savedDialogue;
 		}
@@ -4316,3 +4463,709 @@ public class Game implements Serializable, XMLSaving {
 		return slaveryUtil;
 	}
 }
+=======
+		} else {
+			currentDialogue = savedDialogue;
+		}
+		
+		pastDialogueSB.setLength(0);
+		pastDialogueSB.append(previousPastDialogueSBContents);
+
+		if (Main.getProperties().fontSize == FONT_SIZE_NORMAL) {
+			currentDialogue = currentDialogue.replaceFirst("<div class='div-center' style='font-size:" + FONT_SIZE_LARGE + "px'; line-height:" + (FONT_SIZE_LARGE + 6) + "px;>",
+					"<div class='div-center' style='font-size:" + FONT_SIZE_NORMAL + "px'; line-height:" + (FONT_SIZE_NORMAL + 6) + "px;>");
+			currentDialogue = currentDialogue.replaceFirst("<div class='div-center' style='font-size:" + FONT_SIZE_HUGE + "px'; line-height:" + (FONT_SIZE_HUGE + 6) + "px;>",
+					"<div class='div-center' style='font-size:" + FONT_SIZE_NORMAL + "px'; line-height:" + (FONT_SIZE_NORMAL + 6) + "px;>");
+		} else if (Main.getProperties().fontSize == FONT_SIZE_LARGE) {
+			currentDialogue = currentDialogue.replaceFirst("<div class='div-center' style='font-size:" + FONT_SIZE_NORMAL + "px; line-height:" + (FONT_SIZE_NORMAL + 6) + "px;'>",
+					"<div class='div-center' style='font-size:" + FONT_SIZE_LARGE + "px; line-height:" + (FONT_SIZE_LARGE + 6) + "px;'>");
+			currentDialogue = currentDialogue.replaceFirst("<div class='div-center' style='font-size:" + FONT_SIZE_HUGE + "px; line-height:" + (FONT_SIZE_HUGE + 6) + "px;'>",
+					"<div class='div-center' style='font-size:" + FONT_SIZE_LARGE + "px; line-height:" + (FONT_SIZE_LARGE + 6) + "px;'>");
+		} else if (Main.getProperties().fontSize == FONT_SIZE_HUGE) {
+			currentDialogue = currentDialogue.replaceFirst("<div class='div-center' style='font-size:" + FONT_SIZE_NORMAL + "px; line-height:" + (FONT_SIZE_NORMAL + 6) + "px;'>",
+					"<div class='div-center' style='font-size:" + FONT_SIZE_HUGE + "px; line-height:" + (FONT_SIZE_HUGE + 6) + "px;'>");
+			currentDialogue = currentDialogue.replaceFirst("<div class='div-center' style='font-size:" + FONT_SIZE_LARGE + "px; line-height:" + (FONT_SIZE_LARGE + 6) + "px;'>",
+					"<div class='div-center' style='font-size:" + FONT_SIZE_HUGE + "px; line-height:" + (FONT_SIZE_HUGE + 6) + "px;'>");
+		}
+
+		Main.mainController.setMainContent(currentDialogue);
+
+		textEndStringBuilder.setLength(0);
+		textStartStringBuilder.setLength(0);
+		
+		Main.game.endTurn(0);
+		//Main.mainController.processNewDialogue();
+
+	}
+	
+	private List<NPC> charactersPresent = new ArrayList<>();
+	private List<NPC> charactersHome = new ArrayList<>();
+	public List<NPC> getCharactersPresent() {
+		if(player==null) {
+			charactersPresent.clear();
+			return charactersPresent;
+		} else {
+			return getCharactersPresent(player.getWorldLocation(), player.getLocation());
+		}
+	}
+	
+	public List<NPC> getCharactersTreatingCellAsHome(Cell cell) {
+		charactersHome.clear();
+		
+		for(NPC npc : NPCMap.values()) {
+			if(npc.getHomeWorldLocation()==cell.getType() && npc.getHomeLocation().equals(cell.getLocation())) {
+				charactersHome.add(npc);
+			}
+		}
+		
+		charactersHome.sort(Comparator.comparing(GameCharacter::getName));
+		
+		return charactersHome;
+	}
+	
+	public List<NPC> getCharactersPresent(Cell cell) {
+		return getCharactersPresent(cell.getType(), cell.getLocation());
+	}
+	
+	public List<NPC> getCharactersPresent(WorldType worldType, Vector2i location) {
+		charactersPresent.clear();
+		
+		for(NPC npc : NPCMap.values()) {
+			if(npc.getWorldLocation()==worldType && npc.getLocation().equals(location)) {
+				charactersPresent.add(npc);
+			}
+		}
+		
+		charactersPresent.sort(Comparator.comparing(GameCharacter::getName));
+		
+		return charactersPresent;
+	}
+	
+	public String getWeatherImage() {
+		if (isDayTime()) {
+			switch (currentWeather) {
+			case CLEAR:
+				return SVGImages.SVG_IMAGE_PROVIDER.getWeatherDayClear();
+			case CLOUD:
+				return SVGImages.SVG_IMAGE_PROVIDER.getWeatherDayCloud();
+			case RAIN:
+				return SVGImages.SVG_IMAGE_PROVIDER.getWeatherDayRain();
+			case MAGIC_STORM_GATHERING:
+				return SVGImages.SVG_IMAGE_PROVIDER.getWeatherDayStormIncoming();
+			case MAGIC_STORM:
+				return SVGImages.SVG_IMAGE_PROVIDER.getWeatherDayStorm();
+			}
+		} else {
+			switch (currentWeather) {
+			case CLEAR:
+				return SVGImages.SVG_IMAGE_PROVIDER.getWeatherNightClear();
+			case CLOUD:
+				return SVGImages.SVG_IMAGE_PROVIDER.getWeatherNightCloud();
+			case RAIN:
+				return SVGImages.SVG_IMAGE_PROVIDER.getWeatherNightRain();
+			case MAGIC_STORM_GATHERING:
+				return SVGImages.SVG_IMAGE_PROVIDER.getWeatherNightStormIncoming();
+			case MAGIC_STORM:
+				return SVGImages.SVG_IMAGE_PROVIDER.getWeatherNightStorm();
+			}
+		}
+		return "";
+	}
+
+	public int getWeatherTimeRemaining() {
+		return weatherTimeRemaining;
+	}
+	
+	public void setWeather(Weather weather, int timeRemaining) {
+		currentWeather = weather;
+		weatherTimeRemaining = timeRemaining;
+	}
+
+	public World getActiveWorld() {
+		return worlds.get(player.getWorldLocation());
+	}
+
+	public Map<WorldType, World> getWorlds() {
+		return worlds;
+	}
+
+	/**
+	 * @param world
+	 * @param location Location to set player to
+	 */
+	public void setActiveWorld(World world, Vector2i location, boolean setDefaultDialogue) {
+//		activeWorld = world;
+		player.setWorldLocation(world.getWorldType());
+		player.setLocation(location);
+		
+		if(setDefaultDialogue) {
+			DialogueNodeOld dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getPlace().getDialogue(true);
+			Main.game.setContent(new Response("", "", dn));
+		}
+		
+		if(Main.game.started) {
+			Main.saveGame("AutoSave_"+Main.game.getPlayer().getName(), true);
+		}
+	}
+	
+	public void setActiveWorld(World world, PlaceType placeType, boolean setDefaultDialogue) {
+		setActiveWorld(
+				world,
+				world.getPlacesOfInterest().get(new GenericPlace(placeType)),
+				setDefaultDialogue);
+	}
+	
+//	public void setActiveWorld(boolean setDefaultDialogue) {
+//		setActiveWorld(
+//				getWorlds().get(getPlayerCell().getPlace().getLinkedWorldType()),
+//				getWorlds().get(getPlayerCell().getPlace().getLinkedWorldType()).getPlacesOfInterest().get(new GenericPlace(getPlayerCell().getPlace().getLinkedPlaceType())),
+//				setDefaultDialogue);
+//	}
+
+	public void setPlayer(PlayerCharacter player) {
+		this.player = player;
+	}
+
+	public PlayerCharacter getPlayer() {
+		return player;
+	}
+
+	public long getMinutesPassed() {
+		return minutesPassed;
+	}
+	
+	public LocalDateTime getStartingDate() {
+		return startingDate;
+	}
+	
+	public void setStartingDateMonth(Month month) {
+		if(startingDate.getMonthValue() > month.getValue()) {
+			startingDate = startingDate.minusMonths(startingDate.getMonthValue() - month.getValue());
+		} else {
+			startingDate = startingDate.plusMonths(month.getValue() - startingDate.getMonthValue());
+		}
+		
+		
+//		startingDate = LocalDateTime.of(LocalDateTime.now().getYear(), month, LocalDateTime.now().getDayOfMonth(), 00, 00).plusYears(3);
+	}
+	
+	public LocalDateTime getDateNow() {
+		return getStartingDate().plusMinutes(Main.game.getMinutesPassed());
+	}
+	
+	public int getYear() {
+		return Main.game.getDateNow().getYear();
+	}
+
+	public long getHour() {
+		return Main.game.getMinutesPassed() / 60l;
+	}
+	
+	public boolean isDayTime() {
+		return minutesPassed % (24 * 60) >= (60 * 7) && minutesPassed % (24 * 60) < (60 * 21);
+	}
+	
+	public boolean isMorning() {
+		return minutesPassed % (24 * 60) >= 0 && minutesPassed % (24 * 60) < (60 * 12);
+	}
+
+	public int getDayNumber() {
+		return (int) (1 + (getMinutesPassed() / (24 * 60)));
+	}
+	
+	public int getDayNumber(long minutes) {
+		return (int) (1 + (minutes / (24 * 60)));
+	}
+
+	public boolean isInCombat() {
+		return inCombat;
+	}
+
+	public void setInCombat(boolean inCombat) {
+		this.inCombat = inCombat;
+	}
+
+	public boolean isInSex() {
+		return inSex;
+	}
+
+	public void setInSex(boolean inSex) {
+		this.inSex = inSex;
+	}
+
+	public boolean isDebugMode() {
+		return debugMode;
+	}
+
+	public void setDebugMode(boolean debugMode) {
+		this.debugMode = debugMode;
+	}
+
+	public boolean isImperialMeasurements() {
+		return imperialMeasurements;
+	}
+
+	public void setImperialMeasurements(boolean imperialMeasurements) {
+		this.imperialMeasurements = imperialMeasurements;
+	}
+
+	public Encounter getCurrentEncounter() {
+		return currentEncounter;
+	}
+
+	public void setCurrentEncounter(Encounter currentEncounter) {
+		this.currentEncounter = currentEncounter;
+	}
+	
+	public NPC getNPC(Class<? extends NPC> NPCclass) {
+		for(NPC npc : NPCMap.values()) {
+			if(npc.getClass().equals(NPCclass)) {
+				return npc;
+			}
+		}
+		return null;
+	}
+
+	public NPC getPrologueMale() {
+		return (NPC) this.getNPCById(getUniqueNPCId(PrologueMale.class));
+	}
+
+	public NPC getPrologueFemale() {
+		return (NPC) this.getNPCById(getUniqueNPCId(PrologueFemale.class));
+	}
+
+	public NPC getTestNPC() {
+		return (NPC) this.getNPCById(getUniqueNPCId(TestNPC.class));
+	}
+
+	public NPC getLilaya() {
+		return (NPC) this.getNPCById(getUniqueNPCId(Lilaya.class));
+	}
+
+	public NPC getRose() {
+		return (NPC) this.getNPCById(getUniqueNPCId(Rose.class));
+	}
+
+	public NPC getBrax() {
+		return (NPC) this.getNPCById(getUniqueNPCId(Brax.class));
+	}
+
+//	public NPC getArthur() {
+//		return arthur;
+//	}
+
+	public NPC getPix() {
+		return (NPC) this.getNPCById(getUniqueNPCId(Pix.class));
+	}
+
+	public NPC getRalph() {
+		return (NPC) this.getNPCById(getUniqueNPCId(Ralph.class));
+	}
+
+	public NPC getNyan() {
+		return (NPC) this.getNPCById(getUniqueNPCId(Nyan.class));
+	}
+
+	public NPC getVicky() {
+		return (NPC) this.getNPCById(getUniqueNPCId(Vicky.class));
+	}
+
+	public NPC getKate() {
+		return (NPC) this.getNPCById(getUniqueNPCId(Kate.class));
+	}
+
+	public NPC getScarlett() {
+		return (NPC) this.getNPCById(getUniqueNPCId(Scarlett.class));
+	}
+	
+	public NPC getAlexa() {
+		return (NPC) this.getNPCById(getUniqueNPCId(Alexa.class));
+	}
+
+	public NPC getHarpyBimbo() {
+		return (NPC) this.getNPCById(getUniqueNPCId(HarpyBimbo.class));
+	}
+
+	public NPC getHarpyDominant() {
+		return (NPC) this.getNPCById(getUniqueNPCId(HarpyDominant.class));
+	}
+
+	public NPC getHarpyNympho() {
+		return (NPC) this.getNPCById(getUniqueNPCId(HarpyNympho.class));
+	}
+
+	public NPC getHarpyBimboCompanion() {
+		return (NPC) this.getNPCById(getUniqueNPCId(HarpyBimboCompanion.class));
+	}
+
+	public NPC getHarpyDominantCompanion() {
+		return (NPC) this.getNPCById(getUniqueNPCId(HarpyDominantCompanion.class));
+	}
+
+	public NPC getHarpyNymphoCompanion() {
+		return (NPC) this.getNPCById(getUniqueNPCId(HarpyNymphoCompanion.class));
+	}
+
+	public NPC getPazu() {
+		return (NPC) this.getNPCById(getUniqueNPCId(Pazu.class));
+	}
+	
+	public NPC getCandi() {
+		return (NPC) this.getNPCById(getUniqueNPCId(CandiReceptionist.class));
+	}
+	
+	public NPC getFinch() {
+		return (NPC) this.getNPCById(getUniqueNPCId(Finch.class));
+	}
+	
+	public NPC getZaranix() {
+		return (NPC) this.getNPCById(getUniqueNPCId(Zaranix.class));
+	}
+	
+	public NPC getAmber() {
+		return (NPC) this.getNPCById(getUniqueNPCId(Amber.class));
+	}
+	
+	public NPC getArthur() {
+		return (NPC) this.getNPCById(getUniqueNPCId(Arthur.class));
+	}
+	
+	public NPC getKelly() {
+		return (NPC) this.getNPCById(getUniqueNPCId(ZaranixMaidKelly.class));
+	}
+	
+	public NPC getKatherine() {
+		return (NPC) this.getNPCById(getUniqueNPCId(ZaranixMaidKatherine.class));
+	}
+
+	public NPC getGenericMaleNPC() {
+		return (NPC) this.getNPCById(getUniqueNPCId(GenericMaleNPC.class));
+	}
+
+	public NPC getGenericFemaleNPC() {
+		return (NPC) this.getNPCById(getUniqueNPCId(GenericFemaleNPC.class));
+	}
+
+	public NPC getGenericAndrogynousNPC() {
+		return (NPC) this.getNPCById(getUniqueNPCId(GenericAndrogynousNPC.class));
+	}
+	
+	public List<NPC> getOffspring() {
+		List<NPC> offspring = new ArrayList<>();
+		
+		for(NPC npc : NPCMap.values()) {
+			if((npc.getMother()!=null && npc.getMother().isPlayer()) || (npc.getFather()!=null && npc.getFather().isPlayer())) {
+				if(npc.getMother()!=null) {
+					if(!(npc.getMother().getPregnantLitter() != null && npc.getMother().getPregnantLitter().getOffspring().contains(npc.getId()))) {
+						offspring.add(npc);
+					}
+				} else {
+					offspring.add(npc);
+				}
+			}
+		}
+		
+		return offspring;
+	}
+	
+	public List<NPC> getOffspringSpawned() {
+		List<NPC> offspringSpawned = new ArrayList<>(getOffspring());
+		
+		offspringSpawned.removeIf(npc -> npc.getWorldLocation()==WorldType.EMPTY);
+		
+		return offspringSpawned;
+	}
+	
+	public List<NPC> getAllNPCs() {
+		return new ArrayList<NPC>(NPCMap.values());
+	}
+	
+	public boolean isCharacterExisting(String id) {
+		return NPCMap.containsKey(id);
+	}
+	
+	public GameCharacter getNPCById(String id) {
+		if(id==null || id.isEmpty()) {
+			return null;
+		}
+		
+		if(id.equals(Main.game.getPlayer().getId())) {
+			return Main.game.getPlayer();
+		}
+		if(!NPCMap.containsKey(id)) {
+			System.err.println("!WARNING! getNPC("+id+") is returning null!");
+			return null;
+//			throw new NullPointerException();
+		}
+		return NPCMap.get(id);
+	}
+	
+	public Map<String, NPC> getNPCMap() {
+		return NPCMap;
+	}
+	
+	public String getUniqueNPCId(Class<? extends NPC> c) {
+		return "-1"+","+c.getSimpleName();
+	}
+	
+	public String getNPCId(Class<? extends NPC> c) {
+		return npcTally+","+c.getSimpleName();
+	}
+	
+	public String getNextNPCId(Class<? extends NPC> c) {
+		return (npcTally+1)+","+c.getSimpleName();
+	}
+	
+	public String addNPC(NPC npc, boolean isImported) throws Exception {
+		
+		if(isImported) {
+			int tallyCount = 0;
+			// Support old versions (in the format "Stan-Stan-Stan-49"):
+			String[] split = npc.getId().split("-");
+			try{
+				tallyCount = Integer.valueOf(split[split.length-1]);
+			}catch(NumberFormatException ex) {
+				tallyCount = Integer.valueOf(npc.getId().split(",")[0]);
+			}
+			if(tallyCount>npcTally) {
+				npcTally = tallyCount;
+			}
+			
+		} else {
+			if(npc.isUnique()) {
+				npc.setId(getUniqueNPCId(npc.getClass()));
+			} else {
+				npcTally++;
+				npc.setId(getNPCId(npc.getClass()));
+			}
+		}
+		
+		if(NPCMap.keySet().contains(npc.getId())) {
+			throw new Exception("NPC map already contained an NPC with this Id ("+npc.getId()+"). SOMETHING HAS GONE HORRIBLY WRONG! PANIC!");
+		}
+		
+		if(isInNPCUpdateLoop) {
+			npcsToAdd.add(npc);
+		} else {
+			NPCMap.put(npc.getId(), npc);
+		}
+		
+		return npc.getId();
+	}
+	
+	/**
+	 * If the NPC has relationship stats with the player, don't delete entirely. Instead, move to PlaceType.GENERIC_EMPTY_TILE.
+	 * If the NPC has no stats related to the player, then remove them from the game.
+	 * @param npc
+	 */
+	public void banishNPC(NPC npc) {
+		if(npc.getTotalTimesHadSex()!=0 || npc.getPregnantLitter()!=null || npc.getLastLitterBirthed()!=null || npc.getMother()!=null || npc.getFather()!=null) {
+			npc.setLocation(WorldType.EMPTY, PlaceType.GENERIC_EMPTY_TILE, true);
+		} else {
+			removeNPC(npc);
+		}
+	}
+	
+	public void banishNPC(String id) {
+		NPC npc = (NPC) getNPCById(id);
+		if(npc.getTotalTimesHadSex()!=0 || npc.getPregnantLitter()!=null || npc.getLastLitterBirthed()!=null || npc.getMother()!=null || npc.getFather()!=null) {
+			npc.setLocation(WorldType.EMPTY, PlaceType.GENERIC_EMPTY_TILE, true);
+		} else {
+			removeNPC(npc);
+		}
+	}
+
+	public void removeNPC(String id) {
+		if(isInNPCUpdateLoop) {
+			npcsToRemove.add(NPCMap.get(id));
+		} else {
+			NPCMap.remove(id);
+		}
+	}
+	
+	public void removeNPC(NPC npc) {
+		if(npc.isPregnant()) {
+			npc.endPregnancy(false);
+		} else if(npc.hasStatusEffect(StatusEffect.PREGNANT_0)) {
+			npc.removeStatusEffect(StatusEffect.PREGNANT_0);
+		}
+		
+		if(isInNPCUpdateLoop) {
+			npcsToRemove.add(npc);
+		} else {
+			NPCMap.remove(npc.getId());
+		}
+	}
+	
+	public int getNumberOfWitches() {
+		int i = 0;
+		for(NPC npc : NPCMap.values()) {
+			if(npc instanceof Cultist && npc.getLocationPlace().getPlaceType()!=PlaceType.GENERIC_EMPTY_TILE) {
+				i++;
+			}
+		}
+		return i;
+	}
+	
+	public NPC getActiveNPC() {
+		return activeNPC;
+	}
+
+	public void setActiveNPC(NPC activeNPC) {
+		this.activeNPC = activeNPC;
+	}
+
+	public boolean isHintsOn() {
+		return hintsOn;
+	}
+
+	public void setHintsOn(boolean hintsOn) {
+		this.hintsOn = hintsOn;
+	}
+
+	public boolean isStarted() {
+		return started;
+	}
+
+	// Dialogues:
+
+	public boolean isInNewWorld() {
+		return inNewWorld;
+	}
+
+	public void setInNewWorld(boolean inNewWorld) {
+		this.inNewWorld = inNewWorld;
+	}
+
+	public StringBuilder getTextStartStringBuilder() {
+		return textStartStringBuilder;
+	}
+
+	public void clearTextStartStringBuilder() {
+		textStartStringBuilder.setLength(0);
+	}
+
+	public StringBuilder getTextEndStringBuilder() {
+		return textEndStringBuilder;
+	}
+
+	public void clearTextEndStringBuilder() {
+		textEndStringBuilder.setLength(0);
+	}
+
+	public DialogueNodeOld getCurrentDialogueNode() {
+		return currentDialogueNode;
+	}
+
+	public MapDisplay getMapDisplay() {
+		if (currentDialogueNode != null)
+			return currentDialogueNode.getMapDisplay();
+		else
+			return null;
+	}
+
+	public boolean isRenderAttributesSection() {
+		return renderAttributesSection;
+	}
+
+	public void setRenderAttributesSection(boolean renderAttributesSection) {
+		this.renderAttributesSection = renderAttributesSection;
+	}
+
+	public int getResponsePage() {
+		return responsePage;
+	}
+
+	public void setResponsePage(int responsePage) {
+		this.responsePage = responsePage;
+	}
+
+	public boolean isHasNextResponsePage() {
+		return currentDialogueNode.getResponse(responseTab, ((responsePage + 1) * MainController.RESPONSE_COUNT)) != null;
+	}
+
+	public int getResponseTab() {
+		return responseTab;
+	}
+
+	public void setResponseTab(int responseTab) {
+		this.responseTab = responseTab;
+	}
+
+	public DialogueNodeOld getSavedDialogueNode() {
+		return savedDialogueNode;
+	}
+
+	public Cell getPlayerCell() {
+		return Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation());
+	}
+
+	public DialogueFlags getDialogueFlags() {
+		return dialogueFlags;
+	}
+	
+	public int getResponsePointer() {
+		return responsePointer;
+	}
+
+	public void setResponsePointer(int responsePointer) {
+		this.responsePointer = responsePointer;
+	}
+	
+	public boolean isPlayerTileFull() {
+		return getActiveWorld().getCell(getPlayer().getLocation()).getInventory().isInventoryFull();
+	}
+	
+	public boolean isNonConEnabled() {
+		return Main.getProperties().nonConContent;
+	}
+	
+	public boolean isIncestEnabled() {
+		return Main.getProperties().incestContent;
+	}
+	
+	public boolean isFacialHairEnabled() {
+		return Main.getProperties().facialHairContent;
+	}
+	
+	public boolean isPubicHairEnabled() {
+		return Main.getProperties().pubicHairContent;
+	}
+	
+	public boolean isBodyHairEnabled() {
+		return Main.getProperties().bodyHairContent;
+	}
+	
+	public boolean isRenderMap() {
+		return renderMap;
+	}
+
+	public void setRenderMap(boolean renderMap) {
+		this.renderMap = renderMap;
+	}
+
+	public List<EventLogEntry> getEventLog() {
+		return eventLog;
+	}
+	
+	public void addEvent(EventLogEntry event, boolean appendAdditionTextToMainDialogue) {
+		eventLog.add(event);
+		if(appendAdditionTextToMainDialogue) {
+			Main.game.getTextEndStringBuilder().append(event.getMainDialogueDescription());
+		}
+	}
+	
+	public void setEventLog(List<EventLogEntry> eventLog) {
+		this.eventLog = eventLog;
+	}
+	
+
+	public int getNpcTally() {
+		return npcTally;
+	}
+
+	public SlaveryUtil getSlaveryUtil() {
+		return slaveryUtil;
+	}
+}
+>>>>>>> 581c954 merge 1
