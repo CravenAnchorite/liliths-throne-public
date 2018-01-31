@@ -690,6 +690,13 @@ public enum Sex {
 //			if (areasCummedIn.get(Sex.getActivePartner()).contains(OrificeType.VAGINA))
 //				sexSB.append(activePartner.rollForPregnancy(Main.game.getPlayer()));
 //		}
+		if (wetOrificeTypes.get(Main.game.getPlayer()).get(OrificeType.VAGINA).contains(LubricationType.PARTNER_GIRLCUM) ){
+			sexSB.append(Main.game.getPlayer().rollForPregnancy(activePartner));
+		}
+	// Partner pregnancy:
+		if (wetOrificeTypes.get(activePartner).get(OrificeType.VAGINA).contains(LubricationType.PLAYER_GIRLCUM) ){
+			sexSB.append(activePartner.rollForPregnancy(Main.game.getPlayer()));
+		}
 		
 		if(getNumberOfOrgasms(Main.game.getPlayer())==0) {
 			if(Sex.getSexPace(Main.game.getPlayer())!=SexPace.SUB_RESISTING) {
@@ -1932,7 +1939,7 @@ public enum Sex {
 		}
 		if(Main.game.getPlayer().hasVagina()) {
 			if(Main.game.getPlayer().getArousal() >= Main.game.getPlayer().getVaginaWetness().getArousalNeededToGetVaginaWet()) {
-				addOrificeLubrication(Main.game.getPlayer(), OrificeType.VAGINA, LubricationType.PLAYER_NATURAL_LUBRICATION);
+				addOrificeLubrication(Main.game.getPlayer(), OrificeType.VAGINA, LubricationType.PLAYER_GIRLCUM);
 			}
 		}
 		
@@ -1968,7 +1975,7 @@ public enum Sex {
 				}
 				if(activePartner.hasVagina()) {
 					if(activePartner.getArousal() >= activePartner.getVaginaWetness().getArousalNeededToGetVaginaWet()) {
-						addOrificeLubrication(character, OrificeType.VAGINA, LubricationType.PARTNER_NATURAL_LUBRICATION);
+						addOrificeLubrication(character, OrificeType.VAGINA, LubricationType.PARTNER_GIRLCUM);
 					}
 				}
 			}

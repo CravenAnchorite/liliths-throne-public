@@ -7,6 +7,7 @@ import com.lilithsthrone.game.sex.Sex;
 import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.SexPositionSlot;
 import com.lilithsthrone.game.sex.managers.universal.consensual.SMChair;
+import com.lilithsthrone.game.sex.managers.universal.consensual.SMChairKneeling;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
@@ -113,6 +114,46 @@ public class ConChairPositions {
 						Util.newHashMapOfValues(new Value<>(Sex.getActivePartner(), SexPositionSlot.CHAIR_TOP)),
 						Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexPositionSlot.CHAIR_BOTTOM))));
 			}
+		}
+	};
+	
+	public static final SexAction PLAYER_KNEEL = new SexAction(
+			SexActionType.PLAYER_POSITIONING,
+			ArousalIncrease.ZERO_NONE,
+			ArousalIncrease.ZERO_NONE,
+			CorruptionLevel.ZERO_PURE,
+			null,
+			null,
+			SexParticipantType.MISC) {
+
+		@Override
+		public boolean isBaseRequirementsMet() {
+			return !Sex.isAnyNonSelfPenetrationHappening();
+		}
+		
+		@Override
+		public String getActionTitle() {
+			return "Kneel on Floor";
+		}
+
+		@Override
+		public String getActionDescription() {
+			return UtilText.parse(Sex.getActivePartner(),
+					"Kneel down on the floor in front of "+Sex.getActivePartner().getName("the")+".");
+		}
+
+		@Override
+		public String getDescription() {
+			return UtilText.parse(Sex.getActivePartner(),
+					"You slide of of "+Sex.getActivePartner().getName("the")+"'s lap, and with a playful little grin you get to your knees in front of <herPro>."
+					+ " You lick your lips and gaze up at <her> eyes while your hands spread her legs apart."
+					+ " Looking down at you, <she> smiles, "
+					+ UtilText.parseSpeech("You're looking to lick some pussy, sweetie, huh?", Sex.getActivePartner()));
+		}
+
+		@Override
+		public void applyEffects() {
+			Sex.setSexManager(new SMChairKneeling());
 		}
 	};
 }
