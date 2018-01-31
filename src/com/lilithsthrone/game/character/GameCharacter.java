@@ -23,7 +23,6 @@ import com.lilithsthrone.game.DifficultyLevel;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
-import com.lilithsthrone.game.character.attributes.LustLevel;
 import com.lilithsthrone.game.character.attributes.ObedienceLevel;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.BodyPartInterface;
@@ -7863,6 +7862,7 @@ public abstract class GameCharacter implements Serializable, XMLSaving {
 		} else {
 			pregnancyChance = 0;
 <<<<<<< Upstream, based on upstream/master
+<<<<<<< Upstream, based on upstream/master
 			if (partner.hasPenis()){
 				pregnancyChance += (partner.getAttributeValue(Attribute.VIRILITY)/100f) * partner.getPenisCumProduction().getPregnancyModifier();
 			} else {
@@ -9577,6 +9577,13 @@ public abstract class GameCharacter implements Serializable, XMLSaving {
 =======
 >>>>>>> 417f7e7 awefef
 			pregnancyChance += (partner.getAttributeValue(Attribute.VIRILITY)/100f) * partner.getPenisCumProduction().getPregnancyModifier();
+=======
+			if (partner.hasPenis()){
+				pregnancyChance += (partner.getAttributeValue(Attribute.VIRILITY)/100f) * partner.getPenisCumProduction().getPregnancyModifier();
+			}else{
+				pregnancyChance += (partner.getAttributeValue(Attribute.VIRILITY)/100f);
+			}
+>>>>>>> 10411c5 Cleanup
 			pregnancyChance += (getAttributeValue(Attribute.FERTILITY)/100f);
 		}
 		
