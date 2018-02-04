@@ -653,6 +653,7 @@ public class SexActionPresets {
 		playerSixtyNineOnTop.add(PlayerFingerVagina.class);
 		playerSixtyNineOnTop.add(PlayerFingerAnus.class);
 		playerSixtyNineOnTop.add(PlayerTongueVagina.class);
+		partnerSixtyNineOnTop.add(PlayerTongueAnus.class);
 		playerSixtyNineOnTop.add(PlayerPenisNipple.class);
 		playerSixtyNineOnTop.add(PlayerPenisBreasts.class);
 		
@@ -676,6 +677,7 @@ public class SexActionPresets {
 		partnerSixtyNineOnTop.add(PlayerFingerVagina.class);
 		partnerSixtyNineOnTop.add(PlayerFingerAnus.class);
 		partnerSixtyNineOnTop.add(PlayerTongueVagina.class);
+		partnerSixtyNineOnTop.add(PlayerTongueAnus.class);
 		partnerSixtyNineOnTop.add(PlayerPenisNipple.class);
 		partnerSixtyNineOnTop.add(PlayerPenisBreasts.class);
 		
@@ -792,6 +794,11 @@ public class SexActionPresets {
 		playerChairTop.addAll(playerDefaultSelf);
 		playerChairTop.addAll(playerGenerics);
 		playerChairTop.remove(GenericPositioning.class);
+		
+		playerChairTop.add(PlayerFingerVagina.class);
+		
+		playerChairTop.add(PartnerFingerVagina.class);
+		
 
 		playerChairTop.add(ConChairTop.class);
 		playerChairTop.add(ConChairPositions.class);
@@ -813,6 +820,10 @@ public class SexActionPresets {
 		playerChairBottom.add(PlayerTongueNipple.class);
 		playerChairBottom.add(PartnerTongueBreasts.class);
 		playerChairBottom.add(PartnerTongueNipple.class);
+		
+		playerChairTop.add(PlayerFingerVagina.class);
+		
+		playerChairTop.add(PartnerFingerVagina.class);
 		
 		playerChairBottom.add(ConChairBottom.class);
 		playerChairBottom.add(ConChairPositions.class);

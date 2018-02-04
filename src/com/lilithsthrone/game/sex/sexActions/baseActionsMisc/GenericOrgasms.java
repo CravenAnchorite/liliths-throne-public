@@ -1493,9 +1493,9 @@ public class GenericOrgasms {
 			
 		} else { // No penetration:
 			if(characterOrgasming.isPlayer()) {
-				genericOrgasmSB.append(" Your [npc1.pussy+] clenches down hard, and the wave of disappointment upon finding itself empty almost overwhelms the pleasure that radiates up through your groin.");
+				genericOrgasmSB.append(" Your [npc1.pussy+] clenches down hard and you're nearly overwhelmed by the pleasure that radiates up through your groin.");
 			} else {
-				genericOrgasmSB.append(" [npc1.Name]'s [npc1.pussy+] clenches down hard, and the wave of disappointment upon finding itself empty almost overwhelms the pleasure that radiates up through [npc.her] groin.");
+				genericOrgasmSB.append(" [npc1.Name]'s [npc1.pussy+] clenches down hard and you're nearly overwhelmed by the pleasure that radiates up through [npc.her] groin.");
 			}
 		}
 		
