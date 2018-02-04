@@ -4614,16 +4614,16 @@ public class Body implements Serializable, XMLSaving {
 		
 		if (isPlayer) {
 			if(owner.getVaginaRawClitorisSizeValue()==0) {
-				descriptionSB.append(" You have [pc.a_clitSize] clit, which measures less than one inch in length.");
+				descriptionSB.append(" You have [pc.a_clitSize] clit, which measures less than one centimeter in length.");
 			} else {
-				descriptionSB.append(" You have [pc.a_clitSize] clit, which measures [pc.clitSizeInches] inch"+(owner.getVaginaRawClitorisSizeValue()==1?"":"es")+" long.");
+				descriptionSB.append(" You have [pc.a_clitSize] clit, which measures [pc.clitSizeInches] centimeter"+(owner.getVaginaRawClitorisSizeValue()==1?"":"s")+" long.");
 			}
 			
 		} else {
 			if(owner.getVaginaRawClitorisSizeValue()==0) {
-				descriptionSB.append(" [npc.She] has [npc.a_clitSize] clit, which measures less than one inch in length.");
+				descriptionSB.append(" [npc.She] has [npc.a_clitSize] clit, which measures less than a centimeter in length.");
 			} else {
-				descriptionSB.append(" [npc.She] has [npc.a_clitSize] clit, which measures [npc.clitSizeInches] inch"+(owner.getVaginaRawClitorisSizeValue()==1?"":"es")+" long.");
+				descriptionSB.append(" [npc.She] has [npc.a_clitSize] clit, which measures [npc.clitSizeInches] centimeter"+(owner.getVaginaRawClitorisSizeValue()==1?"":"s")+" long.");
 			}
 		}
 		// Virgin/capacity:
