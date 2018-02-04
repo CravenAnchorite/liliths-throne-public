@@ -363,7 +363,7 @@ public class Game implements Serializable, XMLSaving {
 
 			Element eventLogNode = doc.createElement("eventLog");
 			game.appendChild(eventLogNode);
-			for(EventLogEntry event : Main.game.getEventLog()) {
+			for(EventLogEntry event : Main.game.getEventLog().subList(Math.max(0, Main.game.getEventLog().size()-50), Main.game.getEventLog().size())) {
 				event.saveAsXML(eventLogNode, doc);
 			}
 			
@@ -412,12 +412,14 @@ public class Game implements Serializable, XMLSaving {
 			
 			transformer.transform(source, result);
 			
-			if(overwrite) {
 				if(!exportFileName.startsWith("AutoSave")) {
+				if(overwrite) {
+					Main.game.addEvent(new EventLogEntry(Main.game.getMinutesPassed(), "[style.colourGood(Game saved)]", saveLocation), false);
 					Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()), Colour.GENERIC_GOOD, "Save game overwritten!");
-			}
 			} else {
+					Main.game.addEvent(new EventLogEntry(Main.game.getMinutesPassed(), "[style.colourGood(Game saved)]", saveLocation), false);
 				Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()), Colour.GENERIC_GOOD, "Game saved!");
+			}
 			}
 			
 			if(timeLog) {
@@ -513,6 +515,11 @@ public class Game implements Serializable, XMLSaving {
 							npc.getBody().getHair().setLength(null, npc.isFeminine()?RacialBody.valueOfRace(npc.getRace()).getFemaleHairLength():RacialBody.valueOfRace(npc.getRace()).getMaleHairLength());
 						}
 						
+						// Generate desires in non-unique NPCs:
+						if(Main.isVersionOlderThan(version, "0.1.98.5") && !npc.isUnique()) {
+							CharacterUtils.generateDesires(npc);
+						}
+						
 						if(npc instanceof SlaveImport) {
 							slaveImports.add(npc);
 						}
@@ -600,6 +607,7 @@ public class Game implements Serializable, XMLSaving {
 		Main.game.started = true;
 		
 		DialogueNodeOld startingDialogueNode = Main.game.getPlayerCell().getPlace().getDialogue(false);
+		Main.game.addEvent(new EventLogEntry(Main.game.getMinutesPassed(), "[style.colourGood(Game loaded)]", "data/saves/"+name+".xml"), false);
 		Main.game.setContent(new Response(startingDialogueNode.getLabel(), startingDialogueNode.getDescription(), startingDialogueNode));
 		
 		newGame.endTurn(0);
@@ -906,7 +914,7 @@ public class Game implements Serializable, XMLSaving {
 			if(npc.getLocation().equals(Main.game.getPlayer().getLocation()) && npc.getWorldLocation()==Main.game.getPlayer().getWorldLocation()) {
 				for(CoverableArea ca : CoverableArea.values()) {
 					if(npc.isCoverableAreaExposed(ca) && ca!=CoverableArea.MOUTH) {
-						npc.getPlayerKnowsAreasMap().put(ca, true);
+						npc.getPlayerKnowsAreas().add(ca);
 					}
 				}
 			}
