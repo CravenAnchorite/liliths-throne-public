@@ -3041,7 +3041,7 @@ public class DominionOffspringDialogue {
 					}
 					@Override
 					public void effects() {
-						Main.game.getActiveNPC().setAffection(Main.game.getPlayer(), -100+Util.random.nextInt(10));
+						Main.game.getActiveNPC().incrementAffection(Main.game.getPlayer(), -100+Util.random.nextInt(10));
 						Main.game.getActiveNPC().setObedience(-100+Util.random.nextInt(10));
 					}
 				};

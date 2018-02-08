@@ -9,103 +9,37 @@
 	
 	Patch notes:
 	
-<<<<<<< Upstream, based on upstream/master
-<<<<<<< Upstream, based on upstream/master
-	Engine:
-		Updated to Java 9.0.4. If you're using the .jar version of the game, and are encountering UI bugs, please update your Java to 9.0.4 (.exe versions are unaffected, as they are packaged with 9.0.4).
-		Save files now only keep track of the last 50 events in the event log. (As only the last 50 are ever displayed within the game, it was pointless to be saving more than this.)
-	
-	Gameplay:
-		Expanded fetish mechanics to tie-in with the lust mechanic in sex. You can now select your 'desire' for each fetish, which affects your lust gains in sex. (Lust affects NPC pace, and when in consensual sex, dominant NPCs stop sex if their lust gets to 0, and submissive NPCs stop it when they drop below 20.)
-		All NPCs now have their own desires. You can see these by hovering over their 'desires' status effect. (I chose to display these in a easy manner, rather than having you find them out 1-by-1, as I thought 'desire discovery' mechanics would get very tedious.)
-		Added voyeurist, vaginal, pussy slut, leg lover, and strutter fetishes.
-		Added new fetishes and desire increases/decreases to the 'mystery kink' item's enchantments. Also organised the fetish order in that menu.
-		You now earn experience for each fetish-related action both in and out of sex. Higher fetish levels increase arousal gains from those actions in sex, and for the next version I'll make them level the fetish up to provide larger bonuses.
-		Added the start of stamina drains in sex (although I haven't added exhaustion for when the character reaches 0 yet).
-		Added the start of alcoholic effects (the rest & psychoactive effects will be finished for the full version).
-	
-	Other:
-		Improved the save/load icons. (I'm sorry they were so poorly thought-out before!)
-		Added more antler and horn colours.
-		If you are the dom in a sex scene in which your partner does not have equal control (i.e. a non-con scene), then your partner will not be allowed to remove your clothing by default. (You can still permit them to.)
-		Taking a shower now cleans 500ml of cum from all orifices, except your mouth (representing cum in stomach), which isn't affected.
-		Sightly improved formatting of all tooltips.
-		Added associated fetishes to orgasms.
-		Added save/load entries to event log.
-		Added correct fetishes to Lilaya & Rose (I still need to go through all unique NPCs and give them proper likes/dislikes).
-		Ralph now stocks 25 dye brushes instead of 5. (Wait for his shop to refresh at midnight for him to start stocking 25.)
-	
 	Bugs:
-		Fixed ongoing penetration status effect's incorrect tooltip descriptions.
-		Typos and parsing fixes (including fixing knotting descriptions).
-		Fixed incorrect naming for breast shape and horn TF potions.
-		Loading a game no longer overwrites the activity log.
-		Your discoveries of NPC genitals are now correctly saved/loaded.
-		Cumming inside a partner multiple times should no longer result in multiple pregnancy possibilities in the pregnancy stats screen.	
-		The description of losing your penile virginity should now always be appended correctly in sex.
-		Body parts being exposed in sex should now have the correct descriptions appended.
-		Fixed bug where the action 'Pull out (chest)' sometimes wouldn't work.
-		Fixed grey horns and antlers text colour being red.
-		Fixed Kate's intro referencing three pairs of breasts (she now just has a single pair of breasts).
-		Fixed clothing remaining dirty after taking a shower.
-		Fixed some sex actions randomly not being available.
-		Fixed bug where 'stop X' actions would show up in sex actions for when your partner was using themselves. (e.g. 'Stop fingering' would show up when your partner was fingering themselves.)
-		Fixed bug where the status message informing you that your clothing was getting dirty would lock up sex scenes.
-		Fixed penile virginity being reset on every game load (old characters will still incorrectly be penile virgins, but after losing it their non-virgin state will be saved).
-		NPCs will no longer listen to your pullout/creampie requests if they're the dom in non-con sex.
-=======
-<<<<<<< Upstream, based on upstream/master
-=======
-	<b>There were several bug reports (mainly the game's options locking up) that I was unable to reproduce. If you're having issues like that, please try exporting, then importing your game.</b>
+		Fixed Vicky's sex scene causing a game-breaking bug to occur.
 	
-	Contributors:
-		Minor fix to Gator's Gumbo usage text. (by Rfpnj)
-		<b>Added reindeer morphs.</b> (by Rfpnj)
+	
+	
+	
+	
+	
+	
+	images
+	
+	It seems you can only get your mouth clean if your stomach is empty
+	
+	weapon damage in tooltip trader inv, tooltip player inv, and when clicked on are all different
+	
+	Ended up with a -10 to fitness after a significant belly full of cum, reason I'm posting here is because it remained even after it had drained.
+Reloading seems to have fixed it and I dunno what I did to get that to happen. Figured I'd let you know I ran into some weirdness.
+	
+	When I lubricate my fingers, it makes anal impossible.
+	
+	Npcs who have control sometimes don't seem to do things they like, in this case I submitted to an alleyway attacker and in the middle of raping me they gave up, she also somehow managed to give up sex DURING an arcane storm
+	
+	
 		
 	
-	Other:
-		Nyan's hair and fur colours are now black.
-		Reduced maximum prostitute spawn chance from 50% to 30%.
-		Added a 20% chance for NPCs to have unusual hair colours.
-		Changed hair length calculation to make alligator-morphs naturally bald, but only if their face type is that of an alligator-morph's (i.e. partial/lesser alligator-morphs will have human hair lengths).
-		NPCs will no longer generate new clothes while you're still interacting with them.
-		Added in (basic, to be expanded upon later) self-virginity-loss variants.
-		Made all self-actions in sex have the masturbation fetish associated with them.
-		Added amber & grey colours for demon skin.
-		Added cock length to selfie/character viewer screens.
-	
-	Bugs:
-		Fixed another cause of game imports not working.
-		Fixed leg skin/fur colour not being displayed properly in selfie view.
-		Fixed bug where NPCs trying to pull down the Milk Maid's dress would cause a game crash (by fixing bug where the top couldn't be pulled down).
-		Gator's Gumbo TF menu now shows correct number modifiers for TF descriptions in enchantment menu.
-		Alligator-morph items can now be fed to NPCs like other consumables.
-		Fixed form input fields not displaying apostrophes and quotation marks correctly.
-		Minor typo fixes.
-		Changing your body (using the demonic transformation menu) during sex will now correctly update sex actions accordingly.
-		Fixed cause of UI bugs where the bottom response bar would not be anchored to the bottom of the screen.
-		Fixed some incorrect stats for the 'alligator-morph' status effect.
-		Fixed more causes of crashes in game importing.
-		Fixed male prostitute names.
-		Time will now pass in the Enforcer HQ area.
-		Fixed bug where highlighted hair was being treated as a natural colour.
-		Fixed rarity of alligator-morph's bottled essence.
-		NPC's body preferences (what they want to TF you into after beating you) should now be correctly loaded on game import.
-		Fixed forced TF bug (where all NPCs would keep giving you human penis or vagina parts even if they wanted to turn you into something else).
-		Slaves with the transformation fetish which are assigned as a test subject, but without feminine or masculine transformation specified, now correctly receive a gain in affection when Lilaya performs tests on them.
-		Having furry encounters enabled while having "forced TF racial limits" set to "Human Only" should no longer have the problem of the characters not giving you any genitals when you are transformed.
-		Prostitutes should no longer be able to spawn in as virgins.
->>>>>>> 600d4dc merge and chair update
->>>>>>> 313efc0 merge and chair update
-=======
->>>>>>> 417f7e7 awefef
+	Breeder collar:
+		it would be literally purrfect as a slave collar instead of just a normal clothing item.
+		which would be super amusing because instead of someone only being shocked that something is a slave collar, their words would be cut off near the end with said needy moan as they teleported. 
+		and of course when possible it adds the breeder fetish, and if possibly leaves their pussy permanently dripping wet~
 	
 	
-	
-	
-	
-<<<<<<< Upstream, based on upstream/master
-<<<<<<< Upstream, based on upstream/master
 	psychoactive/alcoholic fluids
 	Also flavours
 	
@@ -127,11 +61,6 @@
 	Bug: virginity loss text for anal and mouth
 	
 	cum sliding down into stomach when none is produced (for all orgasms)
-=======
-<<<<<<< Upstream, based on upstream/master
->>>>>>> 313efc0 merge and chair update
-=======
->>>>>>> 417f7e7 awefef
 	
 	Spitroast
 		Similarly, partner positions don't seem to matter, since someone stated to be in front of you can also fuck your ass and then suck off the person stated to be behind you.
@@ -142,6 +71,8 @@
 	Bugs
 	
 	UNIQUE NPC DESIRES
+	
+	Typo: For incest in the "Desires & Fetishes" menu, it says something about liking/not liking "having sex with relations". Perhaps the word "relatives" would be the right word to replace "relations"?
 	
 	----------------------------
 	
@@ -179,7 +110,7 @@ Need to add cumming on self stomach
 
 I will also add an option to set the size of Dominion. :3
 
-Stopped thigh sex right before I had an orgasm, got “You slide your throbbing horse-like cock out of Player's thighs.”, had orgasm, and then self actions tab appeared blank.  Switching to a few other tabs and then back to self actions fixed it.
+Stopped thigh sex right before I had an orgasm, got “You slide your throbbing horse-like cock out of Player's thighs.�?, had orgasm, and then self actions tab appeared blank.  Switching to a few other tabs and then back to self actions fixed it.
 
 Going going to page 2 of sex actions and then switching to another tab puts you on the second page of that action tab, which is (usually) blank.
 
@@ -268,7 +199,7 @@ The cells at (0,0), (0,1), and (1,0) are still being obscured on load.
 
 When you strip an NPC during sex, revealing parts of them sometimes doesn’t print a description of the part like it should. I’m guessing this is related to the bug where NPCs won’t react to you stripping off.
 
-When fucking Kate, there are two “Dirty talk” actions. Also, the buttons to permit/forbid clothing and self-actions aren’t there.
+When fucking Kate, there are two “Dirty talk�? actions. Also, the buttons to permit/forbid clothing and self-actions aren’t there.
 
 When doing the quick transform with a succubus, the adjective for her breasts doesn’t match up with what breasts of that size are normally called.
 
@@ -317,11 +248,11 @@ Still being dommed by same succubus, she spreads her ass open and presents herse
 
 While I was getting fucked, + sucking my fingers, stroking my own cock was greyed out. It said my urethra was unavailable.
 
-PC dominated by Brax, kneeling, sucking him, both cum at once, there are two options; “Stay in position”, and “Cum on floor”. “Cum on floor” works just fine, but “Stay in position” doesn’t. Error log here.
+PC dominated by Brax, kneeling, sucking him, both cum at once, there are two options; “Stay in position�?, and “Cum on floor�?. “Cum on floor�? works just fine, but “Stay in position�? doesn’t. Error log here.
 
 XML saves still don’t save whether or not PC has seen NPC genitals.
 
-When getting a big… “Discount” from Ralph, the tooltip for “Take it” refers to your pussy even if you don’t have one and he’s using your ass.
+When getting a big… “Discount�? from Ralph, the tooltip for “Take it�? refers to your pussy even if you don’t have one and he’s using your ass.
 
 Also when getting Ralph’s discount, when a customer is at the counter, staying still and doing nothing increases his arousal just as much as teasing him. Also, it seems to be pretty much impossible in the new version to finish before he does.
 
@@ -344,20 +275,20 @@ In 69, a female getting licked blocks her from blowing a male on the bottom.
 
 When domming an NPC in doggy, the hotdogging actions rely on your butt being free, not theirs.
 
-Domming an NPC in doggy; they finger their ass, this shows three “Anal Fingering” actions, which have in the tooltip description “finger their ass”, but requirements for your ass being free.
+Domming an NPC in doggy; they finger their ass, this shows three “Anal Fingering�? actions, which have in the tooltip description “finger their ass�?, but requirements for your ass being free.
 
-The “Last Save” on the initial screen doesn’t reflect the actual save files, if you’ve moved or deleted the one the game thinks was last, it will show wrong. This could be fixed by checking the save file with the most recent timestamp, although given how long it takes to load a file this might not work too well; you’d need to profile a load to see if it’s parsing the XML or creating the gameworld that is expensive before deciding, I think.
+The “Last Save�? on the initial screen doesn’t reflect the actual save files, if you’ve moved or deleted the one the game thinks was last, it will show wrong. This could be fixed by checking the save file with the most recent timestamp, although given how long it takes to load a file this might not work too well; you’d need to profile a load to see if it’s parsing the XML or creating the gameworld that is expensive before deciding, I think.
 
-If playing with a clean install (no properties.xml), when you start your first game you get the “Demon” and “Cat-morph” encyclopedia entries as soon as you first encounter Lilith. I’d argue that since you don’t actually see her, you shouldn’t get the demon entry until you meet Lilaya. You certainly shouldn’t get the Cat-morph entry that early, and even after you do meet that first cat-morph (it would be interesting to run into her again later, btw), you don’t get the encyclopedia entry for her horse-morph friends.
+If playing with a clean install (no properties.xml), when you start your first game you get the “Demon�? and “Cat-morph�? encyclopedia entries as soon as you first encounter Lilith. I’d argue that since you don’t actually see her, you shouldn’t get the demon entry until you meet Lilaya. You certainly shouldn’t get the Cat-morph entry that early, and even after you do meet that first cat-morph (it would be interesting to run into her again later, btw), you don’t get the encyclopedia entry for her horse-morph friends.
 	
 	
 	
 	Simple but great addition would be to check if we have same version of java as you did while working on the jar & warn us if we don't (same place we see our java ver.) Bold warning with correct ver written will save a lot of trouble in the future...
 	
 
-“Shifting aside” makes sense for panties, but seems less fitting for boxers. I would expect those to have similar displacement options to trousers, such as “unbutton” and “pull down”.
+“Shifting aside�? makes sense for panties, but seems less fitting for boxers. I would expect those to have similar displacement options to trousers, such as “unbutton�? and “pull down�?.
 
-When raping an NPC who isn’t into your gender, it seems way too hard to make them cum. This may be related to the general sex bugs; the effects in the sidebar show two sets of “+your arousal”, rather than one for each partner, but I remember it being a real chore to get an unwilling partner off in previous versions too. Hopefully when you split physical stimulation off from mental arousal, this will work out better.
+When raping an NPC who isn’t into your gender, it seems way too hard to make them cum. This may be related to the general sex bugs; the effects in the sidebar show two sets of “+your arousal�?, rather than one for each partner, but I remember it being a real chore to get an unwilling partner off in previous versions too. Hopefully when you split physical stimulation off from mental arousal, this will work out better.
 
 There are presently technical issues preventing saving during combat or sex; would these also disallow loading the game during these? I often find I want to do that, for various reasons.
 	
@@ -385,7 +316,7 @@ There are presently technical issues preventing saving during combat or sex; wou
 	so if you import a char as a slave they wont be attracted to you no matter what if they dont has the incest fetish
 	
 	
-	Lilaya & Kate: I’m also hoping that soon using any of the “Rough” actions will switch the pace to rough, like they do in most scenes.
+	Lilaya & Kate: I’m also hoping that soon using any of the “Rough�? actions will switch the pace to rough, like they do in most scenes.
 	
 	The action buttons in sex scenes are all jumbled up now.
 	
@@ -475,7 +406,7 @@ There are presently technical issues preventing saving during combat or sex; wou
 	
 	add the option for a bigger map
 	
-	NPCs with the “TF Test Subject” fetish object to being fed potions (during sex). I’m guessing they’re not supposed to.
+	NPCs with the “TF Test Subject�? fetish object to being fed potions (during sex). I’m guessing they’re not supposed to.
 	
 	
 	
@@ -562,10 +493,10 @@ It was actually quite amusing, I got to grind out 8 condoms super quick
 -also, making these and the existing lubricate fingers repeatable might be nice(maybe rename it "lick fingers"), some people might like being able to stick their fingers in their parter then licking the fluids on their fingers.
 
 	
-When neither partner is doing anything, dirty talk is something like “I’ll be gentle” or “I’m going to fuck you senseless”, depending on pace. Maybe if the scene has been going on long enough for one of you to cum, there should be other lines, like “Did you like that, you little slut?” or “Good girl, I enjoyed that!”
+When neither partner is doing anything, dirty talk is something like “I’ll be gentle�? or “I’m going to fuck you senseless�?, depending on pace. Maybe if the scene has been going on long enough for one of you to cum, there should be other lines, like “Did you like that, you little slut?�? or “Good girl, I enjoyed that!�?
 
 While I’m thinking about dirty talk, there’s a noticable difference in tone between the rough talk when you’re doing something to them, and the rough talk when you’re making them do something to you.
-The former are basically all variants on “You’re enjoying that, aren’t you slut?”, while the latter has both that and a number of lines telling them how worthless they are, or how they’re no good at what they’re doing. Maybe those should only appear if you have a fetish for that kind of thing?
+The former are basically all variants on “You’re enjoying that, aren’t you slut?�?, while the latter has both that and a number of lines telling them how worthless they are, or how they’re no good at what they’re doing. Maybe those should only appear if you have a fetish for that kind of thing?
 
 It might be nice to be able to change the pace of a scene without having to already be doing anything.
 
@@ -610,7 +541,7 @@ Allow us to use more than just letters and numbers for save names. I can’t see
 
 Bug Reports:
 
-There are a bunch of warnings (five) in the log about how “An instance of AbstractItem was unable to be imported”. I’m not noticing anything missing from anyone’s inventory, but five out of hundreds of items in the world would be easy to miss.
+There are a bunch of warnings (five) in the log about how “An instance of AbstractItem was unable to be imported�?. I’m not noticing anything missing from anyone’s inventory, but five out of hundreds of items in the world would be easy to miss.
 
 	
 	Clothing removal - Before your chemise is able to be removed, Chemise and Dress coat need to be removed.
@@ -657,15 +588,15 @@ There are a bunch of warnings (five) in the log about how “An instance of Abst
 	
 	Suggestions:
 
-		Maybe the “Anal Fingering” action should have the “Masturbation” fetish applied to it?
+		Maybe the “Anal Fingering�? action should have the “Masturbation�? fetish applied to it?
 		
-		It might be a good idea to block NPCs from doing the “spread pussy/ass” action if you’re already fucking them.
+		It might be a good idea to block NPCs from doing the “spread pussy/ass�? action if you’re already fucking them.
 		
 		There really should be a way to access a slave’s inventory while talking to them.
 		
-		It would be good if, during sex scenes, it remembered which tab you’re on when an orgasm reaction comes up; as of now, you get switched to the “Misc. Actions” tab, rather than back to the one you were on.
+		It would be good if, during sex scenes, it remembered which tab you’re on when an orgasm reaction comes up; as of now, you get switched to the “Misc. Actions�? tab, rather than back to the one you were on.
 		
-		It might be an idea for finger sucking (and tail sucking for demons) to be limited to those with the “Oral Performer” fetish. Quickly getting them wet is one thing, but keeping on sucking them is kind of weird, unless it’s a stand in for some other kind of sucking they’d rather be doing.
+		It might be an idea for finger sucking (and tail sucking for demons) to be limited to those with the “Oral Performer�? fetish. Quickly getting them wet is one thing, but keeping on sucking them is kind of weird, unless it’s a stand in for some other kind of sucking they’d rather be doing.
 		
 		If a wandering NPC is addicted to you, maybe their encounter rate should go up as they go into withdrawal? I mean, they should be actively seeking you out, right?
 		
@@ -675,7 +606,7 @@ There are a bunch of warnings (five) in the log about how “An instance of Abst
 		
 		The introduction for prostitutes refers to slutty clothes and heavy makeup, but as far as I can see they actually wear pretty much the same outfits as any other NPC, and don’t necessarily wear makeup either (and males don’t seem to ever wear makeup without the crossdressing fetish).
 		
-		In character descriptions, “dark grey” text appears as red.
+		In character descriptions, “dark grey�? text appears as red.
 		
 		I went to the slavery screen, opened a slave’s inventory, then clicked on their name at the top-right to examine them. What I got was not them, but the last NPC I examined out in the city.
 		
@@ -685,10 +616,10 @@ There are a bunch of warnings (five) in the log about how “An instance of Abst
 	Suggestion:
 
 This first one was written before I read this post, so it might be obsolete given the upcoming changes; I’m going to post it anyway because it might still be useful.
-NPCs always seem to end sex scenes as soon as each participant has had at least one orgasm (or sometimes if they have had one orgasm for rape scenes). It would be cool if, instead, they would want to end it after they’d had as many orgasms as they want, based on something like a “sex appetite” stat. This would vary from NPC to NPC (demons would obviously have a very high one). This could also link up with the orgasm control stuff we talked about before; when an NPC reaches their orgasm limit, they’d try to end the scene, depending on factors (they might not if they had lost combat, or had the forced orgasm or submissive fetishes, for example).
+NPCs always seem to end sex scenes as soon as each participant has had at least one orgasm (or sometimes if they have had one orgasm for rape scenes). It would be cool if, instead, they would want to end it after they’d had as many orgasms as they want, based on something like a “sex appetite�? stat. This would vary from NPC to NPC (demons would obviously have a very high one). This could also link up with the orgasm control stuff we talked about before; when an NPC reaches their orgasm limit, they’d try to end the scene, depending on factors (they might not if they had lost combat, or had the forced orgasm or submissive fetishes, for example).
 This would also add depth to the post-sex scene, which at the moment is typically a binary satisfied/unsatisfied thing. You could have several varieties, from totally unsatisfied, through partially sated, totally satisfied, then a couple of overstimulated levels of panting and gasping exhaustion, depending on the ratio of orgasms to orgasm limit. One side-effect of this would be that player-submissive scenes could get very long if, for example, you lost a fight with a demon; one possible fix would be to have the PC pass out and wake up later, skipping the scene so you don’t have to watch the NPC fuck you to several dozen orgasms or whatever. Another could be a sensitivity stat so demons might come really quickly, reducing the time to rack up a high orgasm count.
 
-There perhaps should be a lesser version of the “Exposed” statuses for when a character’s underwear is exposed, but not their body. This probably shouldn’t have it’s own fetish, simply being covered by the exhibitionist fetish. Too many more fetishes will make the screen unwieldy, and require them to be categorised in some way. This would of course require clothing items to be flagged as being underwear or outerwear, since as I’ve previously observed, it isn’t reliable to do it by clothing slot.
+There perhaps should be a lesser version of the “Exposed�? statuses for when a character’s underwear is exposed, but not their body. This probably shouldn’t have it’s own fetish, simply being covered by the exhibitionist fetish. Too many more fetishes will make the screen unwieldy, and require them to be categorised in some way. This would of course require clothing items to be flagged as being underwear or outerwear, since as I’ve previously observed, it isn’t reliable to do it by clothing slot.
 
 The feminine watch is really restricted in available colours. I can’t see why it shouldn’t have the same colour palette as any other item of clothing. Similarly, jewelry could easily be any of the regular colours as well as the metallic ones.
 
@@ -696,7 +627,7 @@ Bug Reports:
 
 I recently commented on how NPCs might sometimes not fill all clothing slots, and how some underwears could really pass as outerwear. A counterpart to that is that, even when filling all slots, NPCs often end up not covering up fully. I’ve often seen NPCs spawning with the crotchless and cupless underwears in conjunction with a microskirt or fishnet top. This seems to be the norm for exhibitionists, but it happens with NPCs without the exhibitionist fetish too.
 
-When you use Arthur’s hypno-watch on someone, it says they are now “command_unknown”.
+When you use Arthur’s hypno-watch on someone, it says they are now “command_unknown�?.
 	
 	Bug: The bug with the alligator head transformation reappeared. This is the one where the PC's description will describe their hair as, for example "You have 'long', 'brown', 'scales' in place of hair, [...]" showing both hair length, hair color, and hair style, when these do not apply to alligator hair transformations.
 Perhaps you could add a rule, like if the hair type equals to alligator, then there shouldn't be any type of hair descriptions, instead opting for the one which states that the hair is made of scales?
@@ -836,7 +767,7 @@ Perhaps you could add a rule, like if the hair type equals to alligator, then th
 	
 	The thigh high boots and the heart necklace are darker than other items of clothing.
 	
-	NPC’s hair seems wrong. Examining one, she has 43″ hair, which should be “incredibly long”, but her description just lists it as “long”.
+	NPC’s hair seems wrong. Examining one, she has 43″ hair, which should be “incredibly long�?, but her description just lists it as “long�?.
 	
 	
 	
@@ -845,7 +776,7 @@ Perhaps you could add a rule, like if the hair type equals to alligator, then th
 
 Vicky sells essences, but won’t buy them. Ralph doesn’t sell them, but will buy them from you. This is probably wrong.
 
-Most potions are named in the style of “Canine elixir of <whatever>”, or something similar. However, reindeer potions are simply named “Elixir of <whatever>”.
+Most potions are named in the style of “Canine elixir of <whatever>�?, or something similar. However, reindeer potions are simply named “Elixir of <whatever>�?.
 
 The demon transform menu is a bit inconsistent if you’re only part demon:
 If your arms or legs aren’t demonic, you can’t edit them at all (and if they are, you can’t change them to anything else — what is that section even for?);
@@ -858,11 +789,11 @@ I met a brand new NPC in cell (0,0) and immediately knew the details of her cock
 
 Given how long the demon tail is described as being, you should really be able to tail-fuck or tail-peg a partner from any position, but some of them don’t allow you to. Seems to be the oral positions (doggy, kneeling, and 69) that are missing it.
 
-The “Tease Clit” action disappears when you start fucking someone.
+The “Tease Clit�? action disappears when you start fucking someone.
 
 When you drink a stat boost potion (as opposed to a TF potion), the list of effects is printed out twice.
 
-I’m guessing this one is a “WONTFIX”, but for completeness sake: When you start a new game with an imported character, in the intro sequence in the street, the catgirl says “He’s human” even if you aren’t. Even if you’re a full demon, they don’t react, and Lilaya still finds it surprising that you aren’t affected by the storm.
+I’m guessing this one is a “WONTFIX�?, but for completeness sake: When you start a new game with an imported character, in the intro sequence in the street, the catgirl says “He’s human�? even if you aren’t. Even if you’re a full demon, they don’t react, and Lilaya still finds it surprising that you aren’t affected by the storm.
 	
 	
 	Tail and horn rings. These items go in the tail and horn slots, respectively, and are essentially rings that fit (or clasp around) on tails and horns.
@@ -894,7 +825,7 @@ I'll also add a way to change NPC's sexuality soon, as that seems to be a heavil
 	
 	add the "self-insemination" action to sex scenes soon (the one that used to be present in Brax's sex scene), so I'll get virgins with pregnancy/broodmother fetishes to use that
 	
-	Slaves without the “Exhibitionist” fetish should probably lose affection if you make them go naked.
+	Slaves without the “Exhibitionist�? fetish should probably lose affection if you make them go naked.
 	
 	Likewise, alley encounters don’t react to storm conditions. Not such a big deal with muggers, since all they do is attack you anyway, but prostitutes probably shouldn’t still be working.
 	
@@ -903,13 +834,13 @@ I'll also add a way to change NPC's sexuality soon, as that seems to be a heavil
 	
 	There’s some sort of problem with the public stocks. The scenes are fine, but the first intro line (You decide to have some fun with the <Insert Race Here> in the stocks nearest you) is buggy. At first I thought it was just going off the first one regardless of which one you picked, but subsequently I realised it was more than that when it told me I was fucking a wolf-girl when there wasn’t a wolf-girl there.
 
-Well, I say the scenes are fine, but they obviously need a lot more work; they use the same actions as the regular scenes, leading to such things as non-con slaves “trying to pull away from you, but you easily stop them”, or willing slaves masturbating despite being restrained.
+Well, I say the scenes are fine, but they obviously need a lot more work; they use the same actions as the regular scenes, leading to such things as non-con slaves “trying to pull away from you, but you easily stop them�?, or willing slaves masturbating despite being restrained.
 
-I had completely explored the main Dominion area in 1.90, but some cells in the southwest were hidden again after import to 1.95. NPCs in them were still there, just the “explored” information was missing. This happened with two different saves, both lost some cells in the southwest.
+I had completely explored the main Dominion area in 1.90, but some cells in the southwest were hidden again after import to 1.95. NPCs in them were still there, just the “explored�? information was missing. This happened with two different saves, both lost some cells in the southwest.
 
 I just met a trap, and despite never having seen her naked, I apparently just knew she was a trap and what her cock and ass look like. If it’s relevant, she was in one of the cells that was obfuscated on import.
 
-NPCs with the “Transformer” fetish don’t respect gender content options. They don’t need to follow the same frequency or anything, but if I’ve completely disabled a body-type from being in the game, it might be an idea to filter it from NPC TF preferences too.
+NPCs with the “Transformer�? fetish don’t respect gender content options. They don’t need to follow the same frequency or anything, but if I’ve completely disabled a body-type from being in the game, it might be an idea to filter it from NPC TF preferences too.
 	
 	have a button for Take All, Sell All in the inventory
 	
@@ -1063,7 +994,7 @@ Npc's are doing that black magic voodoo thing where they're pulling up my chemis
 	
 	
 	
-	Started a new game in 1.95, chose “very experienced”, Lilaya’s tests, “You’ll always remember this moment as the time that you lost your penile virginity!”.
+	Started a new game in 1.95, chose “very experienced�?, Lilaya’s tests, “You’ll always remember this moment as the time that you lost your penile virginity!�?.
 	
 	Importing a save exported from 1.89, the center panel appears but the side panels don’t. Needless to say, the game is not playable in this state.
 	
@@ -1076,17 +1007,17 @@ Npc's are doing that black magic voodoo thing where they're pulling up my chemis
 	
 	When you’re fucking someone’s ass, and they come, it talks about their pussy squeezing down (if they have one), but not their ass. One would think that you’d be more likely to notice the one that you were actually in.
 	
-	My “Strengthened Aura” effect doesn’t seem to be affecting my willpower resist, at least according to the stat screen. It’s showing -70 from my “Frustrated” effect and my corruption, but that should be brought back up to -45 from the “Strengthened Aura”, which doesn’t appear to be the case.
+	My “Strengthened Aura�? effect doesn’t seem to be affecting my willpower resist, at least according to the stat screen. It’s showing -70 from my “Frustrated�? effect and my corruption, but that should be brought back up to -45 from the “Strengthened Aura�?, which doesn’t appear to be the case.
 	
 	Weirdness:
 	
-	The “lacy plunge bra” and “lacy panties” don’t look particularly lacy to me.
+	The “lacy plunge bra�? and “lacy panties�? don’t look particularly lacy to me.
 	
 	A black blazer is noticeably darker than other black clothing.
 	
-	I see a bunch of items geing generated with “+Stamina Damage” effect. Does this actually do anything? I don’t think I’ve come across any stamina damaging attacks so far.
+	I see a bunch of items geing generated with “+Stamina Damage�? effect. Does this actually do anything? I don’t think I’ve come across any stamina damaging attacks so far.
 	
-	Lilaya makes such a big deal about your amazing aura after her “tests”, even going so far as saying you should warn any other demons you meet, yet none of these other demons seem to notice. OK, OK, maybe I just want to see the “lazy demon” get all hyper. I think that would be cute.
+	Lilaya makes such a big deal about your amazing aura after her “tests�?, even going so far as saying you should warn any other demons you meet, yet none of these other demons seem to notice. OK, OK, maybe I just want to see the “lazy demon�? get all hyper. I think that would be cute.
 	
 	
 	idle slaves with house freedom be able to use or be used by other idle slaves or working slaves?
@@ -1210,11 +1141,11 @@ If you force your way into Zaranix’s house, Katherine clearly hears you, but w
 
 You could put in interactions between slave’s obedience and affection, for example a slave that loves you but is defiant could gain obedience over time. Conversely, a slave that hates you could see their obedience suffer. I’m not sure if affection should track towards obedience, you could probably make a case either way for that.
 
-NPC dirty talk regarding virginity is a little odd. They will mention that they’re a virgin every other sentence, even if you don’t have a cock and couldn’t possibly take it, but they never mention they’re an anal or oral virgin even when you put them on their knees or rub your cock on their ass. They just say “That's right, fuck my ass!”, same as anyone else. Maybe they should wait until you actually get your cock out (especially if you’re feminine), and have some sort of comment if losing one of their other virginities is apparently imminent.
+NPC dirty talk regarding virginity is a little odd. They will mention that they’re a virgin every other sentence, even if you don’t have a cock and couldn’t possibly take it, but they never mention they’re an anal or oral virgin even when you put them on their knees or rub your cock on their ass. They just say “That's right, fuck my ass!�?, same as anyone else. Maybe they should wait until you actually get your cock out (especially if you’re feminine), and have some sort of comment if losing one of their other virginities is apparently imminent.
 
 Bug Reports:
 
-The “Repeat Actions” tab could still use a little work; actions that are unavailable even momentarily get removed from it, and stay out of it even if they become available again. It might be better to simply keep a list of all actions taken, and rebuild the “Repeat Actions” tab each turn. That way, you’d not only not lose actions that had been unavailable, the buttons would automatically be in order of how recently you used that action.
+The “Repeat Actions�? tab could still use a little work; actions that are unavailable even momentarily get removed from it, and stay out of it even if they become available again. It might be better to simply keep a list of all actions taken, and rebuild the “Repeat Actions�? tab each turn. That way, you’d not only not lose actions that had been unavailable, the buttons would automatically be in order of how recently you used that action.
 
 When you drink a potion in combat, the description header still says the action you did last turn.
 
@@ -1228,7 +1159,7 @@ The heart necklace is noticably darker than other jewelry of the same colour.
 
 If you give someone (who doesn’t have one) a cock with a potion, it defaults to zeroes on all three sizes. I’m frankly amazed that nobody seems to have reported this before! I guess F2M isn’t all that popular or something?
 
-If you fuck someone who is too loose, the “Too loose” status remains even after you stop.
+If you fuck someone who is too loose, the “Too loose�? status remains even after you stop.
 
 Both Arthur’s package and his watch can be found randomly in alleyways.
 	
@@ -1240,7 +1171,7 @@ Both Arthur’s package and his watch can be found randomly in alleyways.
 	
 		When buying Scarlett, maybe add a third option for players who aren’t that keen on owning a slave but don’t want to just eat the ¤2500 they spent, so offer that you’ll free her if she works it off. She’d presumably start out hating you less, and being less unruly, with a big hit later if you decide to screw her over down the line.
 	
-		In a scene, when an NPC rubs their crotch through their clothes, maybe it shouldn’t tell you that a trap or shemale is rubbing their cock if you haven’t seen it before, just say “crotch”?
+		In a scene, when an NPC rubs their crotch through their clothes, maybe it shouldn’t tell you that a trap or shemale is rubbing their cock if you haven’t seen it before, just say “crotch�??
 		
 		Speaking of which, how come we can grope our own crotch, but not an NPC’s?
 		
@@ -1250,7 +1181,7 @@ Both Arthur’s package and his watch can be found randomly in alleyways.
 		
 		Speaking of Lilaya, I just had a scene with her where she kept on using her tail on herself, I kept pulling it out and she immediately reinserted it, Every. Single. Time. Something like a couple dozen times in a row. And because you’re technically still the submissive partner in that scene even if you turn things around, you can’t forbid her from doing this.
 		
-		I think I found a bug with an encounter with an NPC with the “Unwilling Fuck-toy” fetish. She was ambiphillic, so her resisting should have been an act, but her arousal obviously had the large penalty an NPC gets when they really don’t want you fucking them, as it kept dropping to zero. This might have had something to do with her being a slave in the stocks; maybe that uses the wrong “resisting” scene, the real one, by mistake?
+		I think I found a bug with an encounter with an NPC with the “Unwilling Fuck-toy�? fetish. She was ambiphillic, so her resisting should have been an act, but her arousal obviously had the large penalty an NPC gets when they really don’t want you fucking them, as it kept dropping to zero. This might have had something to do with her being a slave in the stocks; maybe that uses the wrong “resisting�? scene, the real one, by mistake?
 		
 		Penises are regaining their virginity on export/import. Well… sort of. They show as virgin on the selfie screen, and are described as virgin when exposed, but using one doesn’t count as losing/taking virginity. This affects NPCs as well as the player.
 		
@@ -1258,13 +1189,13 @@ Both Arthur’s package and his watch can be found randomly in alleyways.
 		
 		I’m not sure why ankle boots are listed as feminine; they look pretty neutral to me. Likewise with the headband, which is listed as neutral despite looking obviously feminine.
 		
-		When switching to doggy style, PC’s line (“Be a good girl and hold still while I fuck you like the bitch you are!”) fits in fine with the dirty talk from the “Rough” pace, but seems rather out of place if you’re in the “Gentle” pace.
+		When switching to doggy style, PC’s line (“Be a good girl and hold still while I fuck you like the bitch you are!�?) fits in fine with the dirty talk from the “Rough�? pace, but seems rather out of place if you’re in the “Gentle�? pace.
 		
 		Kate’s intro says she has plump lips and wavy hair, but she actually has full lips and a bob cut. Also says she has three pairs of breasts even if your settings limit her to one pair.
 		
-		Looking back on things, I’m pretty sure every feminine NPC I’ve met has had “full” sized lips, they never seem to have larger or smaller ones.
+		Looking back on things, I’m pretty sure every feminine NPC I’ve met has had “full�? sized lips, they never seem to have larger or smaller ones.
 		
-		Found a bug with the character generation screen; I went to start a new game (from within a running game, not a new session) and when I went to change body style (that is, skinny-huge and soft-ripped) the result body type stayed fixed at “Average”, not changing like it should. Unfortunately, I haven’t been able to reproduce it, and there was nothing in the error log, so this report probably isn’t going to be useful; I include it simply so you know there’s a possible issue there.
+		Found a bug with the character generation screen; I went to start a new game (from within a running game, not a new session) and when I went to change body style (that is, skinny-huge and soft-ripped) the result body type stayed fixed at “Average�?, not changing like it should. Unfortunately, I haven’t been able to reproduce it, and there was nothing in the error log, so this report probably isn’t going to be useful; I include it simply so you know there’s a possible issue there.
 	
 	
 	-----------
@@ -2516,11 +2447,6 @@ So basically, the transformer fetish actually reduces the cost of enchantments b
 	
 	
 	
-	Breeder collar:
-		it would be literally purrfect as a slave collar instead of just a normal clothing item.
-		which would be super amusing because instead of someone only being shocked that something is a slave collar, their words would be cut off near the end with said needy moan as they teleported. 
-		and of course when possible it adds the breeder fetish, and if possibly leaves their pussy permanently dripping wet~
-		
 	Additions:
 		Also, any follow ups on already exposed states pre combat/sex? Being an exhibitionist virtually removes all npc reactions from the game, which is wierd!
 

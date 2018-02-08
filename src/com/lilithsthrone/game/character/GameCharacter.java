@@ -7864,11 +7864,7 @@ public abstract class GameCharacter implements Serializable, XMLSaving {
 			pregnancyChance = 0;
 			if (partner.hasPenis()){
 				pregnancyChance += (partner.getAttributeValue(Attribute.VIRILITY)/100f) * partner.getPenisCumProduction().getPregnancyModifier();
-<<<<<<< HEAD
-			} else {
-=======
 			}else{
->>>>>>> a3900a9a3651f971ba7a643e51ab4e280e1f3b3a
 				pregnancyChance += (partner.getAttributeValue(Attribute.VIRILITY)/100f);
 			}
 			pregnancyChance += (getAttributeValue(Attribute.FERTILITY)/100f);
@@ -7911,7 +7907,7 @@ public abstract class GameCharacter implements Serializable, XMLSaving {
 				int minimumNumberOfChildren = 1;
 				int maximumNumberOfChildren = 1;
 				
-<<<<<<< HEAD
+
 				if(getVaginaType()==VaginaType.HUMAN) {
 					if( partner.hasPenis() ){
 						minimumNumberOfChildren = partner.getPenisType().getRace().getNumberOfOffspringLow();
@@ -7920,15 +7916,7 @@ public abstract class GameCharacter implements Serializable, XMLSaving {
 						minimumNumberOfChildren = partner.getVaginaType().getRace().getNumberOfOffspringLow();
 						maximumNumberOfChildren = partner.getVaginaType().getRace().getNumberOfOffspringHigh();
 					}
-=======
-				if(getVaginaType()==VaginaType.HUMAN ) {
-					minimumNumberOfChildren = partner.getRace().getNumberOfOffspringLow();
-					maximumNumberOfChildren = partner.getRace().getNumberOfOffspringHigh();
-					
-				} else {
-					minimumNumberOfChildren = getVaginaType().getRace().getNumberOfOffspringLow();
-					maximumNumberOfChildren = getVaginaType().getRace().getNumberOfOffspringHigh();
->>>>>>> a3900a9a3651f971ba7a643e51ab4e280e1f3b3a
+
 				}
 				
 				if(partner.hasFetish(Fetish.FETISH_SEEDER)) {
