@@ -586,7 +586,7 @@ public class SlaveDialogue {
 								new SMDoggy(
 										Util.newHashMapOfValues(
 												new Value<>(charactersPresent.get(1), SexPositionSlot.DOGGY_INFRONT),
-												new Value<>(charactersPresent.get(0), SexPositionSlot.DOGGY_BEHIND)),
+												new Value<>(charactersPresent.get(0), SexPositionSlot.DOGGY_BEHIND_ORAL)),
 										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexPositionSlot.DOGGY_ON_ALL_FOURS))),
 								AFTER_SEX,
 								"<p>"
