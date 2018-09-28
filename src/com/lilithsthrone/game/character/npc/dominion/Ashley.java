@@ -25,7 +25,7 @@ import com.lilithsthrone.game.character.persona.PersonalityWeight;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
-import com.lilithsthrone.game.dialogue.DialogueNode;
+import com.lilithsthrone.game.dialogue.DialogueNodeOld;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.AbstractCoreItem;
 import com.lilithsthrone.game.inventory.CharacterInventory;
@@ -60,7 +60,7 @@ public class Ashley extends NPC {
 	}
 	
 	public Ashley(boolean isImported) {
-		super(isImported, new NameTriplet("Ashley"), "Minett", //TODO
+		super(isImported, new NameTriplet("Ashley"),
 				"Ashley is the owner of the shop 'Dream Lover', and is seemingly also its only working staff."
 						+ " They are very stand-offish and loathe helping out their customers, to the point where they'd rather stare at the walls instead of offering any help.",
 				200, Month.AUGUST, 14,//TODO
@@ -112,7 +112,7 @@ public class Ashley extends NPC {
 		// Body:
 
 		// Core:
-		this.setAgeAppearanceDifferenceToAppearAsAge(25);
+		this.setAgeAppearanceDifferenceToAppearAsAge(15);
 		this.setHeight(186);
 		this.setFemininity(50);
 		this.setMuscle(Muscle.TWO_TONED.getMedianValue());
@@ -184,7 +184,7 @@ public class Ashley extends NPC {
 	}
 	
 	@Override
-	public void equipClothing(boolean replaceUnsuitableClothing, boolean addWeapons, boolean addScarsAndTattoos, boolean addAccessories) {
+	public void equipClothing(boolean replaceUnsuitableClothing, boolean addWeapons, boolean addScarsAndTattoos) {
 
 		this.unequipAllClothingIntoVoid(true);
 		
@@ -224,7 +224,7 @@ public class Ashley extends NPC {
 					infoScreenSB.append("<br/>" + AffectionLevel.getDescription(this, target, AffectionLevel.getAffectionLevelFromValue(this.getAffection(target)), true));
 				}
 			} catch (Exception e) {
-				Util.logGetNpcByIdError("Ashley.getCharacterInformationScreen()", entry.getKey());
+				System.err.println("Main.game.getNPCById("+entry.getKey()+") returning null in method: Ashley.getCharacterInformationScreen()");
 			}
 		}
 		
@@ -279,13 +279,17 @@ public class Ashley extends NPC {
 	}
 	
 	@Override
-	public DialogueNode getEncounterDialogue() {
+	public DialogueNodeOld getEncounterDialogue() {
 		return null;
 	}
 
 	@Override
 	public boolean isTrader() {
 		return true;
+	}
+
+	@Override
+	public void endSex() {
 	}
 
 }

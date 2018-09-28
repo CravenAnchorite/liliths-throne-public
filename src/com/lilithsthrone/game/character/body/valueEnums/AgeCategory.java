@@ -14,7 +14,13 @@ import com.lilithsthrone.utils.Util;
 public enum AgeCategory {
 	
 	// Always at least 18, as returned by valueOf()
-	TEENS_LATE("late teens", 18, 20, Colour.AGE_TEENS, ContentPreferenceValue.FOUR_HIGH),
+	ADO_EARLY("early adolescent", 9, 12, Colour.AGE_TEENS, ContentPreferenceValue.TWO_LOW),
+	
+	TEENS_EARLY("early-teens", 12, 16, Colour.AGE_TEENS, ContentPreferenceValue.TWO_LOW),
+	
+	TEENS_MIDDLE("mid-teens", 16, 17, Colour.AGE_TEENS, ContentPreferenceValue.TWO_LOW),
+	
+	TEENS_LATE("late teens", 17, 20, Colour.AGE_TEENS, ContentPreferenceValue.FOUR_HIGH),
 	
 	TWENTIES_EARLY("early twenties", 20, 23, Colour.AGE_TWENTIES, ContentPreferenceValue.FIVE_ABUNDANT),
 	
@@ -54,10 +60,10 @@ public enum AgeCategory {
 	private Colour colour;
 	private ContentPreferenceValue agePreferenceDefault;
 
-	private AgeCategory(String name, int minimumAge, int maximumAge, Colour colour, ContentPreferenceValue agePreferenceDefault) {
+	private AgeCategory(String name, int minimumBodySize, int maximumBodySize, Colour colour, ContentPreferenceValue agePreferenceDefault) {
 		this.name = name;
-		this.minimumAge = minimumAge;
-		this.maximumAge = maximumAge;
+		this.minimumAge = minimumBodySize;
+		this.maximumAge = maximumBodySize;
 		this.colour = colour;
 		this.agePreferenceDefault = agePreferenceDefault;
 	}
@@ -75,9 +81,9 @@ public enum AgeCategory {
 	}
 
 	public static AgeCategory valueOf(int age) {
-		if(age<TEENS_LATE.getMinimumValue()) {
-			return TEENS_LATE;
-		}
+		//if(age<TEENS_LATE.getMinimumValue()) {
+		//	return TEENS_LATE;
+		//}
 		for(AgeCategory f : AgeCategory.values()) {
 			if(age>=f.getMinimumValue() && age<f.getMaximumValue()) {
 				return f;
@@ -99,16 +105,7 @@ public enum AgeCategory {
 	}
 	
 	public static int getAgeFromPreferences(Gender gender) {
-		AgeCategory category;
-		try {
-			category = Util.getRandomObjectFromWeightedMap(Main.getProperties().agePreferencesMap.get(gender.getType()));
-		} catch(Exception ex) {
-			category = AgeCategory.TWENTIES_MIDDLE;
-		}
-		if(category==null) {
-			category = AgeCategory.TWENTIES_MIDDLE;
-		}
-		
+		AgeCategory category = Util.getRandomObjectFromWeightedMap(Main.getProperties().agePreferencesMap.get(gender.getType()));
 		int lowerBound = category.getMinimumValue();
 		int upperBound = category.getMaximumValue();
 		return lowerBound + Util.random.nextInt(upperBound-lowerBound);
