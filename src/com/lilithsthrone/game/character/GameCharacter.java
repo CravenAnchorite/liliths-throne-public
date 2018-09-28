@@ -3056,8 +3056,8 @@ public abstract class GameCharacter implements XMLSaving {
 		this.birthday = birthday;
 		
 		if(this.isPlayer()) {
-			if(this.getAgeValue()<18) {
-				this.birthday = (this.getBirthday().minusYears(18-this.getAgeValue()));
+			if(this.getAgeValue()<9) {
+				this.birthday = (this.getBirthday().minusYears(9-this.getAgeValue()));
 				
 			} else if(this.getAgeValue()>50) {
 				this.birthday = (this.getBirthday().plusYears(this.getAgeValue()-50));
@@ -3070,7 +3070,7 @@ public abstract class GameCharacter implements XMLSaving {
 	}
 	
 	public int getAppearsAsAgeValue() {
-		return Math.max(18, getAgeValue() + ageAppearanceDifference);
+		return Math.max(9, getAgeValue() + ageAppearanceDifference);
 	}
 
 	public AgeCategory getAge() {
@@ -3081,10 +3081,10 @@ public abstract class GameCharacter implements XMLSaving {
 		int age = (int) ChronoUnit.YEARS.between(birthday, Main.game.getDateNow());
 		
 		if(birthday.getYear()>=Main.game.getStartingDate().getYear()) {
-			return 18 + age;
+			return 9 + age;
 		}
 		
-		return Math.max(18, age);
+		return Math.max(9, age);
 	}
 	
 	public int getAgeAppearanceDifference() {
@@ -10776,9 +10776,9 @@ public abstract class GameCharacter implements XMLSaving {
 			}
 		}
 		
-		if((this.getBodyMaterial()==BodyMaterial.SLIME
-				|| orificeIngestedThrough == SexAreaOrifice.VAGINA)
-				&& fluid.getBaseType()==FluidTypeBase.CUM) {
+		if((this.getBodyMaterial()==BodyMaterial.SLIME)
+				|| orificeIngestedThrough == SexAreaOrifice.VAGINA
+				&& (fluid.getBaseType()==FluidTypeBase.CUM || fluid.getBaseType()==FluidTypeBase.GIRLCUM)) {
 			fluidIngestionSB.append(rollForPregnancy(charactersFluid, millilitres));
 		}
 		
@@ -11500,7 +11500,7 @@ public abstract class GameCharacter implements XMLSaving {
 			List<FluidStored> fluids = new ArrayList<>(this.fluidsStoredMap.get(SexAreaOrifice.VAGINA));
 			Collections.shuffle(fluids);
 			for(FluidStored fs : fluids) {
-				if(fs.isCum()) {
+				if(fs.isCum() || fs.isGirlCum()) {
 					GameCharacter partner = null;
 					if(fs.getCharactersFluidID().equals(Main.game.getPlayer().getId())) {
 						partner = Main.game.getPlayer();
@@ -11533,7 +11533,11 @@ public abstract class GameCharacter implements XMLSaving {
 			
 		} else {
 			pregnancyChance = 0;
-			pregnancyChance += (Util.getModifiedDropoffValue(partner.getAttributeValue(Attribute.VIRILITY), Attribute.VIRILITY.getUpperLimit())/100f) * CumProduction.getCumProductionFromInt(cumQuantity).getPregnancyModifier();
+			if (partner.hasPenis()){
+				pregnancyChance += (Util.getModifiedDropoffValue(partner.getAttributeValue(Attribute.VIRILITY), Attribute.VIRILITY.getUpperLimit())/100f) * CumProduction.getCumProductionFromInt(cumQuantity).getPregnancyModifier();
+			}else{
+				pregnancyChance += (Util.getModifiedDropoffValue(partner.getAttributeValue(Attribute.VIRILITY), Attribute.VIRILITY.getUpperLimit())/100f);
+			}
 			pregnancyChance += (Util.getModifiedDropoffValue(getAttributeValue(Attribute.FERTILITY), Attribute.FERTILITY.getUpperLimit())/100f);
 			pregnancyChance /= 3;
 		}
@@ -11806,7 +11810,7 @@ public abstract class GameCharacter implements XMLSaving {
 	 */
 	public boolean isOnlyCumInArea(SexAreaOrifice area) {
 		for(FluidStored f : fluidsStoredMap.get(area)) {
-			if(!f.isCum()) {
+			if(!(f.isCum() || f.isGirlCum())) {
 				return false;
 			}
 		}

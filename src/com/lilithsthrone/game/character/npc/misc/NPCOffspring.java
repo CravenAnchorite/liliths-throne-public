@@ -41,7 +41,7 @@ public class NPCOffspring extends NPC {
 	
 	public NPCOffspring(boolean isImported) {
 		super(isImported, null, "",
-				18, Month.JUNE, 15,
+				9, Month.JUNE, 15,
 				3, Gender.F_V_B_FEMALE, Subspecies.DOG_MORPH, RaceStage.GREATER, new CharacterInventory(10), WorldType.EMPTY, PlaceType.GENERIC_EMPTY_TILE, true);
 		
 		this.setEnslavementDialogue(DominionOffspringDialogue.ENSLAVEMENT_DIALOGUE);

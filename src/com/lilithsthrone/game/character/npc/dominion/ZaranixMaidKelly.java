@@ -98,7 +98,7 @@ public class ZaranixMaidKelly extends NPC {
 			resetBodyAfterVersion_2_10_5();
 		}
 		if(Main.isVersionOlderThan(Game.loadingVersion, "0.2.11")) {
-			this.setAgeAppearanceDifferenceToAppearAsAge(18);
+			this.setAgeAppearanceDifferenceToAppearAsAge(13);
 		}
 		this.setDescription("One of Zaranix's succubi maid twins, Katherine is assigned by her master to keep the ground floor clean.");
 	}

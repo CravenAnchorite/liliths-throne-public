@@ -765,9 +765,24 @@ public class Sex {
 					participant.setLust(0);
 				}
 				
+				// Player pregnancy:
+				for(GameCharacter lubedUp : Sex.getAllParticipants()) {
+						if(lubedUp != participant) {
+							if (getWetAreas(participant).get(SexAreaOrifice.VAGINA).get(lubedUp).contains(LubricationType.GIRLCUM)){
+								sexSB.append(participant.rollForPregnancy(lubedUp, 100));
+							}
+						}
+				}
 				
 			// Partner effects:
 			} else {
+				for(GameCharacter lubedUp : Sex.getAllParticipants()) {
+					if(lubedUp != participant) {
+						if (getWetAreas(participant).get(SexAreaOrifice.VAGINA).get(lubedUp).contains(LubricationType.GIRLCUM)){
+							sexSB.append(participant.rollForPregnancy(lubedUp, 100));
+						}
+					}
+				}
 				// Stretching effects:
 				if (participant.getAssRawCapacityValue() != participant.getAssStretchedCapacity() && areasStretched.get(Sex.getActivePartner()).contains(SexAreaOrifice.ANUS)) {
 					if (participant.getAssPlasticity() == OrificePlasticity.ZERO_RUBBERY){

@@ -2011,7 +2011,7 @@ public class MainControllerInitMethod {
 						if (((EventTarget) MainController.document.getElementById(id)) != null) {
 							((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
 								Main.game.setStartingDateMonth(month);
-								int age = Math.max(18, Main.game.getPlayer().getAgeValue());
+								int age = Math.max(9, Main.game.getPlayer().getAgeValue());
 								CharacterModificationUtils.performPlayerAgeCheck(age);
 								Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()));
 							}, false);

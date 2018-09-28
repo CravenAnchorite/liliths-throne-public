@@ -71,7 +71,7 @@ public interface SexManagerInterface {
 		return true;
 	}
 	
-	public default String applyEndSexEffects() {
+	public default String applyEndSexEffects() {		
 		return "";
 	}
 	
