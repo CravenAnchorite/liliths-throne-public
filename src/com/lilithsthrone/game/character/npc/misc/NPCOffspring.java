@@ -2,7 +2,9 @@ package com.lilithsthrone.game.character.npc.misc;
 
 import java.time.Month;
 import java.time.temporal.ChronoUnit;
+import java.util.Set;
 
+import com.lilithsthrone.utils.Units;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -11,18 +13,21 @@ import com.lilithsthrone.game.character.CharacterUtils;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
 import com.lilithsthrone.game.character.attributes.Attribute;
+import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.persona.Name;
+import com.lilithsthrone.game.character.persona.Relationship;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.RacialBody;
 import com.lilithsthrone.game.character.race.Subspecies;
-import com.lilithsthrone.game.dialogue.DialogueNodeOld;
-import com.lilithsthrone.game.dialogue.npcDialogue.dominion.DominionOffspringDialogue;
-import com.lilithsthrone.game.dialogue.npcDialogue.dominion.HarpyNestOffspringDialogue;
+import com.lilithsthrone.game.dialogue.DialogueNode;
+import com.lilithsthrone.game.dialogue.npcDialogue.SlaveDialogue;
+import com.lilithsthrone.game.dialogue.npcDialogue.offspring.GenericOffspringDialogue;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.CharacterInventory;
+import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.world.WorldType;
@@ -30,7 +35,7 @@ import com.lilithsthrone.world.places.PlaceType;
 
 /**
  * @since 0.1.82
- * @version 0.2.11
+ * @version 0.3.1
  * @author Innoxia
  */
 public class NPCOffspring extends NPC {
@@ -40,18 +45,27 @@ public class NPCOffspring extends NPC {
 	}
 	
 	public NPCOffspring(boolean isImported) {
-		super(isImported, null, "",
+		super(isImported, null, null, "",
 				9, Month.JUNE, 15,
 				3, Gender.F_V_B_FEMALE, Subspecies.DOG_MORPH, RaceStage.GREATER, new CharacterInventory(10), WorldType.EMPTY, PlaceType.GENERIC_EMPTY_TILE, true);
-		
-		this.setEnslavementDialogue(DominionOffspringDialogue.ENSLAVEMENT_DIALOGUE);
 	}
 	
 	public NPCOffspring(GameCharacter mother, GameCharacter father) {
-		super(false, null, "",
+		super(false, null, null, "",
 				0, Main.game.getDateNow().getMonth(), Main.game.getDateNow().getDayOfMonth(),
 				3, Gender.F_V_B_FEMALE, Subspecies.DOG_MORPH, RaceStage.GREATER,
 				new CharacterInventory(10), WorldType.EMPTY, PlaceType.GENERIC_EMPTY_TILE, true);
+
+
+		if(mother.getSubspecies()==Subspecies.LILIN || mother.getSubspecies()==Subspecies.ELDER_LILIN) {
+			this.setSurname(mother.getName(false)+"martuilani");
+			
+		} else if(father.getSubspecies()==Subspecies.LILIN || father.getSubspecies()==Subspecies.ELDER_LILIN) {
+			this.setSurname(father.getName(false)+"martuilani");
+				
+		} else if(mother.getSurname()!=null && !mother.getSurname().isEmpty()) {
+			this.setSurname(mother.getSurname());
+		}
 		
 		this.setMother(mother);
 		this.setFather(father);
@@ -65,12 +79,13 @@ public class NPCOffspring extends NPC {
 		// BODY GENERATION:
 		
 		Gender gender = Gender.getGenderFromUserPreferences(false, false);
-		if (!father.hasPenis() && !mother.hasPenis()){
-			gender = Gender.getGenderFromUserPreferences(true, false);
-			
-		}
 		
-		setBody(gender, mother, father);
+		Body preGeneratedBody = Subspecies.getPreGeneratedBody(this, gender, mother, father);
+		if(preGeneratedBody!=null) {
+			setBody(preGeneratedBody);
+		} else {
+			setBody(gender, mother, father);
+		}
 		
 		setSexualOrientation(RacialBody.valueOfRace(this.getRace()).getSexualOrientation(getGender()));
 
@@ -89,16 +104,10 @@ public class NPCOffspring extends NPC {
 		resetInventory(true);
 		inventory.setMoney(10 + Util.random.nextInt(getLevel()*10) + 1);
 		
-		CharacterUtils.equipClothing(this, true, false);
+		equipClothing(true, true, true, true);
 		
 		CharacterUtils.applyMakeup(this, true);
 
-		if(this.getWorldLocation()==WorldType.HARPY_NEST) {
-			this.setEnslavementDialogue(HarpyNestOffspringDialogue.ENSLAVEMENT_DIALOGUE);
-		} else {
-			this.setEnslavementDialogue(DominionOffspringDialogue.ENSLAVEMENT_DIALOGUE);
-		}
-		
 		setMana(getAttributeValue(Attribute.MANA_MAXIMUM));
 		setHealth(getAttributeValue(Attribute.HEALTH_MAXIMUM));
 	}
@@ -108,12 +117,7 @@ public class NPCOffspring extends NPC {
 	@Override
 	public void loadFromXML(Element parentElement, Document doc, CharacterImportSetting... settings) {
 		loadNPCVariablesFromXML(this, null, parentElement, doc, settings);
-		if(this.getWorldLocation()==WorldType.HARPY_NEST) {
-			this.setEnslavementDialogue(HarpyNestOffspringDialogue.ENSLAVEMENT_DIALOGUE);
-		} else {
-			this.setEnslavementDialogue(DominionOffspringDialogue.ENSLAVEMENT_DIALOGUE);
-		}
-
+		
 		if(this.getConceptionDate().isAfter(this.getBirthday())) {
 			this.setBirthday(this.getConceptionDate().plusMonths(2));
 			
@@ -123,13 +127,26 @@ public class NPCOffspring extends NPC {
 	}
 
 	@Override
+	public DialogueNode getEnslavementDialogue(AbstractClothing enslavementClothing) {
+		SlaveDialogue.setEnslavementTarget(this);
+		this.enslavementClothing = enslavementClothing;
+		
+		return GenericOffspringDialogue.ENSLAVEMENT_DIALOGUE;
+	}
+	
+	@Override
+	public boolean isAbleToBeEnslaved() {
+		return this.getSubspecies()!=Subspecies.DEMON;
+	}
+	
+	@Override
 	public void setStartingBody(boolean setPersona) {
 		// Not needed
 	}
 
 	@Override
-	public void equipClothing(boolean replaceUnsuitableClothing, boolean addWeapons, boolean addScarsAndTattoos) {
-		// Not needed
+	public void equipClothing(boolean replaceUnsuitableClothing, boolean addWeapons, boolean addScarsAndTattoos, boolean addAccessories) {
+		super.equipClothing(replaceUnsuitableClothing, addWeapons, addScarsAndTattoos, addAccessories); //TODO - add unique outfit type
 	}
 	
 	@Override
@@ -138,22 +155,25 @@ public class NPCOffspring extends NPC {
 	}
 	
 	@Override
-	public String getPlayerPetName() {
-		if(playerPetName.length()==0 || playerPetName.equalsIgnoreCase("Mom") || playerPetName.equalsIgnoreCase("Dad")) {
-			if(Main.game.getPlayer().isFeminine()) {
-				return "Mom";
-			} else {
-				return "Dad";
-			}
-		} else if (playerPetName.equalsIgnoreCase("Mommy") || playerPetName.equalsIgnoreCase("Daddy")) {
-			if(Main.game.getPlayer().isFeminine()) {
-				return "Mommy";
-			} else {
-				return "Daddy";
-			}
-		} else {
-			return playerPetName;
-		}
+	public boolean isPlayerOnFirstNameTerms() {
+		return true;
+	}
+	
+	private String getRelationshipFromPlayer() {
+		Set<Relationship> rel = Main.game.getPlayer().getRelationshipsTo(this);
+		if(rel.isEmpty())
+			return "";
+
+		return UtilText.parse(this, " You are [npc.hisHer] ") + getRelationshipStr(rel, Main.game.getPlayer().getGender().getType()) + ".";
+	}
+
+	private static String getMatingDescription(GameCharacter self, GameCharacter partner, String what) {
+		String result = what + " with " + partner.getName("a");
+		String rel = partner.getRelationshipStrTo(self);
+		if(!rel.isEmpty())
+			return result + ", your " + rel;
+		else
+			return result;
 	}
 	
 	@Override
@@ -164,8 +184,13 @@ public class NPCOffspring extends NPC {
 			return "";
 		}
 		return (UtilText.parse(this,
-				"[npc.Name] is your [npc.daughter], who you "+(this.getMother().isPlayer()?"mothered with "+(this.getFather().getName("a")):"fathered with "+(this.getMother().getName("a")))+"."
-						+ " [npc.She] was conceived on "+Util.getStringOfLocalDateTime(this.getConceptionDate())+", and "
+				"[npc.Name] is your [npc.daughter], who you "+
+						(this.getMother().isPlayer()
+								? getMatingDescription(getMother(), getFather(), "mothered")
+								: getMatingDescription(getFather(), getMother(), "fathered")
+						)+"."
+						+ getRelationshipFromPlayer()
+						+ " [npc.She] was conceived on "+Units.date(this.getConceptionDate(), Units.DateType.LONG)+", and "
 						+(daysToBirth==0
 							?"later that same day"
 							:daysToBirth>1?Util.intToString(daysToBirth)+" days later":Util.intToString(daysToBirth)+" day later")
@@ -192,31 +217,23 @@ public class NPCOffspring extends NPC {
 	}
 	
 	@Override
-	public DialogueNodeOld getEncounterDialogue() {
-		if(this.getWorldLocation()==WorldType.HARPY_NEST) {
-			return HarpyNestOffspringDialogue.OFFSPRING_ENCOUNTER;
-		} else {
-			return DominionOffspringDialogue.OFFSPRING_ENCOUNTER;
-		}
+	public DialogueNode getEncounterDialogue() {
+		return GenericOffspringDialogue.OFFSPRING_ENCOUNTER;
+	}
+	
+	@Override
+	public boolean isAllowingPlayerToManageInventory() {
+		return this.getAffection(Main.game.getPlayer())>=AffectionLevel.POSITIVE_FIVE_WORSHIP.getMinimumValue() || (this.isSlave() && this.getOwner().isPlayer());
 	}
 
 	// Combat:
 
 	@Override
 	public Response endCombat(boolean applyEffects, boolean victory) {
-		if(this.getWorldLocation()==WorldType.HARPY_NEST) {
-			if (victory) {
-				return new Response("", "", HarpyNestOffspringDialogue.AFTER_COMBAT_VICTORY);
-			} else {
-				return new Response ("", "", HarpyNestOffspringDialogue.AFTER_COMBAT_DEFEAT);
-			}
-			
+		if (victory) {
+			return new Response("", "", GenericOffspringDialogue.AFTER_COMBAT_VICTORY);
 		} else {
-			if (victory) {
-				return new Response("", "", DominionOffspringDialogue.AFTER_COMBAT_VICTORY);
-			} else {
-				return new Response ("", "", DominionOffspringDialogue.AFTER_COMBAT_DEFEAT);
-			}
+			return new Response ("", "", GenericOffspringDialogue.AFTER_COMBAT_DEFEAT);
 		}
 	}
 }

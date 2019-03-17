@@ -5667,6 +5667,21 @@ public class MainControllerInitMethod {
 	
 	}
 
+	private static void createToggleListener(String id, PropertyValue option, boolean value) {
+		createToggleListener(id, option, value, null);
+	}
+
+	private static void createToggleListener(String id, PropertyValue option, boolean value, Runnable action) {
+		if (MainController.document.getElementById(id) != null) {
+			((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
+				Main.getProperties().setValue(option, value);
+				if (action != null) action.run();
+				Main.saveProperties();
+				Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()));
+			}, false);
+		}
+	}
+
 	static void setDiceHandler(int i) {
 		String id = "DICE_PLAYER_"+i;
 		if (((EventTarget) MainController.document.getElementById(id)) != null) {
