@@ -65,6 +65,10 @@ public class NPCOffspring extends NPC {
 		// BODY GENERATION:
 		
 		Gender gender = Gender.getGenderFromUserPreferences(false, false);
+		if (!father.hasPenis() && !mother.hasPenis()){
+			gender = Gender.getGenderFromUserPreferences(true, false);
+			
+		}
 		
 		setBody(gender, mother, father);
 		
