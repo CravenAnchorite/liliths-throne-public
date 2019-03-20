@@ -12,6 +12,7 @@ import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.CharacterUtils;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
+import com.lilithsthrone.game.character.body.valueEnums.AgeCategory;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
@@ -56,7 +57,7 @@ public class DominionSuccubusAttacker extends NPC {
 	
 	public DominionSuccubusAttacker(boolean isImported) {
 		super(isImported, null, null, "",
-				Util.random.nextInt(50)+18, Util.randomItemFrom(Month.values()), 1+Util.random.nextInt(25),
+				AgeCategory.getAgeFromPreferences(Gender.F_V_B_FEMALE), Util.randomItemFrom(Month.values()), 1+Util.random.nextInt(25),
 				5, Gender.F_V_B_FEMALE, Subspecies.DEMON, RaceStage.GREATER,
 				new CharacterInventory(10), WorldType.DOMINION, PlaceType.DOMINION_BACK_ALLEYS, false);
 
@@ -74,7 +75,7 @@ public class DominionSuccubusAttacker extends NPC {
 			}
 			
 			CharacterUtils.randomiseBody(this, true);
-			this.setAgeAppearanceDifferenceToAppearAsAge(9+Util.random.nextInt(10));
+			this.setAgeAppearanceDifferenceToAppearAsAge(AgeCategory.getAgeFromPreferences(Gender.F_V_B_FEMALE));
 			
 			this.setVaginaVirgin(false);
 			this.setAssVirgin(false);
@@ -116,7 +117,7 @@ public class DominionSuccubusAttacker extends NPC {
 			this.setFetishDesire(Fetish.FETISH_NON_CON_DOM, FetishDesire.TWO_NEUTRAL);
 		}
 		if(Main.isVersionOlderThan(Game.loadingVersion, "0.2.11")) {
-			this.setAgeAppearanceDifferenceToAppearAsAge(18+Util.random.nextInt(10));
+			this.setAgeAppearanceDifferenceToAppearAsAge(9+Util.random.nextInt(21));
 		}
 	}
 

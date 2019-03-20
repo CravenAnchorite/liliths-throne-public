@@ -1468,7 +1468,7 @@ public class CharacterUtils {
 		if(randomiseAge) {
 			character.setBirthday(LocalDateTime.of(Main.game.getStartingDate().getYear()-AgeCategory.getAgeFromPreferences(character.getGender()), character.getBirthMonth(), character.getDayOfBirth(), 12, 0));
 			if(character.getRace()==Race.DEMON || character.getRace()==Race.HARPY) {
-				character.setAgeAppearanceDifferenceToAppearAsAge(18+Util.random.nextInt(9));
+				character.setAgeAppearanceDifferenceToAppearAsAge(9+Util.random.nextInt(18));
 			}
 		}
 		
@@ -1513,6 +1513,10 @@ public class CharacterUtils {
 		// Body:
 		int height = character.getHeightValue()-15 + Util.random.nextInt(30) +1;
 		
+		if (character.getAppearsAsAgeValue() < 17){
+			height = height - (Util.random.nextInt(17-character.getAppearsAsAgeValue()) * 2);
+		}
+		
 		if(character.getHeight()==Height.NEGATIVE_TWO_MIMIMUM) {
 			character.setHeight(Math.min(Height.NEGATIVE_TWO_MIMIMUM.getMaximumValue()-1, Math.max(Height.NEGATIVE_TWO_MIMIMUM.getMinimumValue(), height)));
 			
@@ -1525,7 +1529,12 @@ public class CharacterUtils {
 		
 		//Breasts:
 		if(character.hasBreasts()) {
-			character.setBreastSize(Math.max(CupSize.AA.getMeasurement(), character.getBreastSize().getMeasurement() -2 + Util.random.nextInt(5))); // Random size between -2 and +2 of base value.
+			if (character.getAppearsAsAgeValue() < 17){
+				character.setBreastSize(Math.max(CupSize.AA.getMeasurement(), character.getBreastSize().getMeasurement() -2 + Util.random.nextInt(0+(character.getAppearsAsAgeValue()/4)))); // Random size between -2 and +2 of base value.
+			}else{
+				character.setBreastSize(Math.max(CupSize.AA.getMeasurement(), character.getBreastSize().getMeasurement() -2 + Util.random.nextInt(5))); // Random size between -2 and +2 of base value.
+			}
+			
 			if(Math.random()<=0.015f || character.hasFetish(Fetish.FETISH_LACTATION_SELF)) {
 				character.setBreastMilkStorage((int)((character.getBreastSize().getMeasurement() * 5)*(1+(Math.random()*2))));
 				if(Math.random()<=0.025f) {

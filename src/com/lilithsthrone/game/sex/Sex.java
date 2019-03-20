@@ -970,10 +970,24 @@ public class Sex {
 					participant.addStatusEffect(StatusEffect.RECOVERING_AURA, (240*60)+(postSexDialogue.getSecondsPassed()));
 				}
 				
+				for(GameCharacter lubedUp : Sex.getAllParticipants()) {
+					if(lubedUp != participant) {
+						if (getWetAreas(participant).get(SexAreaOrifice.VAGINA).get(lubedUp).contains(LubricationType.GIRLCUM)){
+							sexSB.append(participant.rollForPregnancy(lubedUp, 100));
+						}
+					}
+				}
 				endSexSB = new StringBuilder(UtilText.parse(participant, endSexSB.toString()));
 				
 			// Partner effects:
 			} else {
+				for(GameCharacter lubedUp : Sex.getAllParticipants()) {
+					if(lubedUp != participant) {
+						if (getWetAreas(participant).get(SexAreaOrifice.VAGINA).get(lubedUp).contains(LubricationType.GIRLCUM)){
+							sexSB.append(participant.rollForPregnancy(lubedUp, 100));
+						}
+					}
+				}
 //				endSexSB.append("<br/><p style='text-align:center;'>"
 //						+ "<span style='color:"+participant.getFemininity().getColour().toWebHexString()+";'>[npc.Name]:</span>"
 //								+ "</p>");

@@ -3317,10 +3317,11 @@ public abstract class GameCharacter implements XMLSaving {
 		this.birthday = birthday;
 		
 		if(this.isPlayer()) {
-			if(this.getAgeValue()<18) {
-				this.birthday = (this.getBirthday().minusYears(18-this.getAgeValue()));
-				
-			} else if(this.getAgeValue()>50) {
+			//if(this.getAgeValue()<18) {
+			//	this.birthday = (this.getBirthday().minusYears(18-this.getAgeValue()));
+			//	
+			//} else 
+			if(this.getAgeValue()>50) {
 				this.birthday = (this.getBirthday().plusYears(this.getAgeValue()-50));
 			}
 		}
@@ -3331,7 +3332,7 @@ public abstract class GameCharacter implements XMLSaving {
 	}
 	
 	public int getAppearsAsAgeValue() {
-		return Math.max(18, getAgeValue() + ageAppearanceDifference);
+		return getAgeValue() + ageAppearanceDifference;
 	}
 
 	public AgeCategory getAge() {
@@ -3345,7 +3346,7 @@ public abstract class GameCharacter implements XMLSaving {
 			return 18 + age;
 		}
 		
-		return Math.max(18, age);
+		return age;
 	}
 	
 	public int getAgeAppearanceDifference() {
@@ -13381,7 +13382,12 @@ public abstract class GameCharacter implements XMLSaving {
 		boolean partnerVirile = partner.getAttributeValue(Attribute.VIRILITY) > 0 || !partner.hasPerkAnywhereInTree(Perk.FIRING_BLANKS);
 		boolean selfFertile = getAttributeValue(Attribute.FERTILITY) > 0 || !hasPerkAnywhereInTree(Perk.BARREN);
 		if (partnerVirile && selfFertile && isAbleToBeImpregnated()) {
-			pregnancyChance += (Util.getModifiedDropoffValue(partner.getAttributeValue(Attribute.VIRILITY), Attribute.VIRILITY.getUpperLimit())/100f) * CumProduction.getCumProductionFromInt((int) cumQuantity).getPregnancyModifier();
+			if (partner.hasPenis()){
+				pregnancyChance += (Util.getModifiedDropoffValue(partner.getAttributeValue(Attribute.VIRILITY), Attribute.VIRILITY.getUpperLimit())/100f) * CumProduction.getCumProductionFromInt((int) cumQuantity).getPregnancyModifier();
+			}else{
+				pregnancyChance += (Util.getModifiedDropoffValue(partner.getAttributeValue(Attribute.VIRILITY), Attribute.VIRILITY.getUpperLimit())/100f);
+			}
+			
 			pregnancyChance += (Util.getModifiedDropoffValue(getAttributeValue(Attribute.FERTILITY), Attribute.FERTILITY.getUpperLimit())/100f);
 			pregnancyChance = Math.max(0, Math.min(pregnancyChance/3, 1));
 		}

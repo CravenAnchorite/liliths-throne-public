@@ -16,6 +16,7 @@ import com.lilithsthrone.game.character.CharacterUtils;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.CoverableArea;
+import com.lilithsthrone.game.character.body.valueEnums.AgeCategory;
 import com.lilithsthrone.game.character.body.valueEnums.AssSize;
 import com.lilithsthrone.game.character.body.valueEnums.BodySize;
 import com.lilithsthrone.game.character.body.valueEnums.CupSize;
@@ -82,7 +83,7 @@ public class ImpAttacker extends NPC {
 	
 	public ImpAttacker(Subspecies subspecies, Gender gender, boolean isImported) {
 		super(isImported, null, null, "",
-				Util.random.nextInt(28)+18, Util.randomItemFrom(Month.values()), 1+Util.random.nextInt(25),
+				AgeCategory.getAgeFromPreferences(gender), Util.randomItemFrom(Month.values()), 1+Util.random.nextInt(25),
 				3, gender, subspecies, RaceStage.GREATER,
 				new CharacterInventory(10), WorldType.SUBMISSION, PlaceType.SUBMISSION_TUNNELS, false);
 		
