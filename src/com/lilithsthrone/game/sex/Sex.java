@@ -973,7 +973,7 @@ public class Sex {
 				for(GameCharacter lubedUp : Sex.getAllParticipants()) {
 					if(lubedUp != participant) {
 						if (getWetAreas(participant).get(SexAreaOrifice.VAGINA).get(lubedUp).contains(LubricationType.GIRLCUM)){
-							sexSB.append(participant.rollForPregnancy(lubedUp, 100));
+							//sexSB.append(participant.rollForPregnancy(lubedUp, 100));
 						}
 					}
 				}
@@ -984,7 +984,7 @@ public class Sex {
 				for(GameCharacter lubedUp : Sex.getAllParticipants()) {
 					if(lubedUp != participant) {
 						if (getWetAreas(participant).get(SexAreaOrifice.VAGINA).get(lubedUp).contains(LubricationType.GIRLCUM)){
-							sexSB.append(participant.rollForPregnancy(lubedUp, 100));
+							//sexSB.append(participant.rollForPregnancy(lubedUp, 100));
 						}
 					}
 				}
@@ -2145,7 +2145,7 @@ public class Sex {
 				Sex.getCharacterPerformingAction().unequipClothingIntoVoid(Sex.getCharacterPerformingAction().getClothingInSlot(InventorySlot.PENIS), true, Sex.getCharacterPerformingAction());
 			}
 			
-			if(Sex.getCharacterPerformingAction().hasVagina() && Sex.getCharacterPerformingAction().isVaginaSquirter()) {
+			if(Sex.getCharacterPerformingAction().hasVagina() /**&& Sex.getCharacterPerformingAction().isVaginaSquirter()**/) {
 				if(Sex.getCharacterPerformingAction().getLowestZLayerCoverableArea(CoverableArea.VAGINA)!=null) {
 					Sex.getCharacterPerformingAction().getLowestZLayerCoverableArea(CoverableArea.VAGINA).setDirty(true);
 					
@@ -2158,7 +2158,7 @@ public class Sex {
 								Sex.getCharacterPerformingAction(),
 								Sex.getCharacterPerformingAction().getGirlcum(),
 								SexAreaOrifice.MOUTH,
-								5 * Sex.getCharacterPerformingAction().getVaginaWetness().getValue()));
+								10 * Sex.getCharacterPerformingAction().getVaginaWetness().getValue()));
 					}
 				}
 			}

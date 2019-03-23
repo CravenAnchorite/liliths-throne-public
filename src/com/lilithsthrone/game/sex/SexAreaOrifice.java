@@ -13,7 +13,7 @@ public enum SexAreaOrifice implements SexAreaInterface {
 	MOUTH(2,
 			-0.5f, -0.5f, -1f,
 			0.5f, -0.5f ,-1f,
-			2/60f, 15/60f,
+			1/60f, 1/60f,
 			true) {
 		@Override
 		public String getName(GameCharacter owner) {

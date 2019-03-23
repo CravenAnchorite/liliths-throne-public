@@ -3343,7 +3343,7 @@ public abstract class GameCharacter implements XMLSaving {
 		int age = (int) ChronoUnit.YEARS.between(birthday, Main.game.getDateNow());
 		
 		if(birthday.getYear()>=Main.game.getStartingDate().getYear()) {
-			return 18 + age;
+			return 9 + age;
 		}
 		
 		return age;
@@ -12611,6 +12611,17 @@ public abstract class GameCharacter implements XMLSaving {
 //			}
 		}
 		
+		if((this.getBodyMaterial()==BodyMaterial.SLIME || orificeIngestedThrough == SexAreaOrifice.MOUTH)
+				&& fluid.getType().getBaseType()==FluidTypeBase.GIRLCUM) {
+			if(charactersFluid!=null) {
+				fluidIngestionSB.append(rollForPregnancy(charactersFluid, millilitres));
+			}
+			//TODO need to store relevant cum data and provide that in the case of the charactersFluid not being in the game any more
+//			else if(subspecies!=null) {
+//				fluidIngestionSB.append(rollForPregnancy(subspecies, millilitres));
+//			}
+		}
+		
 		if(modifiers.contains(FluidModifier.ALCOHOLIC)) { //TODO factor in body size:
 			fluidIngestionSB.append(this.incrementAlcoholLevel(millilitres * 0.001f));
 		}
@@ -13361,6 +13372,28 @@ public abstract class GameCharacter implements XMLSaving {
 					}
 					if(partner!=null) {
 						rollForPregnancy(partner, fs.getMillilitres());
+					}
+				}
+			}
+		}
+		if(this.fluidsStoredMap.get(SexAreaOrifice.MOUTH)!=null && !this.fluidsStoredMap.get(SexAreaOrifice.MOUTH).isEmpty()) {
+			List<FluidStored> fluids = new ArrayList<>(this.fluidsStoredMap.get(SexAreaOrifice.MOUTH));
+			Collections.shuffle(fluids);
+			for(FluidStored fs : fluids) {
+				if(fs.isGirlCum()) {
+					GameCharacter partner = null;
+					if(fs.getCharactersFluidID().equals(Main.game.getPlayer().getId())) {
+						partner = Main.game.getPlayer();
+					} else {
+						try {
+							partner = Main.game.getNPCById(fs.getCharactersFluidID());
+						} catch(Exception e) {
+							// No need to print to error log - a failure to get the character just means that they've been removed from the game.
+//							Util.logGetNpcByIdError("performImpregnationCheck()", fs.getCharactersFluidID());
+						}
+					}
+					if(partner!=null) {
+						rollForPregnancy(partner, fs.getMillilitres() * 2);
 					}
 				}
 			}

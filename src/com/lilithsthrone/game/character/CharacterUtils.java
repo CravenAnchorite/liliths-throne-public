@@ -1609,25 +1609,36 @@ public class CharacterUtils {
 					|| character.hasFetish(Fetish.FETISH_ANAL_GIVING)) {
 				character.setPenisVirgin(false);
 			}
-			if((character.getGender()==Gender.F_P_TRAP || character.getGender()==Gender.N_P_TRAP) && Math.random()>=0.1f) { // Most traps have a small cock:
-				character.setPenisSize(PenisSize.ONE_TINY.getMinimumValue() + Util.random.nextInt(character.getPenisSize().getMaximumValue() - character.getPenisSize().getMinimumValue()) +1);
-				character.setTesticleSize(TesticleSize.ONE_TINY.getValue());
-				character.setPenisCumStorage(CumProduction.ONE_TRICKLE.getMedianValue());
+			//if((character.getGender()==Gender.F_P_TRAP || character.getGender()==Gender.N_P_TRAP) && Math.random()>=0.1f) { // Most traps have a small cock:
+				//character.setPenisSize(PenisSize.ONE_TINY.getMinimumValue() + Util.random.nextInt(character.getPenisSize().getMaximumValue() - character.getPenisSize().getMinimumValue()) +1);
+				//character.setTesticleSize(TesticleSize.ONE_TINY.getValue());
+				//character.setPenisCumStorage(CumProduction.ONE_TRICKLE.getMedianValue());
 				
-			} else {
+			//} else {
 				character.setPenisSize(character.getPenisSize().getMinimumValue() + Util.random.nextInt(character.getPenisSize().getMaximumValue() - character.getPenisSize().getMinimumValue()) +1);
 				
 				int testicleSize = character.getTesticleSize().getValue();
 				testicleSize += Util.random.nextInt(3) - 1;
 				character.setTesticleSize(testicleSize);
 				
+				/**if(Math.random()>0.4f){
+					character.setPenisCumStorage(CumProduction.THREE_AVERAGE.getMedianValue());
+				}else if(Math.random()>0.5f){
+					character.setPenisCumStorage(CumProduction.FOUR_LARGE.getMedianValue());
+				}else if(Math.random()>0.8f){
+					character.setPenisCumStorage(CumProduction.FIVE_HUGE.getMedianValue());
+				}else{
+					character.setPenisCumStorage(CumProduction.TWO_SMALL_AMOUNT.getMedianValue());
+				}**/
+				
 				int cumProduction = character.getPenisRawCumStorageValue();
 				if(cumProduction>0) {
 					cumProduction += Util.random.nextInt(cumProduction) - (cumProduction/2);
 					character.setPenisCumStorage(cumProduction);
+					System.out.println("Cum Production: " + cumProduction);
 				}
 				character.fillCumToMaxStorage();
-			}
+			//}
 			
 			if(Math.random()<=0.02f) {
 				character.addCumModifier(FluidModifier.ADDICTIVE);
