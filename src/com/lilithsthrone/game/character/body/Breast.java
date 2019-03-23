@@ -55,7 +55,7 @@ public class Breast implements BodyPartInterface {
 		
 		nipples = new Nipples(type.getNippleType(), nippleSize, nippleShape, areolaeSize, Lactation.getLactationFromInt(milkStorage).getAssociatedWetness().getValue(), capacity, elasticity, plasticity, virgin, false);
 		
-		milk = new FluidMilk(type.getFluidType());
+		milk = new FluidMilk(type.getFluidType(), false);
 	}
 	
 	@Override
@@ -140,7 +140,7 @@ public class Breast implements BodyPartInterface {
 	}
 
 	public boolean hasBreasts() {
-		return size>=CupSize.AA.getMeasurement();
+		return size>=CupSize.getMinimumCupSizeForBreasts().getMeasurement();
 	}
 
 	public String setType(GameCharacter owner, AbstractBreastType type) {

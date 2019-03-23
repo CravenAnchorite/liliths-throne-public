@@ -31,7 +31,7 @@ import com.lilithsthrone.game.character.body.Testicle;
 import com.lilithsthrone.game.character.body.types.AbstractArmType;
 import com.lilithsthrone.game.character.body.types.AbstractAssType;
 import com.lilithsthrone.game.character.body.types.AbstractBreastType;
-import com.lilithsthrone.game.character.body.types.AbstractEarType;
+
 import com.lilithsthrone.game.character.body.types.AbstractHornType;
 import com.lilithsthrone.game.character.body.types.AbstractLegType;
 import com.lilithsthrone.game.character.body.types.AntennaType;
@@ -2674,15 +2674,7 @@ public class MainControllerInitMethod {
 					}
 				}
 				
-				for(AbstractEarType earType: EarType.getAllEarTypes()) {
-					id = "CHANGE_EAR_"+EarType.getIdFromEarType(earType);
-					if (((EventTarget) MainController.document.getElementById(id)) != null) {
-						((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
-							BodyChanging.getTarget().setEarType(earType);
-							Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()));
-						}, false);
-					}
-				}
+
 				
 				for(AbstractHornType hornType: HornType.getAllHornTypes()) {
 					id = "CHANGE_HORN_"+HornType.getIdFromHornType(hornType);

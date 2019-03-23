@@ -262,7 +262,6 @@ public class Brax extends NPC {
 				this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.TORSO_FISHNET_TOP, Colour.CLOTHING_WHITE, false), true, this);
 				this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.LEG_MICRO_SKIRT_PLEATED, Colour.CLOTHING_PINK, false), true, this);
 				this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.SOCK_FISHNET_STOCKINGS, Colour.CLOTHING_WHITE, false), true, this);
-				this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.FOOT_STILETTO_HEELS, Colour.CLOTHING_BLACK, false), true, this);
 				this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.HAND_FISHNET_GLOVES, Colour.CLOTHING_WHITE, false), true, this);
 				this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.FINGER_RING, Colour.CLOTHING_GOLD, false), true, this);
 				this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.WRIST_BANGLE, Colour.CLOTHING_GOLD, false), true, this);
@@ -280,7 +279,6 @@ public class Brax extends NPC {
 				this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.ENFORCER_SHORTS, Colour.CLOTHING_PINK_LIGHT, false), true, this);
 				this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.ENFORCER_SHIRT, Colour.CLOTHING_PINK_LIGHT, false), true, this);
 				this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.SOCK_KNEEHIGH_SOCKS, Colour.CLOTHING_WHITE, false), true, this);
-				this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.FOOT_HEELS, Colour.CLOTHING_BLACK, false), true, this);
 				this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.WRIST_WOMENS_WATCH, Colour.CLOTHING_PINK_LIGHT, false), true, this);
 				this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.FINGER_RING,  Colour.CLOTHING_SILVER, false), true, this);
 			}
@@ -289,7 +287,6 @@ public class Brax extends NPC {
 			
 			this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.GROIN_BOXERS, Colour.CLOTHING_BLACK, false), true, this);
 			this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.SOCK_SOCKS, Colour.CLOTHING_BLACK, false), true, this);
-			this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.FOOT_TRAINERS, Colour.CLOTHING_BLACK, false), true, this);
 			
 			if(Main.game.getDialogueFlags().values.contains(DialogueFlagValue.braxBeaten)) {
 				this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.ENFORCER_SHORTS, Colour.CLOTHING_BLUE, false), true, this);
@@ -850,7 +847,6 @@ public class Brax extends NPC {
 								if(!Main.game.getPlayer().hasVagina()) {
 									Main.game.getPlayer().setVaginaType(VaginaType.HUMAN);
 								}
-								Main.game.getPlayer().setEarType(EarType.LYCAN);
 								Main.game.getPlayer().setEyeType(EyeType.LYCAN);
 								Main.game.getPlayer().setTailType(TailType.LYCAN);
 								Main.game.getPlayer().setHornType(HornType.NONE);
@@ -863,7 +859,6 @@ public class Brax extends NPC {
 								Main.game.getPlayer().setPenisType(PenisType.NONE);
 								Main.game.getPlayer().setVaginaType(VaginaType.WOLF_MORPH);
 								
-								Main.game.getPlayer().setEarType(EarType.LYCAN);
 								Main.game.getPlayer().setEyeType(EyeType.LYCAN);
 								Main.game.getPlayer().setTailType(TailType.LYCAN);
 								Main.game.getPlayer().setHornType(HornType.NONE);
@@ -883,7 +878,6 @@ public class Brax extends NPC {
 								Main.game.getPlayer().setPenisType(PenisType.NONE);
 								Main.game.getPlayer().setVaginaType(VaginaType.WOLF_MORPH);
 								
-								Main.game.getPlayer().setEarType(EarType.LYCAN);
 								Main.game.getPlayer().setEyeType(EyeType.LYCAN);
 								Main.game.getPlayer().setTailType(TailType.LYCAN);
 								Main.game.getPlayer().setHornType(HornType.NONE);

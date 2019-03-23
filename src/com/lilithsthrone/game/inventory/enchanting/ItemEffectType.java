@@ -221,7 +221,8 @@ public class ItemEffectType {
 	};
 	
 	public static AbstractItemEffectType VIXENS_VIRILITY = new AbstractItemEffectType(Util.newArrayListOfValues(
-			"Temporarily boosts fertility."),
+			"Temporary fertility boost",
+			"Temporary virility boost"),
 			Colour.GENERIC_SEX) {
 		
 		@Override
@@ -1780,8 +1781,7 @@ public class ItemEffectType {
 			// Harpy TFs:
 			if(target.getFaceType()!=FaceType.HUMAN)
 				sb.append("<br/>" + target.setFaceType(FaceType.HUMAN));
-			if(target.getEarType()!=EarType.HARPY)
-				sb.append("<br/>" + target.setEarType(EarType.HARPY));
+
 			if(target.getEyeType()!=EyeType.HARPY)
 				sb.append("<br/>" + target.setEyeType(EyeType.HARPY));
 			if(target.getHairType()!=HairType.HARPY)
@@ -1874,8 +1874,7 @@ public class ItemEffectType {
 			// Harpy TFs:
 			if(target.getFaceType()!=FaceType.HUMAN)
 				sb.append("<br/>" + target.setFaceType(FaceType.HUMAN));
-			if(target.getEarType()!=EarType.HARPY)
-				sb.append("<br/>" + target.setEarType(EarType.HARPY));
+
 			if(target.getEyeType()!=EyeType.HARPY)
 				sb.append("<br/>" + target.setEyeType(EyeType.HARPY));
 			if(target.getHairType()!=HairType.HARPY)
@@ -1974,8 +1973,7 @@ public class ItemEffectType {
 			// Harpy TFs:
 			if(target.getFaceType()!=FaceType.HUMAN)
 				sb.append("<br/>" + target.setFaceType(FaceType.HUMAN));
-			if(target.getEarType()!=EarType.HARPY)
-				sb.append("<br/>" + target.setEarType(EarType.HARPY));
+
 			if(target.getEyeType()!=EyeType.HARPY)
 				sb.append("<br/>" + target.setEyeType(EyeType.HARPY));
 			if(target.getHairType()!=HairType.HARPY)
@@ -3157,6 +3155,7 @@ public class ItemEffectType {
 		return itemEffectTypeToIdMap.get(itemEffectType);
 	}
 	
+	// set in ItemType
 	public static AbstractItemEffectType getBookEffectFromSubspecies(Subspecies subspecies) {
 		String id = Util.getClosestStringMatch("BOOK_READ_"+subspecies.toString(), idToItemEffectTypeMap.keySet());
 		return idToItemEffectTypeMap.get(id);
