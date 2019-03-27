@@ -462,7 +462,7 @@ public class CharactersPresentDialogue {
 						+ "</p>");
 				
 			} else {
-				if(Sex.getNumberOfOrgasms(Main.game.getActiveNPC()) >= Main.game.getActiveNPC().getOrgasmsBeforeSatisfied()) {
+				if(Sex.getNumberOfOrgasms(Sex.getActivePartner()) >= 1) {
 					return UtilText.parse(Main.game.getActiveNPC(),
 							"<p>"
 								+ "As you step back from [npc.name], [npc.she] sinks to the floor, totally worn out from [npc.her] orgasm"+(Sex.getNumberOfOrgasms(Sex.getActivePartner()) > 1?"s":"")+"."

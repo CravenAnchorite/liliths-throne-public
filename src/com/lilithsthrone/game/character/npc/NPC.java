@@ -1569,7 +1569,9 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 						possibleEffects.put(new ItemEffect(itemType.getEnchantmentEffect(), TFModifier.TF_BREASTS, TFModifier.NONE, TFPotency.MINOR_BOOST, 1), reaction);
 					}
 				}
-
+				if(Main.game.getPlayer().getEarType() != getPreferredBody().getEar().getType()) {
+					possibleEffects.put(new ItemEffect(itemType.getEnchantmentEffect(), TFModifier.TF_EARS, TFModifier.NONE, TFPotency.MINOR_BOOST, 1), reaction);
+				}
 				if(Main.game.getPlayer().getEyeType() != getPreferredBody().getEye().getType()) {
 					possibleEffects.put(new ItemEffect(itemType.getEnchantmentEffect(), TFModifier.TF_EYES, TFModifier.NONE, TFPotency.MINOR_BOOST, 1), reaction);
 				}
@@ -3116,12 +3118,11 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 					case TWO_NEUTRAL:
 						weight+=1;
 						break;
-					// They really should never want to perform actions they dislike or hate:
 					case ONE_DISLIKE:
-						weight-=100;
+						weight-=4;
 						break;
 					case ZERO_HATE:
-						weight-=200;
+						weight-=8;
 						break;
 				}
 			}
@@ -3132,7 +3133,6 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 			for(SexType st : request) {
 				if((st.getTargetedSexArea()==type.getTargetedSexArea() || st.getPerformingSexArea()==type.getPerformingSexArea())) {
 					weight += 50;
-//					System.out.println("requested " +st.toString());
 					isRequest = true;
 				}
 			}
@@ -3156,10 +3156,6 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 			weight-=100000;
 		}
 
-		if((fetishes.contains(Fetish.FETISH_FOOT_GIVING) || fetishes.contains(Fetish.FETISH_FOOT_RECEIVING)) && !Main.game.isFootContentEnabled()) {
-			weight-=100000;
-		}
-		
 		// Anal actions are not available unless the person likes anal.
 		if(fetishes.contains(Fetish.FETISH_ANAL_RECEIVING) && !isRequest) {
 			if(type.getAsParticipant()==SexParticipantType.SELF && !this.getFetishDesire(Fetish.FETISH_ANAL_RECEIVING).isPositive()) {
@@ -3184,10 +3180,6 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 				&& fetishes.contains(Fetish.FETISH_VAGINAL_RECEIVING)) {
 			weight-=50;
 		}
-		
-//		if(fetishes.contains(Fetish.FETISH_FOOT_GIVING)) {
-//			System.out.println("Foot giving weight: "+weight);
-//		}
 		
 		return weight;
 	}
@@ -3277,20 +3269,10 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 		addSexTypeWeighting(new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.THIGHS), target, request, foreplaySexTypes, 0.5f);
 		addSexTypeWeighting(new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.THIGHS), target, request, mainSexTypes, 0.5f);
 		
-		// Feet:
-		addSexTypeWeighting(new SexType(SexParticipantType.NORMAL, SexAreaPenetration.FOOT, SexAreaPenetration.PENIS), target, request, foreplaySexTypes, 3);
-		addSexTypeWeighting(new SexType(SexParticipantType.NORMAL, SexAreaPenetration.FOOT, SexAreaPenetration.PENIS), target, request, mainSexTypes, 1f);
 		
-		addSexTypeWeighting(new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaPenetration.FOOT), target, request, foreplaySexTypes, 3);
-		addSexTypeWeighting(new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaPenetration.FOOT), target, request, mainSexTypes, 1f);
-		
-		
-		foreplaySexTypes.entrySet().removeIf(e -> e.getValue()<=0); //TODO
+		foreplaySexTypes.entrySet().removeIf(e -> e.getValue()<=0);
 		mainSexTypes.entrySet().removeIf(e -> e.getValue()<=0);
 		
-		if(debug && foreplaySexTypes.containsKey(new SexType(SexParticipantType.NORMAL, SexAreaPenetration.FOOT, SexAreaPenetration.PENIS))) {
-			System.out.println("Foreplay contains foot actions 1");
-		}
 		
 		// ************************ This section deals with the possibilities that no fetish-related SexTypes were chosen ************************ //
 		
@@ -3385,9 +3367,6 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 			mainSexTypes.keySet().removeIf(sexType -> sexType.getPerformingSexArea()==SexAreaPenetration.TAIL);
 		}
 		
-		if(debug && foreplaySexTypes.containsKey(new SexType(SexParticipantType.NORMAL, SexAreaPenetration.FOOT, SexAreaPenetration.PENIS))) {
-			System.out.println("Foreplay contains foot actions 2");
-		}
 		
 		// ************************ Finally, set preferences from the resulting lists. ************************ //
 
@@ -3438,9 +3417,6 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 		
 		foreplayPreference.put(target, null);
 		if(!foreplaySexTypes.isEmpty()) {
-			if(debug && foreplaySexTypes.containsKey(new SexType(SexParticipantType.NORMAL, SexAreaPenetration.FOOT, SexAreaPenetration.PENIS))) {
-				System.out.println("Foreplay contains foot actions 3");
-			}
 			if(request!=null) {
 				Map<SexType, Integer> requestedSexTypes = new HashMap<>(foreplaySexTypes);
 				requestedSexTypes.keySet().removeIf((type) -> type.getTargetedSexArea()!=request);
@@ -3451,9 +3427,8 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 			if(foreplayPreference.get(target)==null) {
 				foreplayPreference.put(target, Util.getRandomObjectFromWeightedMap(foreplaySexTypes));
 			}
-			if(debug) {
+			if(debug)
 				System.out.println("Foreplay: "+foreplayPreference.get(target).getPerformingSexArea().toString()+" "+foreplayPreference.get(target).getTargetedSexArea().toString());
-		}
 		}
 
 		mainSexPreference.put(target, null);
@@ -3478,9 +3453,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 	}
 
 	/**
-	 * @param position The position to check.
 	 * @param slot The slot to check.
-	 * @param slot The target's slot to check.
 	 * @param target The person who is being interacted with in this slot.
 	 * @return Whether this NPC is happy to be in this SexSlot
 	 */

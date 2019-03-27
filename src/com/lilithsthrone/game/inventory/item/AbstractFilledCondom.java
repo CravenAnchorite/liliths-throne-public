@@ -29,28 +29,28 @@ import com.lilithsthrone.utils.XMLSaving;
 public class AbstractFilledCondom extends AbstractItem implements XMLSaving {
 	
 	
-	private String cumProvider;
+	private String cumProvidor;
 	private FluidCum cum;
 	private int millilitresStored;
 	
-	public AbstractFilledCondom(AbstractItemType itemType, Colour colour, GameCharacter cumProvider, FluidCum cum, int millilitresStored) {
+	public AbstractFilledCondom(AbstractItemType itemType, Colour colour, GameCharacter cumProvidor, FluidCum cum, int millilitresStored) {
 		super(itemType);
 		
-		this.cumProvider = cumProvider.getId();
+		this.cumProvidor = cumProvidor.getId();
 		this.cum = new FluidCum(cum.getType());
-		this.cum.setFlavour(cumProvider, cum.getFlavour());
+		this.cum.setFlavour(cumProvidor, cum.getFlavour());
 		for(FluidModifier fm : cum.getFluidModifiers()) {
-			this.cum.addFluidModifier(cumProvider, fm);
+			this.cum.addFluidModifier(cumProvidor, fm);
 		}
 		this.colourShade = colour;
 		SVGString = getSVGString(itemType.getPathName(), colour);
 		this.millilitresStored = millilitresStored;
 	}
 	
-	public AbstractFilledCondom(AbstractItemType itemType, Colour colour, String cumProviderId, FluidCum cum, int millilitresStored) {
+	public AbstractFilledCondom(AbstractItemType itemType, Colour colour, String cumProvidorId, FluidCum cum, int millilitresStored) {
 		super(itemType);
 		
-		this.cumProvider = cumProviderId;
+		this.cumProvidor = cumProvidorId;
 		this.cum = new FluidCum(cum.getType());
 		this.cum.setFlavour(null, cum.getFlavour());
 		for(FluidModifier fm : cum.getFluidModifiers()) {
@@ -65,7 +65,7 @@ public class AbstractFilledCondom extends AbstractItem implements XMLSaving {
 	public boolean equals(Object o) {
 		if(super.equals(o)) {
 			return (o instanceof AbstractFilledCondom)
-					&& ((AbstractFilledCondom)o).getCumProviderId().equals(this.getCumProviderId())
+					&& ((AbstractFilledCondom)o).getCumProvidorId().equals(this.getCumProvidorId())
 					&& ((AbstractFilledCondom)o).getCum().equals(cum);
 		} else {
 			return false;
@@ -75,7 +75,7 @@ public class AbstractFilledCondom extends AbstractItem implements XMLSaving {
 	@Override
 	public int hashCode() {
 		int result = super.hashCode();
-		result = 31 * result + cumProvider.hashCode();
+		result = 31 * result + cumProvidor.hashCode();
 		result = 31 * result + cum.hashCode();
 		return result;
 	}
@@ -87,7 +87,7 @@ public class AbstractFilledCondom extends AbstractItem implements XMLSaving {
 		
 		CharacterUtils.addAttribute(doc, element, "id", this.getItemType().getId());
 		CharacterUtils.addAttribute(doc, element, "colour", String.valueOf(this.getColour()));
-		CharacterUtils.addAttribute(doc, element, "cumProvider", this.getCumProviderId());
+		CharacterUtils.addAttribute(doc, element, "cumProvidor", this.getCumProvidorId());
 		CharacterUtils.addAttribute(doc, element, "millilitresStored", String.valueOf(this.getMillilitresStored()));
 		
 		Element innerElement = doc.createElement("itemEffects");
@@ -104,15 +104,10 @@ public class AbstractFilledCondom extends AbstractItem implements XMLSaving {
 	}
 
 	public static AbstractFilledCondom loadFromXML(Element parentElement, Document doc) {
-		String provider = parentElement.getAttribute("cumProvider");
-		if(provider.isEmpty()) {
-			provider = parentElement.getAttribute("cumProvidor"); // Support for old versions in which I could not spell
-		}
-		
 		return new AbstractFilledCondom(
 				ItemType.getIdToItemMap().get(parentElement.getAttribute("id")),
 				Colour.valueOf(parentElement.getAttribute("colour")),
-				provider,
+				parentElement.getAttribute("cumProvidor"),
 				((Element) parentElement.getElementsByTagName("cum").item(0)==null
 					?new FluidCum(FluidType.CUM_HUMAN)
 					:FluidCum.loadFromXML((Element) parentElement.getElementsByTagName("cum").item(0), doc)),
@@ -147,27 +142,27 @@ public class AbstractFilledCondom extends AbstractItem implements XMLSaving {
 						+ "[npc.Name] can't help but let out a delighted [npc.moan] as [npc.she] greedily [npc.verb(gulp)] down the slimy fluid."
 						+ " Darting [npc.her] [npc.tongue] out, [npc.she] desperately [npc.verb(lick)] up every last drop of cum; only discarding the condom once [npc.sheIs] sure that's it's completely empty."
 					+ "</p>"
-					+ target.ingestFluid(getCumProvider(), cum, SexAreaOrifice.MOUTH, millilitresStored));
+					+ target.ingestFluid(getCumProvidor(), cum, SexAreaOrifice.MOUTH, millilitresStored));
 		} else {
 			return UtilText.parse(user, target,
 					"<p>"
 						+ "[npc.Name] scrunches [npc.her] [npc.eyes] shut as [npc.she] [npc.verb(gulp)] down the slimy fluid,"
 						+ " trying [npc.her] best not to think about what [npc.sheHas] just done as "+(user.equals(target)?"[npc.she] [npc.verb(throw)]":"[npc2.name] [npc2.verb(throw)]")+" the now-empty condom to the floor..."
 					+ "</p>"
-					+ target.ingestFluid(getCumProvider(), cum, SexAreaOrifice.MOUTH, millilitresStored));
+					+ target.ingestFluid(getCumProvidor(), cum, SexAreaOrifice.MOUTH, millilitresStored));
 		}
 		
 	}
 	
-	public String getCumProviderId() {
-		return cumProvider;
+	public String getCumProvidorId() {
+		return cumProvidor;
 	}
 	
-	public GameCharacter getCumProvider() {
+	public GameCharacter getCumProvidor() {
 		try {
-			return Main.game.getNPCById(cumProvider);
+			return Main.game.getNPCById(cumProvidor);
 		} catch (Exception e) {
-			Util.logGetNpcByIdError("getCumProvider()", cumProvider);
+			Util.logGetNpcByIdError("getCumProvidor()", cumProvidor);
 			return null;
 		}
 	}

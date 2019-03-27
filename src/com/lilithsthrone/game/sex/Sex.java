@@ -48,7 +48,6 @@ import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.clothing.DisplacementType;
 import com.lilithsthrone.game.inventory.enchanting.TFEssence;
 import com.lilithsthrone.game.inventory.item.AbstractItemType;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
 import com.lilithsthrone.game.sex.managers.SexManagerInterface;
 import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.SexSlot;
@@ -210,14 +209,13 @@ public class Sex {
 	private static Set<GameCharacter> charactersForbiddenByOthersFromPositioning;
 	private static Set<GameCharacter> charactersSelfActionsBlocked;
 	private static Set<GameCharacter> charactersDeniedOrgasm;
-	private static Map<GameCharacter, SexControl> forcedSexControlMap;
 
 	private static Value<GameCharacter, Class<? extends BodyPartInterface>> creampieLockedBy;
 	
 	// Clothes:
 
-	private static Set<GameCharacter> charactersBannedFromRemovingSelfClothing;
-	private static Set<GameCharacter> charactersBannedFromRemovingOthersClothing;
+	private static Set<GameCharacter> charactersAbleToRemoveSelfClothing;
+	private static Set<GameCharacter> charactersAbleToRemoveOthersClothing;
 	
 	private static AbstractClothing clothingBeingRemoved;
 	
@@ -364,15 +362,6 @@ public class Sex {
 		positionRequest = null;
 		charactersBannedFromPositioning = new HashSet<>();
 		
-		
-		charactersSelfActionsBlocked = new HashSet<>();
-		charactersDeniedOrgasm = new HashSet<>();
-		
-		forcedSexControlMap = new HashMap<>();
-		for(GameCharacter character : Sex.getAllParticipants()) {
-			forcedSexControlMap.put(character, null);
-		}
-
 		charactersForbiddenByOthersFromPositioning = new HashSet<>();
 		for(GameCharacter character : Sex.getAllParticipants()) {
 			if(!character.isPlayer() && (Sex.getSexControl(character)!=SexControl.FULL || !Sex.isDom(character))) {
@@ -380,6 +369,10 @@ public class Sex {
 			}
 		}
 		
+		
+		charactersSelfActionsBlocked = new HashSet<>();
+		charactersDeniedOrgasm = new HashSet<>();
+
 		areasStretched = new HashMap<>();
 		for(GameCharacter character : Sex.getAllParticipants()) {
 			areasStretched.put(character, new HashSet<>());
@@ -515,8 +508,8 @@ public class Sex {
 		
 		sexSB.append(calculateWetAreas(true));
 		
-		charactersBannedFromRemovingSelfClothing = new HashSet<>();
-		charactersBannedFromRemovingOthersClothing = new HashSet<>();
+		charactersAbleToRemoveSelfClothing = new HashSet<>();
+		charactersAbleToRemoveOthersClothing = new HashSet<>();
 		
 		// Store status of all clothes for both partners (so they can be restored afterwards):
 		clothingPreSexMap = new HashMap<>();
@@ -640,14 +633,14 @@ public class Sex {
 				boolean satisfiedPartners = false;
 				if(Sex.isDom(participant)) {
 					for(GameCharacter sub : Sex.getSubmissiveParticipants(false).keySet()) {
-						if(Sex.getNumberOfOrgasms(sub)>=sub.getOrgasmsBeforeSatisfied()) {
+						if(Sex.getNumberOfOrgasms(sub)>= sub.getOrgasmsBeforeSatisfied()) {
 							satisfiedPartners = true;
 							break;
 						}
 					}
 				} else {
 					for(GameCharacter dom : Sex.getDominantParticipants(false).keySet()) {
-						if(Sex.getNumberOfOrgasms(dom)>=dom.getOrgasmsBeforeSatisfied()) {
+						if(Sex.getNumberOfOrgasms(dom)>= dom.getOrgasmsBeforeSatisfied()) {
 							satisfiedPartners = true;
 							break;
 						}
@@ -662,10 +655,17 @@ public class Sex {
 				((NPC)participant).endSex();
 			}
 			
-			if(getNumberOfOrgasms(participant) > 0) {
+			if(getNumberOfOrgasms(participant) >= participant.getOrgasmsBeforeSatisfied()) {
 				participant.setLust(0);
 			}
+		
+			if(participant.hasVagina() && !participant.hasPenis()){
+				participant.setOrgasmsBeforeSatisfied();
+						//(2 + (int)(Math.random() * 5)));
+			}
 		}
+		
+		
 		
 		if(SexFlags.playerGrewDemonicCock) {
 			Main.game.getPlayer().setPenisType(PenisType.NONE);
@@ -886,7 +886,7 @@ public class Sex {
 				// Stretching effects:
 				endSexSB.append(getEndSexStretchingDescription(participant));
 
-				if((participant.getArousal() > ArousalLevel.THREE_HEATED.getMaximumValue() || Sex.getNumberOfDeniedOrgasms(participant)>0) && getNumberOfOrgasms(participant) == 0) {
+				if((participant.getArousal() > ArousalLevel.THREE_HEATED.getMaximumValue() || Sex.getNumberOfDeniedOrgasms(participant)>0) && getNumberOfOrgasms(participant) < participant.getOrgasmsBeforeSatisfied()) {
 					participant.addStatusEffect(StatusEffect.FRUSTRATED_NO_ORGASM, (240*60)+(postSexDialogue.getSecondsPassed()));
 					if(Sex.getNumberOfDeniedOrgasms(participant)>0) {
 						endSexSB.append("<p style='text-align:center'>[style.boldArcane(After being denied your orgasm, you're left feeling frustrated and horny!)]</p>");
@@ -894,7 +894,7 @@ public class Sex {
 						endSexSB.append("<p style='text-align:center'>[style.boldArcane(After stopping so close to the edge, you're left feeling frustrated and horny!)]</p>");
 					}
 				}
-				if(getNumberOfOrgasms(participant) > 0
+				if(getNumberOfOrgasms(participant) >= participant.getOrgasmsBeforeSatisfied()
 						&& Main.game.isInNewWorld()) {
 					participant.removeStatusEffect(StatusEffect.FRUSTRATED_NO_ORGASM);
 					if(participant.hasStatusEffect(StatusEffect.RECOVERING_AURA)) {
@@ -977,10 +977,24 @@ public class Sex {
 					participant.addStatusEffect(StatusEffect.RECOVERING_AURA, (240*60)+(postSexDialogue.getSecondsPassed()));
 				}
 				
+				for(GameCharacter lubedUp : Sex.getAllParticipants()) {
+					if(lubedUp != participant) {
+						if (getWetAreas(participant).get(SexAreaOrifice.VAGINA).get(lubedUp).contains(LubricationType.GIRLCUM)){
+							//sexSB.append(participant.rollForPregnancy(lubedUp, 100));
+						}
+					}
+				}
 				endSexSB = new StringBuilder(UtilText.parse(participant, endSexSB.toString()));
 				
 			// Partner effects:
 			} else {
+				for(GameCharacter lubedUp : Sex.getAllParticipants()) {
+					if(lubedUp != participant) {
+						if (getWetAreas(participant).get(SexAreaOrifice.VAGINA).get(lubedUp).contains(LubricationType.GIRLCUM)){
+							//sexSB.append(participant.rollForPregnancy(lubedUp, 100));
+						}
+					}
+				}
 //				endSexSB.append("<br/><p style='text-align:center;'>"
 //						+ "<span style='color:"+participant.getFemininity().getColour().toWebHexString()+";'>[npc.Name]:</span>"
 //								+ "</p>");
@@ -988,14 +1002,14 @@ public class Sex {
 				endSexSB.append(getEndSexStretchingDescription(participant));
 				
 				// Extra effects:
-				if((participant.getArousal() > ArousalLevel.THREE_HEATED.getMaximumValue() || Sex.getNumberOfDeniedOrgasms(participant)>0) && getNumberOfOrgasms(participant) == 0) {
+				if((participant.getArousal() > ArousalLevel.THREE_HEATED.getMaximumValue() || Sex.getNumberOfDeniedOrgasms(participant)>0) && getNumberOfOrgasms(participant) < participant.getOrgasmsBeforeSatisfied()) {
 					participant.addStatusEffect(StatusEffect.FRUSTRATED_NO_ORGASM, (240*60)+(postSexDialogue.getSecondsPassed()));if(Sex.getNumberOfDeniedOrgasms(participant)>0) {
 						endSexSB.append("<p style='text-align:center'>[style.boldArcane(After being denied [npc.her] orgasm, [npc.name] is left feeling frustrated and horny!)]</p>");
 					} else {
 						endSexSB.append("<p style='text-align:center'>[style.boldArcane(After stopping so close to the edge, [npc.name] is left feeling frustrated and horny!)]</p>");
 					}
 				}
-				if(getNumberOfOrgasms(participant) > 0
+				if(getNumberOfOrgasms(participant) >= participant.getOrgasmsBeforeSatisfied() 
 						&& Main.game.isInNewWorld()) {
 					participant.removeStatusEffect(StatusEffect.FRUSTRATED_NO_ORGASM);
 					if(participant.hasStatusEffect(StatusEffect.RECOVERING_AURA)) {
@@ -1619,13 +1633,26 @@ public class Sex {
 			if(SexFlags.playerPreparedForCharactersOrgasm.contains(Sex.getCharacterPerformingAction())) {
 				for (SexActionInterface sexAction : Sex.getOrgasmActionsPartner(Sex.getCharacterPerformingAction(), targetedCharacter)) {
 					if (sexAction.isAddedToAvailableSexActions()) {
-						
+						boolean dislikedAction = false;
+//						if(sexAction.getFetishes(Sex.getCharacterPerformingAction())!=null) {
+//							for(Fetish f : sexAction.getFetishes(Sex.getCharacterPerformingAction())) {
+//								if(f!=Fetish.FETISH_EXHIBITIONIST // Do not include exhibitionist, as otherwise NPC will never do anything in public sex.
+//										&& (Sex.getCharacterPerformingAction().getFetishDesire(f)==FetishDesire.ONE_DISLIKE
+//											|| Sex.getCharacterPerformingAction().getFetishDesire(f)==FetishDesire.ZERO_HATE)) {
+//									lowPriority.add(sexAction);
+//									dislikedAction = true;
+//									break;
+//								}
+//							}
+//						}
 						int weight = ((NPC)Sex.getCharacterPerformingAction()).calculateSexTypeWeighting(sexAction.getAsSexType(), targetedCharacter, null);
 						
 						if(weight<0) {
 							lowPriority.add(sexAction);
+							dislikedAction = true;
+						}
 						
-						} else {
+						if(!dislikedAction) {
 							switch(sexAction.getPriority()){
 								case LOW:
 									lowPriority.add(sexAction);
@@ -1674,12 +1701,26 @@ public class Sex {
 			for (SexActionInterface sexAction : Sex.getActionsAvailablePartner(Sex.getCharacterPerformingAction(), targetedCharacter)) {
 				if (sexAction.getActionType()==SexActionType.PREPARE_FOR_PARTNER_ORGASM) {
 					if (sexAction.isAddedToAvailableSexActions()) {
+						boolean dislikedAction = false;
+//						if(sexAction.getFetishes(Sex.getCharacterPerformingAction())!=null) {
+//							for(Fetish f : sexAction.getFetishes(Sex.getCharacterPerformingAction())) {
+//								if(f!=Fetish.FETISH_EXHIBITIONIST // Do not include exhibitionist, as otherwise NPC will never do anything in public sex.
+//										&& (Sex.getCharacterPerformingAction().getFetishDesire(f)==FetishDesire.ONE_DISLIKE
+//											|| Sex.getCharacterPerformingAction().getFetishDesire(f)==FetishDesire.ZERO_HATE)) {
+//									lowPriority.add(sexAction);
+//									dislikedAction = true;
+//									break;
+//								}
+//							}
+//						}
 						int weight = ((NPC)Sex.getCharacterPerformingAction()).calculateSexTypeWeighting(sexAction.getAsSexType(), targetedCharacter, null);
 						
 						if(weight<0) {
 							lowPriority.add(sexAction);
+							dislikedAction = true;
+						}
 						
-						} else {
+						if(!dislikedAction) {
 							switch(sexAction.getPriority()){
 								case LOW:
 									lowPriority.add(sexAction);
@@ -1722,7 +1763,7 @@ public class Sex {
 			
 			// Add actions:
 			for (SexActionInterface sexAction : Sex.getActionsAvailablePartner(Sex.getCharacterPerformingAction(), targetedCharacter)) {
-				if (sexAction.isAddedToAvailableSexActions() && (Sex.isCharacterAllowedToUseSelfActions(Sex.getCharacterPerformingAction()) || sexAction.getParticipantType()==SexParticipantType.NORMAL)) {
+				if (sexAction.isAddedToAvailableSexActions() && (Sex.isCharacterAllowedToUseSelfActions(targetedCharacter) || sexAction.getParticipantType()==SexParticipantType.NORMAL)) {
 					
 					// Do not add action if the partner is resisting and this action is SUB_EAGER or SUB_NORMAL or is a self action
 					// Do not add action if action does not correspond to the partner's preferred action pace
@@ -1736,13 +1777,26 @@ public class Sex {
 						
 					} else {
 						// Add action as normal:
-						
+						boolean dislikedAction = false;
+//						if(sexAction.getFetishes(Sex.getCharacterPerformingAction())!=null) {
+//							for(Fetish f : sexAction.getFetishes(Sex.getCharacterPerformingAction())) {
+//								if(f!=Fetish.FETISH_NON_CON_SUB
+//										&& f!=Fetish.FETISH_EXHIBITIONIST // Do not include exhibitionist, as otherwise NPC will never do anything in public sex.
+//										&& (Sex.getCharacterPerformingAction().getFetishDesire(f)==FetishDesire.ONE_DISLIKE
+//											|| Sex.getCharacterPerformingAction().getFetishDesire(f)==FetishDesire.ZERO_HATE)) {
+//									dislikedAction = true;
+//									break;
+//								}
+//							}
+//						}
 						int weight = ((NPC)Sex.getCharacterPerformingAction()).calculateSexTypeWeighting(sexAction.getAsSexType(), targetedCharacter, null);
 						
 						if(weight<0 && !sexAction.equals(GenericActions.PARTNER_STOP_SEX_NOT_HAVING_FUN)) {
 							lowPriority.add(sexAction);
+							dislikedAction = true;
+						}
 						
-						} else {
+						if(!dislikedAction) {
 							switch(sexAction.getPriority()){
 								case LOW:
 									lowPriority.add(sexAction);
@@ -1778,6 +1832,7 @@ public class Sex {
 				availableSexActionsPartner.addAll(normalPriority);
 
 			} else if(!lowPriority.isEmpty()) {
+				System.out.println("low priority added");
 				availableSexActionsPartner.addAll(lowPriority);
 			}
 			
@@ -1977,23 +2032,106 @@ public class Sex {
 				}
 
 				List<CoverableArea> cummedOnAreas = sexAction.getAreasCummedOn(cumProvider, cumTarget);
-				if (cummedOnAreas == null) {
+				if (cummedOnAreas == null)
 					continue;
-				}
+
 				for(CoverableArea area : cummedOnAreas) {
-					for(InventorySlot slot : area.getAssociatedInventorySlots(cumTarget)) {
-						List<AbstractClothing> dirtyClothing = cumTarget.getVisibleClothingConcealingSlot(slot);
-						if(!dirtyClothing.isEmpty()) {
-							for(AbstractClothing c : dirtyClothing) {
-								c.setDirty(true);
+
+					InventorySlot invSlot = InventorySlot.MOUTH;
+					switch(area) {
+						case NONE:
+							continue;
+	
+						case MOUTH: // Facial:
+							if(cumTarget.getClothingInSlot(InventorySlot.EYES)!=null) {
+								cumTarget.getClothingInSlot(InventorySlot.EYES).setDirty(true);
+							} else {
+								cumTarget.addDirtySlot(InventorySlot.EYES);
 							}
-						} else if(slot!=InventorySlot.TORSO_OVER) { // Do not dirty over-torso slot, as it doesn't really make much sense...
-							cumTarget.addDirtySlot(slot);
-						}
+							if(cumTarget.getClothingInSlot(InventorySlot.NECK)!=null) {
+								cumTarget.getClothingInSlot(InventorySlot.NECK).setDirty(true);
+							} else {
+								cumTarget.addDirtySlot(InventorySlot.NECK);
+							}
+							// invSlot = InventorySlot.MOUTH;
+							break;
+	
+						case FEET:
+							if (cumTarget.getHighestZLayerCoverableArea(CoverableArea.FEET)==null) {
+								cumTarget.addDirtySlot(InventorySlot.ANKLE);
+								invSlot = InventorySlot.FOOT;
+							}
+							break;
+	
+						case HAIR:
+							invSlot = InventorySlot.HAIR;
+							break;
+	
+						case HANDS:
+							invSlot = InventorySlot.HAND;
+							break;
+	
+						case STOMACH:
+							invSlot = InventorySlot.STOMACH;
+							break;
+	
+						case BACK:
+							invSlot = InventorySlot.TORSO_OVER;
+							break;
+	
+						case ASS: case ANUS:
+							invSlot = InventorySlot.ANUS;
+							break;
+	
+						case NIPPLES:
+							area = CoverableArea.BREASTS;
+							invSlot = InventorySlot.CHEST;
+							break;
+						case BREASTS:
+							invSlot = InventorySlot.CHEST;
+							break;
+	
+						case NIPPLES_CROTCH:
+							area = CoverableArea.LEGS;
+							invSlot = InventorySlot.GROIN;
+							break;
+						case BREASTS_CROTCH:
+							invSlot = InventorySlot.GROIN;
+							break;
+	
+						case TESTICLES:
+							area = CoverableArea.PENIS;
+							invSlot = InventorySlot.GROIN;
+							break;
+						case PENIS:
+							invSlot = InventorySlot.GROIN;
+							break;
+	
+						case MOUND:
+							area = CoverableArea.VAGINA;
+							invSlot = InventorySlot.GROIN;
+							break;
+						case VAGINA:
+							invSlot = InventorySlot.GROIN;
+							break;
+	
+						case THIGHS:
+							area = CoverableArea.LEGS;
+							invSlot = InventorySlot.LEG;
+							break;
+						case LEGS:
+							invSlot = InventorySlot.LEG;
+							break;
+					}
+					if (cumTarget.getHighestZLayerCoverableArea(area)!=null) {
+						cumTarget.getHighestZLayerCoverableArea(area).setDirty(true);
+					} else {
+						cumTarget.addDirtySlot(invSlot);
 					}
 				}
 			}
 		}
+
 		if(sexAction.getActionType()==SexActionType.PREPARE_FOR_PARTNER_ORGASM
 				&& Sex.getCharacterPerformingAction().isPlayer()) {
 			SexFlags.playerPreparedForCharactersOrgasm.add(Sex.getCharacterTargetedForSexAction(sexAction));
@@ -2014,23 +2152,25 @@ public class Sex {
 				Sex.getCharacterPerformingAction().unequipClothingIntoVoid(Sex.getCharacterPerformingAction().getClothingInSlot(InventorySlot.PENIS), true, Sex.getCharacterPerformingAction());
 			}
 			
-			if(Sex.getCharacterPerformingAction().hasVagina() && Sex.getCharacterPerformingAction().isVaginaSquirter()) {
-				AbstractClothing vaginaClothing = Sex.getCharacterPerformingAction().getLowestZLayerCoverableArea(CoverableArea.VAGINA);
-				if(vaginaClothing!=null
-						&& !vaginaClothing.getItemTags().contains(ItemTag.PLUGS_VAGINA)
-						&& !vaginaClothing.getItemTags().contains(ItemTag.SEALS_VAGINA)) {
-					vaginaClothing.setDirty(true);
+			if(Sex.getCharacterPerformingAction().hasVagina() /**&& Sex.getCharacterPerformingAction().isVaginaSquirter()**/) {
+				if(Sex.getCharacterPerformingAction().getLowestZLayerCoverableArea(CoverableArea.VAGINA)!=null) {
+					Sex.getCharacterPerformingAction().getLowestZLayerCoverableArea(CoverableArea.VAGINA).setDirty(true);
 					
 				} else {
 					Set<GameCharacter> charactersEatingOut = new HashSet<>(getCharacterContactingSexArea(Sex.getCharacterPerformingAction(), SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE));
 					charactersEatingOut.addAll(getCharacterContactingSexArea(Sex.getCharacterPerformingAction(), SexAreaOrifice.VAGINA, SexAreaOrifice.MOUTH));
 					
 					for(GameCharacter character : charactersEatingOut) {
+						int girlcumAmmount = 10 * Sex.getCharacterPerformingAction().getVaginaWetness().getValue();
+						if(Sex.getCharacterPerformingAction().isVaginaSquirter()){
+							girlcumAmmount += 100;
+						}
+						
 						stringBuilderForAppendingDescriptions.append(character.ingestFluid(
 								Sex.getCharacterPerformingAction(),
 								Sex.getCharacterPerformingAction().getGirlcum(),
 								SexAreaOrifice.MOUTH,
-								5 * Sex.getCharacterPerformingAction().getVaginaWetness().getValue()));
+								girlcumAmmount));
 					}
 				}
 			}
@@ -2345,19 +2485,19 @@ public class Sex {
 					Util.capitaliseSentence(Util.stringsToStringList(lubricationTransferred, false))
 						+(sexInitFinished
 							?" quickly lubricate"+(lubricationTransferred.size()>1 || !lastLubricationPlural?"s ":" ")
-							:" has already lubricated ")
+							:targetArea.isPlural()?" are already lubricated":" is already lubricated")
 						+(targetCharacter.isPlayer()?"your ":targetCharacter.getName("the")+"'s ")+targetArea.getName(targetCharacter)+"."));
 		}
 		
 		lubricationTransferred.clear();
 		
-		for(GameCharacter lubricantProvider : Sex.getAllParticipants()) {
-			for(LubricationType lt : wetAreas.get(targetCharacter).get(targetArea).get(lubricantProvider)) {
-				if(!wetAreas.get(character).get(characterArea).get(lubricantProvider).contains(lt)
+		for(GameCharacter lubricantProvidor : Sex.getAllParticipants()) {
+			for(LubricationType lt : wetAreas.get(targetCharacter).get(targetArea).get(lubricantProvidor)) {
+				if(!wetAreas.get(character).get(characterArea).get(lubricantProvidor).contains(lt)
 						// Cannot lubricate with self cum or precum via penis through a condom:
-						&& ((lt!=LubricationType.PRECUM && lt!=LubricationType.CUM) || targetArea!=SexAreaPenetration.PENIS || !targetCharacter.isWearingCondom() || !lubricantProvider.equals(targetCharacter))) {
-					wetAreas.get(character).get(characterArea).get(lubricantProvider).add(lt);
-					lubricationTransferred.add((lubricantProvider==null?"":UtilText.parse(lubricantProvider, "[npc.namePos] "))+lt.getName(lubricantProvider));
+						&& ((lt!=LubricationType.PRECUM && lt!=LubricationType.CUM) || targetArea!=SexAreaPenetration.PENIS || !targetCharacter.isWearingCondom() || !lubricantProvidor.equals(targetCharacter))) {
+					wetAreas.get(character).get(characterArea).get(lubricantProvidor).add(lt);
+					lubricationTransferred.add((lubricantProvidor==null?"":UtilText.parse(lubricantProvidor, "[npc.namePos] "))+lt.getName(lubricantProvidor));
 					lastLubricationPlural = lt.isPlural();
 				}
 			}
@@ -2368,7 +2508,7 @@ public class Sex {
 					Util.capitaliseSentence(Util.stringsToStringList(lubricationTransferred, false))
 						+(sexInitFinished
 							?" quickly lubricate"+(lubricationTransferred.size()>1 || !lastLubricationPlural?"s ":" ")
-							:" has already lubricated ")
+							:targetArea.isPlural()?" are already lubricated":" is already lubricated")
 						+(character.isPlayer()?"your ":character.getName("the")+"'s ")+characterArea.getName(character)+"."));
 		}
 		
@@ -2955,8 +3095,7 @@ public class Sex {
 		
 		SimpleEntry<AbstractClothing, DisplacementType> clothingRemoval = targetForManagement.getNextClothingToRemoveForCoverableAreaAccess(coverableArea);
 		if (clothingRemoval == null || clothingRemoval.getKey() == null) {
-			Sex.setUnequipClothingText(null,
-					UtilText.parse(characterManagingClothing, targetForManagement, "[npc.Name] can't find a piece of [npc2.namePos] clothing to remove in order to access the slot '"+coverableArea+"'. (This is a bug...)"));
+			unequipClothingText = UtilText.parse(characterManagingClothing, targetForManagement, "[npc.Name] can't find a piece of [npc2.namePos] clothing to remove in order to access the slot '"+coverableArea+"'. (This is a bug...)");
 			System.err.println("manageClothingToAccessCoverableArea() can't find clothing - CoverableArea."+coverableArea.toString());
 			return SexActionUtility.CLOTHING_REMOVAL;
 		}
@@ -2965,11 +3104,11 @@ public class Sex {
 
 		if (clothingRemoval.getValue() == DisplacementType.REMOVE_OR_EQUIP) {
 			targetForManagement.unequipClothingOntoFloor(clothingBeingRemoved, false, characterManagingClothing);
-			Sex.setUnequipClothingText(clothingBeingRemoved, targetForManagement.getUnequipDescription());
+			unequipClothingText = targetForManagement.getUnequipDescription();
 
 		} else {
 			targetForManagement.isAbleToBeDisplaced(clothingBeingRemoved, clothingRemoval.getValue(), true, false, characterManagingClothing);
-			Sex.setDisplaceClothingText(clothingBeingRemoved, targetForManagement.getDisplaceDescription());
+			unequipClothingText = targetForManagement.getDisplaceDescription();
 		}
 
 		return SexActionUtility.CLOTHING_REMOVAL;
@@ -3001,14 +3140,7 @@ public class Sex {
 		Sex.subHasEqualControl = subHasEqualControl;
 	}
 
-	public static void setForcedSexControl(GameCharacter character, SexControl sexControl) {
-		forcedSexControlMap.put(character, sexControl);
-	}
-	
 	public static SexControl getSexControl(GameCharacter character) {
-		if(forcedSexControlMap.get(character)!=null) {
-			return forcedSexControlMap.get(character);
-		}
 		return initialSexManager.getSexControl(character);
 	}
 	
@@ -3176,44 +3308,8 @@ public class Sex {
 		return unequipClothingText;
 	}
 
-	public static void setUnequipClothingText(AbstractClothing clothing, String unequipClothingText) {
-		Sex.unequipClothingText =
-						"<p style='text-align:center;'>"
-								+ "<i style='color:" + Colour.GENERIC_BAD.toWebHexString() + ";'>Clothing removal</i>"+(clothing==null?"":": "+Util.capitaliseSentence(clothing.getName()))
-						+ "</p>"
-						+ unequipClothingText;
-	}
-
-	public static void setUnequipWeaponText(AbstractWeapon weapon, String unequipClothingText) {
-		Sex.unequipClothingText = 
-				"<p style='text-align:center;'>"
-						+ "<i style='color:" + Colour.GENERIC_BAD.toWebHexString() + ";'>Weapon removal</i>"+(weapon==null?"":": "+Util.capitaliseSentence(weapon.getName()))
-				+ "</p>"
-				+ unequipClothingText;
-	}
-	
-	public static void setDisplaceClothingText(AbstractClothing clothing, String unequipClothingText) {
-		Sex.unequipClothingText = 
-				"<p style='text-align:center;'>"
-						+ "<i style='color:" + Colour.GENERIC_MINOR_BAD.toWebHexString() + ";'>Clothing displacement</i>"+(clothing==null?"":": "+Util.capitaliseSentence(clothing.getName()))
-				+ "</p>"
-				+ unequipClothingText;
-	}
-	
-	public static void setEquipClothingText(AbstractClothing clothing, String unequipClothingText) {
-		Sex.unequipClothingText =
-				"<p style='text-align:center;'>"
-						+ "<i style='color:" + Colour.GENERIC_GOOD.toWebHexString() + ";'>Clothing equip</i>"+(clothing==null?"":": "+Util.capitaliseSentence(clothing.getName()))
-				+ "</p>"
-				+ unequipClothingText;
-	}
-
-	public static void setJinxRemovalClothingText(AbstractClothing clothing, String unequipClothingText) {
-		Sex.unequipClothingText = 
-				"<p style='text-align:center;'>"
-						+ "<i style='color:" + Colour.GENERIC_ARCANE.toWebHexString() + ";'>Jinx removal</i>"+(clothing==null?"":": "+Util.capitaliseSentence(clothing.getName()))
-				+ "</p>"
-				+ unequipClothingText;
+	public static void setUnequipClothingText(String unequipClothingText) {
+		Sex.unequipClothingText = unequipClothingText;
 	}
 	
 	public static String getDyeClothingText() {
@@ -4202,32 +4298,32 @@ public class Sex {
 	}
 
 	public static boolean isCanRemoveSelfClothing(GameCharacter character) {
-		if(charactersBannedFromRemovingSelfClothing.contains(character)) {
-			return false;
+		if(charactersAbleToRemoveSelfClothing.contains(character)) {
+			return true;
 		}
 		return initialSexManager.isAbleToRemoveSelfClothing(character);
 	}
 
 	public static void setCanRemoveSelfClothing(GameCharacter character, boolean canRemoveSelfClothing) {
 		if(canRemoveSelfClothing) {
-			charactersBannedFromRemovingSelfClothing.remove(character);
+			charactersAbleToRemoveSelfClothing.add(character);
 		} else {
-			charactersBannedFromRemovingSelfClothing.add(character);
+			charactersAbleToRemoveSelfClothing.remove(character);
 		}
 	}
 	
 	public static boolean isCanRemoveOthersClothing(GameCharacter character, AbstractClothing clothing) {
-		if(charactersBannedFromRemovingOthersClothing.contains(character)) {
-			return false;
+		if(charactersAbleToRemoveOthersClothing.contains(character)) {
+			return true;
 		}
 		return initialSexManager.isAbleToRemoveOthersClothing(character, clothing);
 	}
 
 	public static void setCanRemoveOthersClothing(GameCharacter character, boolean canRemoveOthersClothing) {
 		if(canRemoveOthersClothing) {
-			charactersBannedFromRemovingOthersClothing.remove(character);
+			charactersAbleToRemoveOthersClothing.add(character);
 		} else {
-			charactersBannedFromRemovingOthersClothing.add(character);
+			charactersAbleToRemoveOthersClothing.remove(character);
 		}
 	}
 	

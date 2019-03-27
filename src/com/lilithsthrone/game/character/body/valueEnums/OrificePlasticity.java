@@ -51,7 +51,7 @@ public enum OrificePlasticity {
 	FIVE_YIELDING("yielding",
 			"[style.colourPlasticity(very slowly recovers [style.italicsMinorBad(most, not all)], of its original capacity)]",
 			"[style.colourPlasticity(very slowly recover [style.italicsMinorBad(most, not all)], of their original capacity)]",
-			5, 0.2f, 2/(60*60f*24), Colour.GENERIC_SIZE_SIX),
+			5, 0.02f, 2/(60*60f*4), Colour.GENERIC_SIZE_SIX),
 
 	/**Will only recover about 40% of its original size after sex, at a rate of 2 cm per 24 hours.*/
 	SIX_MALLEABLE("malleable",

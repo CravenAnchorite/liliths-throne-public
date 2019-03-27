@@ -79,8 +79,10 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 		
 		this.secondaryColour = secondaryColour;
 		this.tertiaryColour = tertiaryColour;
-
-		handlePatternCreation();
+		
+		patternColour = null;
+		patternSecondaryColour = null;
+		patternTertiaryColour = null;
 
 		displacedList = new ArrayList<>();
 
@@ -141,7 +143,9 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 		this.secondaryColour = secondaryColour;
 		this.tertiaryColour = tertiaryColour;
 		
-		handlePatternCreation();
+		patternColour = null;
+		patternSecondaryColour = null;
+		patternTertiaryColour = null;
 		
 		displacedList = new ArrayList<>();
 		if(effects!=null) {
@@ -151,32 +155,6 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 		}
 
 		enchantmentKnown = false;
-	}
-	
-	private void handlePatternCreation() {
-		if(Math.random()<clothingType.getPatternChance()) {
-			pattern = Util.randomItemFrom(clothingType.getDefaultPatterns()).getName();
-			patternColour = Util.randomItemFrom(clothingType.getAvailablePatternPrimaryColours());
-			
-			List<Colour> secondariesExclusive = new ArrayList<>(clothingType.getAvailablePatternSecondaryColours());
-			if(secondariesExclusive.size()>1) {
-				secondariesExclusive.remove(patternColour);
-			}
-			patternSecondaryColour = Util.randomItemFrom(secondariesExclusive);
-
-			List<Colour> tertiariesExclusive = new ArrayList<>(clothingType.getAvailablePatternTertiaryColours());
-			if(secondariesExclusive.size()>2) {
-				secondariesExclusive.remove(patternColour);
-				secondariesExclusive.remove(patternSecondaryColour);
-			}
-			patternTertiaryColour = Util.randomItemFrom(tertiariesExclusive);
-			
-		} else {
-			pattern = "none";
-			patternColour = null;
-			patternSecondaryColour = null;
-			patternTertiaryColour = null;
-		}
 	}
 	
 	@Override
@@ -292,25 +270,13 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 		if(!parentElement.getAttribute("name").isEmpty()) {
 			clothing.setName(parentElement.getAttribute("name"));
 		}
-
+		
 		// Try to load colours:
 		if((clothing.getClothingType().equals(ClothingType.getClothingTypeFromId("BDSM_CHOKER")) && Main.isVersionOlderThan(Game.loadingVersion, "0.2.12.6"))
-				|| (clothing.getClothingType().equals(ClothingType.getClothingTypeFromId("innoxia_ankle_shin_guards")) && Main.isVersionOlderThan(Game.loadingVersion, "0.3.0.6"))
-				|| (clothing.getClothingType().equals(ClothingType.getClothingTypeFromId("FOOT_TRAINERS")) && Main.isVersionOlderThan(Game.loadingVersion, "0.3.1.2"))) {
+				|| (clothing.getClothingType().equals(ClothingType.getClothingTypeFromId("innoxia_ankle_shin_guards")) && Main.isVersionOlderThan(Game.loadingVersion, "0.3.0.6"))) {
 			try {
 				clothing.setColour(Colour.valueOf(parentElement.getAttribute("colourSecondary")));
 				clothing.setSecondaryColour(Colour.valueOf(parentElement.getAttribute("colour")));
-			} catch(Exception ex) {
-			}
-			
-		} else if(clothing.getClothingType().equals(ClothingType.getClothingTypeFromId("FOOT_LOW_TOP_SKATER_SHOES")) && Main.isVersionOlderThan(Game.loadingVersion, "0.3.1.2")){
-			try {
-				clothing.setSecondaryColour(Colour.CLOTHING_WHITE);
-				if(!parentElement.getAttribute("colour").isEmpty()) {
-					clothing.setColour(Colour.valueOf(parentElement.getAttribute("colour")));
-				} else {
-					clothing.setColour(AbstractClothingType.DEFAULT_COLOUR_VALUE);
-				}
 			} catch(Exception ex) {
 			}
 			
@@ -777,6 +743,16 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 	public String getDisplayName(boolean withRarityColour) {
 		
 		if(!this.getName().replaceAll("\u00A0"," ").equalsIgnoreCase(this.getClothingType().getName().replaceAll("\u00A0"," "))) { // If this item has a custom name, just display that:
+//			for(int i=0;i<this.getName().toCharArray().length;i++) {
+//				System.out.print("["+Character.codePointAt(this.getName().toCharArray(), i)+"]");
+//			}
+//			System.out.println();
+//			for(int i=0;i<this.getClothingType().getName().toCharArray().length;i++) {
+//				System.out.print("["+Character.codePointAt(this.getClothingType().getName().toCharArray(), i)+"]");
+//			}
+//			System.out.println();
+//			System.out.println();
+			
 			return (withRarityColour
 					? (" <span style='color: " + (!this.isEnchantmentKnown()?Colour.RARITY_UNKNOWN:this.getRarity().getColour()).toWebHexString() + ";'>" + getName() + "</span>")
 					: getName());

@@ -11,7 +11,7 @@ public enum SlaveEvent {
 	
 	WASHED_BODY("Washed Body", "[npc.Name] had a wash and cleaned [npc.her] body.") {
 		public void applyEffects(GameCharacter character) {
-			character.washAllOrifices(true);
+			character.washAllOrifices();
 			character.cleanAllDirtySlots();
 			character.calculateStatusEffects(0);
 		}

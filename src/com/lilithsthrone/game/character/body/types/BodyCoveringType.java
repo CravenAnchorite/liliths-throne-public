@@ -153,9 +153,9 @@ public enum BodyCoveringType {
 			null,
 			null,
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null),
 	
 	PENIS(BodyCoveringTemplateFactory.createPenisSkin()),

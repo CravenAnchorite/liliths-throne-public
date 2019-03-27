@@ -8,11 +8,12 @@ import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.game.sex.SexAreaPenetration;
 import com.lilithsthrone.game.sex.SexPace;
 import com.lilithsthrone.game.sex.SexParticipantType;
-import com.lilithsthrone.game.sex.positions.SexPositionBipeds;
 import com.lilithsthrone.game.sex.positions.SexSlotBipeds;
+import com.lilithsthrone.game.sex.positions.SexPositionBipeds;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionLimitation;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
+import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 
@@ -126,6 +127,11 @@ public class PartnerSelfFingerVagina {
 		}
 		
 		@Override
+		public boolean isBaseRequirementsMet() {
+			return !Sex.isDom(Main.game.getPlayer());
+		}
+		
+		@Override
 		public String getActionTitle() {
 			return "Gentle fingering (self)";
 		}
@@ -160,6 +166,11 @@ public class PartnerSelfFingerVagina {
 		@Override
 		public SexActionLimitation getLimitation() {
 			return SexActionLimitation.NPC_ONLY;
+		}
+		
+		@Override
+		public boolean isBaseRequirementsMet() {
+			return !Sex.isDom(Main.game.getPlayer());
 		}
 		
 		@Override
@@ -200,6 +211,11 @@ public class PartnerSelfFingerVagina {
 		}
 		
 		@Override
+		public boolean isBaseRequirementsMet() {
+			return !Sex.isDom(Main.game.getPlayer());
+		}
+		
+		@Override
 		public String getActionTitle() {
 			return "Rough fingering (self)";
 		}
@@ -237,6 +253,11 @@ public class PartnerSelfFingerVagina {
 		}
 		
 		@Override
+		public boolean isBaseRequirementsMet() {
+			return Sex.isDom(Main.game.getPlayer());
+		}
+		
+		@Override
 		public String getActionTitle() {
 			return "Finger self";
 		}
@@ -271,6 +292,11 @@ public class PartnerSelfFingerVagina {
 		@Override
 		public SexActionLimitation getLimitation() {
 			return SexActionLimitation.NPC_ONLY;
+		}
+		
+		@Override
+		public boolean isBaseRequirementsMet() {
+			return Sex.isDom(Main.game.getPlayer());
 		}
 		
 		@Override

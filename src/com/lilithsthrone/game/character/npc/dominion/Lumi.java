@@ -140,7 +140,7 @@ public class Lumi extends NPC {
 		}
 		
 		// Body:
-		
+		this.setEarType(EarType.LYCAN);
 		this.setTailType(TailType.LYCAN);
 
 		// Core:

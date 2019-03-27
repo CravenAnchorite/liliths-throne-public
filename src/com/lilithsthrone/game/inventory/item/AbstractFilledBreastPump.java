@@ -27,29 +27,29 @@ import com.lilithsthrone.utils.XMLSaving;
 public class AbstractFilledBreastPump extends AbstractItem implements XMLSaving {
 	
 	
-	private String milkProvider;
+	private String milkProvidor;
 	private FluidMilk milk;
 	private int millilitresStored;
 	
-	public AbstractFilledBreastPump(AbstractItemType itemType, Colour colour, GameCharacter milkProvider, FluidMilk milk, int millilitresStored) {
+	public AbstractFilledBreastPump(AbstractItemType itemType, Colour colour, GameCharacter milkProvidor, FluidMilk milk, int millilitresStored) {
 		super(itemType);
 		
-		this.milkProvider = milkProvider.getId();
-		this.milk = new FluidMilk(milk.getType(), milk.isCrotchMilk());
-		this.milk.setFlavour(milkProvider, milk.getFlavour());
+		this.milkProvidor = milkProvidor.getId();
+		this.milk = new FluidMilk(milk.getType());
+		this.milk.setFlavour(milkProvidor, milk.getFlavour());
 		for(FluidModifier fm : milk.getFluidModifiers()) {
-			this.milk.addFluidModifier(milkProvider, fm);
+			this.milk.addFluidModifier(milkProvidor, fm);
 		}
 		this.colourShade = colour;
 		SVGString = getSVGString(itemType.getPathName(), colour);
 		this.millilitresStored = millilitresStored;
 	}
 	
-	public AbstractFilledBreastPump(AbstractItemType itemType, Colour colour, String milkProviderId, FluidMilk milk, int millilitresStored) {
+	public AbstractFilledBreastPump(AbstractItemType itemType, Colour colour, String milkProvidorId, FluidMilk milk, int millilitresStored) {
 		super(itemType);
 		
-		this.milkProvider = milkProviderId;
-		this.milk = new FluidMilk(milk.getType(), milk.isCrotchMilk());
+		this.milkProvidor = milkProvidorId;
+		this.milk = new FluidMilk(milk.getType());
 		this.milk.setFlavour(null, milk.getFlavour());
 		for(FluidModifier fm : milk.getFluidModifiers()) {
 			this.milk.addFluidModifier(null, fm);
@@ -63,7 +63,7 @@ public class AbstractFilledBreastPump extends AbstractItem implements XMLSaving 
 	public boolean equals(Object o) {
 		if(super.equals(o)) {
 			return (o instanceof AbstractFilledBreastPump)
-					&& ((AbstractFilledBreastPump)o).getMilkProviderId().equals(this.getMilkProviderId())
+					&& ((AbstractFilledBreastPump)o).getMilkProvidorId().equals(this.getMilkProvidorId())
 					&& ((AbstractFilledBreastPump)o).getMilk().equals(milk);
 		} else {
 			return false;
@@ -73,7 +73,7 @@ public class AbstractFilledBreastPump extends AbstractItem implements XMLSaving 
 	@Override
 	public int hashCode() {
 		int result = super.hashCode();
-		result = 31 * result + milkProvider.hashCode();
+		result = 31 * result + milkProvidor.hashCode();
 		result = 31 * result + milk.hashCode();
 		return result;
 	}
@@ -85,7 +85,7 @@ public class AbstractFilledBreastPump extends AbstractItem implements XMLSaving 
 		
 		CharacterUtils.addAttribute(doc, element, "id", this.getItemType().getId());
 		CharacterUtils.addAttribute(doc, element, "colour", String.valueOf(this.getColour()));
-		CharacterUtils.addAttribute(doc, element, "milkProvider", this.getMilkProviderId());
+		CharacterUtils.addAttribute(doc, element, "milkProvidor", this.getMilkProvidorId());
 		CharacterUtils.addAttribute(doc, element, "millilitresStored", String.valueOf(this.getMillilitresStored()));
 		
 		Element innerElement = doc.createElement("itemEffects");
@@ -102,16 +102,12 @@ public class AbstractFilledBreastPump extends AbstractItem implements XMLSaving 
 	}
 
 	public static AbstractFilledBreastPump loadFromXML(Element parentElement, Document doc) {
-		String provider = parentElement.getAttribute("milkProvider");
-		if(provider.isEmpty()) {
-			provider = parentElement.getAttribute("milkProvidor"); // Support for old versions in which I could not spell
-		}
 		return new AbstractFilledBreastPump(
 				ItemType.getIdToItemMap().get(parentElement.getAttribute("id")),
 				Colour.valueOf(parentElement.getAttribute("colour")),
-				provider,
+				parentElement.getAttribute("milkProvidor"),
 				((Element) parentElement.getElementsByTagName("milk").item(0)==null
-					?new FluidMilk(FluidType.MILK_HUMAN, false)
+					?new FluidMilk(FluidType.MILK_HUMAN)
 					:FluidMilk.loadFromXML((Element) parentElement.getElementsByTagName("milk").item(0), doc)),
 				(parentElement.getAttribute("millilitresStored").isEmpty()
 					?25
@@ -138,19 +134,19 @@ public class AbstractFilledBreastPump extends AbstractItem implements XMLSaving 
 	
 	@Override
 	public String applyEffect(GameCharacter user, GameCharacter target) {
-		return target.ingestFluid(getMilkProvider(), milk, SexAreaOrifice.MOUTH, millilitresStored)
+		return target.ingestFluid(getMilkProvidor(), milk, SexAreaOrifice.MOUTH, millilitresStored)
 				+ target.addItem(AbstractItemType.generateItem(ItemType.MOO_MILKER_EMPTY), false);
 	}
 	
-	public String getMilkProviderId() {
-		return milkProvider;
+	public String getMilkProvidorId() {
+		return milkProvidor;
 	}
 	
-	public GameCharacter getMilkProvider() {
+	public GameCharacter getMilkProvidor() {
 		try {
-			return Main.game.getNPCById(milkProvider);
+			return Main.game.getNPCById(milkProvidor);
 		} catch (Exception e) {
-			Util.logGetNpcByIdError("getMilkProvider()", milkProvider);
+			Util.logGetNpcByIdError("getMilkProvidor()", milkProvidor);
 			return null;
 		}
 	}

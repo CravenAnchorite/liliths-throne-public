@@ -10,7 +10,6 @@ import java.util.Set;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.FluidCum;
 import com.lilithsthrone.game.character.body.FluidMilk;
-import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.AbstractCoreType;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
@@ -260,14 +259,6 @@ public abstract class AbstractItemType extends AbstractCoreType {
 
 	public String getUseName() {
 		return "use";
-	}
-	
-	public String getUseTooltipDescription(GameCharacter user, GameCharacter target) {
-		if(user.equals(target)) {
-			return Util.capitaliseSentence(getUseName()) + " the " + getName(false) + ".";
-		} else {
-			return UtilText.parse(target, "Get [npc.name] to " + getUseName() + " the " + getName(false) + ".");
-		}
 	}
 	
 	public String getUseDescription(GameCharacter user, GameCharacter target) {

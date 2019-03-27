@@ -1,6 +1,6 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.submission;
 
-import java.util.Collections;
+import java.util.ArrayList;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
@@ -532,7 +532,7 @@ public class TunnelAttackDialogue {
 		
 		@Override
 		public String getContent() {
-			if(Sex.getNumberOfOrgasms(getMugger())>=getMugger().getOrgasmsBeforeSatisfied()) {
+			if(Sex.getNumberOfOrgasms(getMugger())>0) {
 				return UtilText.parseFromXMLFile("encounters/submission/tunnelAttack", "AFTER_SEX_PEACEFUL", getMugger());
 			} else {
 				return UtilText.parseFromXMLFile("encounters/submission/tunnelAttack", "AFTER_SEX_PEACEFUL_NO_ORGASM", getMugger());
@@ -866,26 +866,32 @@ public class TunnelAttackDialogue {
 			if(getMugger().hasTransformationFetish()
 					&& potion != null
 					&& getMugger().isWillingToRape(Main.game.getPlayer())) {
-				Fetish applicableFetish = potion.getValue().getItemType() == ItemType.FETISH_REFINED
-						?Fetish.FETISH_KINK_RECEIVING
-						:Fetish.FETISH_TRANSFORMATION_RECEIVING;
-				CorruptionLevel applicableCorruptionLevel = potion.getValue().getItemType() == ItemType.FETISH_REFINED
-						?Fetish.FETISH_KINK_RECEIVING.getAssociatedCorruptionLevel()
-						:Fetish.FETISH_TRANSFORMATION_RECEIVING.getAssociatedCorruptionLevel();
+				
+//				System.out.println("Potion Check 2"); 
+//				System.out.println(potion); 
+//				System.out.println(potion.getValue()); 
 				
 				if (index == 1) {
-					if(!Collections.disjoint(Main.game.getPlayer().getFetishes(), Util.newArrayListOfValues(applicableFetish))) {
+					if(Main.game.getPlayer().hasFetish(Fetish.FETISH_TRANSFORMATION_RECEIVING)) {
 						return new Response("Spit",
-								"Due to your <b style='color:"+Colour.FETISH.toWebHexString()+";'>"+applicableFetish.getName(Main.game.getPlayer())
-									+"</b> fetish, you love "+applicableFetish.getShortDescriptor()+" so much that you can't bring yourself to spit out the transformative liquid!",
+								"Due to your <b style='color:"+Colour.FETISH.toWebHexString()+";'>"+Fetish.FETISH_TRANSFORMATION_RECEIVING.getName(Main.game.getPlayer())
+									+"</b> fetish, you love being transformed so much that you can't bring yourself to spit out the transformative liquid!",
 								null);
 					} else {
 						return new Response("Spit", "Spit out the potion.", AFTER_COMBAT_TRANSFORMATION_REFUSED);
 					}
 					
 				} else if (index == 2) {
+					ArrayList<Fetish> applicableFetishes = Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_RECEIVING);
+					CorruptionLevel applicableCorruptionLevel = Fetish.FETISH_TRANSFORMATION_RECEIVING.getAssociatedCorruptionLevel();
+					
+					if(potion.getValue().getItemType() == ItemType.FETISH_REFINED) {
+						applicableFetishes = Util.newArrayListOfValues(Fetish.FETISH_KINK_RECEIVING);
+						applicableCorruptionLevel = Fetish.FETISH_KINK_RECEIVING.getAssociatedCorruptionLevel();
+					}
+					
 					return new Response("Swallow", "Do as you're told and swallow the strange potion.", AFTER_COMBAT_TRANSFORMATION,
-							Util.newArrayListOfValues(applicableFetish),
+							applicableFetishes,
 							applicableCorruptionLevel,
 							null,
 							null,
@@ -1108,7 +1114,7 @@ public class TunnelAttackDialogue {
 		public String getContent() {
 			if((getMugger().isAttractedTo(Main.game.getPlayer()) || !Main.game.isNonConEnabled())
 					&& !getMugger().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer)) {
-				if(Sex.getNumberOfOrgasms(getMugger()) >= getMugger().getOrgasmsBeforeSatisfied()) {
+				if(Sex.getNumberOfOrgasms(Sex.getActivePartner()) >= 1) {
 					return UtilText.parseFromXMLFile("encounters/submission/tunnelAttack", "AFTER_SEX_VICTORY", getMugger());
 				} else {
 					return UtilText.parseFromXMLFile("encounters/submission/tunnelAttack", "AFTER_SEX_VICTORY_NO_ORGASM", getMugger());
@@ -1184,13 +1190,7 @@ public class TunnelAttackDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", AFTER_SEX_DEFEAT) {
-					@Override
-					public void effects() {
-						if(getMugger().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer)) {
-							Main.game.banishNPC(getMugger());
-						}
-					}
+				return new Response("Continue", "Carry on your way.", AFTER_SEX_VICTORY){
 					@Override
 					public DialogueNode getNextDialogue(){
 						return Main.game.getDefaultDialogueNoEncounter();

@@ -96,7 +96,7 @@ public class FluidStored implements XMLSaving {
 			this.bestial = false;
 		}
 		
-		this.milk = new FluidMilk(milk.getType(), milk.isCrotchMilk());
+		this.milk = new FluidMilk(milk.getType());
 		this.milk.clearFluidModifiers();
 		
 		this.milk.setFlavour(null, milk.getFlavour());
@@ -114,10 +114,11 @@ public class FluidStored implements XMLSaving {
 		this.charactersFluidID = charactersFluidID;
 
 		this.cumSubspecies = null;
-		this.virility = 0;
+
 		try {
 			GameCharacter owner = charactersFluidID==null||charactersFluidID.isEmpty()?null:Main.game.getNPCById(charactersFluidID);
 			this.bestial = girlCum.isBestial(owner);
+			this.virility = owner==null?25:owner.getAttributeValue(Attribute.VIRILITY);
 		} catch (Exception e) {
 			this.bestial = false;
 		}
@@ -154,7 +155,7 @@ public class FluidStored implements XMLSaving {
 	@Override
 	public int hashCode() {
 		// Does not take into account quantity on purpose.
-		int result = 17;
+		int result = super.hashCode();
 		result = 31 * result + this.getFluid().hashCode();
 		result = 31 * result + this.getCharactersFluidID().hashCode();
 		result = 31 * result + (this.isBestial() ? 1 : 0);
@@ -205,7 +206,7 @@ public class FluidStored implements XMLSaving {
 		if(parentElement.getElementsByTagName("milk").item(0)!=null) {
 			FluidStored fluid = new FluidStored(ID, FluidMilk.loadFromXML(parentElement, doc), millimetres);
 			fluid.bestial=bestial;
-			fluid.virility=0;
+			fluid.virility=virility;
 			return fluid;
 		}
 		

@@ -11,6 +11,7 @@ import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionLimitation;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
+import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 
@@ -56,7 +57,7 @@ public class PartnerSelfFingerNipple {
 					
 					"With [npc.a_moan+], [npc.name] reaches up to [npc.her] [npc.nipples+], pinching and flicking them as [npc.she] continues to cry out in delight."));
 			
-			switch (Sex.getCharacterPerformingAction().getBreastStoredMilk()) {
+			switch (Sex.getActivePartner().getBreastStoredMilk()) {
 				case ONE_TRICKLE:
 					UtilText.nodeContentSB.append(" A small trickle of [npc.milk] leaks out around [npc.her] fingertips.");
 					break;
@@ -87,7 +88,7 @@ public class PartnerSelfFingerNipple {
 		
 		@Override
 		public String applyEffectsString() {
-			return Sex.getCharacterPerformingAction().incrementBreastStoredMilk(-10);
+			return Sex.getActivePartner().incrementBreastStoredMilk(-10);
 		}
 
 	};
@@ -128,7 +129,7 @@ public class PartnerSelfFingerNipple {
 					"With a lewd cry, [npc.name] sinks [npc.her] digits into [npc.her] inviting nipple-cunts, panting heavily as [npc.she] start eagerly fingering [npc.herself]."));
 			
 		
-			switch (Sex.getCharacterPerformingAction().getBreastStoredMilk()) {
+			switch (Sex.getActivePartner().getBreastStoredMilk()) {
 				case ONE_TRICKLE:
 					UtilText.nodeContentSB.append(" A small trickle of [npc.milk] leaks out around [npc.her] fingertips.");
 					break;
@@ -159,7 +160,7 @@ public class PartnerSelfFingerNipple {
 		
 		@Override
 		public String applyEffectsString() {
-			return Sex.getCharacterPerformingAction().incrementBreastStoredMilk(-10);
+			return Sex.getActivePartner().incrementBreastStoredMilk(-10);
 		}
 		
 	};
@@ -175,6 +176,11 @@ public class PartnerSelfFingerNipple {
 		@Override
 		public SexActionLimitation getLimitation() {
 			return SexActionLimitation.NPC_ONLY;
+		}
+		
+		@Override
+		public boolean isBaseRequirementsMet() {
+			return !Sex.isDom(Main.game.getPlayer());
 		}
 		
 		@Override
@@ -215,6 +221,11 @@ public class PartnerSelfFingerNipple {
 		}
 		
 		@Override
+		public boolean isBaseRequirementsMet() {
+			return !Sex.isDom(Main.game.getPlayer());
+		}
+		
+		@Override
 		public String getActionTitle() {
 			return "Nipple fingering (self)";
 		}
@@ -249,6 +260,11 @@ public class PartnerSelfFingerNipple {
 		@Override
 		public SexActionLimitation getLimitation() {
 			return SexActionLimitation.NPC_ONLY;
+		}
+		
+		@Override
+		public boolean isBaseRequirementsMet() {
+			return !Sex.isDom(Main.game.getPlayer());
 		}
 		
 		@Override
@@ -289,6 +305,11 @@ public class PartnerSelfFingerNipple {
 		}
 		
 		@Override
+		public boolean isBaseRequirementsMet() {
+			return Sex.isDom(Main.game.getPlayer());
+		}
+		
+		@Override
 		public String getActionTitle() {
 			return "Nipple-fingering (self)";
 		}
@@ -323,6 +344,11 @@ public class PartnerSelfFingerNipple {
 		@Override
 		public SexActionLimitation getLimitation() {
 			return SexActionLimitation.NPC_ONLY;
+		}
+		
+		@Override
+		public boolean isBaseRequirementsMet() {
+			return Sex.isDom(Main.game.getPlayer());
 		}
 		
 		@Override

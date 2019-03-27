@@ -30,7 +30,7 @@ public class TattooCounter implements XMLSaving {
 	}
 	
 	public static List<Colour> getAvailableColours() {
-		return ColourListPresets.ALL;
+		return ColourListPresets.ALL.getPresetColourList();
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class TattooCounter implements XMLSaving {
 	
 	@Override
 	public int hashCode() {
-		int result = 17;
+		int result = super.hashCode();
 		result = 31 * result + getType().hashCode();
 		result = 31 * result + getCountType().hashCode();
 		result = 31 * result + getColour().hashCode();

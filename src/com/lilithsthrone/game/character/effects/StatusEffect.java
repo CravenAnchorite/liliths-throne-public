@@ -4732,7 +4732,7 @@ public enum StatusEffect {
 			
 			return UtilText.parse(target, 
 					target.isOnlyCumInArea(SexAreaOrifice.MOUTH)
-					?"[npc.NameHasFull] recently swallowed a load of cum.<br/>"
+					?"[npc.NameHasFull] recently swallowed some cum.<br/>"
 						+ "Current cum in stomach: [style.colourSex("+Units.fluid(cumInArea)+")]<br/>"
 						+ "(-"+Units.fluid(cumLost)+"/minute)"
 					:"[npc.NameHasFull] recently swallowed some sexual fluids.<br/>"
@@ -9876,7 +9876,8 @@ public enum StatusEffect {
 		@Override
 		public String getDescription(GameCharacter target) {
 			if(target.isPlayer()) {
-				return "Anyone with a strong arcane aura, such as yours, doesn't suffer from any sort of refractory period after orgasming...";
+				return "Anyone with a strong arcane aura, such as yours, doesn't suffer from any sort of refractory period after orgasming. <br/>"
+						+ "You needs to orgasm [style.boldSex("+Util.intToCount(target.getOrgasmsBeforeSatisfied())+")] before satisfied";
 			} else {
 				return UtilText.parse(target, "Anyone in the presence of a strong arcane aura, such as yours, doesn't suffer from any sort of refractory period after orgasming...<br/>"
 						+ "[npc.Name] needs to orgasm [style.boldSex("+Util.intToCount(target.getOrgasmsBeforeSatisfied())+")] before [npc.sheIs] satisfied.");

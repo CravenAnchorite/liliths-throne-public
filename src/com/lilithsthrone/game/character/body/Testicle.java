@@ -190,8 +190,8 @@ public class Testicle implements BodyPartInterface {
 		}
 	}
 
-	public boolean isInternal(GameCharacter owner) {
-		if(!Main.getProperties().hasValue(PropertyValue.futanariTesticles) && owner!=null && owner.isFeminine()) {
+	public boolean isInternal() {
+		if(!Main.getProperties().hasValue(PropertyValue.futanariTesticles)) {
 			return true;
 		}
 		return internal;

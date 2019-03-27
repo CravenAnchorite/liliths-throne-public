@@ -17,12 +17,11 @@ public enum PregnancyDescriptor {
 		@Override
 		public String getDescriptor(GameCharacter characterBeingImpregnated, GameCharacter characterProvidingCum) {
 			boolean isSlime = characterBeingImpregnated.getBodyMaterial()==BodyMaterial.SLIME;
-			boolean selfcest = characterBeingImpregnated.equals(characterProvidingCum);
 			
 			if(characterBeingImpregnated.isPlayer()){
 					return UtilText.parse(characterProvidingCum,
 							"<p>"
-								+ "You feel "+(selfcest?"your own":"[npc.namePos]")+" [npc.cum+] "
+								+ "You feel [npc.namePos] [npc.cum+] "
 									+(isSlime
 										?"dispersing through your slimy body, seeking to impregnate your core"
 										:"deep in your body")
@@ -31,7 +30,7 @@ public enum PregnancyDescriptor {
 			} else {
 				return UtilText.parse(characterProvidingCum, characterBeingImpregnated,
 						"<p>"
-							+ "[npc2.NameIsFull] already pregnant, <b style='color:" + Colour.GENERIC_SEX.toWebHexString() + ";'>so there's no chance that "+(selfcest?"[npc.she] has knocked [npc.herself]":"[npc1.nameHas] knocked [npc2.herHim]")+" up!</b>"
+							+ "[npc2.NameIsFull] already pregnant, <b style='color:" + Colour.GENERIC_SEX.toWebHexString() + ";'>so there's no chance that [npc1.nameHas] knocked [npc2.herHim] up!</b>"
 						+ "</p>");
 			}
 		}
@@ -41,25 +40,16 @@ public enum PregnancyDescriptor {
 		@Override
 		public String getDescriptor(GameCharacter characterBeingImpregnated, GameCharacter characterProvidingCum) {
 			boolean isSlime = characterBeingImpregnated.getBodyMaterial()==BodyMaterial.SLIME;
-			boolean selfcest = characterBeingImpregnated.equals(characterProvidingCum);
 			
 			if(characterBeingImpregnated.isPlayer()){
 					return UtilText.parse(characterProvidingCum,
 							"<p>"
-								+ "Despite feeling "+(selfcest?"your own":"[npc.namePos]")+" [npc.cum+] "
+								+ "Despite feeling [npc.namePos] [npc.cum+] "
 									+(isSlime
 										?"dispersing through your slimy body, seeking to impregnate your core"
 										:"deep in your body")
 								+", you feel that <b style='color:" + Colour.GENERIC_SEX.toWebHexString() + ";'>you aren't going to get pregnant from this.</b>"
 							+ "</p>");
-					
-			} else if(selfcest) {
-				return UtilText.parse(characterProvidingCum, characterBeingImpregnated,
-						"<p>"
-							+ "Despite having [npc.her] "+(isSlime?"slimy body":"womb")+" filled with [npc.her] own seed,"
-									+ " <b style='color:" + Colour.GENERIC_SEX.toWebHexString() + ";'>there's no chance that [npc.nameHasFull] impregnated [npc.herself].</b>"
-						+ "</p>");
-				
 			} else {
 				return UtilText.parse(characterProvidingCum, characterBeingImpregnated,
 						"<p>"
@@ -73,12 +63,11 @@ public enum PregnancyDescriptor {
 		@Override
 		public String getDescriptor(GameCharacter characterBeingImpregnated, GameCharacter characterProvidingCum) {
 			boolean isSlime = characterBeingImpregnated.getBodyMaterial()==BodyMaterial.SLIME;
-			boolean selfcest = characterBeingImpregnated.equals(characterProvidingCum);
 			
 			if(characterBeingImpregnated.isPlayer()){
 				return UtilText.parse(characterProvidingCum,
 						"<p>"
-							+ "You feel "+(selfcest?"your own":"[npc.namePos]")+" [npc.cum+] "
+							+ "You feel [npc.namePos] [npc.cum+] "
 							+(isSlime
 									?"dispersing through your slimy body, seeking to impregnate your core"
 									:"deep in your body")
@@ -87,16 +76,6 @@ public enum PregnancyDescriptor {
 										?"if you aren't already pregnant, there's a small chance you are now!</b>"
 										:"there's a small chance you'll get pregnant!</b>")
 						+ "</p>");
-				
-			} else if(selfcest) {
-				return UtilText.parse(characterProvidingCum, characterBeingImpregnated,
-						"<p>"
-							+ "After having [npc.her] "+(isSlime?"slimy body":"womb")+" filled with [npc.her] own seed, [npc.name] [npc.verb(realise)] that <b style='color:" + Colour.GENERIC_SEX.toWebHexString() + ";'>"
-									+ (characterBeingImpregnated.hasStatusEffect(StatusEffect.PREGNANT_0)
-											?"if [npc2.she] isn't already pregnant, there's a small chance [npc2.she] is now!</b>"
-											:"there's a small chance that [npc2.sheIs] going to get pregnant!</b>")
-						+ "</p>");
-				
 			} else {
 				return UtilText.parse(characterProvidingCum, characterBeingImpregnated,
 						"<p>"
@@ -117,12 +96,11 @@ public enum PregnancyDescriptor {
 		@Override
 		public String getDescriptor(GameCharacter characterBeingImpregnated, GameCharacter characterProvidingCum) {
 			boolean isSlime = characterBeingImpregnated.getBodyMaterial()==BodyMaterial.SLIME;
-			boolean selfcest = characterBeingImpregnated.equals(characterProvidingCum);
 			
 			if(characterBeingImpregnated.isPlayer()){
 				return UtilText.parse(characterProvidingCum,
 						"<p>"
-						+ "You feel "+(selfcest?"your own":"[npc.namePos]")+" [npc.cum+] "
+						+ "You feel [npc.namePos] [npc.cum+] "
 						+(isSlime
 								?"dispersing through your slimy body, seeking to impregnate your core"
 								:"deep in your body")
@@ -131,16 +109,6 @@ public enum PregnancyDescriptor {
 										?"if you aren't already pregnant, there's a chance you are now!</b>"
 										:"there's a chance you'll get pregnant!</b>")
 						+ "</p>");
-				
-			} else if(selfcest) {
-				return UtilText.parse(characterProvidingCum, characterBeingImpregnated,
-						"<p>"
-							+ "After having [npc.her] "+(isSlime?"slimy body":"womb")+" filled with [npc.her] own seed, [npc.name] [npc.verb(realise)] that <b style='color:" + Colour.GENERIC_SEX.toWebHexString() + ";'>"
-									+ (characterBeingImpregnated.hasStatusEffect(StatusEffect.PREGNANT_0)
-											?"if [npc2.she] isn't already pregnant, there's a chance [npc2.she] is now!</b>"
-											:"there's a chance that [npc2.sheIs] going to get pregnant!</b>")
-						+ "</p>");
-				
 			} else {
 				return UtilText.parse(characterProvidingCum, characterBeingImpregnated,
 						"<p>"
@@ -161,12 +129,11 @@ public enum PregnancyDescriptor {
 		@Override
 		public String getDescriptor(GameCharacter characterBeingImpregnated, GameCharacter characterProvidingCum) {
 			boolean isSlime = characterBeingImpregnated.getBodyMaterial()==BodyMaterial.SLIME;
-			boolean selfcest = characterBeingImpregnated.equals(characterProvidingCum);
 			
 			if(characterBeingImpregnated.isPlayer()){
 				return UtilText.parse(characterProvidingCum,
 						"<p>"
-						+ "You feel "+(selfcest?"your own":"[npc.namePos]")+" [npc.cum+] "+
+						+ "You feel [npc.namePos] [npc.cum+] "+
 						(isSlime
 								?"dispersing through your slimy body, seeking to impregnate your core"
 								:"deep in your body")
@@ -175,16 +142,6 @@ public enum PregnancyDescriptor {
 										?"if you aren't already pregnant, there's a high chance you are now!</b>"
 										:"there's a high chance you'll get pregnant!</b>")
 						+ "</p>");
-				
-			} else if(selfcest) {
-				return UtilText.parse(characterProvidingCum, characterBeingImpregnated,
-						"<p>"
-							+ "After having [npc.her] "+(isSlime?"slimy body":"womb")+" filled with [npc.her] own seed, [npc.name] [npc.verb(realise)] that <b style='color:" + Colour.GENERIC_SEX.toWebHexString() + ";'>"
-									+ (characterBeingImpregnated.hasStatusEffect(StatusEffect.PREGNANT_0)
-											?"if [npc2.she] isn't already pregnant, there's a high chance [npc2.she] is now!</b>"
-											:"there's a high chance that [npc2.sheIs] going to get pregnant!</b>")
-						+ "</p>");
-				
 			} else {
 				return UtilText.parse(characterProvidingCum, characterBeingImpregnated,
 						"<p>"
@@ -205,12 +162,11 @@ public enum PregnancyDescriptor {
 		@Override
 		public String getDescriptor(GameCharacter characterBeingImpregnated, GameCharacter characterProvidingCum) {
 			boolean isSlime = characterBeingImpregnated.getBodyMaterial()==BodyMaterial.SLIME;
-			boolean selfcest = characterBeingImpregnated.equals(characterProvidingCum);
 			
 			if(characterBeingImpregnated.isPlayer()){
 				return UtilText.parse(characterProvidingCum,
 						"<p>"
-							+ "You feel "+(selfcest?"your own":"[npc.namePos]")+" [npc.cum+] "
+							+ "You feel [npc.namePos] [npc.cum+] "
 							+(isSlime
 									?"dispersing through your slimy body, seeking to impregnate your core"
 									:"deep in your womb")
@@ -219,23 +175,13 @@ public enum PregnancyDescriptor {
 										?"if you aren't already pregnant, you certainly are now!</b>"
 										:"it's a certainty that you'll get pregnant!</b>")
 						+ "</p>");
-				
-			} else if(selfcest) {
-				return UtilText.parse(characterProvidingCum, characterBeingImpregnated,
-						"<p>"
-							+ "After having [npc.her] "+(isSlime?"slimy body":"womb")+" filled with [npc.her] own seed, [npc.name] [npc.verb(realise)] that <b style='color:" + Colour.GENERIC_SEX.toWebHexString() + ";'>"
-									+ (characterBeingImpregnated.hasStatusEffect(StatusEffect.PREGNANT_0)
-											?"if [npc2.she] isn't already pregnant, [npc2.she] certainly is now!</b>"
-											:"it's a certainty that [npc2.sheIs] going to get pregnant!</b>")
-						+ "</p>");
-				
 			} else {
 				return UtilText.parse(characterProvidingCum, characterBeingImpregnated,
 						"<p>"
 							+ "After depositing [npc1.her] [npc1.cum+] in [npc2.namePos] "
 							+(isSlime
 									?"slimy body"
-									:"body")
+									:"womb")
 							+", [npc.name] [npc.verb(realise)] that <b style='color:" + Colour.GENERIC_SEX.toWebHexString() + ";'>"
 									+ (characterBeingImpregnated.hasStatusEffect(StatusEffect.PREGNANT_0)
 											?"if [npc2.she] isn't already pregnant, [npc2.she] certainly is now!</b>"

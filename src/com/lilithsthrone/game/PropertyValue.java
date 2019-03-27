@@ -46,7 +46,6 @@ public enum PropertyValue {
 	urethralContent(false),
 	nipplePenContent(true),
 	analContent(true),
-	footContent(true),
 	futanariTesticles(true),
 	bipedalCloaca(true),
 	voluntaryNTR(false),

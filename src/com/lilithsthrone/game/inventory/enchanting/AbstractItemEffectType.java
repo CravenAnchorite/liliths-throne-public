@@ -115,8 +115,7 @@ public abstract class AbstractItemEffectType {
 	public int getSmallLimitChange() {
 		if (EnchantmentDialogue.getSecondaryMod() == TFModifier.TF_MOD_WETNESS
 				&& (EnchantmentDialogue.getPrimaryMod() == TFModifier.TF_BREASTS
-						|| EnchantmentDialogue.getPrimaryMod() == TFModifier.TF_BREASTS_CROTCH
-						|| EnchantmentDialogue.getPrimaryMod() == TFModifier.TF_PENIS)) {
+				|| EnchantmentDialogue.getPrimaryMod() == TFModifier.TF_PENIS)) {
 			// Increase small change for fluids
 			return 10;
 		}
@@ -126,12 +125,11 @@ public abstract class AbstractItemEffectType {
 	public int getLargeLimitChange() {
 		if (EnchantmentDialogue.getSecondaryMod() == TFModifier.TF_MOD_WETNESS
 				&& (EnchantmentDialogue.getPrimaryMod() == TFModifier.TF_BREASTS
-						|| EnchantmentDialogue.getPrimaryMod() == TFModifier.TF_BREASTS_CROTCH
-						|| EnchantmentDialogue.getPrimaryMod() == TFModifier.TF_PENIS)) {
+				|| EnchantmentDialogue.getPrimaryMod() == TFModifier.TF_PENIS)) {
 			// Decrease large change for fluids
 			return 500;
 		}
-		return Math.max(5, getMaximumLimit()/10);
+		return getMaximumLimit() / 10;
 	}
 
 	public int getMaximumLimit() {
@@ -1998,12 +1996,10 @@ public abstract class AbstractItemEffectType {
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLUID_ALCOHOLIC, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLUID_BUBBLING, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLUID_HALLUCINOGENIC, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLUID_MINERAL_OIL, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLUID_MUSKY, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLUID_SLIMY, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLUID_STICKY, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLUID_VISCOUS, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				
 				
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_BEER, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_CHOCOLATE, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
@@ -2854,7 +2850,32 @@ public abstract class AbstractItemEffectType {
 						};
 				}
 				
-			
+			case TF_EARS:
+				switch(secondaryModifier) {
+					case TF_TYPE_1:
+						return new RacialEffectUtil(Util.capitaliseSentence(EarType.getEarTypes(race).get(0).getTransformName())+" ears transformation.") {
+							@Override public String applyEffect() { return target.setEarType(EarType.getEarTypes(race).get(0)); } };
+	
+					case TF_TYPE_2:
+						return new RacialEffectUtil(Util.capitaliseSentence(EarType.getEarTypes(race).get(1).getTransformName())+" ears transformation.") {
+							@Override public String applyEffect() { return target.setEarType(EarType.getEarTypes(race).get(1)); } };
+	
+					case TF_TYPE_3:
+						return new RacialEffectUtil(Util.capitaliseSentence(EarType.getEarTypes(race).get(2).getTransformName())+" ears transformation.") {
+							@Override public String applyEffect() { return target.setEarType(EarType.getEarTypes(race).get(2)); } };
+	
+					case TF_TYPE_4:
+						return new RacialEffectUtil(Util.capitaliseSentence(EarType.getEarTypes(race).get(3).getTransformName())+" ears transformation.") {
+							@Override public String applyEffect() { return target.setEarType(EarType.getEarTypes(race).get(3)); } };
+	
+					case TF_TYPE_5:
+						return new RacialEffectUtil(Util.capitaliseSentence(EarType.getEarTypes(race).get(4).getTransformName())+" ears transformation.") {
+							@Override public String applyEffect() { return target.setEarType(EarType.getEarTypes(race).get(4)); } };
+							
+					default:
+						return new RacialEffectUtil(Util.capitaliseSentence(race.getName(false))+" ears transformation.") { @Override public String applyEffect() { return target.setEarType(RacialBody.valueOfRace(race).getEarType()); } };
+				}
+				
 			case TF_EYES:
 				switch(secondaryModifier) {
 					case TF_TYPE_1:
@@ -4018,12 +4039,6 @@ public abstract class AbstractItemEffectType {
 						} else {
 							return new RacialEffectUtil("Adds a psychoactive effect to cum.") { @Override public String applyEffect() { return target.addCumModifier(FluidModifier.HALLUCINOGENIC); } };
 						}
-					case TF_MOD_FLUID_MINERAL_OIL:
-						if(potency == TFPotency.MINOR_DRAIN) {
-							return new RacialEffectUtil("Removes mineral oil effect from cum.") { @Override public String applyEffect() { return target.removeCumModifier(FluidModifier.MINERAL_OIL); } };
-						} else {
-							return new RacialEffectUtil("Adds a mineral oil effect to cum.") { @Override public String applyEffect() { return target.addCumModifier(FluidModifier.MINERAL_OIL); } };
-						}
 					case TF_MOD_FLUID_MUSKY:
 						if(potency == TFPotency.MINOR_DRAIN) {
 							return new RacialEffectUtil("Removes musky effect from cum.") { @Override public String applyEffect() { return target.removeCumModifier(FluidModifier.MUSKY); } };
@@ -4115,12 +4130,6 @@ public abstract class AbstractItemEffectType {
 							return new RacialEffectUtil("Removes psychoactive effect from milk.") { @Override public String applyEffect() { return target.removeMilkModifier(FluidModifier.HALLUCINOGENIC); } };
 						} else {
 							return new RacialEffectUtil("Adds a psychoactive effect to milk.") { @Override public String applyEffect() { return target.addMilkModifier(FluidModifier.HALLUCINOGENIC); } };
-						}
-					case TF_MOD_FLUID_MINERAL_OIL:
-						if(potency == TFPotency.MINOR_DRAIN) {
-							return new RacialEffectUtil("Removes mineral oil effect from milk.") { @Override public String applyEffect() { return target.removeMilkModifier(FluidModifier.MINERAL_OIL); } };
-						} else {
-							return new RacialEffectUtil("Adds a mineral oil effect to milk.") { @Override public String applyEffect() { return target.addMilkModifier(FluidModifier.MINERAL_OIL); } };
 						}
 					case TF_MOD_FLUID_MUSKY:
 						if(potency == TFPotency.MINOR_DRAIN) {
@@ -4214,12 +4223,6 @@ public abstract class AbstractItemEffectType {
 						} else {
 							return new RacialEffectUtil("Adds a psychoactive effect to udder-milk.") { @Override public String applyEffect() { return target.addMilkCrotchModifier(FluidModifier.HALLUCINOGENIC); } };
 						}
-					case TF_MOD_FLUID_MINERAL_OIL:
-						if(potency == TFPotency.MINOR_DRAIN) {
-							return new RacialEffectUtil("Removes mineral oil effect from udder-milk.") { @Override public String applyEffect() { return target.removeMilkCrotchModifier(FluidModifier.MINERAL_OIL); } };
-						} else {
-							return new RacialEffectUtil("Adds a mineral oil effect to udder-milk.") { @Override public String applyEffect() { return target.addMilkCrotchModifier(FluidModifier.MINERAL_OIL); } };
-						}
 					case TF_MOD_FLUID_MUSKY:
 						if(potency == TFPotency.MINOR_DRAIN) {
 							return new RacialEffectUtil("Removes musky effect from udder-milk.") { @Override public String applyEffect() { return target.removeMilkCrotchModifier(FluidModifier.MUSKY); } };
@@ -4311,12 +4314,6 @@ public abstract class AbstractItemEffectType {
 							return new RacialEffectUtil("Removes psychoactive effect from girlcum.") { @Override public String applyEffect() { return target.removeGirlcumModifier(FluidModifier.HALLUCINOGENIC); } };
 						} else {
 							return new RacialEffectUtil("Adds a psychoactive effect to girlcum.") { @Override public String applyEffect() { return target.addGirlcumModifier(FluidModifier.HALLUCINOGENIC); } };
-						}
-					case TF_MOD_FLUID_MINERAL_OIL:
-						if(potency == TFPotency.MINOR_DRAIN) {
-							return new RacialEffectUtil("Removes mineral oil effect from girlcum.") { @Override public String applyEffect() { return target.removeGirlcumModifier(FluidModifier.MINERAL_OIL); } };
-						} else {
-							return new RacialEffectUtil("Adds a mineral oil effect to girlcum.") { @Override public String applyEffect() { return target.addGirlcumModifier(FluidModifier.MINERAL_OIL); } };
 						}
 					case TF_MOD_FLUID_MUSKY:
 						if(potency == TFPotency.MINOR_DRAIN) {

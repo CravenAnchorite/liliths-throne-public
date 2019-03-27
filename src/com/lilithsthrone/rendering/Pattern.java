@@ -20,7 +20,6 @@ import com.lilithsthrone.utils.SvgUtil;
 public class Pattern {
 	
 	private static Map<String, Pattern> allPatterns;
-	private static Map<String, Pattern> defaultPatterns;
 	
 	private String name;
 	
@@ -33,12 +32,10 @@ public class Pattern {
 	
 	static {
 		allPatterns = new TreeMap<>();
-		defaultPatterns = new TreeMap<>();
 		
 		File dir = new File("res/patterns");
 		
 		allPatterns.put("none", new Pattern("none")); // Adding empty pattern
-		defaultPatterns.put("none", new Pattern("none"));
 		
 		if(dir.exists()) {
 			FilenameFilter textFilter = new FilenameFilter() {
@@ -57,9 +54,6 @@ public class Pattern {
 					try {
 						String newPatternName = subFile.getName().substring(0, subFile.getName().indexOf(".svg"));
 						allPatterns.put(newPatternName, new Pattern(newPatternName));
-						if(!newPatternName.equalsIgnoreCase("rainbow")) {
-							defaultPatterns.put(newPatternName, new Pattern(newPatternName));
-						}
 						//System.out.println("Added Pattern: " + newPatternName);
 						
 					} catch(Exception ex) {
@@ -123,13 +117,6 @@ public class Pattern {
 	 */
 	public static Map<String, Pattern> getAllPatterns() {
 		return allPatterns;
-	}
-
-	/**
-	 * Returns all default patterns which clothing can spawn with
-	 */
-	public static Map<String, Pattern> getAllDefaultPatterns() {
-		return defaultPatterns;
 	}
 	
 	/**

@@ -474,7 +474,7 @@ public class FluidGirlCum implements FluidInterface, XMLSaving {
 	}
 
 	public float getValuePerMl() {
-		return 4f + this.getFluidModifiers().size()*1f + (this.getFlavour()!=FluidFlavour.GIRL_CUM?1f:0);
+		return 0.1f + this.getFluidModifiers().size()*0.3f + (this.getFlavour()!=FluidFlavour.GIRL_CUM?0.3f:0);
 	}
 
 	@Override

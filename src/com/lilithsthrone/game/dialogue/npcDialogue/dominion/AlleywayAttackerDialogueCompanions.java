@@ -50,11 +50,6 @@ public class AlleywayAttackerDialogueCompanions {
 				|| pt.equals(PlaceType.DOMINION_CANAL_END);
 	}
 	
-	private static boolean isStorm() {
-		AbstractPlaceType pt = getMugger().getLocationPlace().getPlaceType();
-		return !pt.equals(PlaceType.DOMINION_BACK_ALLEYS) && !isCanal();
-	}
-	
 	private static GameCharacter getMainCompanion() {
 		return Main.game.getPlayer().getMainCompanion();
 	}
@@ -704,7 +699,7 @@ public class AlleywayAttackerDialogueCompanions {
 		
 		@Override
 		public String getContent() {
-			if(Sex.getNumberOfOrgasms(getMugger())>=getMugger().getOrgasmsBeforeSatisfied()) {
+			if(Sex.getNumberOfOrgasms(getMugger())>0) {
 				return UtilText.parseFromXMLFile("encounters/dominion/alleywayAttackCompanions", "AFTER_SEX_PEACEFUL", getAllCharacters());
 			} else {
 				return UtilText.parseFromXMLFile("encounters/dominion/alleywayAttackCompanions", "AFTER_SEX_PEACEFUL_NO_ORGASM", getAllCharacters());
@@ -899,7 +894,7 @@ public class AlleywayAttackerDialogueCompanions {
 				return new Response("Continue", "Carry on your way...", Main.game.getDefaultDialogueNoEncounter()){
 					@Override
 					public void effects() {
-						if(getMugger().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer) || isStorm()) {
+						if(getMugger().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer)) {
 							Main.game.banishNPC(getMugger());
 						}
 					}
@@ -916,8 +911,8 @@ public class AlleywayAttackerDialogueCompanions {
 							new SMGeneric(
 									Util.newArrayListOfValues(Main.game.getPlayer()),
 									Util.newArrayListOfValues(getMugger()),
-									Util.newArrayListOfValues(getMainCompanion()),
-									null),
+							null,
+							Util.newArrayListOfValues(getMainCompanion())),
 							AFTER_SEX_VICTORY,
 							UtilText.parseFromXMLFile("encounters/dominion/alleywayAttackCompanions", "AFTER_COMBAT_VICTORY_SEX", getAllCharacters()));
 				} else {
@@ -946,8 +941,8 @@ public class AlleywayAttackerDialogueCompanions {
 							new SMGeneric(
 									Util.newArrayListOfValues(Main.game.getPlayer()),
 									Util.newArrayListOfValues(getMugger()),
-									Util.newArrayListOfValues(getMainCompanion()),
 									null,
+									Util.newArrayListOfValues(getMainCompanion()),
 									ResponseTag.START_PACE_PLAYER_DOM_GENTLE),
 							AFTER_SEX_VICTORY,
 							UtilText.parseFromXMLFile("encounters/dominion/alleywayAttackCompanions", "AFTER_COMBAT_VICTORY_SEX_GENTLE", getAllCharacters()));
@@ -960,7 +955,7 @@ public class AlleywayAttackerDialogueCompanions {
 							new SMGeneric(
 									Util.newArrayListOfValues(Main.game.getPlayer()),
 									Util.newArrayListOfValues(getMugger()),
-									Util.newArrayListOfValues(getMainCompanion()),
+									null,
 									null,
 									ResponseTag.START_PACE_PLAYER_DOM_GENTLE),
 							AFTER_SEX_VICTORY,
@@ -978,8 +973,8 @@ public class AlleywayAttackerDialogueCompanions {
 							new SMGeneric(
 									Util.newArrayListOfValues(Main.game.getPlayer()),
 									Util.newArrayListOfValues(getMugger()),
-									Util.newArrayListOfValues(getMainCompanion()),
 									null,
+									Util.newArrayListOfValues(getMainCompanion()),
 									ResponseTag.START_PACE_PLAYER_DOM_ROUGH),
 							AFTER_SEX_VICTORY,
 							UtilText.parseFromXMLFile("encounters/dominion/alleywayAttackCompanions", "AFTER_COMBAT_VICTORY_SEX_ROUGH", getAllCharacters()));
@@ -992,7 +987,7 @@ public class AlleywayAttackerDialogueCompanions {
 							new SMGeneric(
 									Util.newArrayListOfValues(Main.game.getPlayer()),
 									Util.newArrayListOfValues(getMugger()),
-									Util.newArrayListOfValues(getMainCompanion()),
+									null,
 									null,
 									ResponseTag.START_PACE_PLAYER_DOM_ROUGH),
 							AFTER_SEX_VICTORY,
@@ -1206,12 +1201,7 @@ public class AlleywayAttackerDialogueCompanions {
 		public Response getResponse(int responseTab, int index) {
 			if(getMugger().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer)) {
 				if (index == 1) {
-					return new Response("Continue", "Carry on your way.", Main.game.getDefaultDialogueNoEncounter()) {
-						@Override
-						public void effects() {
-							Main.game.banishNPC(getMugger());
-						}
-					};
+					return new Response("Continue", "Carry on your way.", Main.game.getDefaultDialogueNoEncounter());
 				}
 				return null;
 			}
@@ -1256,27 +1246,32 @@ public class AlleywayAttackerDialogueCompanions {
 			} else if(getMugger().hasTransformationFetish()
 					&& potion != null
 					&& getMugger().isWillingToRape(Main.game.getPlayer())) {
-				Fetish applicableFetish = potion.getValue().getItemType() == ItemType.FETISH_REFINED
-						?Fetish.FETISH_KINK_RECEIVING
-						:Fetish.FETISH_TRANSFORMATION_RECEIVING;
-				CorruptionLevel applicableCorruptionLevel = potion.getValue().getItemType() == ItemType.FETISH_REFINED
-						?Fetish.FETISH_KINK_RECEIVING.getAssociatedCorruptionLevel()
-						:Fetish.FETISH_TRANSFORMATION_RECEIVING.getAssociatedCorruptionLevel();
+				
+//				System.out.println("Potion Check 2"); 
+//				System.out.println(potion); 
+//				System.out.println(potion.getValue()); 
 				
 				if (index == 1) {
-					if(!Collections.disjoint(Main.game.getPlayer().getFetishes(), Util.newArrayListOfValues(applicableFetish))) {
+					if(Main.game.getPlayer().hasFetish(Fetish.FETISH_TRANSFORMATION_RECEIVING)) {
 						return new Response("Spit",
-								"Due to your <b style='color:"+Colour.FETISH.toWebHexString()+";'>"+applicableFetish.getName(Main.game.getPlayer())
-									+"</b> fetish, you love "+applicableFetish.getShortDescriptor()+" so much that you can't bring yourself to spit out the transformative liquid!",
+								"Due to your <b style='color:"+Colour.FETISH.toWebHexString()+";'>"+Fetish.FETISH_TRANSFORMATION_RECEIVING.getName(Main.game.getPlayer())
+									+"</b> fetish, you love being transformed so much that you can't bring yourself to spit out the transformative liquid!",
 								null);
 					} else {
 						return new Response("Spit", "Spit out the potion.", AFTER_COMBAT_TRANSFORMATION_REFUSED);
 					}
 					
 				} else if (index == 2) {
+					ArrayList<Fetish> applicableFetishes = Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_RECEIVING);
+					CorruptionLevel applicableCorruptionLevel = Fetish.FETISH_TRANSFORMATION_RECEIVING.getAssociatedCorruptionLevel();
+					
+					if(potion.getValue().getItemType() == ItemType.FETISH_REFINED) {
+						applicableFetishes = Util.newArrayListOfValues(Fetish.FETISH_KINK_RECEIVING);
+						applicableCorruptionLevel = Fetish.FETISH_KINK_RECEIVING.getAssociatedCorruptionLevel();
+					}
 					
 					return new Response("Swallow", "Do as you're told and swallow the strange potion.", AFTER_COMBAT_TRANSFORMATION,
-							Util.newArrayListOfValues(applicableFetish),
+							applicableFetishes,
 							applicableCorruptionLevel,
 							null,
 							null,
@@ -1344,12 +1339,6 @@ public class AlleywayAttackerDialogueCompanions {
 			} else {
 				if (index == 1) {
 					return new Response("Continue", "Carry on your way.", AFTER_COMBAT_DEFEAT){
-						@Override
-						public void effects() {
-							if(isStorm()) {
-								Main.game.banishNPC(getMugger());
-							}
-						}
 						@Override
 						public DialogueNode getNextDialogue() {
 							return Main.game.getDefaultDialogueNoEncounter();
@@ -1505,7 +1494,7 @@ public class AlleywayAttackerDialogueCompanions {
 		public String getContent() {
 			if((getMugger().isAttractedTo(Main.game.getPlayer()) || !Main.game.isNonConEnabled())
 					&& !getMugger().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer)) {
-				if(Sex.getNumberOfOrgasms(getMugger()) >= getMugger().getOrgasmsBeforeSatisfied()) {
+				if(Sex.getNumberOfOrgasms(Sex.getActivePartner()) >= 1) {
 					return UtilText.parseFromXMLFile("encounters/dominion/alleywayAttackCompanions", "AFTER_SEX_VICTORY", getAllCharacters());
 				} else {
 					return UtilText.parseFromXMLFile("encounters/dominion/alleywayAttackCompanions", "AFTER_SEX_VICTORY_NO_ORGASM", getAllCharacters());
@@ -1526,7 +1515,7 @@ public class AlleywayAttackerDialogueCompanions {
 				return new Response("Continue", "Carry on your way.", Main.game.getDefaultDialogueNoEncounter()){
 					@Override
 					public void effects() {
-						if(getMugger().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer) || isStorm()) {
+						if(getMugger().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer)) {
 							Main.game.banishNPC(getMugger());
 						}
 					}
@@ -1581,13 +1570,7 @@ public class AlleywayAttackerDialogueCompanions {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", AFTER_SEX_VICTORY) {
-					@Override
-					public void effects() {
-						if(getMugger().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer) || isStorm()) {
-							Main.game.banishNPC(getMugger());
-						}
-					}
+				return new Response("Continue", "Carry on your way.", AFTER_SEX_VICTORY){
 					@Override
 					public DialogueNode getNextDialogue(){
 						return Main.game.getDefaultDialogueNoEncounter();

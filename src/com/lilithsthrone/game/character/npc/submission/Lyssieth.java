@@ -338,7 +338,7 @@ public class Lyssieth extends NPC {
 		Main.game.getPlayer().setHornType(HornType.SWEPT_BACK);
 		Main.game.getPlayer().setWingType(WingType.DEMON_COMMON);
 		Main.game.getPlayer().setWingSize(WingSize.THREE_LARGE.getValue());
-		
+		Main.game.getPlayer().setEarType(EarType.DEMON_COMMON);
 		Main.game.getPlayer().setEyeType(EyeType.DEMON_COMMON);
 		Main.game.getPlayer().setHairType(HairType.DEMON_COMMON);
 	}

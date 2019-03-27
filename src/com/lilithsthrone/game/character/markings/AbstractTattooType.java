@@ -195,7 +195,7 @@ public class AbstractTattooType extends AbstractCoreType {
 			}
 			return result;
 		}
-		return ColourListPresets.getColourListFromId(coloursElement.getAttribute("values"));
+		return ColourListPresets.valueOf(coloursElement.getAttribute("values")).getPresetColourList();
 	}
 	
 	@Override

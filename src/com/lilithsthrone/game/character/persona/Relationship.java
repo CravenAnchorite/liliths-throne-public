@@ -1,12 +1,11 @@
 package com.lilithsthrone.game.character.persona;
 
-import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.gender.PronounType;
 
 // TODO: needs plural forms
 /**
  * @since 0.2.0
- * @version 0.3.2
+ * @version 0.3.1
  * @author Innoxia, orvail
  */
 public enum Relationship {
@@ -53,14 +52,6 @@ public enum Relationship {
         }
     }
 
-    public String getName(GameCharacter character) {
-    	if(character.isFeminine()) {
-    		return getDisplayF();
-    	} else {
-    		return getDisplayM();
-    	}
-    }
-    
     public String getDisplayF() {
         return displayF;
     }

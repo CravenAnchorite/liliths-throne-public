@@ -13,7 +13,6 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
 import com.lilithsthrone.game.character.body.valueEnums.Wetness;
-import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
@@ -99,7 +98,7 @@ public class ClothingType {
 							null,
 							null, null)),
 			null,
-			ColourListPresets.JUST_GOLD,
+			ColourListPresets.JUST_GOLD.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -146,7 +145,7 @@ public class ClothingType {
 			null,
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, null, null, null, null)),
 			null,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -192,10 +191,10 @@ public class ClothingType {
 			null,
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, null, null, null, null)),
 			null,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
-			ColourListPresets.JUST_STEEL,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.JUST_STEEL.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null,
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_KATE)){
@@ -238,7 +237,7 @@ public class ClothingType {
 			null,
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, null, null, null, null)),
 			null,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -286,7 +285,7 @@ public class ClothingType {
 			null,
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, null, null, null, null)),
 			null,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -333,7 +332,7 @@ public class ClothingType {
 			null,
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, null, null, null, null)),
 			null,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -379,10 +378,10 @@ public class ClothingType {
 			null,
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, null, null, null, null)),
 			null,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
-			ColourListPresets.JUST_WHITE,
-			ColourListPresets.ALL,
+			ColourListPresets.JUST_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null, 
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_KATE)){
@@ -426,7 +425,7 @@ public class ClothingType {
 			null,
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, null, null, null, null)),
 			null,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -478,7 +477,7 @@ public class ClothingType {
 							null,
 							null, null)),
 			null,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -525,7 +524,7 @@ public class ClothingType {
 			null,
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, null, null, null, null)),
 			null,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -572,7 +571,7 @@ public class ClothingType {
 			null,
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, Util.newArrayListOfValues(ClothingAccess.HEAD), null, null, null)),
 			null,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -618,7 +617,7 @@ public class ClothingType {
 			null,
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, Util.newArrayListOfValues(ClothingAccess.HEAD), null, null, null)),
 			null,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -665,10 +664,10 @@ public class ClothingType {
 			null,
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, Util.newArrayListOfValues(ClothingAccess.HEAD), null, null, null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
-			ColourListPresets.JUST_GREY,
-			ColourListPresets.ALL,
+			ColourListPresets.JUST_GREY.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null, 
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
@@ -711,11 +710,11 @@ public class ClothingType {
 			null,
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, Util.newArrayListOfValues(ClothingAccess.HEAD), null, null, null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
-			ColourListPresets.JUST_GREY,
-			ColourListPresets.ALL,
-			ColourListPresets.ALL,
+			ColourListPresets.JUST_GREY.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
 
@@ -757,7 +756,7 @@ public class ClothingType {
 			null,
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, Util.newArrayListOfValues(ClothingAccess.HEAD), null, null, null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -809,7 +808,7 @@ public class ClothingType {
 							null,
 							null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -861,8 +860,8 @@ public class ClothingType {
 							null,
 							null)),
 			null,
-			ColourListPresets.LEATHER,
-			ColourListPresets.ALL,
+			ColourListPresets.LEATHER.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -907,7 +906,7 @@ public class ClothingType {
 			null,
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, Util.newArrayListOfValues(ClothingAccess.HEAD), null, null, null)),
 			null,
-			ColourListPresets.JUST_BROWN,
+			ColourListPresets.JUST_BROWN.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -954,12 +953,12 @@ public class ClothingType {
 			null,
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, Util.newArrayListOfValues(ClothingAccess.EYES), null, null, null)),
 			null,
-			ColourListPresets.JUST_STEEL,
-			ColourListPresets.ALL_METAL,
-			ColourListPresets.JUST_STEEL,
-			ColourListPresets.ALL_METAL,
-			ColourListPresets.JUST_GREY,
-			ColourListPresets.ALL,
+			ColourListPresets.JUST_STEEL.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
+			ColourListPresets.JUST_STEEL.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
+			ColourListPresets.JUST_GREY.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
 		
 		@Override
@@ -999,10 +998,10 @@ public class ClothingType {
 			null,
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, Util.newArrayListOfValues(ClothingAccess.EYES), null, null, null)),
 			null,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
-			ColourListPresets.JUST_ORANGE,
-			ColourListPresets.ALL,
+			ColourListPresets.JUST_ORANGE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null, 
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
@@ -1045,10 +1044,10 @@ public class ClothingType {
 			null,
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, Util.newArrayListOfValues(ClothingAccess.EYES), null, null, null)),
 			null,
-			ColourListPresets.JUST_BLACK,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_BLACK,
-			ColourListPresets.ALL,
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null, 
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
@@ -1106,7 +1105,7 @@ public class ClothingType {
 									InventorySlot.PIERCING_LIP,
 									InventorySlot.PIERCING_TONGUE))),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -1177,7 +1176,7 @@ public class ClothingType {
 			null,
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, null, null, null, null)),
 			null,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -1223,7 +1222,7 @@ public class ClothingType {
 			null,
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, null, null, null, null)),
 			null,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -1269,7 +1268,7 @@ public class ClothingType {
 			null,
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, null, null, null, null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -1315,7 +1314,7 @@ public class ClothingType {
 			null,
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, null, null, null, null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -1361,7 +1360,7 @@ public class ClothingType {
 			null,
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, null, null, null, null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -1407,9 +1406,9 @@ public class ClothingType {
 			null,
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, null, null, null, null)),
 			null,
-			ColourListPresets.JUST_BLACK, ColourListPresets.ALL,
-			ColourListPresets.JUST_WHITE, ColourListPresets.ALL,
-			ColourListPresets.JUST_BLACK, ColourListPresets.ALL, 
+			ColourListPresets.JUST_BLACK.getPresetColourList(), ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_WHITE.getPresetColourList(), ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_BLACK.getPresetColourList(), ColourListPresets.ALL.getPresetColourList(), 
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
 
 		@Override
@@ -1460,12 +1459,12 @@ public class ClothingType {
 					new ItemEffect(ItemEffectType.CLOTHING, TFModifier.TF_VAGINA, TFModifier.TF_MOD_WETNESS, TFPotency.MAJOR_BOOST, Wetness.SEVEN_DROOLING.getValue())),
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, null, null, null, null)),
 			null,
-			ColourListPresets.JUST_PINK,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_STEEL,
-			ColourListPresets.ALL_METAL,
-			ColourListPresets.JUST_STEEL,
-			ColourListPresets.ALL_METAL, 
+			ColourListPresets.JUST_PINK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_STEEL.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
+			ColourListPresets.JUST_STEEL.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(), 
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
 
 		@Override
@@ -1530,7 +1529,7 @@ public class ClothingType {
 									ClothingAccess.WAIST),
 							PresetConcealmentLists.CONCEALED_PARTIAL_TORSO.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -1614,7 +1613,7 @@ public class ClothingType {
 									ClothingAccess.WAIST),
 							PresetConcealmentLists.CONCEALED_PARTIAL_TORSO.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -1637,7 +1636,7 @@ public class ClothingType {
 		public String unequipText(GameCharacter clothingOwner, GameCharacter clothingRemover, boolean rough, AbstractClothing clothing, boolean applyEffects) {
 			return getEquipDescriptions(clothingOwner, clothingRemover, rough,
 					"You unbutton your shirt and pull it off.",
-					"You unbutton [npc.namePos] shirt and pull it off.",
+					"You unbuttons [npc.namePos] shirt and pull it off.",
 					null,
 					"[npc.Name] unbuttons [npc.her] shirt and pulls it off.",
 					"[npc.Name] unbuttons your shirt and pulls it off.",
@@ -1702,7 +1701,7 @@ public class ClothingType {
 									ClothingAccess.WAIST),
 							PresetConcealmentLists.CONCEALED_FULL_TORSO.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL, null,
+			ColourListPresets.ALL.getPresetColourList(), null,
 			null, null,
 			null, null,
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
@@ -1773,7 +1772,7 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.ARMS_UP_TO_SHOULDER),
 							null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -1836,7 +1835,7 @@ public class ClothingType {
 									ClothingAccess.WAIST),
 							PresetConcealmentLists.CONCEALED_PARTIAL_TORSO.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -1900,8 +1899,8 @@ public class ClothingType {
 									ClothingAccess.WAIST),
 							PresetConcealmentLists.CONCEALED_FULL_TORSO.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.LEATHER,
-			ColourListPresets.ALL,
+			ColourListPresets.LEATHER.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -1964,12 +1963,12 @@ public class ClothingType {
 									ClothingAccess.WAIST),
 							PresetConcealmentLists.CONCEALED_PARTIAL_TORSO.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
-			ColourListPresets.JUST_BLACK,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_WHITE,
-			ColourListPresets.ALL,
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
 		
 		@Override
@@ -2090,9 +2089,9 @@ public class ClothingType {
 									InventorySlot.WEAPON_OFFHAND,
 									InventorySlot.WRIST))),
 			null,
-			ColourListPresets.LEATHER,
-			ColourListPresets.ALL,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.LEATHER.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -2155,7 +2154,7 @@ public class ClothingType {
 								ClothingAccess.WAIST),
 						PresetConcealmentLists.CONCEALED_FULL_TORSO.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -2198,10 +2197,10 @@ public class ClothingType {
 							PresetConcealmentLists.CONCEALED_FULL_TORSO.getPresetInventorySlotList())),
 
 			null,
-			ColourListPresets.NOT_WHITE,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_WHITE,
-			ColourListPresets.ALL,
+			ColourListPresets.NOT_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			Util.newArrayListOfValues(ItemTag.REINDEER_GIFT)){
@@ -2246,7 +2245,7 @@ public class ClothingType {
 									ClothingAccess.WAIST),
 							PresetConcealmentLists.CONCEALED_PARTIAL_TORSO.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -2290,12 +2289,99 @@ public class ClothingType {
 									ClothingAccess.WAIST),
 							PresetConcealmentLists.CONCEALED_PARTIAL_TORSO.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null, null, null, null,
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
 	};
 	
+	public static AbstractClothingType TORSO_TSHIRT = new AbstractClothingType(80,
+			"a",
+			false,
+			"T-shirt",
+			"T-shirts",
+			"A plain T-shirt that would look good on any figure.",
+			1,
+			null,
+			InventorySlot.TORSO_UNDER,
+			Rarity.COMMON,
+			null,
+			"clothing/torso_tshirt",
+			null,
+			Util.newArrayListOfValues(
+					new BlockedParts(
+							DisplacementType.REMOVE_OR_EQUIP,
+							Util.newArrayListOfValues(
+									ClothingAccess.ARMS_UP_TO_SHOULDER,
+									ClothingAccess.HEAD),
+							null,
+							null, null
+							),
+					new BlockedParts(
+							DisplacementType.PULLS_UP,
+							null,
+							Util.newArrayListOfValues(
+									CoverableArea.BREASTS,
+									CoverableArea.NIPPLES,
+									CoverableArea.STOMACH,
+									CoverableArea.BACK),
+							Util.newArrayListOfValues(
+									ClothingAccess.CHEST,
+									ClothingAccess.WAIST),
+							PresetConcealmentLists.CONCEALED_PARTIAL_TORSO.getPresetInventorySlotList())),
+			null,
+			ColourListPresets.ALL.getPresetColourList(),
+			null,
+			null,
+			null,
+			null,
+			null,
+			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
+
+		@Override
+		public String equipText(GameCharacter clothingOwner, GameCharacter clothingRemover, boolean rough, AbstractClothing clothing, boolean applyEffects) {
+			return getEquipDescriptions(clothingOwner, clothingRemover, rough,
+					"You pull on the T-shirt.",
+					"You guide [npc.namePos] [npc.arms] through the T-shirt's sleeves as you pull down over [npc.her] head.",
+					null,
+					"[npc.Name] pulls on the T-shirt.",
+					"[npc.Name] guides your [pc.arms] through the T-shirt's sleeves as [npc.she] pulls it down over your head.",
+					null, null, null);
+		}
+
+		@Override
+		public String unequipText(GameCharacter clothingOwner, GameCharacter clothingRemover, boolean rough, AbstractClothing clothing, boolean applyEffects) {
+			return getEquipDescriptions(clothingOwner, clothingRemover, rough,
+					"You take off your T-shirt.",
+					"You pull off [npc.namePos] T-shirt.",
+					null,
+					"[npc.Name] takes [npc.her] T-shirt off.",
+					"[npc.Name] pulls your T-shirt off.",
+					null, null, null);
+		}
+
+		@Override
+		public String displaceText(GameCharacter clothingOwner, GameCharacter clothingRemover, DisplacementType dt, boolean rough) {
+			return getEquipDescriptions(clothingOwner, clothingRemover, rough,
+					"You pull your t-shirt up to just below your chin, exposing your torso.",
+					"You pull up [npc.namePos] t-shirt.",
+					null,
+					"[npc.Name] pulls [npc.her] t-shirt up to just below [npc.her] chin, exposing [npc.her] torso.",
+					"[npc.Name] pulls up your t-shirt.",
+					null, null, null);
+		}
+
+		@Override
+		public String replaceText(GameCharacter clothingOwner, GameCharacter clothingRemover, DisplacementType dt, boolean rough) {
+			return getEquipDescriptions(clothingOwner, clothingRemover, rough,
+					"You pull your t-shirt back down, covering your torso.",
+					"You pull down [npc.namePos] t-shirt.",
+					null,
+					"[npc.Name] pulls [npc.her] t-shirt back down to cover [npc.her] torso.",
+					"[npc.Name] pulls down your t-shirt.",
+					null, null, null);
+		}
+	};
 	public static AbstractClothingType TORSO_KEYHOLE_CROPTOP = new AbstractClothingType(120,
 			"a",
 			false,
@@ -2329,7 +2415,7 @@ public class ClothingType {
 									ClothingAccess.WAIST),
 							PresetConcealmentLists.CONCEALED_PARTIAL_TORSO.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -2391,7 +2477,7 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.CHEST),
 							PresetConcealmentLists.CONCEALED_PARTIAL_TORSO_STOMACH_VISIBLE.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -2450,7 +2536,7 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.CHEST), 
 							null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -2517,7 +2603,7 @@ public class ClothingType {
 									ClothingAccess.WAIST),
 							PresetConcealmentLists.CONCEALED_PARTIAL_TORSO.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -2581,7 +2667,7 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.CHEST),
 							PresetConcealmentLists.CONCEALED_PARTIAL_TORSO_STOMACH_VISIBLE.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -2637,7 +2723,7 @@ public class ClothingType {
 									ClothingAccess.ANUS),
 							PresetConcealmentLists.CONCEALED_GROIN.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -2753,12 +2839,12 @@ public class ClothingType {
 			Util.newArrayListOfValues(
 					InventorySlot.STOMACH,
 					InventorySlot.CHEST),
-			ColourListPresets.JUST_BLACK,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_BLACK,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_BLACK,
-			ColourListPresets.ALL,
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN, ItemTag.DRESS)){
 		
 		@Override
@@ -2823,7 +2909,7 @@ public class ClothingType {
 									ClothingAccess.ANUS),
 							PresetConcealmentLists.CONCEALED_GROIN.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -2879,7 +2965,7 @@ public class ClothingType {
 									ClothingAccess.ANUS),
 							PresetConcealmentLists.CONCEALED_GROIN.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -2995,7 +3081,7 @@ public class ClothingType {
 									ClothingAccess.ANUS),
 							PresetConcealmentLists.CONCEALED_GROIN.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -3108,7 +3194,7 @@ public class ClothingType {
 									ClothingAccess.ANUS),
 							PresetConcealmentLists.CONCEALED_GROIN.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -3206,10 +3292,10 @@ public class ClothingType {
 									ClothingAccess.GROIN),
 							PresetConcealmentLists.CONCEALED_DRESS_FRONT_FULL.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
-			ColourListPresets.JUST_STEEL,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.JUST_STEEL.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null,
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN, ItemTag.DRESS)){
@@ -3339,7 +3425,7 @@ public class ClothingType {
 			Util.newArrayListOfValues(
 					InventorySlot.GROIN,
 					InventorySlot.STOMACH),
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -3448,7 +3534,7 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.CHEST),
 							PresetConcealmentLists.CONCEALED_PARTIAL_TORSO_STOMACH_VISIBLE.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -3506,8 +3592,8 @@ public class ClothingType {
 							null) // It's see-through
 					),
 			null,
-			ColourListPresets.LINGERIE,
-			ColourListPresets.ALL,
+			ColourListPresets.LINGERIE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -3564,8 +3650,8 @@ public class ClothingType {
 							PresetConcealmentLists.CONCEALED_BREASTS.getPresetInventorySlotList())
 					),
 			null,
-			ColourListPresets.LINGERIE,
-			ColourListPresets.ALL,
+			ColourListPresets.LINGERIE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -3621,8 +3707,8 @@ public class ClothingType {
 							PresetConcealmentLists.CONCEALED_BREASTS.getPresetInventorySlotList())
 					),
 			null,
-			ColourListPresets.LINGERIE,
-			ColourListPresets.ALL,
+			ColourListPresets.LINGERIE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -3671,8 +3757,8 @@ public class ClothingType {
 							null,
 							null)),
 			null,
-			ColourListPresets.LINGERIE,
-			ColourListPresets.ALL,
+			ColourListPresets.LINGERIE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -3718,8 +3804,8 @@ public class ClothingType {
 							PresetConcealmentLists.CONCEALED_BREASTS.getPresetInventorySlotList())
 					),
 			null,
-			ColourListPresets.LINGERIE,
-			ColourListPresets.ALL,
+			ColourListPresets.LINGERIE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -3775,8 +3861,8 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.CHEST),
 							PresetConcealmentLists.CONCEALED_BREASTS.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.LINGERIE,
-			ColourListPresets.ALL,
+			ColourListPresets.LINGERIE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -3832,8 +3918,8 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.CHEST),
 							PresetConcealmentLists.CONCEALED_BREASTS.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.LINGERIE,
-			ColourListPresets.ALL,
+			ColourListPresets.LINGERIE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -3887,8 +3973,8 @@ public class ClothingType {
 							PresetConcealmentLists.CONCEALED_BREASTS.getPresetInventorySlotList())
 					),
 			null,
-			ColourListPresets.LINGERIE,
-			ColourListPresets.ALL,
+			ColourListPresets.LINGERIE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -3953,10 +4039,10 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.CHEST),
 							PresetConcealmentLists.CONCEALED_BREASTS.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.NOT_WHITE,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_WHITE,
-			ColourListPresets.ALL,
+			ColourListPresets.NOT_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
@@ -4010,7 +4096,7 @@ public class ClothingType {
 							PresetConcealmentLists.CONCEALED_BREASTS.getPresetInventorySlotList())
 					),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -4086,7 +4172,7 @@ public class ClothingType {
 							null,
 							PresetConcealmentLists.CONCEALED_BREASTS.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -4139,7 +4225,7 @@ public class ClothingType {
 							null,
 							Util.newArrayListOfValues(InventorySlot.PIERCING_NIPPLE))),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -4227,8 +4313,8 @@ public class ClothingType {
 			Util.newArrayListOfValues(
 					InventorySlot.GROIN,
 					InventorySlot.CHEST),
-			ColourListPresets.LINGERIE,
-			ColourListPresets.ALL,
+			ColourListPresets.LINGERIE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -4324,8 +4410,8 @@ public class ClothingType {
 						Util.newArrayListOfValues(ClothingAccess.WAIST),
 						PresetConcealmentLists.CONCEALED_STOMACH.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.LINGERIE,
-			ColourListPresets.ALL,
+			ColourListPresets.LINGERIE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -4385,8 +4471,8 @@ public class ClothingType {
 									InventorySlot.PIERCING_NIPPLE,
 									InventorySlot.PIERCING_STOMACH))),
 			Util.newArrayListOfValues(InventorySlot.CHEST),
-			ColourListPresets.LINGERIE,
-			ColourListPresets.ALL,
+			ColourListPresets.LINGERIE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -4440,8 +4526,8 @@ public class ClothingType {
 						Util.newArrayListOfValues(ClothingAccess.WAIST),
 						PresetConcealmentLists.CONCEALED_STOMACH.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.LINGERIE,
-			ColourListPresets.ALL,
+			ColourListPresets.LINGERIE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -4495,7 +4581,7 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.FINGERS),
 							Util.newArrayListOfValues(InventorySlot.FINGER))),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -4548,7 +4634,7 @@ public class ClothingType {
 							null,
 							null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -4605,7 +4691,7 @@ public class ClothingType {
 							null,
 							null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -4659,7 +4745,7 @@ public class ClothingType {
 							null,
 							null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -4718,7 +4804,7 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.WRISTS),
 							null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -4772,7 +4858,7 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.WRISTS),
 							null)),
 			null,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -4825,7 +4911,7 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.WRISTS),
 							null)),
 			null,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -4877,8 +4963,8 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.WRISTS),
 							null)),
 			null,
-			ColourListPresets.JUST_WHITE, ColourListPresets.ALL,
-			ColourListPresets.JUST_BLACK, ColourListPresets.ALL,
+			ColourListPresets.JUST_WHITE.getPresetColourList(), ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_BLACK.getPresetColourList(), ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null, 
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
@@ -4927,7 +5013,7 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.WRISTS),
 							null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -4980,7 +5066,7 @@ public class ClothingType {
 							null, null)),
 
 			null,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -5018,7 +5104,7 @@ public class ClothingType {
 			false,
 			"condom belt",
 			"condom belts",
-			"A strip of strong elastic fabric that hugs the wearer's hips. It doesn't really serve much use, but you could always tie used condoms to it...",
+			"A strip of strong elastic fabric that hugs the wearer's hips. It doens't serve much use, but you could always tie used condoms to it...",
 			0,
 			null,
 			InventorySlot.HIPS,
@@ -5034,7 +5120,7 @@ public class ClothingType {
 							null,
 							null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -5090,8 +5176,8 @@ public class ClothingType {
 							null,
 							null)),
 			null,
-			ColourListPresets.LINGERIE, ColourListPresets.ALL,
-			ColourListPresets.JUST_STEEL, ColourListPresets.ALL_METAL,
+			ColourListPresets.LINGERIE.getPresetColourList(), ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_STEEL.getPresetColourList(), ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null, 
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
@@ -5146,7 +5232,7 @@ public class ClothingType {
 									ClothingAccess.ANUS),
 							PresetConcealmentLists.CONCEALED_GROIN.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -5227,7 +5313,7 @@ public class ClothingType {
 									ClothingAccess.ANUS),
 							PresetConcealmentLists.CONCEALED_GROIN.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -5308,7 +5394,7 @@ public class ClothingType {
 									ClothingAccess.ANUS),
 							PresetConcealmentLists.CONCEALED_GROIN.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -5362,7 +5448,7 @@ public class ClothingType {
 							null,
 							null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -5420,7 +5506,7 @@ public class ClothingType {
 							null,
 							null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -5496,7 +5582,7 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.GROIN),
 							PresetConcealmentLists.CONCEALED_UNZIPS_GROIN.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -5560,7 +5646,7 @@ public class ClothingType {
 									ClothingAccess.ANUS),
 							PresetConcealmentLists.CONCEALED_GROIN.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -5624,10 +5710,10 @@ public class ClothingType {
 									ClothingAccess.ANUS),
 								PresetConcealmentLists.CONCEALED_GROIN.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
-			ColourListPresets.JUST_GREY,
-			ColourListPresets.ALL,
+			ColourListPresets.JUST_GREY.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
@@ -5688,7 +5774,7 @@ public class ClothingType {
 									ClothingAccess.ANUS),
 							PresetConcealmentLists.CONCEALED_GROIN.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -5760,8 +5846,8 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.GROIN),
 							PresetConcealmentLists.CONCEALED_UNZIPS_GROIN.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.DENIM,
-			ColourListPresets.ALL,
+			ColourListPresets.DENIM.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -5832,8 +5918,8 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.GROIN),
 							PresetConcealmentLists.CONCEALED_UNZIPS_GROIN.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.DENIM,
-			ColourListPresets.ALL,
+			ColourListPresets.DENIM.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -5904,7 +5990,7 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.GROIN),
 							PresetConcealmentLists.CONCEALED_UNZIPS_GROIN.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -5975,8 +6061,8 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.GROIN),
 							PresetConcealmentLists.CONCEALED_UNZIPS_GROIN.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.LEATHER,
-			ColourListPresets.ALL,
+			ColourListPresets.LEATHER.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -6041,7 +6127,7 @@ public class ClothingType {
 									ClothingAccess.ANUS),
 							PresetConcealmentLists.CONCEALED_GROIN.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -6108,8 +6194,8 @@ public class ClothingType {
 									InventorySlot.PIERCING_VAGINA))),
 
 			null,
-			ColourListPresets.LEATHER,
-			ColourListPresets.ALL,
+			ColourListPresets.LEATHER.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -6188,8 +6274,8 @@ public class ClothingType {
 									InventorySlot.ANKLE,
 									InventorySlot.SOCK))),
 			null,
-			ColourListPresets.LEATHER,
-			ColourListPresets.ALL,
+			ColourListPresets.LEATHER.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -6255,8 +6341,8 @@ public class ClothingType {
 							null,
 							PresetConcealmentLists.CONCEALED_GENITALS.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.LINGERIE,
-			ColourListPresets.ALL,
+			ColourListPresets.LINGERIE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -6318,10 +6404,10 @@ public class ClothingType {
 							null,
 							PresetConcealmentLists.CONCEALED_GENITALS.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.NOT_WHITE,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_WHITE,
-			ColourListPresets.ALL,
+			ColourListPresets.NOT_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
@@ -6381,8 +6467,8 @@ public class ClothingType {
 							null,
 							PresetConcealmentLists.CONCEALED_GENITALS.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.LINGERIE,
-			ColourListPresets.ALL,
+			ColourListPresets.LINGERIE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -6443,8 +6529,8 @@ public class ClothingType {
 							null,
 							PresetConcealmentLists.CONCEALED_GENITALS.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.LINGERIE,
-			ColourListPresets.ALL,
+			ColourListPresets.LINGERIE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -6508,8 +6594,8 @@ public class ClothingType {
 							null,
 							PresetConcealmentLists.CONCEALED_GENITALS.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.LINGERIE,
-			ColourListPresets.ALL,
+			ColourListPresets.LINGERIE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -6573,8 +6659,8 @@ public class ClothingType {
 							null,
 							PresetConcealmentLists.CONCEALED_GENITALS.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.LINGERIE,
-			ColourListPresets.ALL,
+			ColourListPresets.LINGERIE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -6638,8 +6724,8 @@ public class ClothingType {
 							null,
 							PresetConcealmentLists.CONCEALED_GENITALS.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.LINGERIE,
-			ColourListPresets.ALL,
+			ColourListPresets.LINGERIE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -6702,7 +6788,7 @@ public class ClothingType {
 							null,
 							PresetConcealmentLists.CONCEALED_GENITALS.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -6773,7 +6859,7 @@ public class ClothingType {
 							null,
 							PresetConcealmentLists.CONCEALED_GENITALS.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -6832,10 +6918,10 @@ public class ClothingType {
 							null,
 							PresetConcealmentLists.CONCEALED_GENITALS.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
-			ColourListPresets.JUST_BLACK,
-			ColourListPresets.ALL,
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
@@ -6896,8 +6982,8 @@ public class ClothingType {
 									InventorySlot.PIERCING_PENIS,
 									InventorySlot.PIERCING_VAGINA))),
 			null,
-			ColourListPresets.LINGERIE,
-			ColourListPresets.ALL,
+			ColourListPresets.LINGERIE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -6974,8 +7060,8 @@ public class ClothingType {
 							null,
 							null)),
 			null,
-			ColourListPresets.LINGERIE,
-			ColourListPresets.ALL,
+			ColourListPresets.LINGERIE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -7031,8 +7117,8 @@ public class ClothingType {
 							null,
 							null)),
 			null,
-			ColourListPresets.LINGERIE,
-			ColourListPresets.ALL,
+			ColourListPresets.LINGERIE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -7093,7 +7179,7 @@ public class ClothingType {
 							null,
 							Util.newArrayListOfValues(InventorySlot.ANUS))),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -7173,7 +7259,7 @@ public class ClothingType {
 							null,
 							null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -7225,7 +7311,7 @@ public class ClothingType {
 							null,
 							null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -7279,7 +7365,7 @@ public class ClothingType {
 							null,
 							null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -7334,7 +7420,7 @@ public class ClothingType {
 							null,
 							null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -7389,8 +7475,8 @@ public class ClothingType {
 							null,
 							null)),
 			null,
-			ColourListPresets.JUST_BLACK,
-			ColourListPresets.ALL,
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -7446,9 +7532,9 @@ public class ClothingType {
 							null,
 							null)),
 			null,
-			ColourListPresets.JUST_WHITE,
-			ColourListPresets.ALL,
-			ColourListPresets.ALL,
+			ColourListPresets.JUST_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -7504,10 +7590,10 @@ public class ClothingType {
 							null,
 							null)),
 			null,
-			ColourListPresets.NOT_WHITE,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_WHITE,
-			ColourListPresets.ALL,
+			ColourListPresets.NOT_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
@@ -7573,8 +7659,8 @@ public class ClothingType {
 							null)),
 
 			null,
-			ColourListPresets.JUST_BLACK,
-			ColourListPresets.ALL,
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -7651,7 +7737,7 @@ public class ClothingType {
 							null,
 							null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -7684,6 +7770,598 @@ public class ClothingType {
 		}
 	};
 
+	// FOOT
+	
+	public static AbstractClothingType FOOT_HEELS = new AbstractClothingType(250,
+			"a pair of",
+			true,
+			"heels",
+			"heels",
+			"A pair of high heels.",
+			1,
+			Femininity.FEMININE,
+			InventorySlot.FOOT,
+			Rarity.COMMON,
+			null,
+			"clothing/foot_heels",
+			null,
+			Util.newArrayListOfValues(
+					new BlockedParts(
+							DisplacementType.REMOVE_OR_EQUIP,
+							Util.newArrayListOfValues(ClothingAccess.FEET),
+							Util.newArrayListOfValues(CoverableArea.FEET),
+							Util.newArrayListOfValues(ClothingAccess.FEET),
+							null)),
+			null,
+			ColourListPresets.ALL.getPresetColourList(),
+			null,
+			null,
+			null,
+			null,
+			null,
+			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
+		
+		@Override
+		public String equipText(GameCharacter clothingOwner, GameCharacter clothingRemover, boolean rough, AbstractClothing clothing, boolean applyEffects) {
+			return getEquipDescriptions(clothingOwner, clothingRemover, rough,
+					"You push your [pc.feet] into the heels.",
+					"You push [npc.namePos] [npc.feet] into the heels.",
+					"You force the heels onto [npc.namePos] [npc.feet].",
+					"[npc.Name] pushes [npc.her] [npc.feet] into the heels.",
+					"[npc.Name] pushes your [pc.feet] into the heels.",
+					"[npc.Name] forces the heels onto your [pc.feet].", null, null);
+		}
+
+		@Override
+		public String unequipText(GameCharacter clothingOwner, GameCharacter clothingRemover, boolean rough, AbstractClothing clothing, boolean applyEffects) {
+			return getEquipDescriptions(clothingOwner, clothingRemover, rough,
+					"You slip off your heels.",
+					"You slip [npc.namePos] heels off.",
+					"You grab [npc.namePos] [npc.feet] and pull [npc.her] heels off.",
+					"[npc.Name] slips off [npc.her] heels.",
+					"[npc.Name] slips off your heels.",
+					"[npc.Name] grabs your [pc.feet] and pulls your heels off.", null, null);
+		}
+	};
+	
+	public static AbstractClothingType FOOT_STILETTO_HEELS = new AbstractClothingType(500,
+			"a pair of",
+			true,
+			"stiletto heel",
+			"stiletto heels",
+			"A pair of shoes which have long, thin, high heels, commonly referred to as stiletto heels.",
+			1,
+			Femininity.FEMININE,
+			InventorySlot.FOOT,
+			Rarity.COMMON,
+			null,
+			"clothing/foot_stiletto_heels",
+			null,
+			Util.newArrayListOfValues(
+					new BlockedParts(
+							DisplacementType.REMOVE_OR_EQUIP,
+							Util.newArrayListOfValues(ClothingAccess.FEET),
+							Util.newArrayListOfValues(CoverableArea.FEET),
+							Util.newArrayListOfValues(ClothingAccess.FEET),
+							null)),
+			null,
+			ColourListPresets.ALL.getPresetColourList(),
+			null,
+			ColourListPresets.JUST_TAN.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_GREY.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
+		
+		@Override
+		public String equipText(GameCharacter clothingOwner, GameCharacter clothingRemover, boolean rough, AbstractClothing clothing, boolean applyEffects) {
+			return getEquipDescriptions(clothingOwner, clothingRemover, rough,
+					"You push your [pc.feet] into the heels.",
+					"You push [npc.namePos] [npc.feet] into the heels.",
+					"You force the heels onto [npc.namePos] [npc.feet].",
+					"[npc.Name] pushes [npc.her] [npc.feet] into the heels.",
+					"[npc.Name] pushes your [pc.feet] into the heels.",
+					"[npc.Name] forces the heels onto your [pc.feet].", null, null);
+		}
+
+		@Override
+		public String unequipText(GameCharacter clothingOwner, GameCharacter clothingRemover, boolean rough, AbstractClothing clothing, boolean applyEffects) {
+			return getEquipDescriptions(clothingOwner, clothingRemover, rough,
+					"You slip off your heels.",
+					"You slip [npc.namePos] heels off.",
+					"You grab [npc.namePos] [npc.feet] and pull [npc.her] heels off.",
+					"[npc.Name] slips off [npc.her] heels.",
+					"[npc.Name] slips off your heels.",
+					"[npc.Name] grabs your [pc.feet] and pulls your heels off.", null, null);
+		}
+	};
+	
+	public static AbstractClothingType FOOT_CHELSEA_BOOTS = new AbstractClothingType(250,
+			"a pair of",
+			true,
+			"chelsea boots",
+			"chelsea boots",
+			"A pair of unisex, chelsea-style ankle boots.",
+			1,
+			null,
+			InventorySlot.FOOT,
+			Rarity.COMMON,
+			null,
+			"clothing/foot_chelsea_boots",
+			null,
+			Util.newArrayListOfValues(
+					new BlockedParts(
+							DisplacementType.REMOVE_OR_EQUIP,
+							Util.newArrayListOfValues(ClothingAccess.FEET),
+							Util.newArrayListOfValues(CoverableArea.FEET),
+							Util.newArrayListOfValues(ClothingAccess.FEET),
+							null)),
+			null,
+			ColourListPresets.LEATHER.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			null,
+			null,
+			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
+
+		@Override
+		public String equipText(GameCharacter clothingOwner, GameCharacter clothingRemover, boolean rough, AbstractClothing clothing, boolean applyEffects) {
+			if (clothingOwner.isPlayer() && clothingRemover.isPlayer())
+				return "You push your feet into the ankle boots and zip up the sides.";
+			else
+				return UtilText.parse(clothingOwner,
+						"[npc.Name] pushes [npc.her] feet into " + clothing.getName(true) + " and zips up the sides.");
+		}
+
+		@Override
+		public String unequipText(GameCharacter clothingOwner, GameCharacter clothingRemover, boolean rough, AbstractClothing clothing, boolean applyEffects) {
+			if (clothingOwner.isPlayer() && clothingRemover.isPlayer())
+				return "You unzip your ankle boots and pull them off.";
+			else if (!clothingOwner.isPlayer() && !clothingRemover.isPlayer())
+				return UtilText.parse(clothingOwner, "[npc.Name] unzips [npc.her] ankle boots and pulls them off.");
+			else {
+				if (clothingOwner.isPlayer())
+					return "[npc.Name] pulls off your ankle boots.";
+				else
+					return UtilText.parse(clothingOwner, "You pull off [npc.namePos] ankle boots.");
+			}
+		}
+	};
+	
+	public static AbstractClothingType FOOT_ANKLE_BOOTS = new AbstractClothingType(250,
+			"a pair of",
+			true,
+			"ankle boots",
+			"ankle boots",
+			"A pair of feminine ankle boots.",
+			1,
+			Femininity.FEMININE,
+			InventorySlot.FOOT,
+			Rarity.COMMON,
+			null,
+			"clothing/foot_ankle_boots",
+			null,
+			Util.newArrayListOfValues(
+					new BlockedParts(
+							DisplacementType.REMOVE_OR_EQUIP,
+							Util.newArrayListOfValues(ClothingAccess.FEET),
+							Util.newArrayListOfValues(CoverableArea.FEET),
+							Util.newArrayListOfValues(ClothingAccess.FEET),
+							null)),
+			null,
+			ColourListPresets.LEATHER.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_STEEL.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
+			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
+		
+		@Override
+		public String equipText(GameCharacter clothingOwner, GameCharacter clothingRemover, boolean rough, AbstractClothing clothing, boolean applyEffects) {
+			if (clothingOwner.isPlayer() && clothingRemover.isPlayer())
+				return "You push your feet into the ankle boots and zip up the sides.";
+			else
+				return UtilText.parse(clothingOwner,
+						"[npc.Name] pushes [npc.her] feet into " + clothing.getName(true) + " and zips up the sides.");
+		}
+
+		@Override
+		public String unequipText(GameCharacter clothingOwner, GameCharacter clothingRemover, boolean rough, AbstractClothing clothing, boolean applyEffects) {
+			if (clothingOwner.isPlayer() && clothingRemover.isPlayer())
+				return "You unzip your ankle boots and pull them off.";
+			else if (!clothingOwner.isPlayer() && !clothingRemover.isPlayer())
+				return UtilText.parse(clothingOwner, "[npc.Name] unzips [npc.her] ankle boots and pulls them off.");
+			else {
+				if (clothingOwner.isPlayer())
+					return "[npc.Name] pulls off your ankle boots.";
+				else
+					return UtilText.parse(clothingOwner, "You pull off [npc.namePos] ankle boots.");
+			}
+		}
+	};
+
+	public static AbstractClothingType FOOT_PLATFORM_BOOTS = new AbstractClothingType(300,
+			"a pair of",
+			true,
+			"platform boots",
+			"platform boots",
+			"A pair of platform boots.",
+			1,
+			Femininity.FEMININE,
+			InventorySlot.FOOT,
+			Rarity.COMMON,
+			null,
+			"clothing/foot_platform_boots",
+			null,
+			Util.newArrayListOfValues(
+					new BlockedParts(
+							DisplacementType.REMOVE_OR_EQUIP,
+							Util.newArrayListOfValues(ClothingAccess.FEET),
+							Util.newArrayListOfValues(CoverableArea.FEET),
+							Util.newArrayListOfValues(ClothingAccess.FEET),
+							null)),
+			null,
+			ColourListPresets.LEATHER.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			null,
+			null,
+			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
+
+		@Override
+		public String equipText(GameCharacter clothingOwner, GameCharacter clothingRemover, boolean rough, AbstractClothing clothing, boolean applyEffects) {
+			if (clothingOwner.isPlayer() && clothingRemover.isPlayer())
+				return "You push your feet into the platform boots and zip up the sides.";
+			else
+				return UtilText.parse(clothingOwner,
+						"[npc.Name] pushes [npc.her] feet into " + clothing.getName(true) + " and zips up the sides.");
+		}
+
+		@Override
+		public String unequipText(GameCharacter clothingOwner, GameCharacter clothingRemover, boolean rough, AbstractClothing clothing, boolean applyEffects) {
+			if (clothingOwner.isPlayer() && clothingRemover.isPlayer())
+				return "You unzip your platform boots and pull them off.";
+			else if (!clothingOwner.isPlayer() && !clothingRemover.isPlayer())
+				return UtilText.parse(clothingOwner, "[npc.Name] unzips [npc.her] platform boots and pulls them off.");
+			else {
+				if (clothingOwner.isPlayer())
+					return "[npc.Name] pulls off your platform boots.";
+				else
+					return UtilText.parse(clothingOwner, "You pull off [npc.namePos] platform boots.");
+			}
+		}
+	};
+	
+	public static AbstractClothingType FOOT_THIGH_HIGH_BOOTS = new AbstractClothingType(750,
+			"a pair of",
+			true,
+			"thigh high boots",
+			"thigh high boots",
+			"A pair of thigh high boots.",
+			1,
+			Femininity.FEMININE,
+			InventorySlot.FOOT,
+			Rarity.COMMON,
+			null,
+			"clothing/foot_thigh_high_boots",
+			null,
+			Util.newArrayListOfValues(
+					new BlockedParts(
+							DisplacementType.REMOVE_OR_EQUIP,
+							Util.newArrayListOfValues(ClothingAccess.FEET),
+							Util.newArrayListOfValues(
+									CoverableArea.FEET),
+							Util.newArrayListOfValues(ClothingAccess.FEET),
+							Util.newArrayListOfValues(InventorySlot.ANKLE))),
+			null,
+			ColourListPresets.LEATHER.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			null,
+			null,
+			null,
+			null,
+			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
+		
+
+		@Override
+		public String equipText(GameCharacter clothingOwner, GameCharacter clothingRemover, boolean rough, AbstractClothing clothing, boolean applyEffects) {
+			if (clothingOwner.isPlayer() && clothingRemover.isPlayer())
+				return "You push your feet into the boots and pull them up to your mid-thigh.";
+			else
+				return UtilText.parse(clothingOwner,
+						"[npc.Name] pushes [npc.her] feet into the boots and pulls them up to mid-thigh.");
+		}
+
+		@Override
+		public String unequipText(GameCharacter clothingOwner, GameCharacter clothingRemover, boolean rough, AbstractClothing clothing, boolean applyEffects) {
+			if (clothingOwner.isPlayer() && clothingRemover.isPlayer())
+				return "You pull off your thigh high boots.";
+			else if (!clothingOwner.isPlayer() && !clothingRemover.isPlayer())
+				return UtilText.parse(clothingOwner, "[npc.Name] pulls off [npc.her] thigh high boots.");
+			else {
+				if (clothingOwner.isPlayer())
+					return "[npc.Name] pulls off your thigh high boots.";
+				else
+					return UtilText.parse(clothingOwner, "You pull off [npc.namePos] thigh high boots.");
+			}
+		}
+	};
+	public static AbstractClothingType FOOT_MENS_SMART_SHOES = new AbstractClothingType(500,
+			"a pair of",
+			true,
+			"men's shoes",
+			"men's shoes",
+			"A pair of smart men's shoes, suitable for all occasions.",
+			1,
+			Femininity.MASCULINE,
+			InventorySlot.FOOT,
+			Rarity.COMMON,
+			null,
+			"clothing/foot_mens_smart_shoes",
+			null,
+			Util.newArrayListOfValues(
+					new BlockedParts(
+							DisplacementType.REMOVE_OR_EQUIP,
+							Util.newArrayListOfValues(ClothingAccess.FEET),
+							Util.newArrayListOfValues(CoverableArea.FEET),
+							Util.newArrayListOfValues(ClothingAccess.FEET),
+							null)),
+			null,
+			ColourListPresets.LEATHER.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			null,
+			null,
+			null,
+			null,
+			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
+		
+		@Override
+		public String equipText(GameCharacter clothingOwner, GameCharacter clothingRemover, boolean rough, AbstractClothing clothing, boolean applyEffects) {
+			if (clothingOwner.isPlayer() && clothingRemover.isPlayer())
+				return "You push your feet into the shoes and tie up the laces.";
+			else
+				return UtilText.parse(clothingOwner,
+						"[npc.Name] pushes [npc.her] feet into " + clothing.getName(true) + " and ties up the laces.");
+		}
+
+		@Override
+		public String unequipText(GameCharacter clothingOwner, GameCharacter clothingRemover, boolean rough, AbstractClothing clothing, boolean applyEffects) {
+			if (clothingOwner.isPlayer() && clothingRemover.isPlayer())
+				return "You untie the laces and pull your shoes off.";
+			else if (!clothingOwner.isPlayer() && !clothingRemover.isPlayer())
+				return UtilText.parse(clothingOwner, "[npc.Name] unties [npc.her] laces and pulls [npc.her] shoes off.");
+			else {
+				if (clothingOwner.isPlayer())
+					return "[npc.Name] pulls off your shoes.";
+				else
+					return UtilText.parse(clothingOwner, "You pull off [npc.namePos] shoes.");
+			}
+		}
+	};
+	public static AbstractClothingType FOOT_WORK_BOOTS = new AbstractClothingType(600,
+			"a pair of",
+			true,
+			"work boots",
+			"work boots",
+			"A pair of heavy, steel-capped work boots.",
+			2,
+			Femininity.MASCULINE,
+			InventorySlot.FOOT,
+			Rarity.COMMON,
+			null,
+			"clothing/foot_work_boots",
+			null,
+			Util.newArrayListOfValues(
+					new BlockedParts(
+							DisplacementType.REMOVE_OR_EQUIP,
+							Util.newArrayListOfValues(ClothingAccess.FEET),
+							Util.newArrayListOfValues(CoverableArea.FEET),
+							Util.newArrayListOfValues(ClothingAccess.FEET),
+							null)),
+			null,
+			ColourListPresets.LEATHER.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			null,
+			null,
+			null,
+			null,
+			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
+
+		@Override
+		public String equipText(GameCharacter clothingOwner, GameCharacter clothingRemover, boolean rough, AbstractClothing clothing, boolean applyEffects) {
+			if (clothingOwner.isPlayer() && clothingRemover.isPlayer()) {
+				return "You push your feet into the boots and tie up the laces.";
+			} else {
+				return UtilText.parse(clothingOwner, "[npc.Name] pushes [npc.her] feet into " + clothing.getName(true) + " and ties up the laces.");
+			}
+		}
+
+		@Override
+		public String unequipText(GameCharacter clothingOwner, GameCharacter clothingRemover, boolean rough, AbstractClothing clothing, boolean applyEffects) {
+			if (clothingOwner.isPlayer() && clothingRemover.isPlayer()) {
+				return "You untie the laces and pull your boots off.";
+			} else if (!clothingOwner.isPlayer() && !clothingRemover.isPlayer()) {
+				return UtilText.parse(clothingOwner, "[npc.Name] unties [npc.her] laces and pulls [npc.her] boots off.");
+			} else {
+				if (clothingOwner.isPlayer()) {
+					return UtilText.parse(clothingRemover, "[npc.Name] pulls your boots off.");
+				} else {
+					return UtilText.parse(clothingOwner, "You pull off [npc.namePos] boots.");
+				}
+			}
+		}
+	};
+	
+	public static AbstractClothingType FOOT_TRAINERS = new AbstractClothingType(
+			500,
+			"a pair of",
+			true,
+			"trainers",
+			"trainers",
+			"A pair of unisex trainers, ideal for any kind of exercise.",
+			1,
+			null,
+			InventorySlot.FOOT,
+			Rarity.COMMON,
+			null,
+			"clothing/foot_trainers",
+			null,
+			Util.newArrayListOfValues(
+					new BlockedParts(
+							DisplacementType.REMOVE_OR_EQUIP,
+							Util.newArrayListOfValues(ClothingAccess.FEET),
+							Util.newArrayListOfValues(CoverableArea.FEET),
+							Util.newArrayListOfValues(ClothingAccess.FEET), 
+							null)),
+			null,
+			ColourListPresets.ALL.getPresetColourList(),
+			null,
+			null,
+			null,
+			null,
+			null,
+			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
+		
+		@Override
+		public String equipText(GameCharacter clothingOwner, GameCharacter clothingRemover, boolean rough, AbstractClothing clothing, boolean applyEffects) {
+			return getEquipDescriptions(clothingOwner, clothingRemover, rough,
+					"You push your [pc.feet] into the trainers and tie up the laces.",
+					"You push [npc.namePos] [npc.feet] into the trainers and tie up the laces.",
+					"You force the trainers onto [npc.namePos] [npc.feet].",
+					"[npc.Name] pushes [npc.her] [npc.feet] into the trainers and ties up the laces.",
+					"[npc.Name] pushes your [pc.feet] into the trainers and ties up the laces.",
+					"[npc.Name] forces the trainers onto your [pc.feet].", null, null);
+		}
+
+		@Override
+		public String unequipText(GameCharacter clothingOwner, GameCharacter clothingRemover, boolean rough, AbstractClothing clothing, boolean applyEffects) {
+			return getEquipDescriptions(clothingOwner, clothingRemover, rough,
+					"You slip off your trainers.",
+					"You slip [npc.namePos] trainers off.",
+					"You grab [npc.namePos] [npc.feet] and pull [npc.her] trainers off.",
+					"[npc.Name] slips off [npc.her] trainers.",
+					"[npc.Name] slips off your trainers.",
+					"[npc.Name] grabs your [pc.feet] and pulls your trainers off.", null, null);
+		}
+	};
+	
+	public static AbstractClothingType FOOT_LOW_TOP_SKATER_SHOES = new AbstractClothingType(350,
+			"a pair of",
+			true,
+			"low-top skater shoe",
+			"low-top skater shoes",
+			"A pair of low-top skater shoes, suitable for casual wear.",
+			1,
+			null,
+			InventorySlot.FOOT,
+			Rarity.COMMON,
+			null,
+			"clothing/foot_low_top_skater_shoes",
+			null,
+			Util.newArrayListOfValues(
+					new BlockedParts(
+							DisplacementType.REMOVE_OR_EQUIP,
+							Util.newArrayListOfValues(ClothingAccess.FEET),
+							Util.newArrayListOfValues(CoverableArea.FEET),
+							Util.newArrayListOfValues(ClothingAccess.FEET),
+							null)),
+			null,
+			ColourListPresets.ALL.getPresetColourList(),
+			null,
+			null,
+			null,
+			null,
+			null,
+			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
+		
+			@Override
+			public String equipText(GameCharacter clothingOwner, GameCharacter clothingRemover, boolean rough, AbstractClothing clothing, boolean applyEffects) {
+				return getEquipDescriptions(clothingOwner, clothingRemover, rough,
+						"You push your [pc.feet] into the shoes and tie up the laces.",
+						"You push [npc.namePos] [npc.feet] into the shoes and tie up the laces.",
+						"You force the shoes onto [npc.namePos] [npc.feet].",
+						"[npc.Name] pushes [npc.her] [npc.feet] into the shoes and ties up the laces.",
+						"[npc.Name] pushes your [pc.feet] into the shoes and ties up the laces.",
+						"[npc.Name] forces the shoes onto your [pc.feet].", null, null);
+			}
+
+			@Override
+			public String unequipText(GameCharacter clothingOwner, GameCharacter clothingRemover, boolean rough, AbstractClothing clothing, boolean applyEffects) {
+				return getEquipDescriptions(clothingOwner, clothingRemover, rough,
+						"You slip off your shoes.",
+						"You slip [npc.namePos] shoes off.",
+						"You grab [npc.namePos] [npc.feet] and pull [npc.her] shoes off.",
+						"[npc.Name] slips off [npc.her] shoes.",
+						"[npc.Name] slips off your shoes.",
+						"[npc.Name] grabs your [pc.feet] and pulls your shoes off.", null, null);
+			}
+	};
+	
+//	public static AbstractClothingType PENIS_CONDOM = new AbstractClothingType(20,
+//			"a",
+//			false,
+//			"condom",
+//			"condoms",
+//			"A sheath-shaped rubbery barrier device, designed to fit over a penis and prevent any semen from entering the body of a sexual partner.",
+//			1,
+//			null,
+//			InventorySlot.PENIS,
+//			Rarity.COMMON,
+//			null,
+//			"clothing/penis_condom_unequipped",
+//			"clothing/penis_condom_equipped",
+//			null,
+//			Util.newArrayListOfValues(
+//					new BlockedParts(
+//							DisplacementType.REMOVE_OR_EQUIP,
+//							Util.newArrayListOfValues(ClothingAccess.GROIN),
+//							null,
+//							null, null)),
+//			null,
+//			ColourListPresets.ALL.getPresetColourList(),
+//			null,
+//			null,
+//			null,
+//			null,
+//			null,
+//			Util.newArrayListOfValues(
+//					ItemTag.DISCARDED_WHEN_UNEQUIPPED,
+//					ItemTag.ENABLE_SEX_EQUIP,
+//					ItemTag.REQUIRES_PENIS)){
+//		
+//		@Override
+//		public String equipText(GameCharacter clothingOwner, GameCharacter clothingRemover, boolean rough, AbstractClothing clothing, boolean applyEffects) {
+//			if(applyEffects) {
+//				if(InventoryDialogue.getInventoryNPC()!=null) {
+//					return ((NPC) InventoryDialogue.getInventoryNPC()).getCondomEquipEffects(clothingRemover, clothingOwner, rough);
+//				}
+//			}
+//			
+//			return getEquipDescriptions(clothingOwner, clothingRemover, rough,
+//					"You tear open the packet and roll the condom down the length of your [pc.penis].",
+//					"You tear open the packet and roll the condom down the length of [npc.namePos] [npc.penis].",
+//					"You tear open the packet and forcefully roll the condom down the length of [npc.namePos] [npc.penis].",
+//					"[npc.Name] tears open the packet and rolls the condom down the length of [npc.her] [npc.penis].",
+//					"[npc.Name] tears open the packet and rolls the condom down the length of your [pc.penis].",
+//					"[npc.Name] tears open the packet and forcefully rolls the condom down the length of your [pc.penis].", null, null);
+//		}
+//
+//		@Override
+//		public String unequipText(GameCharacter clothingOwner, GameCharacter clothingRemover, boolean rough, AbstractClothing clothing, boolean applyEffects) {
+//			return getEquipDescriptions(clothingOwner, clothingRemover, rough,
+//					"You slip off your condom and throw it away.",
+//					"You slip [npc.namePos] condom off and throw it away.",
+//					"You grab [npc.namePos] [npc.penis] and pull [npc.her] condom off, before throwing it away.",
+//					"[npc.Name] slips off [npc.her] condom and throws it away.",
+//					"[npc.Name] slips off your condom and throws it away.",
+//					"[npc.Name] grabs your [pc.penis] and pulls your condom off, before throwing it away.", null, null);
+//		}
+//	};
+	
+	
 	// CLOTHING SETS:
 
 	// MAID:
@@ -7709,10 +8387,10 @@ public class ClothingType {
 							null,
 							null)),
 			null,
-			ColourListPresets.MAID,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_WHITE,
-			ColourListPresets.ALL,
+			ColourListPresets.MAID.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
@@ -7783,10 +8461,10 @@ public class ClothingType {
 									ClothingAccess.ANUS), 
 							PresetConcealmentLists.CONCEALED_GROIN.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.MAID,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_WHITE,
-			ColourListPresets.ALL,
+			ColourListPresets.MAID.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN, ItemTag.DRESS)){
@@ -7878,10 +8556,10 @@ public class ClothingType {
 									ClothingAccess.CALVES),
 							null, null, null)),
 			null,
-			ColourListPresets.MAID,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_WHITE,
-			ColourListPresets.ALL,
+			ColourListPresets.MAID.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
@@ -7931,12 +8609,12 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.FEET),
 							null)),
 			null,
-			ColourListPresets.MAID,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_WHITE,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_STEEL,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.MAID.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_STEEL.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
 		
 		@Override
@@ -7982,10 +8660,10 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.WRISTS),
 							null, null, null)),
 			null,
-			ColourListPresets.MAID,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_WHITE,
-			ColourListPresets.ALL,
+			ColourListPresets.MAID.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
@@ -8050,10 +8728,10 @@ public class ClothingType {
 							DisplacementType.REMOVE_OR_EQUIP,
 							null, null, null, null)),
 			null,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
-			ColourListPresets.JUST_STEEL,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.JUST_STEEL.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null,
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_FINCH)){
@@ -8108,12 +8786,12 @@ public class ClothingType {
 							Util.newArrayListOfValues(CoverableArea.MOUTH),
 							null, null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
-			ColourListPresets.JUST_BLACK,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_STEEL,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_STEEL.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			Util.newArrayListOfValues(
 					ItemTag.MUFFLES_SPEECH,
 					ItemTag.SOLD_BY_FINCH)){
@@ -8167,12 +8845,12 @@ public class ClothingType {
 							null,
 							null, null)),
 			null,
-			ColourListPresets.ALL_WITH_METALS,
+			ColourListPresets.ALL_WITH_METALS.getPresetColourList(),
 			null,
-			ColourListPresets.JUST_BLACK,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_STEEL,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_STEEL.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_FINCH)){
 		
 
@@ -8222,10 +8900,10 @@ public class ClothingType {
 							null,
 							null, null)),
 			null,
-			ColourListPresets.JUST_BLACK,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_STEEL,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_STEEL.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null,
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_FINCH)){
@@ -8276,10 +8954,10 @@ public class ClothingType {
 					Util.newArrayListOfValues(ClothingAccess.WRISTS), 
 					null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
-			ColourListPresets.JUST_STEEL,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.JUST_STEEL.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null,
 			Util.newArrayListOfValues(
@@ -8335,10 +9013,10 @@ public class ClothingType {
 							ClothingAccess.CALVES), 
 					null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
-			ColourListPresets.JUST_STEEL,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.JUST_STEEL.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null,
 			Util.newArrayListOfValues(
@@ -8398,12 +9076,12 @@ public class ClothingType {
 									CoverableArea.VAGINA),
 							null, null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
-			ColourListPresets.JUST_STEEL,
-			ColourListPresets.ALL_METAL,
-			ColourListPresets.JUST_GOLD,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.JUST_STEEL.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
+			ColourListPresets.JUST_GOLD.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_FINCH)){
 		
 		@Override
@@ -8461,12 +9139,12 @@ public class ClothingType {
 									ClothingAccess.ANUS),
 							null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
-			ColourListPresets.JUST_STEEL,
-			ColourListPresets.ALL_METAL,
-			ColourListPresets.JUST_GOLD,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.JUST_STEEL.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
+			ColourListPresets.JUST_GOLD.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_FINCH)){
 		
 		@Override
@@ -8516,12 +9194,12 @@ public class ClothingType {
 							null,
 							null)),
 			null,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
-			ColourListPresets.JUST_BLACK,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_STEEL,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_STEEL.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			Util.newArrayListOfValues(
 					ItemTag.ENABLE_SEX_EQUIP,
 					ItemTag.SOLD_BY_FINCH,
@@ -8583,7 +9261,7 @@ public class ClothingType {
 							null, 
 							null)),
 			null, //Util.newArrayListOfValues(InventorySlot.CHEST, InventorySlot.GROIN),
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -8653,11 +9331,11 @@ public class ClothingType {
 					Colour.CLOTHING_BLUE,
 					Colour.CLOTHING_BLACK,
 					Colour.CLOTHING_PINK),
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_BLACK,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_STEEL,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_STEEL.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null){
 		
 
@@ -8728,11 +9406,11 @@ public class ClothingType {
 					Colour.CLOTHING_BLUE,
 					Colour.CLOTHING_BLACK,
 					Colour.CLOTHING_PINK),
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_BLACK,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_STEEL,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_STEEL.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null) {
 		
 		@Override
@@ -8789,11 +9467,11 @@ public class ClothingType {
 					Colour.CLOTHING_BLUE,
 					Colour.CLOTHING_BLACK,
 					Colour.CLOTHING_PINK),
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_BLACK,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_STEEL,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_STEEL.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null){
 		
 		@Override
@@ -8838,10 +9516,10 @@ public class ClothingType {
 							DisplacementType.REMOVE_OR_EQUIP,
 							null, null, null, null)),
 			null,
-			ColourListPresets.JUST_YELLOW,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_RED,
-			ColourListPresets.ALL,
+			ColourListPresets.JUST_YELLOW.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_RED.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_FINCH)){
@@ -8888,7 +9566,7 @@ public class ClothingType {
 							DisplacementType.REMOVE_OR_EQUIP,
 							null, null, null, null)),
 			null,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -8938,12 +9616,12 @@ public class ClothingType {
 							DisplacementType.REMOVE_OR_EQUIP,
 							null, null, null, null)),
 			null,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
-			ColourListPresets.JUST_BLACK,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_STEEL,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_STEEL.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_FINCH)){
 
 		@Override
@@ -9019,10 +9697,10 @@ public class ClothingType {
 									InventorySlot.NIPPLE,
 									InventorySlot.PIERCING_NIPPLE))),
 			null,
-			ColourListPresets.MILK_MAID,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_WHITE,
-			ColourListPresets.ALL,
+			ColourListPresets.MILK_MAID.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN, ItemTag.DRESS)){
@@ -9048,10 +9726,10 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.HEAD),
 							null, null, null)),
 			null,
-			ColourListPresets.MILK_MAID,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_WHITE,
-			ColourListPresets.ALL,
+			ColourListPresets.MILK_MAID.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
@@ -9099,8 +9777,8 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.HEAD),
 							null, null, null)),
 			null,
-			ColourListPresets.JUST_WHITE,
-			ColourListPresets.ALL,
+			ColourListPresets.JUST_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -9277,11 +9955,11 @@ public class ClothingType {
 			Util.newArrayListOfValues(
 							Colour.CLOTHING_BLUE,
 							Colour.CLOTHING_BLACK),
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_WHITE,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_BLACK,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
 
 		@Override
@@ -9323,12 +10001,12 @@ public class ClothingType {
 					new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_ATTRIBUTE, TFModifier.DAMAGE_LUST, TFPotency.MAJOR_BOOST, 0)),
 			null,
 			null,
-			ColourListPresets.KIMONO,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_WHITE,
-			ColourListPresets.ALL,
-			ColourListPresets.KIMONO,
-			ColourListPresets.ALL,
+			ColourListPresets.KIMONO.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.KIMONO.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			Util.newArrayListOfValues(ItemTag.REINDEER_GIFT)){
 
 		@Override
@@ -9412,12 +10090,12 @@ public class ClothingType {
 									ClothingAccess.ANUS),
 							PresetConcealmentLists.CONCEALED_GROIN.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.KIMONO,
-			ColourListPresets.ALL,
-			ColourListPresets.KIMONO,
-			ColourListPresets.ALL,
-			ColourListPresets.KIMONO,
-			ColourListPresets.ALL,
+			ColourListPresets.KIMONO.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.KIMONO.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.KIMONO.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			Util.newArrayListOfValues(ItemTag.REINDEER_GIFT, ItemTag.DRESS)){
 
 		@Override
@@ -9465,10 +10143,10 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.FEET),
 							null)),
 			null,
-			ColourListPresets.KIMONO,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_BLACK,
-			ColourListPresets.ALL,
+			ColourListPresets.KIMONO.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			Util.newArrayListOfValues(ItemTag.REINDEER_GIFT)){
@@ -9557,13 +10235,13 @@ public class ClothingType {
 							Colour.CLOTHING_BLACK,
 							Colour.CLOTHING_GREY,
 							Colour.CLOTHING_BLUE),
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			Util.newArrayListOfValues(
 							Colour.CLOTHING_BLUE_LIGHT,
 							Colour.CLOTHING_WHITE),
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_GREY,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_GREY.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			Util.newArrayListOfValues(ItemTag.REINDEER_GIFT, ItemTag.DRESS)){
 
 		@Override
@@ -9615,7 +10293,7 @@ public class ClothingType {
 							Colour.CLOTHING_BLACK,
 							Colour.CLOTHING_GREY,
 							Colour.CLOTHING_BLUE),
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -9670,9 +10348,9 @@ public class ClothingType {
 							Colour.CLOTHING_BLACK,
 							Colour.CLOTHING_GREY,
 							Colour.CLOTHING_BLUE),
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_BLACK,
-			ColourListPresets.ALL,
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			Util.newArrayListOfValues(ItemTag.REINDEER_GIFT)){
@@ -9721,10 +10399,10 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.HEAD),
 							null, null, null)),
 			null,
-			ColourListPresets.JUST_RED,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_WHITE,
-			ColourListPresets.ALL,
+			ColourListPresets.JUST_RED.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			Util.newArrayListOfValues(ItemTag.REINDEER_GIFT)){
@@ -9776,12 +10454,12 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.ARMS_UP_TO_SHOULDER),
 							PresetConcealmentLists.CONCEALED_FULL_TORSO.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.JUST_RED,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_WHITE,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_BLACK,
-			ColourListPresets.ALL,
+			ColourListPresets.JUST_RED.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			Util.newArrayListOfValues(ItemTag.REINDEER_GIFT)){
 		
 		@Override
@@ -9849,12 +10527,12 @@ public class ClothingType {
 									ClothingAccess.ANUS),
 							PresetConcealmentLists.CONCEALED_GROIN.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.JUST_RED,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_WHITE,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_BLACK,
-			ColourListPresets.ALL,
+			ColourListPresets.JUST_RED.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			Util.newArrayListOfValues(ItemTag.REINDEER_GIFT, ItemTag.DRESS)){
 
 		@Override
@@ -9924,12 +10602,12 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.FEET),
 							null)),
 			null,
-			ColourListPresets.JUST_RED,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_BLACK,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_WHITE,
-			ColourListPresets.ALL,
+			ColourListPresets.JUST_RED.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			Util.newArrayListOfValues(ItemTag.REINDEER_GIFT)){
 
 		@Override
@@ -9977,12 +10655,12 @@ public class ClothingType {
 							Util.newArrayListOfValues(ClothingAccess.FEET),
 							null)),
 			null,
-			ColourListPresets.JUST_RED,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_BLACK,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_WHITE,
-			ColourListPresets.ALL,
+			ColourListPresets.JUST_RED.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			Util.newArrayListOfValues(ItemTag.REINDEER_GIFT)){
 
 		@Override
@@ -10060,8 +10738,8 @@ public class ClothingType {
 									ClothingAccess.WAIST),
 							PresetConcealmentLists.CONCEALED_DRESS_FRONT_FULL.getPresetInventorySlotList())),
 			null,
-			ColourListPresets.BLACK_OR_WHITE,
-			ColourListPresets.ALL,
+			ColourListPresets.BLACK_OR_WHITE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -10116,8 +10794,8 @@ public class ClothingType {
 							null,
 							null, null)),
 			null,
-			ColourListPresets.JUST_BLACK,
-			ColourListPresets.ALL,
+			ColourListPresets.JUST_BLACK.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -10217,8 +10895,8 @@ public class ClothingType {
 					new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_ATTRIBUTE, TFModifier.DAMAGE_ICE, TFPotency.MAJOR_BOOST, 0)),
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, null, null, null, null)),
 			null,
-			ColourListPresets.JUST_SILVER,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.JUST_SILVER.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -10268,8 +10946,8 @@ public class ClothingType {
 					new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_ATTRIBUTE, TFModifier.DAMAGE_ICE, TFPotency.BOOST, 0)),
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, null, null, null, null)),
 			null,
-			ColourListPresets.JUST_SILVER,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.JUST_SILVER.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -10320,8 +10998,8 @@ public class ClothingType {
 					new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_ATTRIBUTE, TFModifier.DAMAGE_ICE, TFPotency.MINOR_BOOST, 0)),
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, null, null, null, null)),
 			null,
-			ColourListPresets.JUST_SILVER,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.JUST_SILVER.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null,
 			null,
@@ -10371,10 +11049,10 @@ public class ClothingType {
 					new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_ATTRIBUTE, TFModifier.DAMAGE_FIRE, TFPotency.MAJOR_BOOST, 0)),
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, null, null, null, null)),
 			null,
-			ColourListPresets.JUST_COPPER,
-			ColourListPresets.ALL_METAL,
-			ColourListPresets.JUST_ORANGE,
-			ColourListPresets.ALL,
+			ColourListPresets.JUST_COPPER.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
+			ColourListPresets.JUST_ORANGE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null, 
 			Util.newArrayListOfValues(
@@ -10421,10 +11099,10 @@ public class ClothingType {
 					new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_ATTRIBUTE, TFModifier.DAMAGE_FIRE, TFPotency.BOOST, 0)),
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, null, null, null, null)),
 			null,
-			ColourListPresets.JUST_COPPER,
-			ColourListPresets.ALL_METAL,
-			ColourListPresets.JUST_ORANGE,
-			ColourListPresets.ALL,
+			ColourListPresets.JUST_COPPER.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
+			ColourListPresets.JUST_ORANGE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			Util.newArrayListOfValues(
@@ -10472,10 +11150,10 @@ public class ClothingType {
 					new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_ATTRIBUTE, TFModifier.DAMAGE_FIRE, TFPotency.MINOR_BOOST, 0)),
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, null, null, null, null)),
 			null,
-			ColourListPresets.JUST_COPPER,
-			ColourListPresets.ALL_METAL,
-			ColourListPresets.JUST_ORANGE,
-			ColourListPresets.ALL,
+			ColourListPresets.JUST_COPPER.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
+			ColourListPresets.JUST_ORANGE.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
 			null,
 			null,
 			Util.newArrayListOfValues(
@@ -10534,9 +11212,9 @@ public class ClothingType {
 							null, null)),
 			null,
 			Util.newArrayListOfValues(Colour.CLOTHING_PINK_LIGHT),
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_STEEL,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_STEEL.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null,
 			null,
 			null){
@@ -10589,12 +11267,12 @@ public class ClothingType {
 					new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_ATTRIBUTE, TFModifier.CRITICAL_DAMAGE, TFPotency.MAJOR_BOOST, 0)),
 			Util.newArrayListOfValues(new BlockedParts(DisplacementType.REMOVE_OR_EQUIP, Util.newArrayListOfValues(ClothingAccess.HEAD), null, null, null)),
 			null,
-			ColourListPresets.JUST_GOLD,
-			ColourListPresets.ALL_METAL,
-			ColourListPresets.JUST_DARK_RED,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_GOLD,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.JUST_GOLD.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
+			ColourListPresets.JUST_DARK_RED.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_GOLD.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null){
 		
 		@Override
@@ -10660,12 +11338,12 @@ public class ClothingType {
 							null,
 							null, null)),
 			null,
-			ColourListPresets.JUST_ROSE_GOLD,
-			ColourListPresets.ALL_METAL,
-			ColourListPresets.JUST_DARK_RED,
-			ColourListPresets.ALL,
-			ColourListPresets.JUST_ROSE_GOLD,
-			ColourListPresets.ALL_METAL,
+			ColourListPresets.JUST_ROSE_GOLD.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
+			ColourListPresets.JUST_DARK_RED.getPresetColourList(),
+			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.JUST_ROSE_GOLD.getPresetColourList(),
+			ColourListPresets.ALL_METAL.getPresetColourList(),
 			null){
 		
 		@Override
@@ -10701,76 +11379,71 @@ public class ClothingType {
 	};
 	
 	
-	private static List<AbstractClothingType> allClothing;
-	private static List<AbstractClothingType> moddedClothingList;
+	private static List<AbstractClothingType> allClothing, moddedClothingList;
 	
-	private static List<InventorySlot> coreClothingSlots;
-	private static List<InventorySlot> lingerieSlots;
+	private static List<InventorySlot> coreClothingSlots, lingerieSlots;
 	
-	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMap;
-	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapFemale;
-	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapMale;
-	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapAndrogynous;
-	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapFemaleIncludingAndrogynous;
-	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapMaleIncludingAndrogynous;
-	
-	private static Map<Occupation, ArrayList<AbstractClothingType>> suitableFeminineClothing = new HashMap<>();
+	private static Map<InventorySlot, List<AbstractClothingType>>commonClothingMap,
+															commonClothingMapFemale,
+															commonClothingMapMale,
+															commonClothingMapAndrogynous,
+															commonClothingMapFemaleIncludingAndrogynous,
+															commonClothingMapMaleIncludingAndrogynous;
 	
 	private static Map<AbstractClothingType, String> clothingToIdMap = new HashMap<>();
 	private static Map<String, AbstractClothingType> idToClothingMap = new HashMap<>();
 	
-	private static Map<String, String> oldIdConversionMap = new HashMap<>();
-	
 	public static AbstractClothingType getClothingTypeFromId(String id) {
 //		System.out.print("ID: "+id);
-		
-		if(oldIdConversionMap.containsKey(id)) {
-			id = oldIdConversionMap.get(id);
+//		System.out.println("  set to: "+id);
+		if(id.equals("EYES_SAFETY_GOGGLES")) {
+			return ClothingType.SCIENTIST_EYES_SAFETY_GOGGLES;
+		}
+		if(id.equals("kobolds_belt_leather_belt")) {
+			id = "innoxia_hips_leather_belt";
+		}
+		if(id.equals("BDSM_CHASTITY_CAGE")) {
+			id = "innoxia_bdsm_chastity_cage";
+		}
+		if(id.equals("PENIS_CONDOM")) {
+			id = "innoxia_penis_condom";
+		}
+		if(id.equals("TORSO_OVER_SUIT_JACKET")) {
+			id = "innoxia_torsoOver_suit_jacket";
+		}
+		if(id.equals("ANKLE_BRACELET")) {
+			id = "innoxia_ankle_anklet";
+		}
+		if(id.equals("ANKLE_SHIN_GUARDS")) {
+			id = "innoxia_ankle_shin_guards";
+		}
+		if(id.equals("HAND_ELBOWLENGTH_GLOVES")) {
+			id = "innoxia_hand_elbow_length_gloves";
 		}
 		
+		
+		
+		if(id.equals("WITCH_HAT")) {
+			id = "innoxia_witch_witch_hat";
+		} else if(id.equals("WITCH_DRESS")) {
+			id = "innoxia_witch_witch_dress";
+		} else if(id.equals("WITCH_BOOTS")) {
+			id = "innoxia_witch_witch_boots";
+		} else if(id.equals("WITCH_BOOTS_THIGH_HIGH")) {
+			id = "innoxia_witch_witch_boots_thigh_high";
+		}
+
 		id = Util.getClosestStringMatch(id, idToClothingMap.keySet());
-		
-//		System.out.println("  set to: "+id);
-		
 		return idToClothingMap.get(id);
 	}
 	
 	public static String getIdFromClothingType(AbstractClothingType clothingType) {
 		return clothingToIdMap.get(clothingType);
 	}
-
-	public static Map<Occupation, ArrayList<AbstractClothingType>> getSuitableFeminineClothing() {
-		return suitableFeminineClothing;
-	}
-
+	
+//	public static AbstractClothingType TORSO_OVER_HOODIE_COPY = new AbstractClothingType(new File("res/items/clothing/rentalMommy/rental_mommy.xml")) {};
+	
 	static {
-		oldIdConversionMap.put("EYES_SAFETY_GOGGLES", "SCIENTIST_EYES_SAFETY_GOGGLES");
-		oldIdConversionMap.put("kobolds_belt_leather_belt", "innoxia_hips_leather_belt");
-		oldIdConversionMap.put("BDSM_CHASTITY_CAGE", "innoxia_bdsm_chastity_cage");
-		oldIdConversionMap.put("PENIS_CONDOM", "innoxia_penis_condom");
-		oldIdConversionMap.put("TORSO_OVER_SUIT_JACKET", "innoxia_torsoOver_suit_jacket");
-		oldIdConversionMap.put("ANKLE_BRACELET", "innoxia_ankle_anklet");
-		oldIdConversionMap.put("ANKLE_SHIN_GUARDS", "innoxia_ankle_shin_guards");
-		oldIdConversionMap.put("HAND_ELBOWLENGTH_GLOVES", "innoxia_hand_elbow_length_gloves");
-
-		oldIdConversionMap.put("FOOT_ANKLE_BOOTS", "innoxia_foot_ankle_boots");
-		oldIdConversionMap.put("FOOT_CHELSEA_BOOTS", "innoxia_foot_chelsea_boots");
-		oldIdConversionMap.put("FOOT_HEELS", "innoxia_foot_heels");
-		oldIdConversionMap.put("FOOT_LOW_TOP_SKATER_SHOES", "innoxia_foot_low_top_skater_shoes");
-		oldIdConversionMap.put("FOOT_MENS_SMART_SHOES", "innoxia_foot_mens_smart_shoes");
-		oldIdConversionMap.put("FOOT_PLATFORM_BOOTS", "innoxia_foot_platform_boots");
-		oldIdConversionMap.put("FOOT_STILETTO_HEELS", "innoxia_foot_stiletto_heels");
-		oldIdConversionMap.put("FOOT_THIGH_HIGH_BOOTS", "innoxia_foot_thigh_high_boots");
-		oldIdConversionMap.put("FOOT_TRAINERS", "innoxia_foot_trainers");
-		oldIdConversionMap.put("FOOT_WORK_BOOTS", "innoxia_foot_work_boots");
-
-		oldIdConversionMap.put("TORSO_TSHIRT", "innoxia_torso_tshirt");
-		
-		
-		oldIdConversionMap.put("WITCH_HAT", "innoxia_witch_witch_hat");
-		oldIdConversionMap.put("WITCH_DRESS", "innoxia_witch_witch_dress");
-		oldIdConversionMap.put("WITCH_BOOTS", "innoxia_witch_witch_boots");
-		oldIdConversionMap.put("WITCH_BOOTS_THIGH_HIGH", "innoxia_witch_witch_boots_thigh_high");
 		
 		commonClothingMap = new EnumMap<>(InventorySlot.class);
 		commonClothingMapFemale = new EnumMap<>(InventorySlot.class);
@@ -10811,29 +11484,11 @@ public class ClothingType {
 								if (innerDirectoryListing != null) {
 									for (File innerChild : innerDirectoryListing) {
 										try{
-											String id = modAuthorDirectory.getName()+"_"+innerChild.getParentFile().getName()+"_"+innerChild.getName().split("\\.")[0];
-											AbstractClothingType ct = new AbstractClothingType(innerChild, modAuthorDirectory.getName()) {};
+											AbstractClothingType ct = new AbstractClothingType(innerChild) {};
 											moddedClothingList.add(ct);
+											String id = modAuthorDirectory.getName()+"_"+innerChild.getParentFile().getName()+"_"+innerChild.getName().split("\\.")[0];
 											clothingToIdMap.put(ct, id);
 											idToClothingMap.put(id, ct);
-
-											if(ct.getRarity()==Rarity.COMMON) {
-												commonClothingMap.get(ct.getSlot()).add(ct);
-												
-												if (ct.getFemininityRestriction() == Femininity.FEMININE) {
-													commonClothingMapFemale.get(ct.getSlot()).add(ct);
-													commonClothingMapFemaleIncludingAndrogynous.get(ct.getSlot()).add(ct);
-													
-												} else if (ct.getFemininityRestriction() == Femininity.ANDROGYNOUS || ct.getFemininityRestriction() == null) {
-													commonClothingMapAndrogynous.get(ct.getSlot()).add(ct);
-													commonClothingMapFemaleIncludingAndrogynous.get(ct.getSlot()).add(ct);
-													commonClothingMapMaleIncludingAndrogynous.get(ct.getSlot()).add(ct);
-													
-												} else if (ct.getFemininityRestriction() == Femininity.MASCULINE) {
-													commonClothingMapMale.get(ct.getSlot()).add(ct);
-													commonClothingMapMaleIncludingAndrogynous.get(ct.getSlot()).add(ct);
-												}
-											}
 											
 										} catch(XMLLoadException ex){ // we want to catch any errors here; we shouldn't want to load any mods that are invalid as that may cause severe bugs
 											System.err.println(ex);
@@ -10866,30 +11521,12 @@ public class ClothingType {
 								if (innerDirectoryListing != null) {
 									for (File innerChild : innerDirectoryListing) {
 										try {
-											String id = authorDirectory.getName()+"_"+innerChild.getParentFile().getName()+"_"+innerChild.getName().split("\\.")[0];
-											AbstractClothingType ct = new AbstractClothingType(innerChild, authorDirectory.getName()) {};
+											AbstractClothingType ct = new AbstractClothingType(innerChild) {};
 											allClothing.add(ct);
+											String id = authorDirectory.getName()+"_"+innerChild.getParentFile().getName()+"_"+innerChild.getName().split("\\.")[0];
+		//											System.out.println(id);
 											clothingToIdMap.put(ct, id);
 											idToClothingMap.put(id, ct);
-
-											if(ct.getRarity()==Rarity.COMMON) {
-												commonClothingMap.get(ct.getSlot()).add(ct);
-												
-												if (ct.getFemininityRestriction() == Femininity.FEMININE) {
-													commonClothingMapFemale.get(ct.getSlot()).add(ct);
-													commonClothingMapFemaleIncludingAndrogynous.get(ct.getSlot()).add(ct);
-													
-												} else if (ct.getFemininityRestriction() == Femininity.ANDROGYNOUS || ct.getFemininityRestriction() == null) {
-													commonClothingMapAndrogynous.get(ct.getSlot()).add(ct);
-													commonClothingMapFemaleIncludingAndrogynous.get(ct.getSlot()).add(ct);
-													commonClothingMapMaleIncludingAndrogynous.get(ct.getSlot()).add(ct);
-													
-												} else if (ct.getFemininityRestriction() == Femininity.MASCULINE) {
-													commonClothingMapMale.get(ct.getSlot()).add(ct);
-													commonClothingMapMaleIncludingAndrogynous.get(ct.getSlot()).add(ct);
-												}
-											}
-											
 										} catch(Exception ex) {
 											System.err.println("Loading modded clothing failed at 'ClothingType' Code 2. File path: "+innerChild.getAbsolutePath());
 											System.err.println("Actual exception: ");
@@ -10959,54 +11596,6 @@ public class ClothingType {
 			}
 		}
 //  	    System.out.println(allClothing.size());
-		suitableFeminineClothing.put(Occupation.NPC_PROSTITUTE,
-				Util.newArrayListOfValues(
-						ClothingType.getClothingTypeFromId("innoxia_ankle_anklet"),
-						ClothingType.CHEST_LACY_PLUNGE_BRA,
-						ClothingType.CHEST_OPEN_CUP_BRA,
-						ClothingType.CHEST_PLUNGE_BRA,
-						ClothingType.EYES_AVIATORS,
-						ClothingType.FINGER_RING,
-						ClothingType.getClothingTypeFromId("innoxia_foot_chelsea_boots"),
-						ClothingType.getClothingTypeFromId("innoxia_foot_ankle_boots"),
-						ClothingType.getClothingTypeFromId("innoxia_foot_heels"),
-						ClothingType.getClothingTypeFromId("innoxia_foot_thigh_high_boots"),
-						ClothingType.getClothingTypeFromId("innoxia_foot_stiletto_heels"),
-						ClothingType.GROIN_BACKLESS_PANTIES,
-						ClothingType.GROIN_CROTCHLESS_PANTIES,
-						ClothingType.GROIN_CROTCHLESS_THONG,
-						ClothingType.GROIN_LACY_PANTIES,
-						ClothingType.GROIN_THONG,
-						ClothingType.GROIN_VSTRING,
-						ClothingType.getClothingTypeFromId("innoxia_hand_elbow_length_gloves"),
-						ClothingType.HEAD_HEADBAND,
-						ClothingType.HEAD_HEADBAND_BOW,
-						ClothingType.LEG_CROTCHLESS_CHAPS,
-						ClothingType.LEG_MICRO_SKIRT_BELTED,
-						ClothingType.LEG_MICRO_SKIRT_PLEATED,
-						ClothingType.LEG_MINI_SKIRT,
-						ClothingType.LEG_SKIRT,
-						ClothingType.NECK_HEART_NECKLACE,
-						ClothingType.NECK_ANKH_NECKLACE,
-						ClothingType.NIPPLE_TAPE_CROSSES,
-						ClothingType.SOCK_FISHNET_STOCKINGS,
-						ClothingType.SOCK_TIGHTS,
-						ClothingType.STOMACH_OVERBUST_CORSET,
-						ClothingType.STOMACH_UNDERBUST_CORSET,
-						ClothingType.TORSO_FISHNET_TOP,
-						ClothingType.TORSO_KEYHOLE_CROPTOP,
-						ClothingType.TORSO_SHORT_CROPTOP,
-						ClothingType.WRIST_BANGLE,
-						ClothingType.WRIST_WOMENS_WATCH,
-						
-						ClothingType.PIERCING_EAR_BASIC_RING,
-						ClothingType.PIERCING_LIP_RINGS,
-						ClothingType.PIERCING_NAVEL_GEM,
-						ClothingType.PIERCING_NIPPLE_BARS,
-						ClothingType.PIERCING_NOSE_BASIC_RING,
-						ClothingType.PIERCING_PENIS_RING,
-						ClothingType.PIERCING_TONGUE_BAR,
-						ClothingType.PIERCING_VAGINA_BARBELL_RING));
 	}
 	
 	public static List<AbstractClothingType> getAllClothing() {

@@ -11,10 +11,11 @@ import com.lilithsthrone.game.sex.Sex;
 import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.positions.SexSlotGeneric;
 import com.lilithsthrone.main.Main;
+import com.lilithsthrone.utils.Colour;
 
 /**
  * @since 0.1.0
- * @version 0.3.2
+ * @version 0.2.8
  * @author Innoxia
  */
 public class SexActionUtility {
@@ -268,7 +269,7 @@ public class SexActionUtility {
 
 		@Override
 		public String getDescription() {
-			return Sex.getUnequipClothingText();
+			return "<i style='color:" + Colour.DISPLACED.toWebHexString() + ";'>Clothing removal</i> - "+Sex.getUnequipClothingText();
 		}
 	};
 	

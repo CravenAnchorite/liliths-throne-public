@@ -11,6 +11,7 @@ import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionLimitation;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
+import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 
@@ -56,7 +57,7 @@ public class PartnerSelfTailNipple {
 					"[npc.Name] eagerly thrusts [npc.her] [npc.tail+] deep into a needy [npc.nipple], letting out a series of [npc.moans+] as [npc.she] starts tail-fucking [npc.her] own [npc.breasts]."));
 			
 		
-			switch (Sex.getCharacterPerformingAction().getBreastStoredMilk()) {
+			switch (Main.game.getPlayer().getBreastStoredMilk()) {
 				case ONE_TRICKLE:
 					UtilText.nodeContentSB.append(" A small trickle of [npc.milk] leaks out around [npc.her] [npc.tail].");
 					break;
@@ -87,7 +88,7 @@ public class PartnerSelfTailNipple {
 		
 		@Override
 		public String applyEffectsString() {
-			return Sex.getCharacterPerformingAction().incrementBreastStoredMilk(-10);
+			return Sex.getActivePartner().incrementBreastStoredMilk(-10);
 		}
 		
 	};
@@ -103,6 +104,11 @@ public class PartnerSelfTailNipple {
 		@Override
 		public SexActionLimitation getLimitation() {
 			return SexActionLimitation.NPC_ONLY;
+		}
+		
+		@Override
+		public boolean isBaseRequirementsMet() {
+			return !Sex.isDom(Main.game.getPlayer());
 		}
 		
 		@Override
@@ -143,6 +149,11 @@ public class PartnerSelfTailNipple {
 		}
 		
 		@Override
+		public boolean isBaseRequirementsMet() {
+			return !Sex.isDom(Main.game.getPlayer());
+		}
+		
+		@Override
 		public String getActionTitle() {
 			return "Nipple tail-fucking (self)";
 		}
@@ -177,6 +188,11 @@ public class PartnerSelfTailNipple {
 		@Override
 		public SexActionLimitation getLimitation() {
 			return SexActionLimitation.NPC_ONLY;
+		}
+		
+		@Override
+		public boolean isBaseRequirementsMet() {
+			return !Sex.isDom(Main.game.getPlayer());
 		}
 		
 		@Override
@@ -217,6 +233,11 @@ public class PartnerSelfTailNipple {
 		}
 		
 		@Override
+		public boolean isBaseRequirementsMet() {
+			return Sex.isDom(Main.game.getPlayer());
+		}
+		
+		@Override
 		public String getActionTitle() {
 			return "Nipple tail-fucking (self)";
 		}
@@ -251,6 +272,11 @@ public class PartnerSelfTailNipple {
 		@Override
 		public SexActionLimitation getLimitation() {
 			return SexActionLimitation.NPC_ONLY;
+		}
+		
+		@Override
+		public boolean isBaseRequirementsMet() {
+			return Sex.isDom(Main.game.getPlayer());
 		}
 		
 		@Override
