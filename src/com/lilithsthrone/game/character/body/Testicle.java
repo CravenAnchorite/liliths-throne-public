@@ -1,6 +1,9 @@
 package com.lilithsthrone.game.character.body;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.types.TesticleType;
@@ -44,7 +47,7 @@ public class Testicle implements BodyPartInterface {
 		this.testicleSize = Math.max(0, Math.min(testicleSize, TesticleSize.SEVEN_ABSURD.getValue()));
 		this.cumStorage = cumStorage;
 		cumStored = cumStorage;
-		cumRegeneration = FluidRegeneration.ONE_AVERAGE.getValue();
+		cumRegeneration = FluidRegeneration.CUM_REGEN_DEFAULT;
 		cumExpulsion = FluidExpulsion.THREE_LARGE.getMinimumValue();
 		
 		this.testicleCount = Math.max(MIN_TESTICLE_COUNT, Math.min(testicleCount, MAX_TESTICLE_COUNT));
@@ -91,7 +94,13 @@ public class Testicle implements BodyPartInterface {
 
 	@Override
 	public String getDescriptor(GameCharacter owner) {
-		return type.getDescriptor(owner);
+		List<String> list = new ArrayList<>();
+		
+		list.add(owner.getTesticleSize().getDescriptor());
+		
+		list.add(type.getDescriptor(owner));
+		
+		return Util.randomItemFrom(list);
 	}
 	
 	public void setType(GameCharacter owner, TesticleType type) {
@@ -190,8 +199,8 @@ public class Testicle implements BodyPartInterface {
 		}
 	}
 
-	public boolean isInternal() {
-		if(!Main.getProperties().hasValue(PropertyValue.futanariTesticles)) {
+	public boolean isInternal(GameCharacter owner) {
+		if(!Main.getProperties().hasValue(PropertyValue.futanariTesticles) && owner!=null && owner.isFeminine()) {
 			return true;
 		}
 		return internal;
@@ -341,11 +350,11 @@ public class Testicle implements BodyPartInterface {
 	}
 
 	/**
-	 * Sets the cumRegeneration. Value is bound to >=0 && <=FluidRegeneration.FOUR_MAXIMUM.getMaximumValue()
+	 * Sets the cumRegeneration. Value is bound to >=0 && <=FluidRegeneration.FOUR_VERY_RAPID.getMaximumRegenerationValuePerDay()
 	 */
 	public String setCumProductionRegeneration(GameCharacter owner, int cumRegeneration) {
 		int oldRegeneration = this.cumRegeneration;
-		this.cumRegeneration = Math.max(0, Math.min(cumRegeneration, FluidRegeneration.FOUR_MAXIMUM.getValue()));
+		this.cumRegeneration = Math.max(0, Math.min(cumRegeneration, FluidRegeneration.FOUR_VERY_RAPID.getMaximumRegenerationValuePerDay()));
 		int regenerationChange = this.cumRegeneration - oldRegeneration;
 		
 		if(owner==null) {

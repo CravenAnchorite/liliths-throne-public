@@ -13,9 +13,9 @@ import org.w3c.dom.Element;
 
 import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.CharacterUtils;
+import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
-import com.lilithsthrone.game.character.body.valueEnums.AgeCategory;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.gender.Gender;
@@ -36,8 +36,8 @@ import com.lilithsthrone.game.sex.SexAreaPenetration;
 import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.SexType;
 import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
-import com.lilithsthrone.game.sex.positions.SexSlot;
-import com.lilithsthrone.game.sex.positions.SexSlotBipeds;
+import com.lilithsthrone.game.sex.positions.slots.SexSlot;
+import com.lilithsthrone.game.sex.positions.slots.SexSlotUnique;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Colour;
 import com.lilithsthrone.utils.Util;
@@ -48,7 +48,7 @@ import com.lilithsthrone.world.places.PlaceType;
 
 /**
  * @since 0.2.2
- * @version 0.2.6
+ * @version 0.3.4
  * @author Innoxia
  */
 public class GenericSexualPartner extends NPC {
@@ -68,7 +68,7 @@ public class GenericSexualPartner extends NPC {
 	
 	public GenericSexualPartner(Gender gender, WorldType worldLocation, Vector2i location, boolean isImported, Predicate<Subspecies> subspeciesRemovalFilter) {
 		super(isImported, null, null, "",
-				AgeCategory.getAgeFromPreferences(gender), Util.randomItemFrom(Month.values()), 1+Util.random.nextInt(25),
+				Util.random.nextInt(28)+18, Util.randomItemFrom(Month.values()), 1+Util.random.nextInt(25),
 				3, gender, Subspecies.DOG_MORPH, RaceStage.GREATER,
 				new CharacterInventory(10), WorldType.DOMINION, PlaceType.DOMINION_BACK_ALLEYS, false);
 
@@ -132,11 +132,11 @@ public class GenericSexualPartner extends NPC {
 			resetInventory(true);
 			inventory.setMoney(10 + Util.random.nextInt(getLevel()*10) + 1);
 
-			this.equipClothing(true, true, true, true);
+			this.equipClothing(EquipClothingSetting.getAllClothingSettings());
 			CharacterUtils.applyMakeup(this, true);
 			
 			// Set starting attributes based on the character's race
-			initAttributes();
+			initPerkTreeAndBackgroundPerks();
 			
 			setMana(getAttributeValue(Attribute.MANA_MAXIMUM));
 			setHealth(getAttributeValue(Attribute.HEALTH_MAXIMUM));
@@ -156,8 +156,8 @@ public class GenericSexualPartner extends NPC {
 	}
 
 	@Override
-	public void equipClothing(boolean replaceUnsuitableClothing, boolean addWeapons, boolean addScarsAndTattoos, boolean addAccessories) {
-		super.equipClothing(replaceUnsuitableClothing, addWeapons, addScarsAndTattoos, addAccessories); //TODO - add unique outfit type
+	public void equipClothing(List<EquipClothingSetting> settings) {
+		super.equipClothing(settings); //TODO - add unique outfit type
 	}
 	
 	@Override
@@ -197,9 +197,9 @@ public class GenericSexualPartner extends NPC {
 			
 		} else {
 			if(Sex.isInForeplay() || this.hasFetish(Fetish.FETISH_ORAL_GIVING) || !target.hasPenis()) {
-				return slot==SexSlotBipeds.GLORY_HOLE_KNEELING;
+				return slot==SexSlotUnique.GLORY_HOLE_KNEELING;
 			} else {
-				return slot==SexSlotBipeds.GLORY_HOLE_FUCKED;
+				return slot==SexSlotUnique.GLORY_HOLE_FUCKED;
 			}
 		}
 	}

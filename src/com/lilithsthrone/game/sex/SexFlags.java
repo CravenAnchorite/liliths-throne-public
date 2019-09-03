@@ -7,20 +7,17 @@ import com.lilithsthrone.game.character.GameCharacter;
 
 /**
  * @since 0.1.69.1
- * @version 0.3.1
+ * @version 0.3.3.4
  * @author Innoxia
  */
 public class SexFlags {
 
 	public static boolean selfActionsBlockedPlayer;
 	public static boolean selfActionsBlockedPartner;
-	public static boolean characterRequestedPullOut;
-	public static boolean characterRequestedCreampie;
 	
 	// Generic:
 	public static boolean mutualOrgasmsAllowed;
 	public static List<GameCharacter> playerPreparedForCharactersOrgasm;
-	public static boolean playerGrewDemonicCock;
 
 	// Brax: TODO Temporary awaiting Brax rewrite
 	public static boolean braxCumOnChest;
@@ -44,13 +41,8 @@ public class SexFlags {
 		selfActionsBlockedPlayer = false;
 		selfActionsBlockedPartner = false;
 		
-		characterRequestedPullOut = false;
-		characterRequestedCreampie = false;
-		
 		mutualOrgasmsAllowed = true;
 		playerPreparedForCharactersOrgasm = new ArrayList<>();
-		
-		playerGrewDemonicCock = false;
 		
 		// Brax:
 		braxCumOnChest = false;

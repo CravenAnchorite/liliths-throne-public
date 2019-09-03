@@ -30,6 +30,8 @@ import com.lilithsthrone.utils.Colour;
 import com.lilithsthrone.utils.CreditsSlot;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
+import com.lilithsthrone.utils.Units.UnitType;
+import com.lilithsthrone.utils.Units.ValueType;
 
 import java.awt.*;
 import java.io.File;
@@ -57,8 +59,8 @@ public class OptionsDialogue {
 		
 		@Override
 		public String getContent(){
-			return "<h1 class='special-text' style='font-size:48px; line-height:52px; text-align:center;'>Lilith's Throne</h1>"
-					+ "<h5 class='special-text' style='text-align:center;'>Created by Innoxia</h5>"
+			return "<h1 class='special-text' style='font-size:48px; line-height:52px; text-align:center;'>"+Main.GAME_NAME+"</h1>"
+					+ "<h5 class='special-text' style='text-align:center;'>Created by "+Main.AUTHOR+"</h5>"
 					+ "<br/>"
 					+ "<p>"
 						+ "This game is a text-based erotic RPG, and contains a lot of graphic sexual content. You must agree to the game's disclaimer before playing this game!"
@@ -91,9 +93,14 @@ public class OptionsDialogue {
 			
 			 if (index == 1) {
 				 if(confirmNewGame || !Main.game.isStarted()) {
-					 
 					return new ResponseEffectsOnly(
-							(!Main.game.isStarted()?"New Game":"<b style='color:"+Colour.GENERIC_GOOD.toWebHexString()+";'>Confirm</b>"), "Start a new game.<br/><br/><b>Remember to save your game first!</b>"){
+							(!Main.game.isStarted()
+									?"New Game"
+									:"<b style='color:"+Colour.GENERIC_GOOD.toWebHexString()+";'>Confirm</b>"),
+							"Start a new game."
+								+(Main.game.isStarted()
+									?"<br/><br/>[style.italicsMinorBad(Remember to save your game first!)]</b>"
+									:"")){
 						@Override
 						public void effects() {
 							//Fixes a bug where inventory would stay on screen
@@ -110,8 +117,15 @@ public class OptionsDialogue {
 							confirmNewGame = false;
 						}
 					};
+					
 				 } else {
-					 return new Response("New Game", "Start a new game.<br/><br/><b>Remember to save your game first!</b>", MENU){
+					 return new Response(
+							 "New Game",
+							 "Start a new game."
+								+(Main.game.isStarted()
+									?"<br/><br/>[style.italicsMinorBad(Remember to save your game first!)]"
+									:""),
+								MENU){
 							@Override
 							public void effects() {
 								confirmNewGame = true;
@@ -276,7 +290,10 @@ public class OptionsDialogue {
 		return sb.toString();
 	}
 
-	public static String loadConfirmationName = "", overwriteConfirmationName = "", deleteConfirmationName = "";
+	public static String loadConfirmationName = "";
+	public static String overwriteConfirmationName = "";
+	public static String deleteConfirmationName = "";
+	
 	public static final DialogueNode SAVE_LOAD = new DialogueNode("Save game files", "", true) {
 
 		@Override
@@ -288,12 +305,15 @@ public class OptionsDialogue {
 		public String getHeaderContent(){
 			StringBuilder saveLoadSB = new StringBuilder();
 
-			saveLoadSB.append("<p>"
-					+ "<b>Please Note:</b><br/>"
-					+ "1. Only standard characters (letters and numbers) will work for save file names.<br/>"
-					+ "2. The 'AutoSave' file is automatically overwritten every time you move between maps.<br/>"
-					+ "3. The 'QuickSave' file is automatically overwritten every time you quick save (default keybind is F5).<br/>"
-					+ "<b>You cannot save during combat or sex due to some bugs that I need to fix!</b>"
+			saveLoadSB.append(
+					"<p style='text-align:center;'>"
+						+ "<b>Please Note:</b>"
+					+ "</p>"
+					+ "<p>"
+						+ "1. Only standard characters (letters and numbers) will work for save file names.<br/>"
+						+ "2. The 'AutoSave' file is automatically overwritten every time you move between maps.<br/>"
+						+ "3. The 'QuickSave' file is automatically overwritten every time you quick save (binding is "+Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.QUICKSAVE).getFullName()+").<br/>"
+						+ "4. You cannot save during scenes which restrict your movement, including combat and sex."
 					+ "</p>"
 					+ "<div class='container-full-width' style='padding:0; margin:0;'>"
 						+ "<div class='container-full-width' style='width:calc(25% - 16px); background:transparent;'>"
@@ -382,7 +402,7 @@ public class OptionsDialogue {
 						+ " Any NPC can be exported in-game by viewing their information screen (either from the 'characters present' or your phone's 'contacts' screen), and then pressing the small 'export character' button in the top-right."
 					+ "</p>"
 					+ "<p>"
-						+ "Exported characters can be used as a playable character when starting a new game (choose 'Start (Import)'), or as a importable slave at the Auction Block in Slaver Alley."
+						+ "Exported characters can be used as a playable character when starting a new game (choose 'Start (Import)'), or as an importable slave at the Auction Block in Slaver Alley."
 					+ "</p>"
 					+ "<div class='container-full-width' style='padding:0; margin:0;'>"
 						+ "<div class='container-quarter-width' style='text-align:center;'>"
@@ -461,7 +481,8 @@ public class OptionsDialogue {
 	
 	private static String getSaveLoadRow(String date, String name, boolean altColour) {
 		if(name!=null){
-			String baseName = name.substring(0, name.lastIndexOf('.'));
+			String baseName = Util.getFileName(name);
+			String identifierName = Util.getFileIdentifier(name);
 			
 			return "<div class='container-full-width' style='padding:0; margin:0 0 4px 0;"+(altColour?"background:#222;":"")+"'>"
 						+ "<div class='container-full-width' style='width:calc(25% - 16px); background:transparent;'>"
@@ -471,20 +492,20 @@ public class OptionsDialogue {
 							+ baseName
 						+ "</div>"
 						+ "<div class='container-full-width' style='width:calc(25% - 16px);text-align:center; background:transparent;'>"
-							+ (Main.game.isStarted() && !Main.game.isInCombat() && !Main.game.isInSex()
+							+ (Main.isSaveGameAvailable()
 									?(name.equals(overwriteConfirmationName)
-										?"<div class='square-button saveIcon' id='overwrite_saved_" + baseName + "'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskSaveConfirm()+"</div></div>"
-										:"<div class='square-button saveIcon' id='overwrite_saved_" + baseName + "'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskOverwrite()+"</div></div>")
-											:"<div class='square-button saveIcon disabled'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskSaveDisabled()+"</div></div>")
+										?"<div class='square-button saveIcon' id='overwrite_saved_" + identifierName + "'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskSaveConfirm()+"</div></div>"
+										:"<div class='square-button saveIcon' id='overwrite_saved_" + identifierName + "'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskOverwrite()+"</div></div>")
+									:"<div class='square-button saveIcon disabled' id='overwrite_saved_" + identifierName + "_disabled'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskSaveDisabled()+"</div></div>")
 							
 							+ (name.equals(loadConfirmationName)
-									?"<div class='square-button saveIcon' id='load_saved_" + baseName + "'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskLoadConfirm()+"</div></div>"
-									:"<div class='square-button saveIcon' id='load_saved_" + baseName + "'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskLoad()+"</div></div>")
+									?"<div class='square-button saveIcon' id='load_saved_" + identifierName + "'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskLoadConfirm()+"</div></div>"
+									:"<div class='square-button saveIcon' id='load_saved_" + identifierName + "'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskLoad()+"</div></div>")
 	
 	
 							+ (name.equals(deleteConfirmationName)
-								?"<div class='square-button saveIcon' id='delete_saved_" + baseName + "'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskDeleteConfirm()+"</div></div>"
-								:"<div class='square-button saveIcon' id='delete_saved_" + baseName + "'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskDelete()+"</div></div>")
+								?"<div class='square-button saveIcon' id='delete_saved_" + identifierName + "'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskDeleteConfirm()+"</div></div>"
+								:"<div class='square-button saveIcon' id='delete_saved_" + identifierName + "'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskDelete()+"</div></div>")
 						+ "</div>"
 					+ "</div>";
 			
@@ -507,7 +528,9 @@ public class OptionsDialogue {
 	}
 
 	private static String getImportRow(String date, String name, boolean altColour) {
-		String baseName = name.substring(0, name.lastIndexOf('.'));
+		String baseName = Util.getFileName(name);
+		String identifierName = Util.getFileIdentifier(name);
+		
 		return "<div class='container-full-width' style='padding:0; margin:0 0 4px 0;"+(altColour?"background:#222;":"")+"'>"
 					+ "<div class='container-quarter-width' style='background:transparent;'>"
 						+ date
@@ -517,8 +540,8 @@ public class OptionsDialogue {
 					+ "</div>"
 					+ "<div class='container-quarter-width' style='padding:auto 0; margin:auto 0; width:20%; text-align:center; background:transparent;'>"
 					+ (name.equals(deleteConfirmationName)
-							?"<div class='square-button big' id='delete_saved_character_" + baseName + "'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskDeleteConfirm()+"</div></div>"
-							:"<div class='square-button big' id='delete_saved_character_" + baseName + "'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskDelete()+"</div></div>")
+							?"<div class='square-button big' id='delete_saved_character_" + identifierName + "'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskDeleteConfirm()+"</div></div>"
+							:"<div class='square-button big' id='delete_saved_character_" + identifierName + "'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskDelete()+"</div></div>")
 					+ "</div>"
 				+ "</div>";
 	}
@@ -550,22 +573,6 @@ public class OptionsDialogue {
 					+ "</p>"
 
 					+"<p>"
-					+ "<b>Locale:</b>"
-					+ "<br/>This changes the way in which your locale and therefore the date, time and number formats are determined."
-					+ " For automatic, the system locale is used. Otherwise, you may override the formats using the following settings."
-					+ "</p>"
-
-					+"<p>"
-					+ "<b>Time:</b>"
-					+ "<br/>This toggles the time format between 12 hour (AM/PM) and 24 hour display."
-					+ "</p>"
-
-					+"<p>"
-					+ "<b>Numbers:</b>"
-					+ "<br/>This toggles the units between metric and imperial. If set manually, the english number format is used."
-					+ "</p>"
-					
-					+"<p>"
 					+ "<b>Difficulty (Currently set to "+Main.getProperties().difficultyLevel.getName()+"):</b>");
 			
 			for(DifficultyLevel dl : DifficultyLevel.values()) {
@@ -575,7 +582,7 @@ public class OptionsDialogue {
 							:"<span style='color:"+dl.getColour().getShades()[0]+";'>"+Util.capitaliseSentence(dl.getName())+"</span> [style.colourDisabled("+dl.getDescription()+")]")
 						 );
 			}
-			
+
 			UtilText.nodeContentSB.append("</p>");
 			
 			return UtilText.nodeContentSB.toString();
@@ -687,8 +694,7 @@ public class OptionsDialogue {
 						Main.saveProperties();
 						
 						for(NPC npc : Main.game.getAllNPCs()) {
-							if(Main.game.isInCombat() && (Combat.getEnemies().contains(npc) || Combat.getAllies().contains(npc))) {
-							} else {
+							if(!Main.game.isInCombat() || !Combat.getAllCombatants(false).contains(npc)) {
 								npc.setMana(npc.getAttributeValue(Attribute.MANA_MAXIMUM));
 								npc.setHealth(npc.getAttributeValue(Attribute.HEALTH_MAXIMUM));
 							}
@@ -919,10 +925,10 @@ public class OptionsDialogue {
 	public static final DialogueNode OPTIONS_PRONOUNS = new DialogueNode("Options", "Options", true) {
 
 		@Override
-		public String getHeaderContent() {
-			UtilText.nodeContentSB.setLength(0);
+		public String getContent() {
+			StringBuilder sb = new StringBuilder();
 			
-			UtilText.nodeContentSB.append("<p>"
+			sb.append("<p>"
 						+ "<h5 style='text-align:center;'>Global gender names:</h5>"
 						+ "<table align='center'>"
 							+ "<tr>"
@@ -933,10 +939,10 @@ public class OptionsDialogue {
 							+ "</tr>");
 			
 			for(GenderNames gn : GenderNames.values()) {
-				UtilText.nodeContentSB.append(getGenderNameTableRow(gn));
+				sb.append(getGenderNameTableRow(gn));
 			}
 							
-			UtilText.nodeContentSB.append("</table>"
+			sb.append("</table>"
 					+ "</p>"
 					
 					+ "<p>"
@@ -964,19 +970,14 @@ public class OptionsDialogue {
 							+ " If clothing is neutral, treated as <b style='color:"+Colour.MASCULINE.toWebHexString()+";'>masculine</b>.<br/>"
 					+ "<b style='color:"+Colour.MASCULINE.toWebHexString()+";'>Masculine:</b> Treated as <b style='color:"+Colour.MASCULINE.toWebHexString()+";'>masculine</b>.<br/>"
 					+ "</p>");
-							
-			return UtilText.nodeContentSB.toString();	
+			
+			return sb.toString();	
 		}
 		
 		@Override
-		public String getContent(){
-			return "";
-		}
-
-		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new ResponseEffectsOnly("Save", "Save all the pronouns that are currently displayed."){
+				return new ResponseEffectsOnly("Save", "Save all the pronouns that are currently displayed.") {
 					@Override
 					public void effects() {
 						for(GenderNames gn : GenderNames.values()) {
@@ -1521,70 +1522,98 @@ public class OptionsDialogue {
 					
 			UtilText.nodeContentSB.append(
 					"<div class='container-full-width'>"
-						+"<div class='container-half-width inner'>"
+					
+						+"<div class='container-half-width inner' style='width:31.3%; margin:1%; padding:1%;'>"
 							+ "<b style='color:"+Colour.RACE_HUMAN.toWebHexString()+"; float:left; width:100%; text-align:center;'>Human encounters</b>"
-							+ "<div style='display:inline-block; padding-left:25%; width:100%;'>"
-								+ "<div id='furry_preference_human_encounter_zero' class='square-button small"+(Main.getProperties().humanEncountersLevel==0
+							+ "<div style='display:inline-block; padding-left:5%; width:100%;'>"
+								+ "<div id='furry_preference_human_encounter_zero' class='square-button"+(Main.getProperties().humanEncountersLevel==0
 									?" selected' style='border-color:"+Colour.RACE_HUMAN.toWebHexString()+";'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleZero()+"</div></div>"
 									:"'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleZeroDisabled()+"</div></div>")
 							
-								+ "<div id='furry_preference_human_encounter_one' class='square-button small"+(Main.getProperties().humanEncountersLevel==1
+								+ "<div id='furry_preference_human_encounter_one' class='square-button"+(Main.getProperties().humanEncountersLevel==1
 									?" selected' style='border-color:"+Colour.RACE_HUMAN.toWebHexString()+";'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleOne()+"</div></div>"
 									:"'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleOneDisabled()+"</div></div>")
 								
-								+ "<div id='furry_preference_human_encounter_two' class='square-button small"+(Main.getProperties().humanEncountersLevel==2
+								+ "<div id='furry_preference_human_encounter_two' class='square-button"+(Main.getProperties().humanEncountersLevel==2
 									?" selected' style='border-color:"+Colour.RACE_HUMAN.toWebHexString()+";'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleTwo()+"</div></div>"
 									:"'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleTwoDisabled()+"</div></div>")
 								
-								+ "<div id='furry_preference_human_encounter_three' class='square-button small"+(Main.getProperties().humanEncountersLevel==3
+								+ "<div id='furry_preference_human_encounter_three' class='square-button"+(Main.getProperties().humanEncountersLevel==3
 									?" selected' style='border-color:"+Colour.RACE_HUMAN.toWebHexString()+";'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleThree()+"</div></div>"
 									:"'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleThreeDisabled()+"</div></div>")
 								
-								+ "<div id='furry_preference_human_encounter_four' class='square-button small"+(Main.getProperties().humanEncountersLevel==4
+								+ "<div id='furry_preference_human_encounter_four' class='square-button"+(Main.getProperties().humanEncountersLevel==4
 									?" selected' style='border-color:"+Colour.RACE_HUMAN.toWebHexString()+";'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleFour()+"</div></div>"
 									:"'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleFourDisabled()+"</div></div>")
 							+"</div>"
 						+ "</div>"
+					
+						+"<div class='container-half-width inner' style='width:31.3%; margin:1%; padding:1%;'>"
+							+ "<b style='color:"+Colour.RACE_CENTAUR.toWebHexString()+"; float:left; width:100%; text-align:center;'>Taurs</b>"
+							+ "<div style='display:inline-block; padding-left:5%; width:100%;'>"
+								+ "<div id='taur_furry_preference_zero' class='square-button"+(Main.getProperties().taurFurryLevel==0
+									?" selected' style='border-color:"+Colour.RACE_CENTAUR.toWebHexString()+";'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleZero()+"</div></div>"
+									:"'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleZeroDisabled()+"</div></div>")
+							
+								+ "<div id='taur_furry_preference_one' class='square-button"+(Main.getProperties().taurFurryLevel==1
+									?" selected' style='border-color:"+Colour.RACE_CENTAUR.toWebHexString()+";'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleOne()+"</div></div>"
+									:"'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleOneDisabled()+"</div></div>")
+								
+								+ "<div id='taur_furry_preference_two' class='square-button"+(Main.getProperties().taurFurryLevel==2
+									?" selected' style='border-color:"+Colour.RACE_CENTAUR.toWebHexString()+";'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleTwo()+"</div></div>"
+									:"'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleTwoDisabled()+"</div></div>")
+								
+								+ "<div id='taur_furry_preference_three' class='square-button"+(Main.getProperties().taurFurryLevel==3
+									?" selected' style='border-color:"+Colour.RACE_CENTAUR.toWebHexString()+";'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleThree()+"</div></div>"
+									:"'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleThreeDisabled()+"</div></div>")
+								
+								+ "<div id='taur_furry_preference_four' class='square-button"+(Main.getProperties().taurFurryLevel==4
+									?" selected' style='border-color:"+Colour.RACE_CENTAUR.toWebHexString()+";'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleFour()+"</div></div>"
+									:"'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleFourDisabled()+"</div></div>")
+							+"</div>"
+						+ "</div>"
 						
-						+"<div class='container-half-width inner'>"
+						+"<div class='container-half-width inner' style='width:31.3%; margin:1%; padding:1%;'>"
 							+ "<b style='color:"+Colour.TRANSFORMATION_GENERIC.toWebHexString()+"; float:left; width:100%; text-align:center;'>Forced TF Racial Limits</b>"
-							+ "<div style='display:inline-block; padding-left:25%; width:100%;'>"
-								+ "<div id='forced_tf_limit_human' class='square-button small"+(Main.getProperties().getForcedTFPreference()==FurryPreference.HUMAN
+							+ "<div style='display:inline-block; padding-left:5%; width:100%;'>"
+								+ "<div id='forced_tf_limit_human' class='square-button"+(Main.getProperties().getForcedTFPreference()==FurryPreference.HUMAN
 									?" selected' style='border-color:"+Colour.TRANSFORMATION_GENERIC.toWebHexString()+";'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleZero()+"</div></div>"
 									:"'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleZeroDisabled()+"</div></div>")
 							
-								+ "<div id='forced_tf_limit_minimum' class='square-button small"+(Main.getProperties().getForcedTFPreference()==FurryPreference.MINIMUM
+								+ "<div id='forced_tf_limit_minimum' class='square-button"+(Main.getProperties().getForcedTFPreference()==FurryPreference.MINIMUM
 									?" selected' style='border-color:"+Colour.TRANSFORMATION_GENERIC.toWebHexString()+";'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleOne()+"</div></div>"
 									:"'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleOneDisabled()+"</div></div>")
 								
-								+ "<div id='forced_tf_limit_reduced' class='square-button small"+(Main.getProperties().getForcedTFPreference()==FurryPreference.REDUCED
+								+ "<div id='forced_tf_limit_reduced' class='square-button"+(Main.getProperties().getForcedTFPreference()==FurryPreference.REDUCED
 									?" selected' style='border-color:"+Colour.TRANSFORMATION_GENERIC.toWebHexString()+";'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleTwo()+"</div></div>"
 									:"'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleTwoDisabled()+"</div></div>")
 								
-								+ "<div id='forced_tf_limit_normal' class='square-button small"+(Main.getProperties().getForcedTFPreference()==FurryPreference.NORMAL
+								+ "<div id='forced_tf_limit_normal' class='square-button"+(Main.getProperties().getForcedTFPreference()==FurryPreference.NORMAL
 									?" selected' style='border-color:"+Colour.TRANSFORMATION_GENERIC.toWebHexString()+";'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleThree()+"</div></div>"
 									:"'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleThreeDisabled()+"</div></div>")
 								
-								+ "<div id='forced_tf_limit_maximum' class='square-button small"+(Main.getProperties().getForcedTFPreference()==FurryPreference.MAXIMUM
+								+ "<div id='forced_tf_limit_maximum' class='square-button"+(Main.getProperties().getForcedTFPreference()==FurryPreference.MAXIMUM
 									?" selected' style='border-color:"+Colour.TRANSFORMATION_GENERIC.toWebHexString()+";'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleFour()+"</div></div>"
 									:"'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getScaleFourDisabled()+"</div></div>")
 							+"</div>"
 						+ "</div>"
+							
 					+ "</div>");
 			
 			
 			UtilText.nodeContentSB.append("<div class='container-full-width' style='text-align: center;'>"
 												+ "<div style='display:inline-block; margin:0 auto;'>"
-													+"<div style='float:left; text-align:right;'>"
-														+ "<b>Set all:</b>&nbsp;"
+													+"<div style='float:left; text-align:right; margin-right:16px;'>"
+														+ "<b>Set all:</b>"
 													+ "</div>"
-													+ "<div id='furry_preference_female_human_all' class='preference-button'>"+FurryPreference.HUMAN.getName()+"</div>"
-													+ "<div id='furry_preference_female_minimum_all' class='preference-button'>"+FurryPreference.MINIMUM.getName()+"</div>"
-													+ "<div id='furry_preference_female_reduced_all' class='preference-button'>"+FurryPreference.REDUCED.getName()+"</div>"
-													+ "<div id='furry_preference_female_normal_all' class='preference-button'>"+FurryPreference.NORMAL.getName()+"</div>"
-													+ "<div id='furry_preference_female_maximum_all' class='preference-button'>"+FurryPreference.MAXIMUM.getName()+"</div>"
+													+ "<div id='furry_preference_human_all' class='preference-button'>"+FurryPreference.HUMAN.getName()+"</div>"
+													+ "<div id='furry_preference_minimum_all' class='preference-button'>"+FurryPreference.MINIMUM.getName()+"</div>"
+													+ "<div id='furry_preference_reduced_all' class='preference-button'>"+FurryPreference.REDUCED.getName()+"</div>"
+													+ "<div id='furry_preference_normal_all' class='preference-button'>"+FurryPreference.NORMAL.getName()+"</div>"
+													+ "<div id='furry_preference_maximum_all' class='preference-button'>"+FurryPreference.MAXIMUM.getName()+"</div>"
 												+"</div>"
 											+"</div>"
+												
 											+ "<div class='container-full-width' style='text-align: center;'>"
 											+"<div class='container-full-width' style='text-align:center; background:"+getEntryBackgroundColour(false)+";'>"
 												+"<div class='container-full-width' style='text-align:center; width:calc(60% - 16px);background:transparent; margin:0 0 0 40%; padding:0;'>"
@@ -1754,6 +1783,23 @@ public class OptionsDialogue {
 		@Override
 		public String getHeaderContent(){
 			UtilText.nodeContentSB.setLength(0);
+
+			UtilText.nodeContentSB.append(getCustomContentPreferenceDivStart(Colour.GENERIC_GOOD, "Autosave Frequency", "Choose how often want the game to autosave when you transition from one map to another."));
+			for(int i=2; i>=0; i--) {
+				UtilText.nodeContentSB.append("<div id='AUTOSAVE_FREQUENCY_"+i+"' class='normal-button"+(Main.getProperties().autoSaveFrequency==i?" selected":"")+"' style='width:calc(33% - 8px); margin-right:8px; text-align:center; float:right;'>"
+						+(Main.getProperties().autoSaveFrequency==i
+							?"[style.boldGood("
+							:"[style.colourDisabled(")
+						+com.lilithsthrone.game.Properties.autoSaveLabels[i]+")]</div>");
+			}
+			UtilText.nodeContentSB.append("</div></div>");
+			
+			UtilText.nodeContentSB.append(getContentPreferenceDiv(
+								"ENCHANTMENT_LIMITS",
+								Colour.GENERIC_ARCANE,
+								"Enchantment Capacity",
+								"Toggle the 'enchantment capacity' mechanic, which restricts how many enchanted items you can wear. This is on by default, and you will potentially break the balance of the game's combat by turning it off.",
+								Main.getProperties().hasValue(PropertyValue.enchantmentLimits)));
 			
 			UtilText.nodeContentSB.append(getContentPreferenceDiv(
 								"ARTWORK",
@@ -1805,7 +1851,14 @@ public class OptionsDialogue {
 							"Non-consent",
 							"This enables the 'resist' pace in sex scenes, which contains some more extreme non-consensual descriptions.",
 							Main.getProperties().hasValue(PropertyValue.nonConContent)));
-
+			
+			UtilText.nodeContentSB.append(getContentPreferenceDiv(
+							"SADISTIC_SEX",
+							Colour.BASE_RED,
+							"Sadistic sex",
+							"This unlocks 'sadistic' sex actions, such as choking, slapping, and spitting on partners in sex.",
+							Main.getProperties().hasValue(PropertyValue.sadisticSexContent)));
+			
 			UtilText.nodeContentSB.append(getContentPreferenceDiv(
 							"SILLY",
 							Colour.GENERIC_GOOD,
@@ -1813,6 +1866,20 @@ public class OptionsDialogue {
 							"This enables funny flavour text throughout the game.",
 							Main.getProperties().hasValue(PropertyValue.sillyMode)));
 
+			UtilText.nodeContentSB.append(getContentPreferenceDiv(
+							"OPPORTUNISTIC_ATTACKERS",
+							Colour.BASE_CRIMSON,
+							"Opportunistic attackers",
+							"This makes random attacks more likely when you're high on lust, low on health, covered in fluids, exposed, or drunk.",
+							Main.game.isOpportunisticAttackersEnabled()));
+			
+			UtilText.nodeContentSB.append(getContentPreferenceDiv(
+							"BYPASS_SEX_ACTIONS",
+							Colour.BASE_PINK,
+							"Sex action bypass",
+							"If disabled, action requirements during sex may no longer be bypassed. (i.e. All 'Corruptive' actions will be unavailable.)",
+							Main.getProperties().hasValue(PropertyValue.bypassSexActions)));
+			
 			UtilText.nodeContentSB.append(getContentPreferenceDiv(
 							"VOLUNTARY_NTR",
 							Colour.GENERIC_MINOR_BAD,
@@ -1853,7 +1920,7 @@ public class OptionsDialogue {
 			UtilText.nodeContentSB.append(getContentPreferenceDiv(
 							"URETHRAL",
 							Colour.BASE_PINK_DEEP,
-							"Urethral",
+							"Urethral content",
 							"This enables urethral transformations and penetrations.",
 							Main.getProperties().hasValue(PropertyValue.urethralContent)));
 				
@@ -1867,21 +1934,28 @@ public class OptionsDialogue {
 			UtilText.nodeContentSB.append(getContentPreferenceDiv(
 							"ANAL",
 							Colour.BASE_ORANGE,
-							"Anal content",
-							"When disabled, all non-unique NPCs will spawn in hating anal (which will make them never use anal actions in sex).",
+							"Anal Content",
+							"When disabled, removes all anal-related actions from being available during sex.",
 							Main.getProperties().hasValue(PropertyValue.analContent)));
+
+			UtilText.nodeContentSB.append(getContentPreferenceDiv(
+							"FOOT",
+							Colour.BASE_TAN,
+							"Foot Content",
+							"When disabled, removes all foot-related actions from being available during sex.",
+							Main.getProperties().hasValue(PropertyValue.footContent)));
 			
 			UtilText.nodeContentSB.append(getContentPreferenceDiv(
 							"FUTA_BALLS",
 							Colour.BASE_PINK,
 							"Futanari Testicles",
-							"When enabled, futanari NPCs will spawn with external testicles. When disabled, they will always be internal.",
+							"When enabled, futanari NPCs will be able to have external testicles. When disabled, they are locked to always being internal.",
 							Main.getProperties().hasValue(PropertyValue.futanariTesticles)));
 			
 			UtilText.nodeContentSB.append(getContentPreferenceDiv(
 							"CLOACA",
 							Colour.BASE_PINK_LIGHT,
-							"Bipedal cloacas",
+							"Bipedal Cloacas",
 							"When enabled, certain bipedal races (such as harpies and alligator-morphs) will have cloacas."
 									+ " When disabled, all bipeds with cloacas will be treated as having a regular genitalia configuration."
 									+ " Some special races, such as lamia, always have cloacas, and are not affected by this.",
@@ -1952,6 +2026,13 @@ public class OptionsDialogue {
 							Main.getProperties().forcedTFPercentage,
 							0,
 							100));
+
+			UtilText.nodeContentSB.append(getContentPreferenceDiv(
+					"SPITTING_ENABLED",
+					Colour.BASE_BLUE,
+					"Rejecting TF potions",
+					"Forced TF potions may be spat out if this is enabled.",
+					!Main.game.isSpittingDisabled()));
 
 			UtilText.nodeContentSB.append(getCustomContentPreferenceDivStart(Colour.BASE_GREEN, "Forced TF Gender Tendency", "This allows you to override NPC tastes when a forced transformation will alter your gender presentation."));
 			UtilText.nodeContentSB.append((Main.getProperties().getForcedTFTendency()==ForcedTFTendency.NEUTRAL
@@ -2100,6 +2181,26 @@ public class OptionsDialogue {
 							Main.getProperties().pregnancyLactationLimit,
 							0,
 							Lactation.SEVEN_MONSTROUS_AMOUNT_POURING.getMaximumValue()));
+
+			UtilText.nodeContentSB.append(getContentPreferenceVariableDiv(
+							"BREAST_SIZE_PREFERENCE",
+							Colour.NIPPLES,
+							"Cup Size Preference",
+							"Affects randomly-generated NPCs' cup sizes (will not be reduced to below AA-cup).",
+							(Main.getProperties().breastSizePreference>=0?"+":"") + Main.getProperties().breastSizePreference,
+							Main.getProperties().breastSizePreference,
+							-20,
+							20));
+
+			UtilText.nodeContentSB.append(getContentPreferenceVariableDiv(
+							"PENIS_SIZE_PREFERENCE",
+							Colour.PENIS,
+							"Penis Size Preference",
+							"Affects randomly-generated NPCs' penis sizes (will not be reduced to below "+Units.size(8)+").",
+							(Main.getProperties().penisSizePreference>=0?"+":"") + Units.size(Main.getProperties().penisSizePreference, ValueType.PRECISE, UnitType.SHORT),
+							Main.getProperties().penisSizePreference,
+							-20,
+							20));
 			
 			return UtilText.nodeContentSB.toString();
 		}
@@ -2133,9 +2234,9 @@ public class OptionsDialogue {
 		StringBuilder contentSB = new StringBuilder();
 
 		contentSB.append(
-				"<div class='container-full-width' style='padding:0;'>"
+				"<div class='container-full-width' style='padding:0; margin:2px 0;'>"
 					+ "<div class='container-half-width' style='width:calc(55% - 16px);'>"
-						+ "<b style='text-align:center; color:"+colour.toWebHexString()+";'>"+ title+"</b><b>:</b><br/>"
+						+ "<b style='text-align:center; color:"+colour.toWebHexString()+";'>"+ title+"</b><b>:</b> "
 						+ description
 					+ "</div>"
 					+ "<div class='container-half-width' style='width:calc(45% - 16px);'>");
@@ -2147,9 +2248,9 @@ public class OptionsDialogue {
 		StringBuilder contentSB = new StringBuilder();
 		
 		contentSB.append(
-				"<div class='container-full-width' style='padding:0;'>"
+				"<div class='container-full-width' style='padding:0; margin:2px 0;'>"
 					+ "<div class='container-half-width' style='width:calc(55% - 16px);'>"
-						+ "<b style='text-align:center; color:"+colour.toWebHexString()+";'>"+ title+"</b><b>:</b><br/>"
+						+ "<b style='text-align:center; color:"+colour.toWebHexString()+";'>"+ title+"</b><b>:</b> "
 						+ description
 					+ "</div>"
 					+ "<div class='container-half-width' style='width:calc(45% - 16px);'>");
@@ -2182,21 +2283,21 @@ public class OptionsDialogue {
 		StringBuilder contentSB = new StringBuilder();
 
 		contentSB.append(
-				"<div class='container-full-width' style='padding:0;'>"
+				"<div class='container-full-width' style='padding:0; margin:2px 0;'>"
 					+ "<div class='container-half-width' style='width:calc(55% - 16px);'>"
-						+ "<b style='text-align:center; color:"+colour.toWebHexString()+";'>"+ title+"</b><b>:</b><br/>"
+						+ "<b style='text-align:center; color:"+colour.toWebHexString()+";'>"+ title+"</b><b>:</b> "
 						+ description
 					+ "</div>"
 					+ "<div class='container-half-width' style='width:calc(45% - 16px);'>");
 		
 		contentSB.append(
-				"<div id='"+id+"_ON' class='normal-button"+(value==maximum?" disabled":"")+"' style='width:15%; margin:0 2.5%; text-align:center; float:right;'>"
+				"<div id='"+id+"_ON' class='normal-button"+(value==maximum?" disabled":"")+"' style='width:10%; margin:0 2.5%; text-align:center; float:right;'>"
 						+ (value==maximum?"[style.boldDisabled(+)]":"[style.boldGood(+)]")
 				+ "</div>"
-				+ "<div class='container-full-width' style='text-align:center; width:calc(20%); float:right; margin:0;'>"
+				+ "<div class='container-full-width' style='text-align:center; width:calc(30%); float:right; margin:0;'>"
 					+ "<b>"+valueDisplay+"</b>"
 				+ "</div>"
-				+ "<div id='"+id+"_OFF' class='normal-button"+(value==minimum?" disabled":"")+"' style='width:15%; margin:0 2.5%; text-align:center; float:right;'>"
+				+ "<div id='"+id+"_OFF' class='normal-button"+(value==minimum?" disabled":"")+"' style='width:10%; margin:0 2.5%; text-align:center; float:right;'>"
 					+ (value==minimum?"[style.boldDisabled(-)]":"[style.boldBad(-)]")
 				+ "</div>");
 		
@@ -2215,11 +2316,11 @@ public class OptionsDialogue {
 			
 			UtilText.nodeContentSB.append(
 					"<p>"
-						+ "Thank you for playing Lilith's Throne, I hope you enjoy it just as much as I do making it!"
-						+ " Thank you so much to all of the supporters on Patreon! Thanks to you, I'm able to spend more time working on Lilith's Throne, and I promise that I'll make this game the very best that I can!"
+						+ "Thank you for playing "+Main.GAME_NAME+", I hope you enjoy it just as much as I do making it!"
+						+ " Thank you so much to all of you who offer financial support! Thanks to you, I'm able to spend more time working on "+Main.GAME_NAME+", and I promise that I'll make this game the very best that I can!"
 					+ "</p>"
 					+"<p style='text-align:center;'>"
-						+ "Lilith's Throne has been created by:<br/>"
+						+ Main.GAME_NAME+" has been created by:<br/>"
 						+ "<b style='color:#9b78fa;'>Innoxia</b>"
 						+ "<br/><br/>"
 						+ "Artists whose character art can be found in the game:<br/>");
@@ -2231,22 +2332,23 @@ public class OptionsDialogue {
 			}	
 
 			UtilText.nodeContentSB.append("<br/>"
-					+ "Contributors:</br>"
+					+ "Contributors:</br>" // In alphabetical order:
+					+ "<b style='color:#21bfc5;'>DJ Addi</b></br>"
+					+ "<b style='color:#21bfc5;'>DSG</b></br>"
 					+ "<b style='color:#21bfc5;'>Irbynx</b></br>"
 					+ "<b style='color:#21bfc5;'>Nnxx</b></br>"
 					+ "<b style='color:#21bfc5;'>Norin</b></br>"
 					+ "<b style='color:#21bfc5;'>Phlarx</b></br>"
 					+ "<b style='color:#21bfc5;'>Pimgd</b></br>"
 					+ "<b style='color:#21bfc5;'>Rfpnj</b></br>"
-					+ "<b style='color:#21bfc5;'>Tukaima</b></br>"
-					+ "<b style='color:#21bfc5;'>DJ Addi</b></br>");
+					+ "<b style='color:#21bfc5;'>Tukaima</b></br>");
 			
 			UtilText.nodeContentSB.append("<br/>"
 						+ "Special thanks to:<br/>"
 						+ "<b>Sensei</b>,<br/>"
 						+ "<b style='color:#fa0063;'>loveless</b>, <b style='color:#c790b2;'>Blue999</b>, and <b style='color:#ec9538;'>DesuDemona</b><br/>"
 						+ "<b style='color:#21bec4;'>Github & wiki contributors</b><br/>"
-						+ "<b style='color:#e06e5f;'>Everyone who's supported me on Patreon</b>,<br/>"
+						+ "<b style='color:#e06e5f;'>Everyone who's financially supported me</b>,<br/>"
 						+ "<b>Bug reporters</b>,<br/>"
 						+ "and<br/>"
 						+ "<b>Everyone for playing Lilith's Throne!</b>"
@@ -2289,7 +2391,7 @@ public class OptionsDialogue {
 					}
 					UtilText.nodeContentSB.append("</div>");
 					UtilText.nodeContentSB.append("<div style='width:50%; display:inline-block; text-align:left;'>");
-					UtilText.nodeContentSB.append("&nbsp;"+cs.getName());
+					UtilText.nodeContentSB.append("&nbsp;"+(cs.getSubspeciesTier()!=null?"<b style='color:"+cs.getSubspeciesTier().getColour(null).toWebHexString()+";'>"+cs.getName()+"</b>":cs.getName()));
 					UtilText.nodeContentSB.append("</div>");
 				}
 			}
@@ -2320,8 +2422,21 @@ public class OptionsDialogue {
 					}
 					UtilText.nodeContentSB.append("</div>");
 					UtilText.nodeContentSB.append("<div style='width:50%; display:inline-block; text-align:left;'>");
-					UtilText.nodeContentSB.append("&nbsp;"+cs.getName());
+					UtilText.nodeContentSB.append("&nbsp;"+(cs.getSubspeciesTier()!=null?"<b style='color:"+cs.getSubspeciesTier().getColour(null).toWebHexString()+";'>"+cs.getName()+"</b>":cs.getName()));
 					UtilText.nodeContentSB.append("</div>");
+				}
+			}
+			
+			UtilText.nodeContentSB.append(
+					"</p>"
+					+ "<br/>"
+					+ "<h5 style='text-align:center; color:"+Subspecies.DEMON.getColour(null).toWebHexString()+";'>Demonic backers</h5>"
+					+ "<p style='text-align:center;'>");
+			
+			for(CreditsSlot cs : Main.credits) {
+				if(cs.getLegendaryCount()==0 && cs.getEpicCount()==0) {
+					UtilText.nodeContentSB.append("<br/>");
+					UtilText.nodeContentSB.append("&nbsp;"+(cs.getSubspeciesTier()!=null?"<b style='color:"+cs.getSubspeciesTier().getColour(null).toWebHexString()+";'>"+cs.getName()+"</b>":cs.getName()));
 				}
 			}
 			

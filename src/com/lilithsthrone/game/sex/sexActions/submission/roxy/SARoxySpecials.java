@@ -72,9 +72,9 @@ public class SARoxySpecials {
 						+ "<br/><br/>"
 							+ "[roxy.speechNoEffects(Fuck, it's fuckin' good to have my own personal pussy licker. Yer just can't get enough o' my sweet fuckin' cunt, can yer?)]"
 						+ "<br/><br/>"
-							+ "You can't help but let out a desperate, muffled moan into Roxy's [roxy.pussy] as you continue hungrily licking up as much of her girlcum as you possibly can.";
-//						+ "<br/><br/>"
-//							+ "[roxy.speechNoEffects(I think that'll do fer now.)] Roxy laughs, [roxy.speech(Yer can always come back an give me anotha thousand flames if yer want more.)]";
+							+ "You can't help but let out a desperate, muffled moan into Roxy's [roxy.pussy] as you continue hungrily licking up as much of her girlcum as you possibly can."
+						+ "<br/><br/>"
+							+ "[roxy.speechNoEffects(I think that'll do fer now.)] Roxy laughs, [roxy.speech(Yer can always come back an give me anotha thousand flames if yer want more.)]";
 				
 			} else {
 				return "Roxy's moans start to increase in volume, and without warning, she suddenly reaches down to grab hold of your head, before letting her legs collapse out from under her."
@@ -101,8 +101,8 @@ public class SARoxySpecials {
 							+ "You can't help but let out a desperate, muffled moan into Roxy's [roxy.pussy] as she reveals this."
 							+ " The addictive nature of her girlcum is already having a profound effect on your mind, and even as she reveals the fact that you've been tricked into drinking her addictive juices,"
 								+ " you can't help but continue hungrily licking and kissing her pussy."
-//						+ "<br/><br/>"
-//							+ "[roxy.speechNoEffects(Fuckin' looks like you're well an' truly addicted to my cunt now, ain't yer?)] Roxy laughs, [roxy.speech(That's enough fer me.)]";
+						+ "<br/><br/>"
+							+ "[roxy.speechNoEffects(Fuckin' looks like you're well an' truly addicted to my cunt now, ain't yer?)] Roxy laughs, [roxy.speech(That's enough fer me.)]";
 			}
 		}
 

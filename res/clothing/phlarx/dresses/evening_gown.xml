@@ -2,13 +2,13 @@
 <clothing>
 	
 	<coreAtributes>
-		<clothingAuthorTag><![CDATA[A tag discreetly sewn into the dress' inner lining informs you that it was made by 'Phlarx'.]]></clothingAuthorTag>
+		<clothingAuthorTag><![CDATA[A tag discreetly sewn into the dress's inner lining informs you that it was made by 'Phlarx'.]]></clothingAuthorTag>
 		<value>1000</value> 
 		<determiner><![CDATA[an]]></determiner>
 		<name><![CDATA[evening gown]]></name>
 		<namePlural pluralByDefault="false"><![CDATA[evening gowns]]></namePlural> 
 		<description><![CDATA[An elegant evening gown, perfect for dinner parties with the social elite.]]></description> 
-		<physicalResistance>1</physicalResistance> 
+		<physicalResistance>0</physicalResistance> 
 		<femininity>FEMININE</femininity> 
 		<slot>TORSO_UNDER</slot> 
 		<rarity>COMMON</rarity> 
@@ -29,6 +29,7 @@
 					<bodyPart>BACK</bodyPart>
 				</blockedBodyParts>
 				<clothingAccessBlocked> 
+					<clothingAccess>WAIST</clothingAccess>
 					<clothingAccess>CHEST</clothingAccess>
 				</clothingAccessBlocked>
 
@@ -50,7 +51,6 @@
 					<bodyPart>LEGS</bodyPart>
 				</blockedBodyParts>
 				<clothingAccessBlocked>
-					<clothingAccess>WAIST</clothingAccess>
 					<clothingAccess>LEGS_UP_TO_GROIN_LOW_LEVEL</clothingAccess>
 					<clothingAccess>LEGS_UP_TO_GROIN</clothingAccess>
 					<clothingAccess>GROIN</clothingAccess>
@@ -73,7 +73,8 @@
 		<primaryColoursDye values="ALL"/>
 		<secondaryColours/>
 		<secondaryColoursDye/>
-		<tertiaryColours/><tertiaryColoursDye/>
+		<tertiaryColours/>
+		<tertiaryColoursDye/>
 		
 		<itemTags> 
 			<tag>SOLD_BY_NYAN</tag>

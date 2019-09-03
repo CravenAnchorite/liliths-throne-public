@@ -1,13 +1,14 @@
 package com.lilithsthrone.game.character.npc.dominion;
 
 import java.time.Month;
+import java.util.List;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.lilithsthrone.game.character.CharacterImportSetting;
+import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.Covering;
 import com.lilithsthrone.game.character.body.types.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.AssSize;
@@ -35,9 +36,9 @@ import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.sex.Sex;
 import com.lilithsthrone.game.sex.SexPace;
-import com.lilithsthrone.game.sex.managers.universal.SMDoggy;
+import com.lilithsthrone.game.sex.managers.universal.SMAllFours;
 import com.lilithsthrone.game.sex.managers.universal.SMGeneric;
-import com.lilithsthrone.game.sex.positions.SexSlotBipeds;
+import com.lilithsthrone.game.sex.positions.slots.SexSlotAllFours;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Colour;
 import com.lilithsthrone.utils.Util;
@@ -49,7 +50,7 @@ import com.lilithsthrone.world.places.PlaceType;
  * Test class that I'm using to try out some methods and stuff. It might end up as a bit of a mess, but don't remove it.
  * 
  * @since 0.1.83
- * @version 0.3.1
+ * @version 0.3.4
  * @author Innoxia
  */
 public class TestNPC extends NPC {
@@ -87,10 +88,6 @@ public class TestNPC extends NPC {
 			this.setSkinCovering(new Covering(BodyCoveringType.FELINE_FUR, Colour.COVERING_BROWN), true);
 			this.setSkinCovering(new Covering(BodyCoveringType.HUMAN, Colour.SKIN_LIGHT), true);
 	
-			this.setAttribute(Attribute.MAJOR_PHYSIQUE, 5);
-			this.setAttribute(Attribute.MAJOR_ARCANE, 25);
-			this.setAttribute(Attribute.MAJOR_CORRUPTION, 0);
-			
 			this.setFemininity(75);
 			
 			this.setHeight(170);
@@ -129,7 +126,7 @@ public class TestNPC extends NPC {
 			this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.CHEST_FULLCUP_BRA, Colour.CLOTHING_WHITE, false), true, this);
 			this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.TORSO_OVER_HOODIE, Colour.CLOTHING_PINK_LIGHT, false), true, this);
 			this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.LEG_HOTPANTS, Colour.CLOTHING_BLACK, false), true, this);
-			this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.SOCK_THIGHHIGH_SOCKS, Colour.CLOTHING_WHITE, false), true, this);
+			this.equipClothingFromNowhere(AbstractClothingType.generateClothing("innoxia_sock_thighhigh_socks", Colour.CLOTHING_WHITE, false), true, this);
 			this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.HEAD_HEADBAND, Colour.CLOTHING_BLACK, false), true, this);
 			this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.EYES_GLASSES, Colour.CLOTHING_BLACK_STEEL, false), true, this);
 		}
@@ -148,14 +145,14 @@ public class TestNPC extends NPC {
 	}
 
 	@Override
-	public void equipClothing(boolean replaceUnsuitableClothing, boolean addWeapons, boolean addScarsAndTattoos, boolean addAccessories) {
+	public void equipClothing(List<EquipClothingSetting> settings) {
 		this.resetInventory(true);
 		
 		this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.GROIN_PANTIES, Colour.CLOTHING_WHITE, false), true, this);
 		this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.CHEST_FULLCUP_BRA, Colour.CLOTHING_WHITE, false), true, this);
 		this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.TORSO_OVER_HOODIE, Colour.CLOTHING_PINK_LIGHT, false), true, this);
 		this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.LEG_HOTPANTS, Colour.CLOTHING_BLACK, false), true, this);
-		this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.SOCK_THIGHHIGH_SOCKS, Colour.CLOTHING_WHITE, false), true, this);
+		this.equipClothingFromNowhere(AbstractClothingType.generateClothing("innoxia_sock_thighhigh_socks", Colour.CLOTHING_WHITE, false), true, this);
 		this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.HEAD_HEADBAND, Colour.CLOTHING_BLACK, false), true, this);
 		this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.EYES_GLASSES, Colour.CLOTHING_BLACK, false), true, this);
 	}
@@ -172,6 +169,11 @@ public class TestNPC extends NPC {
 	
 	@Override
 	public boolean isClothingStealable() {
+		return true;
+	}
+
+	@Override
+	public boolean isOverrideInventoryEquip() {
 		return true;
 	}
 	
@@ -287,9 +289,9 @@ public class TestNPC extends NPC {
 				return new ResponseSex("Rape [test.herHim]", "[test.Her] back is turned, and [test.she] hasn't noticed you enter the room...",
 						Util.newArrayListOfValues(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
 						false, false,
-						new SMDoggy(
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotBipeds.DOGGY_BEHIND)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(TestNPC.class), SexSlotBipeds.DOGGY_ON_ALL_FOURS))),
+						new SMAllFours(
+								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.BEHIND)),
+								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(TestNPC.class), SexSlotAllFours.ALL_FOURS))),
 						null,
 						null, TEST_DIALOGUE_AFTER_RAPE, "<p>"
 							+ "You quietly close the door and lock it behind you. After all, you wouldn't want anyone interrupting your fun."
@@ -310,9 +312,9 @@ public class TestNPC extends NPC {
 				return new ResponseSex("Rape [test.herHim] (gentle)", "[test.Her] back is turned, and [test.she] hasn't noticed you enter the room... (Start the sex scene in the 'gentle' pace.)",
 						Util.newArrayListOfValues(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
 						false, false,
-						new SMDoggy(
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotBipeds.DOGGY_BEHIND)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(TestNPC.class), SexSlotBipeds.DOGGY_ON_ALL_FOURS))) {
+						new SMAllFours(
+								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.BEHIND)),
+								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(TestNPC.class), SexSlotAllFours.ALL_FOURS))) {
 							@Override
 							public SexPace getStartingSexPaceModifier(GameCharacter character) {
 								if(character.isPlayer()) {
@@ -341,9 +343,9 @@ public class TestNPC extends NPC {
 				return new ResponseSex("Rape [test.herHim] (rough)", "[test.Her] back is turned, and [test.she] hasn't noticed you enter the room... (Start the sex scene in the 'rough' pace.)",
 						Util.newArrayListOfValues(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
 						false, false,
-						new SMDoggy(
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotBipeds.DOGGY_BEHIND)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(TestNPC.class), SexSlotBipeds.DOGGY_ON_ALL_FOURS))) {
+						new SMAllFours(
+								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.BEHIND)),
+								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(TestNPC.class), SexSlotAllFours.ALL_FOURS))) {
 							@Override
 							public SexPace getStartingSexPaceModifier(GameCharacter character) {
 								if(character.isPlayer()) {
@@ -501,14 +503,14 @@ public class TestNPC extends NPC {
 						+ "<p>"
 							+ "You knew [test.she] was a slut from the moment you saw [test.herHim], and the fact that [test.she] orgasmed during your fun only proves you right."
 							+ " As you reach the door, you turn around and chuckle,"
-							+ " [test.speech(You were a good fuck, slut. Maybe I'll pay you another visit some time!)]"
+							+ " [pc.speech(You were a good fuck, slut. Maybe I'll pay you another visit some time!)]"
 						+ "</p>";
 			} else {
 				return "<p>"
 							+ "The [test.race] collapses to the floor, sobbing."
 							+ " Grinning down at [test.her] despoiled body, you turn to the door and prepare to make your exit."
 							+ " As you reach for the handle, you turn around and chuckle,"
-							+ " [test.speech(You were a good fuck, slut. Maybe I'll pay you another visit some time!)]"
+							+ " [pc.speech(You were a good fuck, slut. Maybe I'll pay you another visit some time!)]"
 						+ "</p>";
 			}
 		}
@@ -538,14 +540,14 @@ public class TestNPC extends NPC {
 							+ "The [test.race] collapses to the floor, totally worn out and satisfied from the orgasm"+(Sex.getNumberOfOrgasms(Sex.getActivePartner()) > 1?"s":"")+" you gave to [test.herHim]."
 							+ " Grinning down at [test.her] delicate body, you turn to the door and prepare to make your exit."
 							+ " As you reach for the handle, you turn around and chuckle,"
-							+ " [test.speech(That was fun! Maybe I'll pay you another visit some time!)]"
+							+ " [pc.speech(That was fun! Maybe I'll pay you another visit some time!)]"
 						+ "</p>";
 			} else {
 				return "<p>"
 							+ "The [test.race] collapses to the floor, totally worn out."
 							+ " Grinning down at [test.her] delicate body, you turn to the door and prepare to make your exit."
 							+ " As you reach for the handle, you turn around and chuckle,"
-							+ " [test.speech(That was fun! Maybe I'll pay you another visit some time!)]"
+							+ " [pc.speech(That was fun! Maybe I'll pay you another visit some time!)]"
 						+ "</p>";
 			}
 		}

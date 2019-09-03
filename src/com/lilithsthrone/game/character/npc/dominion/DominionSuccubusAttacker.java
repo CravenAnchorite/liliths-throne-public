@@ -10,9 +10,9 @@ import org.w3c.dom.Element;
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.CharacterUtils;
+import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
-import com.lilithsthrone.game.character.body.valueEnums.AgeCategory;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
@@ -57,17 +57,12 @@ public class DominionSuccubusAttacker extends NPC {
 	
 	public DominionSuccubusAttacker(boolean isImported) {
 		super(isImported, null, null, "",
-				AgeCategory.getAgeFromPreferences(Gender.F_V_B_FEMALE), Util.randomItemFrom(Month.values()), 1+Util.random.nextInt(25),
+				Util.random.nextInt(50)+18, Util.randomItemFrom(Month.values()), 1+Util.random.nextInt(25),
 				5, Gender.F_V_B_FEMALE, Subspecies.DEMON, RaceStage.GREATER,
 				new CharacterInventory(10), WorldType.DOMINION, PlaceType.DOMINION_BACK_ALLEYS, false);
 
 		if(!isImported) {
 			this.setLocation(Main.game.getPlayer(), true);
-			
-			// BODY RANDOMISATION:
-			addFetish(Fetish.FETISH_DEFLOWERING);
-			addFetish(Fetish.FETISH_DOMINANT);
-			CharacterUtils.addFetishes(this);
 			
 			if(!Gender.getGenderFromUserPreferences(false, false).isFeminine()) {
 				this.setBody(Gender.M_P_MALE, Subspecies.DEMON, RaceStage.GREATER);
@@ -75,7 +70,12 @@ public class DominionSuccubusAttacker extends NPC {
 			}
 			
 			CharacterUtils.randomiseBody(this, true);
-			this.setAgeAppearanceDifferenceToAppearAsAge(AgeCategory.getAgeFromPreferences(Gender.F_V_B_FEMALE));
+			
+			addFetish(Fetish.FETISH_DEFLOWERING);
+			addFetish(Fetish.FETISH_DOMINANT);
+			CharacterUtils.addFetishes(this);
+			
+			this.setAgeAppearanceDifferenceToAppearAsAge(18+Util.random.nextInt(10));
 			
 			this.setVaginaVirgin(false);
 			this.setAssVirgin(false);
@@ -95,19 +95,22 @@ public class DominionSuccubusAttacker extends NPC {
 			
 			// CLOTHING:
 			
-			this.equipClothing(true, true, true, true);
+			this.equipClothing(EquipClothingSetting.getAllClothingSettings());
 			
 			CharacterUtils.applyMakeup(this, true);
 			
 			this.addSpell(Spell.ARCANE_AROUSAL);
 			this.addSpell(Spell.TELEPATHIC_COMMUNICATION);
 			this.addSpellUpgrade(SpellUpgrade.TELEPATHIC_COMMUNICATION_1);
+
+			// Set starting perks based on the character's race
+			initPerkTreeAndBackgroundPerks();
 			
 			setMana(getAttributeValue(Attribute.MANA_MAXIMUM));
 			setHealth(getAttributeValue(Attribute.HEALTH_MAXIMUM));
 		}
 
-		this.setEnslavementDialogue(SlaveDialogue.DEFAULT_ENSLAVEMENT_DIALOGUE, false);
+		this.setEnslavementDialogue(SlaveDialogue.DEFAULT_ENSLAVEMENT_DIALOGUE, true);
 	}
 	
 	@Override
@@ -117,7 +120,7 @@ public class DominionSuccubusAttacker extends NPC {
 			this.setFetishDesire(Fetish.FETISH_NON_CON_DOM, FetishDesire.TWO_NEUTRAL);
 		}
 		if(Main.isVersionOlderThan(Game.loadingVersion, "0.2.11")) {
-			this.setAgeAppearanceDifferenceToAppearAsAge(9+Util.random.nextInt(21));
+			this.setAgeAppearanceDifferenceToAppearAsAge(18+Util.random.nextInt(10));
 		}
 	}
 
@@ -127,8 +130,8 @@ public class DominionSuccubusAttacker extends NPC {
 	}
 
 	@Override
-	public void equipClothing(boolean replaceUnsuitableClothing, boolean addWeapons, boolean addScarsAndTattoos, boolean addAccessories) {
-		super.equipClothing(replaceUnsuitableClothing, addWeapons, addScarsAndTattoos, addAccessories); //TODO - add unique outfit type
+	public void equipClothing(List<EquipClothingSetting> settings) {
+		super.equipClothing(settings); //TODO - add unique outfit type
 	}
 	
 	@Override
@@ -146,9 +149,9 @@ public class DominionSuccubusAttacker extends NPC {
 	@Override
 	public void endSex() {
 		if(!isSlave()) {
-			if(this.getGender()!=this.getGenderIdentity() && !this.isPregnant()) {
-				this.setPendingTransformationToGenderIdentity(true);
-			}
+//			if(this.getGender()!=this.getGenderIdentity() && !this.isPregnant()) {
+//				this.setPendingTransformationToGenderIdentity(true);
+//			}
 			setPendingClothingDressing(true);
 		}
 	}
@@ -178,21 +181,20 @@ public class DominionSuccubusAttacker extends NPC {
 
 	// Combat:
 
-				
 	@Override
-	public String getMainAttackDescription(boolean isHit) {
+	public String getMainAttackDescription(GameCharacter target, boolean isHit) {
 		if(this.isFeminine()) {
-			return UtilText.parse(this,
+			return UtilText.parse(this, target,
 					UtilText.returnStringAtRandom(
-							"[npc.Name] looks annoyed that you're trying to put up a fight, and leaps forwards to deliver a stinging slap across your face.",
-							"With an angry little click of her tongue, [npc.Name] slaps you across the face.",
-							"With a frustrated whine, [npc.Name] kicks out at your shins."));
+							"[npc.Name] looks annoyed that [npc2.nameIs] trying to put up a fight, and leaps forwards to deliver a stinging slap across [npc2.her] face.",
+							"With an angry little click of her tongue, [npc.Name] slaps [npc2.name] across the face.",
+							"With a frustrated whine, [npc.Name] kicks out at [npc2.namePos] shins."));
 		} else {
-			return UtilText.parse(this,
+			return UtilText.parse(this, target,
 					UtilText.returnStringAtRandom(
-							"[npc.Name] looks annoyed that you're trying to put up a fight, and leaps forwards to deliver a solid punch to your [pc.arm].",
-							"With an angry shout, [npc.Name] darts forwards and punches you right in the chest!",
-							"With a frustrated cry, [npc.Name] kicks out at your shins."));
+							"[npc.Name] looks annoyed that [npc2.nameIs] trying to put up a fight, and leaps forwards to deliver a solid punch to [npc2.her] [npc2.arm].",
+							"With an angry shout, [npc.Name] darts forwards and punches [npc2.name] right in the chest!",
+							"With a frustrated cry, [npc.Name] kicks out at [npc2.namePos] shins."));
 		}
 	}
 
@@ -212,21 +214,24 @@ public class DominionSuccubusAttacker extends NPC {
 	public String getCondomEquipEffects(GameCharacter equipper, GameCharacter target, boolean rough) {
 		if(Main.game.isInSex()) {
 			if((Sex.isDom(Main.game.getPlayer()) || Sex.isSubHasEqualControl()) && !target.isPlayer()) {
-				return "<p>"
-							+ "Holding out a condom to [npc.name], you force [npc.herHim] to take it and put it on."
-							+ " Quickly ripping it out of its little foil wrapper, [npc.she] rolls it down the length of [npc.her] [npc.cock+] as [npc.she] whines at you,"
-							+ " [npc.speech(Do I really have to? It feels so much better without one...)]"
-						+ "</p>";
+				return UtilText.parse(equipper, target,
+						"<p>"
+							+ "Holding out a condom to [npc2.name], [npc.name] [npc.verb(force)] [npc2.herHim] to take it and put it on."
+							+ " Quickly ripping it out of its little foil wrapper, [npc2.she] [npc2.verb(roll)] it down the length of [npc2.her] [npc2.cock+] as [npc2.she] [npc2.verb(whine)],"
+							+ " [npc2.speech(Do I really have to? It feels so much better without one...)]"
+						+ "</p>");
+				
 			} else if (!target.isPlayer()){
 				AbstractClothing clothing = target.getClothingInSlot(InventorySlot.PENIS);
-				if(clothing!=null && clothing.getClothingType().isCondom()) {
+				if(clothing!=null && clothing.getClothingType().isCondom(clothing.getClothingType().getEquipSlots().get(0))) {
 					target.unequipClothingIntoVoid(clothing, true, equipper);
 				}
-				return "<p>"
-							+ "You pull out a condom and try to give it to the horny [npc.race], but [npc.she] simply laughs in your face before grabbing the little foil packet and tearing it in two."
-							+ " Mocking your attempt at trying to get her to wear a rubber, [npc.she] sneers,"
-							+ " [npc.speech(Hah! I don't think so!)]"
-						+ "</p>";
+				return UtilText.parse(equipper, target,
+						"<p>"
+							+ "[npc.Name] [npc.verb(pull)] out a condom and [npc.verb(try)] to give it to [npc2.name], but [npc2.she] simply laughs in [npc.her] face before grabbing the little foil packet and tearing it in two."
+							+ " Mocking [npc.namePos] attempt at trying to get [npc2.herHim] to wear a rubber, [npc2.she] [npc2.verb(sneer)],"
+							+ " [npc2.speech(Hah! I don't think so!)]"
+						+ "</p>");
 			}
 		}
 		return AbstractClothingType.getEquipDescriptions(target, equipper, rough,

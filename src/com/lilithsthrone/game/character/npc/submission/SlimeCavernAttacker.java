@@ -1,14 +1,15 @@
 package com.lilithsthrone.game.character.npc.submission;
 
 import java.time.Month;
+import java.util.List;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.CharacterUtils;
+import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.attributes.Attribute;
-import com.lilithsthrone.game.character.body.valueEnums.AgeCategory;
 import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.npc.NPC;
@@ -54,7 +55,7 @@ public class SlimeCavernAttacker extends NPC {
 	
 	public SlimeCavernAttacker(Gender gender, boolean isImported) {
 		super(isImported, null, null, "",
-				AgeCategory.getAgeFromPreferences(gender), Util.randomItemFrom(Month.values()), 1+Util.random.nextInt(25),
+				Util.random.nextInt(28)+18, Util.randomItemFrom(Month.values()), 1+Util.random.nextInt(25),
 				3, gender, Subspecies.HUMAN, RaceStage.HUMAN,
 				new CharacterInventory(10), WorldType.BAT_CAVERNS, PlaceType.BAT_CAVERN_DARK, false);
 
@@ -93,11 +94,11 @@ public class SlimeCavernAttacker extends NPC {
 			inventory.setMoney(50 + Util.random.nextInt(getLevel()*10) + 1);
 			CharacterUtils.generateItemsInInventory(this);
 	
-			equipClothing(true, true, true, true);
+			equipClothing(EquipClothingSetting.getAllClothingSettings());
 			CharacterUtils.applyMakeup(this, true);
 			
 			// Set starting attributes based on the character's race
-			initAttributes();
+			initPerkTreeAndBackgroundPerks();
 			
 			this.useItem(AbstractItemType.generateItem(ItemType.MUSHROOM), this, false);
 			
@@ -119,8 +120,8 @@ public class SlimeCavernAttacker extends NPC {
 	}
 
 	@Override
-	public void equipClothing(boolean replaceUnsuitableClothing, boolean addWeapons, boolean addScarsAndTattoos, boolean addAccessories) {
-		super.equipClothing(replaceUnsuitableClothing, addWeapons, addScarsAndTattoos, addAccessories); //TODO - add unique outfit type
+	public void equipClothing(List<EquipClothingSetting> settings) {
+		super.equipClothing(settings); //TODO - add unique outfit type
 	}
 	
 	@Override

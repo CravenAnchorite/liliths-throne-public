@@ -239,10 +239,10 @@ public class FingerNipple {
 					break;
 				case DOM_ROUGH:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"[npc.Name] digs [npc.her] [npc.fingers+] into [npc2.namePos] [npc2.breasts+], before moving [npc.her] rough touch up to [npc2.her] [npc2.nipples+]."
+							"[npc.Name] [npc.verb(dig)] [npc.her] [npc.fingers+] into [npc2.namePos] [npc2.breasts+], before moving [npc.her] rough touch up to [npc2.her] [npc2.nipples+]."
 								+ " Forcefully pinching and squeezing [npc2.namePos] [npc2.nipples+], [npc.name] [npc.verb(let)] out a triumphant growl as [npc.she] [npc.verb(manage)] to draw out",
 
-							"With [npc.a_moan+], [npc.name] roughly digs [npc.her] [npc.fingers] into [npc2.namePos] [npc2.breasts+], before quickly moving down to roughly flick [npc2.her] [npc2.nipples+]."
+							"With [npc.a_moan+], [npc.name] roughly [npc.verb(dig)] [npc.her] [npc.fingers] into [npc2.namePos] [npc2.breasts+], before quickly moving down to roughly flick [npc2.her] [npc2.nipples+]."
 									+ " Dominantly pinching and squeezing at [npc2.namePos] [npc2.nipples+], [npc.name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(manage)] to draw out"));
 					break;
 				case SUB_RESISTING:
@@ -464,7 +464,7 @@ public class FingerNipple {
 							" [npc2.Name] [npc2.verb(let)] out [npc2.a_moan+] and [npc2.verb(try)] to pull away, but, with a forceful yank, [npc.name] [npc.verb(pull)] [npc2.her] [npc2.hands] back into [npc.her] [npc.breasts],"
 									+ " making it quite clear that [npc2.she] has no choice but to squeeze the [npc.milk+] from [npc.her] [npc.nipples].",
 
-							" [npc2.Name] desperately tries to pull away from [npc.namePos] [npc.breasts],"
+							" [npc2.Name] desperately [npc2.verb(try)] to pull away from [npc.namePos] [npc.breasts],"
 									+ " but, grabbing hold of [npc2.her] [npc2.hand], [npc.name] [npc.verb(force)] [npc2.her] to continue squeezing the [npc.milk+] from [npc.her] [npc.nipples]."));
 					break;
 			}
@@ -1092,7 +1092,7 @@ public class FingerNipple {
 				case SUB_RESISTING:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 							" [npc2.Name] [npc2.verb(let)] out [npc2.a_sob+] as [npc.name] [npc.verb(force)] [npc2.her] [npc2.fingers] inside of [npc.herHim],"
-									+ " struggling against [npc.namePos] firm grip on [npc2.her] [npc2.hand] as [npc2.she] tries to pull [npc2.herself] free.",
+									+ " struggling against [npc.namePos] firm grip on [npc2.her] [npc2.hand] as [npc2.she] [npc2.verb(try)] to pull [npc2.herself] free.",
 
 							" With [npc2.a_sob+], [npc2.name] [npc2.verb(start)] struggling against [npc.namePos] tight grip on [npc2.her] [npc2.hand],"
 									+ " pleading for [npc.name] to stop as [npc.she] [npc2.verb(force)] [npc2.her] [npc2.fingers] deep into [npc.her] [npc.nipple+]."));

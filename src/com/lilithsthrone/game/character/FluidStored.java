@@ -96,7 +96,7 @@ public class FluidStored implements XMLSaving {
 			this.bestial = false;
 		}
 		
-		this.milk = new FluidMilk(milk.getType());
+		this.milk = new FluidMilk(milk.getType(), milk.isCrotchMilk());
 		this.milk.clearFluidModifiers();
 		
 		this.milk.setFlavour(null, milk.getFlavour());
@@ -114,11 +114,10 @@ public class FluidStored implements XMLSaving {
 		this.charactersFluidID = charactersFluidID;
 
 		this.cumSubspecies = null;
-
+		this.virility = 0;
 		try {
 			GameCharacter owner = charactersFluidID==null||charactersFluidID.isEmpty()?null:Main.game.getNPCById(charactersFluidID);
 			this.bestial = girlCum.isBestial(owner);
-			this.virility = owner==null?25:owner.getAttributeValue(Attribute.VIRILITY);
 		} catch (Exception e) {
 			this.bestial = false;
 		}
@@ -155,7 +154,7 @@ public class FluidStored implements XMLSaving {
 	@Override
 	public int hashCode() {
 		// Does not take into account quantity on purpose.
-		int result = super.hashCode();
+		int result = 17;
 		result = 31 * result + this.getFluid().hashCode();
 		result = 31 * result + this.getCharactersFluidID().hashCode();
 		result = 31 * result + (this.isBestial() ? 1 : 0);
@@ -206,7 +205,7 @@ public class FluidStored implements XMLSaving {
 		if(parentElement.getElementsByTagName("milk").item(0)!=null) {
 			FluidStored fluid = new FluidStored(ID, FluidMilk.loadFromXML(parentElement, doc), millimetres);
 			fluid.bestial=bestial;
-			fluid.virility=virility;
+			fluid.virility=0;
 			return fluid;
 		}
 		
@@ -224,7 +223,7 @@ public class FluidStored implements XMLSaving {
 
 		FluidStored fluid = new FluidStored(ID, FluidGirlCum.loadFromXML(parentElement, doc), millimetres);
 		fluid.bestial=bestial;
-		fluid.virility=virility;
+		fluid.virility=0;
 		return fluid;
 	}
 	
@@ -235,7 +234,7 @@ public class FluidStored implements XMLSaving {
 	
 	/**
 	 * @return The character whose fluid this is.
-	 * @throws Exception A NulllPointerException if the character does not exist.
+	 * @throws Exception A NullPointerException if the character does not exist.
 	 */
 	public GameCharacter getFluidCharacter() throws Exception {
 		if(charactersFluidID.equals(Main.game.getPlayer().getId())) {

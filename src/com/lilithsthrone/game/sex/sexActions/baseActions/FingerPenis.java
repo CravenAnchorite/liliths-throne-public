@@ -7,7 +7,7 @@ import com.lilithsthrone.game.sex.Sex;
 import com.lilithsthrone.game.sex.SexAreaPenetration;
 import com.lilithsthrone.game.sex.SexPace;
 import com.lilithsthrone.game.sex.SexParticipantType;
-import com.lilithsthrone.game.sex.positions.SexSlotBipeds;
+import com.lilithsthrone.game.sex.positions.slots.SexSlotTag;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.utils.Util;
@@ -48,7 +48,7 @@ public class FingerPenis {
 
 		@Override
 		public String getDescription() {
-			if(Sex.getSexPositionSlot(Sex.getCharacterPerformingAction())==SexSlotBipeds.SIXTY_NINE_TOP) {
+			if(Sex.getSexPositionSlot(Sex.getCharacterPerformingAction()).hasTag(SexSlotTag.SIXTY_NINE)) {
 				return UtilText.returnStringAtRandom(
 						"[npc.Name] [npc.verb(prop)] [npc.herself] up on one [npc.arm], before using [npc.her] free [npc.hand] to stroke and squeeze [npc2.namePos] [npc2.balls+].",
 
@@ -278,7 +278,7 @@ public class FingerPenis {
 			SexActionType.ONGOING,
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
-			CorruptionLevel.TWO_HORNY,
+			CorruptionLevel.ONE_VANILLA,
 			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaPenetration.PENIS)),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_GENTLE) {
@@ -317,7 +317,7 @@ public class FingerPenis {
 			SexActionType.ONGOING,
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
-			CorruptionLevel.TWO_HORNY,
+			CorruptionLevel.ONE_VANILLA,
 			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaPenetration.PENIS)),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_NORMAL) {
@@ -395,7 +395,7 @@ public class FingerPenis {
 			SexActionType.ONGOING,
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
-			CorruptionLevel.TWO_HORNY,
+			CorruptionLevel.ONE_VANILLA,
 			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaPenetration.PENIS)),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_NORMAL) {
@@ -434,7 +434,7 @@ public class FingerPenis {
 			SexActionType.ONGOING,
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
-			CorruptionLevel.TWO_HORNY,
+			CorruptionLevel.ONE_VANILLA,
 			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaPenetration.PENIS)),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_EAGER) {
@@ -589,7 +589,7 @@ public class FingerPenis {
 			SexActionType.START_ONGOING,
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
-			CorruptionLevel.TWO_HORNY,
+			CorruptionLevel.ONE_VANILLA,
 			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaPenetration.FINGER)),
 			SexParticipantType.NORMAL) {
 		
@@ -689,7 +689,7 @@ public class FingerPenis {
 				case SUB_RESISTING:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 							" [npc2.Name] [npc2.verb(let)] out [npc2.a_sob+] as [npc.name] [npc.verb(force)] [npc2.her] to perform a handjob,"
-									+ " struggling against [npc.namePos] firm grip on [npc2.her] [npc2.hand] as [npc2.she] tries to pull [npc2.herself] free.",
+									+ " struggling against [npc.namePos] firm grip on [npc2.her] [npc2.hand] as [npc2.she] [npc2.verb(try)] to pull [npc2.herself] free.",
 
 							" With [npc2.a_sob+], [npc2.name] [npc2.verb(start)] struggling against [npc.namePos] tight grip on [npc2.her] [npc2.hand],"
 									+ " pleading for [npc.name] to stop as [npc.she] [npc2.verb(force)] [npc2.her] to perform a handjob."));
@@ -707,7 +707,7 @@ public class FingerPenis {
 			SexActionType.ONGOING,
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
-			CorruptionLevel.TWO_HORNY,
+			CorruptionLevel.ONE_VANILLA,
 			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaPenetration.FINGER)),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_GENTLE) {
@@ -743,7 +743,7 @@ public class FingerPenis {
 			SexActionType.ONGOING,
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
-			CorruptionLevel.TWO_HORNY,
+			CorruptionLevel.ONE_VANILLA,
 			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaPenetration.FINGER)),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_NORMAL) {
@@ -815,7 +815,7 @@ public class FingerPenis {
 			SexActionType.ONGOING,
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
-			CorruptionLevel.TWO_HORNY,
+			CorruptionLevel.ONE_VANILLA,
 			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaPenetration.FINGER)),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_NORMAL) {
@@ -851,7 +851,7 @@ public class FingerPenis {
 			SexActionType.ONGOING,
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
-			CorruptionLevel.TWO_HORNY,
+			CorruptionLevel.ONE_VANILLA,
 			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaPenetration.FINGER)),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_EAGER) {
