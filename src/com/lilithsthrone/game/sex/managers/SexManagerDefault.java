@@ -61,6 +61,14 @@ public abstract class SexManagerDefault implements SexManagerInterface {
 		this.dominants = dominants==null?new HashMap<>():dominants;
 		this.submissives = submissives==null?new HashMap<>():submissives;
 		
+		/**for(GameCharacter character : dominants.keySet()) {
+			character.setOrgasmIncrement(0);
+		}
+		for(GameCharacter character : submissives.keySet()) {
+			character.setOrgasmIncrement(0);
+		}**/
+		
+		
 		if(position!=null) {
 			int totalParticipants = this.dominants.size() + this.submissives.size();
 			

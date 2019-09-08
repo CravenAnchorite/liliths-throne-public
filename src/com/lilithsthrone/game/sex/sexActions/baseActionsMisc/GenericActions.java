@@ -1480,6 +1480,7 @@ public class GenericActions {
 
 		@Override
 		public boolean isBaseRequirementsMet() {
+			System.out.println("isBaseRequirementsMet: " + Sex.getSexManager().isPartnerWantingToStopSex(Sex.getCharacterPerformingAction()) + " && " + !Sex.getCharacterPerformingAction().isPlayer());
 			return Sex.getSexManager().isPartnerWantingToStopSex(Sex.getCharacterPerformingAction())
 					&& !Sex.getCharacterPerformingAction().isPlayer();
 		}

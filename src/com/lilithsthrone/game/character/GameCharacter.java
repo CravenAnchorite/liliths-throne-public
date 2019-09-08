@@ -271,7 +271,7 @@ public abstract class GameCharacter implements XMLSaving {
 	public static final int MAX_COMBAT_MOVES = 8;
 	public static final int DEFAULT_COMBAT_AP = 3;
 
-	public static final int MINIMUM_AGE = 18;
+	public static final int MINIMUM_AGE = 9;
 	
 	// Core variables:
 	protected String id;
@@ -402,6 +402,8 @@ public abstract class GameCharacter implements XMLSaving {
 	private int totalOrgasmCount;
 	private int daysOrgasmCount;
 	private int daysOrgasmCountRecord;
+	
+	private int orgasmIncrement;
 	
 	
 	// Stats:
@@ -6023,16 +6025,11 @@ public abstract class GameCharacter implements XMLSaving {
 				return 3;
 			}
 		}
-		int increment = 0;
-		if(Main.game.isInSex()) {
-			for(GameCharacter character : Sex.getAllParticipants()) {
-				if(!character.equals(this) && character.hasPerkAnywhereInTree(Perk.OBJECT_OF_DESIRE)) {
-					increment++;
-				}
-			}
-		}
 		
-		return 1 + increment + (this.hasStatusEffect(StatusEffect.WEATHER_STORM_VULNERABLE)?1:0);
+		if(this.orgasmIncrement == 0 ) {
+			this.setOrgasmIncrement(0);
+		}
+		return 1 + this.orgasmIncrement;
 	}
 	
 	public int getUniqueSexPartnerCount() {
@@ -14382,7 +14379,7 @@ public abstract class GameCharacter implements XMLSaving {
 			orificesToCheck = new ArrayList<>();
 			Collections.addAll(orificesToCheck, SexAreaOrifice.values());
 		} else {
-			orificesToCheck = Util.newArrayListOfValues(SexAreaOrifice.VAGINA);
+			orificesToCheck = Util.newArrayListOfValues(SexAreaOrifice.VAGINA, SexAreaOrifice.MOUTH);
 		}
 		
 		for(SexAreaOrifice ot : orificesToCheck) {
@@ -14390,7 +14387,8 @@ public abstract class GameCharacter implements XMLSaving {
 				List<FluidStored> fluids = new ArrayList<>(this.fluidsStoredMap.get(ot));
 				Collections.shuffle(fluids);
 				for(FluidStored fs : fluids) {
-					if(fs.isCum()) {
+					if(fs.isCum() | fs.isGirlCum()) {
+						System.out.println("checking cum. Is Girlcum:" + fs.isGirlCum());
 						GameCharacter partner = null;
 						if(fs.getCharactersFluidID().equals(Main.game.getPlayer().getId())) {
 							partner = Main.game.getPlayer();
@@ -22292,6 +22290,32 @@ public abstract class GameCharacter implements XMLSaving {
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
+	}
+
+	public int getOrgasmIncrement() {
+		return orgasmIncrement;
+	}
+
+	public void setOrgasmIncrement(int orgasmIncrement) {
+		int increment = 0;
+		this.orgasmIncrement = 0;
+		/**if(Main.game.isInSex()) {
+			for(GameCharacter character : Sex.getAllParticipants()) {
+				if(!character.equals(this) && character.hasPerkAnywhereInTree(Perk.OBJECT_OF_DESIRE)) {
+					increment++;
+				}
+			}
+		}**/
+		
+		if(this.hasVagina() && !this.hasPenis()){
+			
+			increment += 1 + (Util.random.nextInt(3));
+			if (Math.random() < .15f){
+				increment += 1 + Util.random.nextInt(6);
+			}
+			
+		}
+		this.orgasmIncrement = orgasmIncrement + increment  + (this.hasStatusEffect(StatusEffect.WEATHER_STORM_VULNERABLE)?1:0);
 	}
 
 }

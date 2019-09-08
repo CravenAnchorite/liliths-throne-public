@@ -345,6 +345,7 @@ public class Sex {
 		
 		lastUsedSexAction = new HashMap<>();
 		for(GameCharacter character : Sex.getAllParticipants()) {
+			character.setOrgasmIncrement(0);
 			sexCountMap.put(character, new HashMap<>());
 			if(character.isPlayer()) {
 				lastUsedSexAction.put(character, SexActionUtility.PLAYER_NONE);

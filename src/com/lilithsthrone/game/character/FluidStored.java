@@ -114,7 +114,7 @@ public class FluidStored implements XMLSaving {
 		this.charactersFluidID = charactersFluidID;
 
 		this.cumSubspecies = null;
-		this.virility = 0;
+		this.virility = millilitres;
 		try {
 			GameCharacter owner = charactersFluidID==null||charactersFluidID.isEmpty()?null:Main.game.getNPCById(charactersFluidID);
 			this.bestial = girlCum.isBestial(owner);
@@ -209,7 +209,7 @@ public class FluidStored implements XMLSaving {
 			return fluid;
 		}
 		
-		if(parentElement.getElementsByTagName("cum").item(0)!=null) {
+		if(parentElement.getElementsByTagName("cum").item(0)!=null ) {
 			Subspecies subspecies = Subspecies.HUMAN;
 			try {
 				subspecies = Subspecies.valueOf(parentElement.getAttribute("cumSubspecies"));
@@ -223,7 +223,7 @@ public class FluidStored implements XMLSaving {
 
 		FluidStored fluid = new FluidStored(ID, FluidGirlCum.loadFromXML(parentElement, doc), millimetres);
 		fluid.bestial=bestial;
-		fluid.virility=0;
+		fluid.virility=virility;
 		return fluid;
 	}
 	

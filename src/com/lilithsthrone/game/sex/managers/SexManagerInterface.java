@@ -196,6 +196,7 @@ public interface SexManagerInterface {
 		}
 		
 		for(GameCharacter character : Sex.getDominantParticipants(false).keySet()) {
+			System.out.println("Checking Dom:" + character.getName());
 			if(Sex.getNumberOfOrgasms(character)<character.getOrgasmsBeforeSatisfied() && Sex.getSexPositionSlot(character)!=SexSlotGeneric.MISC_WATCHING) {
 				domsSatisfied = false;
 			}
@@ -213,16 +214,19 @@ public interface SexManagerInterface {
 			}
 		}
 		
-		if(Sex.isDom(partner) && (!Sex.isConsensual() || subsResisting || !Sex.isSubHasEqualControl() || (partner.getFetishDesire(Fetish.FETISH_DENIAL).isPositive() && subsDenied))) {
+		//if(Sex.isDom(partner) && (!Sex.isConsensual() || subsResisting || !Sex.isSubHasEqualControl() || (partner.getFetishDesire(Fetish.FETISH_DENIAL).isPositive() && subsDenied))) {
+		if(Sex.isDom(partner)) {
 			if(Sex.getNumberOfOrgasms(partner)>partner.getOrgasmsBeforeSatisfied()*2) {
 				return true;
 			}
+			System.out.println("Dom(" + partner.getName() + ") Satisfied: " + domsSatisfied);
 			return domsSatisfied;
 			
 		} else if(Sex.getSexControl(partner)!=SexControl.FULL) {
 			return false;
 			
 		} else {
+			System.out.println("Dom Satisfied: " + domsSatisfied + " && Sub Satisfied:" + subsSatisfied);
 			return domsSatisfied && subsSatisfied;
 		}
 	}

@@ -188,6 +188,20 @@ public class TongueVagina {
 			return UtilText.nodeContentSB.toString();
 		}
 		
+		
+		@Override
+		public String applyEffectsString() {
+			float suckleAmount = Sex.getCharacterTargetedForSexAction(this).getVaginaWetness().getValue()*2;
+			
+			
+			return Sex.getCharacterPerformingAction().ingestFluid(
+						Sex.getCharacterTargetedForSexAction(this),
+						Sex.getCharacterTargetedForSexAction(this).getGirlcum(),
+						SexAreaOrifice.MOUTH,
+						suckleAmount);
+		}
+
+		
 	};
 	
 
@@ -322,6 +336,15 @@ public class TongueVagina {
 			return UtilText.nodeContentSB.toString();
 		}
 		
+		@Override
+		public String applyEffectsString() {
+			return Sex.getCharacterTargetedForSexAction(this).ingestFluid(
+					Sex.getCharacterPerformingAction(),
+					Sex.getCharacterPerformingAction().getGirlcum(),
+					SexAreaOrifice.MOUTH,
+					Sex.getCharacterPerformingAction().getVaginaWetness().getValue()*2);
+		}
+		
 	};
 	
 
@@ -442,6 +465,15 @@ public class TongueVagina {
 			}
 			
 			return UtilText.nodeContentSB.toString();
+		}
+		
+		@Override
+		public String applyEffectsString() {
+			return Sex.getCharacterTargetedForSexAction(this).ingestFluid(
+					Sex.getCharacterPerformingAction(),
+					Sex.getCharacterPerformingAction().getGirlcum(),
+					SexAreaOrifice.MOUTH,
+					Sex.getCharacterPerformingAction().getVaginaWetness().getValue()*2);
 		}
 		
 	};
@@ -566,6 +598,15 @@ public class TongueVagina {
 			return UtilText.nodeContentSB.toString();
 		}
 		
+		@Override
+		public String applyEffectsString() {
+			return Sex.getCharacterTargetedForSexAction(this).ingestFluid(
+					Sex.getCharacterPerformingAction(),
+					Sex.getCharacterPerformingAction().getGirlcum(),
+					SexAreaOrifice.MOUTH,
+					Sex.getCharacterPerformingAction().getVaginaWetness().getValue()*2);
+		}
+		
 	};
 
 	public static final SexAction CUNNILINGUS_START = new SexAction(
@@ -673,6 +714,18 @@ public class TongueVagina {
 			
 			return UtilText.nodeContentSB.toString();
 		}
+		
+		@Override
+		public String applyEffectsString() {
+			float suckleAmount = Sex.getCharacterTargetedForSexAction(this).getVaginaWetness().getValue();
+			
+			
+			return Sex.getCharacterPerformingAction().ingestFluid(
+						Sex.getCharacterTargetedForSexAction(this),
+						Sex.getCharacterTargetedForSexAction(this).getGirlcum(),
+						SexAreaOrifice.MOUTH,
+						suckleAmount);
+		}
 
 	};
 	
@@ -776,6 +829,18 @@ public class TongueVagina {
 			
 			return UtilText.nodeContentSB.toString();
 		}
+		
+		@Override
+		public String applyEffectsString() {
+			float suckleAmount = Sex.getCharacterTargetedForSexAction(this).getVaginaWetness().getValue()*2;
+			
+			
+			return Sex.getCharacterPerformingAction().ingestFluid(
+						Sex.getCharacterTargetedForSexAction(this),
+						Sex.getCharacterTargetedForSexAction(this).getGirlcum(),
+						SexAreaOrifice.MOUTH,
+						suckleAmount);
+		}
 
 	};
 	
@@ -817,6 +882,18 @@ public class TongueVagina {
 			
 			return UtilText.nodeContentSB.toString();
 		}
+		
+		@Override
+		public String applyEffectsString() {
+			float suckleAmount = Sex.getCharacterTargetedForSexAction(this).getVaginaWetness().getValue()*2;
+			
+			
+			return Sex.getCharacterPerformingAction().ingestFluid(
+						Sex.getCharacterTargetedForSexAction(this),
+						Sex.getCharacterTargetedForSexAction(this).getGirlcum(),
+						SexAreaOrifice.MOUTH,
+						suckleAmount);
+		}
 
 	};
 	
@@ -857,6 +934,18 @@ public class TongueVagina {
 			UtilText.nodeContentSB.append(getTargetedCharacterResponse(this));
 			
 			return UtilText.nodeContentSB.toString();
+		}
+		
+		@Override
+		public String applyEffectsString() {
+			float suckleAmount = Sex.getCharacterTargetedForSexAction(this).getVaginaWetness().getValue()*2;
+			
+			
+			return Sex.getCharacterPerformingAction().ingestFluid(
+						Sex.getCharacterTargetedForSexAction(this),
+						Sex.getCharacterTargetedForSexAction(this).getGirlcum(),
+						SexAreaOrifice.MOUTH,
+						suckleAmount);
 		}
 		
 	};
@@ -923,6 +1012,18 @@ public class TongueVagina {
 			
 			return UtilText.nodeContentSB.toString();
 		}
+		
+		@Override
+		public String applyEffectsString() {
+			float suckleAmount = Sex.getCharacterTargetedForSexAction(this).getVaginaWetness().getValue();
+			
+			
+			return Sex.getCharacterPerformingAction().ingestFluid(
+						Sex.getCharacterTargetedForSexAction(this),
+						Sex.getCharacterTargetedForSexAction(this).getGirlcum(),
+						SexAreaOrifice.MOUTH,
+						suckleAmount);
+		}
 
 	};
 	
@@ -964,6 +1065,18 @@ public class TongueVagina {
 			
 			return UtilText.nodeContentSB.toString();
 		}
+		
+		@Override
+		public String applyEffectsString() {
+			float suckleAmount = Sex.getCharacterTargetedForSexAction(this).getVaginaWetness().getValue()*2;
+			
+			
+			return Sex.getCharacterPerformingAction().ingestFluid(
+						Sex.getCharacterTargetedForSexAction(this),
+						Sex.getCharacterTargetedForSexAction(this).getGirlcum(),
+						SexAreaOrifice.MOUTH,
+						suckleAmount);
+		}
 
 	};
 	
@@ -1004,6 +1117,18 @@ public class TongueVagina {
 			UtilText.nodeContentSB.append(getTargetedCharacterResponse(this));
 			
 			return UtilText.nodeContentSB.toString();
+		}
+		
+		@Override
+		public String applyEffectsString() {
+			float suckleAmount = Sex.getCharacterTargetedForSexAction(this).getVaginaWetness().getValue()*2;
+			
+			
+			return Sex.getCharacterPerformingAction().ingestFluid(
+						Sex.getCharacterTargetedForSexAction(this),
+						Sex.getCharacterTargetedForSexAction(this).getGirlcum(),
+						SexAreaOrifice.MOUTH,
+						suckleAmount);
 		}
 		
 	};
@@ -1186,6 +1311,15 @@ public class TongueVagina {
 			return UtilText.nodeContentSB.toString();
 		}
 		
+		@Override
+		public String applyEffectsString() {
+			return Sex.getCharacterTargetedForSexAction(this).ingestFluid(
+					Sex.getCharacterPerformingAction(),
+					Sex.getCharacterPerformingAction().getGirlcum(),
+					SexAreaOrifice.MOUTH,
+					Sex.getCharacterPerformingAction().getVaginaWetness().getValue()*2);
+		}
+		
 	};
 	
 	private static String getTargetedCharacterReceivingResponse(SexAction action) {
@@ -1285,6 +1419,15 @@ public class TongueVagina {
 			
 			return UtilText.nodeContentSB.toString();
 		}
+		
+		@Override
+		public String applyEffectsString() {
+			return Sex.getCharacterTargetedForSexAction(this).ingestFluid(
+					Sex.getCharacterPerformingAction(),
+					Sex.getCharacterPerformingAction().getGirlcum(),
+					SexAreaOrifice.MOUTH,
+					Sex.getCharacterPerformingAction().getVaginaWetness().getValue()*2);
+		}
 
 	};
 	
@@ -1323,6 +1466,15 @@ public class TongueVagina {
 			
 			return UtilText.nodeContentSB.toString();
 		}
+		
+		@Override
+		public String applyEffectsString() {
+			return Sex.getCharacterTargetedForSexAction(this).ingestFluid(
+					Sex.getCharacterPerformingAction(),
+					Sex.getCharacterPerformingAction().getGirlcum(),
+					SexAreaOrifice.MOUTH,
+					Sex.getCharacterPerformingAction().getVaginaWetness().getValue()*2);
+		}
 
 	};
 	
@@ -1360,6 +1512,15 @@ public class TongueVagina {
 			UtilText.nodeContentSB.append(getTargetedCharacterReceivingResponse(this));
 					
 			return UtilText.nodeContentSB.toString();
+		}
+		
+		@Override
+		public String applyEffectsString() {
+			return Sex.getCharacterTargetedForSexAction(this).ingestFluid(
+					Sex.getCharacterPerformingAction(),
+					Sex.getCharacterPerformingAction().getGirlcum(),
+					SexAreaOrifice.MOUTH,
+					Sex.getCharacterPerformingAction().getVaginaWetness().getValue()*2);
 		}
 
 	};
@@ -1430,6 +1591,15 @@ public class TongueVagina {
 			return UtilText.nodeContentSB.toString();
 		}
 		
+		@Override
+		public String applyEffectsString() {
+			return Sex.getCharacterTargetedForSexAction(this).ingestFluid(
+					Sex.getCharacterPerformingAction(),
+					Sex.getCharacterPerformingAction().getGirlcum(),
+					SexAreaOrifice.MOUTH,
+					Sex.getCharacterPerformingAction().getVaginaWetness().getValue());
+		}
+		
 	};
 	
 	public static final SexAction RECEIVING_CUNNILINGUS_SUB_NORMAL = new SexAction(
@@ -1466,6 +1636,15 @@ public class TongueVagina {
 			UtilText.nodeContentSB.append(getTargetedCharacterReceivingResponse(this));
 			
 			return UtilText.nodeContentSB.toString();
+		}
+		
+		@Override
+		public String applyEffectsString() {
+			return Sex.getCharacterTargetedForSexAction(this).ingestFluid(
+					Sex.getCharacterPerformingAction(),
+					Sex.getCharacterPerformingAction().getGirlcum(),
+					SexAreaOrifice.MOUTH,
+					Sex.getCharacterPerformingAction().getVaginaWetness().getValue()*2);
 		}
 
 	};
@@ -1504,6 +1683,15 @@ public class TongueVagina {
 			UtilText.nodeContentSB.append(getTargetedCharacterReceivingResponse(this));
 			
 			return UtilText.nodeContentSB.toString();
+		}
+		
+		@Override
+		public String applyEffectsString() {
+			return Sex.getCharacterTargetedForSexAction(this).ingestFluid(
+					Sex.getCharacterPerformingAction(),
+					Sex.getCharacterPerformingAction().getGirlcum(),
+					SexAreaOrifice.MOUTH,
+					Sex.getCharacterPerformingAction().getVaginaWetness().getValue()*2);
 		}
 
 	};

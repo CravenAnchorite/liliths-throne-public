@@ -64,7 +64,7 @@ public class SMVanessaOral extends SexManagerDefault {
 	public boolean isPartnerWantingToStopSex(GameCharacter partner) {
 		// When player is performing cunnilingus, she stops after orgasming once:
 		if(Sex.isDom(partner)) {
-			return Sex.getNumberOfOrgasms(partner)>=1;
+			return Sex.getNumberOfOrgasms(partner)>=Main.game.getNpc(Vanessa.class).getOrgasmsBeforeSatisfied();
 		}
 
 		// When player is receiving cunnilingus, or fucking Vanessa, she stops after both of you are satisfied:

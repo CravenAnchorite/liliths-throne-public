@@ -148,7 +148,7 @@ public class FortressFemalesLeader extends NPC {
 		
 		
 		// Body:
-		this.setAgeAppearanceDifferenceToAppearAsAge(18);
+		this.setAgeAppearanceDifferenceToAppearAsAge(15);
 		this.setTailType(TailType.DEMON_COMMON);
 		this.setWingType(WingType.DEMON_COMMON);
 		this.setLegType(LegType.DEMON_COMMON);

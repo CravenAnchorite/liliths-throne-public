@@ -374,7 +374,7 @@ public class CharacterModificationUtils {
 				
 				contentSB.append(applyDateWrapper("Age", "AGE", "", "",
 						String.valueOf(Main.game.getPlayer().getAgeValue()),
-						Main.game.getPlayer().getAgeValue()<=18,
+						Main.game.getPlayer().getAgeValue()<=9,
 						Main.game.getPlayer().getAgeValue()>=50));
 			contentSB.append("</div>");
 		
@@ -746,7 +746,7 @@ public class CharacterModificationUtils {
 				"1",
 				"5",
 				String.valueOf(BodyChanging.getTarget().getAppearsAsAgeValue()),
-				BodyChanging.getTarget().getAppearsAsAgeValue()<=18,
+				BodyChanging.getTarget().getAppearsAsAgeValue()<=9,
 				BodyChanging.getTarget().getAppearsAsAgeValue()>=(BodyChanging.getTarget().getAgeValue()+10))
 				
 				+ applyWrapper("Birthday",

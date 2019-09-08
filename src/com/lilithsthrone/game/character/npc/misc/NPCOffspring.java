@@ -48,7 +48,7 @@ public class NPCOffspring extends NPC {
 	
 	public NPCOffspring(boolean isImported) {
 		super(isImported, null, null, "",
-				18, Month.JUNE, 15,
+				Util.random.nextInt(20) + 9, Month.JUNE, 15,
 				3, Gender.F_V_B_FEMALE, Subspecies.DOG_MORPH, RaceStage.GREATER, new CharacterInventory(10), WorldType.EMPTY, PlaceType.GENERIC_EMPTY_TILE, true);
 	}
 	

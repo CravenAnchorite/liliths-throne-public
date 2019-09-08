@@ -1600,7 +1600,7 @@ public class CharacterUtils {
 		if(randomiseAge) {
 			character.setBirthday(LocalDateTime.of(Main.game.getStartingDate().getYear()-AgeCategory.getAgeFromPreferences(character.getGender()), character.getBirthMonth(), character.getDayOfBirth(), 12, 0));
 			if(character.getRace()==Race.DEMON || character.getRace()==Race.HARPY) {
-				character.setAgeAppearanceDifferenceToAppearAsAge(18+Util.random.nextInt(9));
+				character.setAgeAppearanceDifferenceToAppearAsAge(11+Util.random.nextInt(9));
 			}
 		}
 		
