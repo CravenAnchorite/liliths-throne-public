@@ -40,7 +40,7 @@ public class SARoxySpecials {
 
 		@Override
 		public boolean isBaseRequirementsMet() {
-			return !Sex.getCharacterPerformingAction().isPlayer();
+			return !Sex.getCharacterPerformingAction().isPlayer() && Sex.getNumberOfOrgasms(Main.game.getNpc(Roxy.class))>=Main.game.getNpc(Roxy.class).getOrgasmsBeforeSatisfied()-1;
 		}
 
 		@Override

@@ -403,7 +403,7 @@ public abstract class GameCharacter implements XMLSaving {
 	private int daysOrgasmCount;
 	private int daysOrgasmCountRecord;
 	
-	private int orgasmIncrement;
+	protected int orgasmIncrement;
 	
 	
 	// Stats:

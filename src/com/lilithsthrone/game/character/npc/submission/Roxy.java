@@ -45,6 +45,7 @@ import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.character.persona.PersonalityWeight;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
+import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueNode;
@@ -370,6 +371,14 @@ public class Roxy extends NPC {
 		}
 		
 		return item instanceof AbstractClothing;
+	}
+	
+	@Override
+	public int getOrgasmsBeforeSatisfied() {
+		if(this.orgasmIncrement == 0 ) {
+			this.setOrgasmIncrement(0);
+		}
+		return 3 + this.orgasmIncrement;
 	}
 
 	

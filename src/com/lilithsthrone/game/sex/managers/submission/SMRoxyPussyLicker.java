@@ -46,7 +46,7 @@ public class SMRoxyPussyLicker extends SexManagerDefault {
 	
 	@Override
 	public boolean isPartnerWantingToStopSex(GameCharacter partner) {
-		return Sex.getNumberOfOrgasms(Main.game.getNpc(Roxy.class))>=4;
+		return Sex.getNumberOfOrgasms(Main.game.getNpc(Roxy.class))>=Main.game.getNpc(Roxy.class).getOrgasmsBeforeSatisfied();
 	}
 	
 }
