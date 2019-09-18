@@ -5,19 +5,19 @@ import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.effects.StatusEffect;
-import com.lilithsthrone.game.combat.SpecialAttack;
+import com.lilithsthrone.game.combat.CombatMove;
 import com.lilithsthrone.game.combat.Spell;
 import com.lilithsthrone.game.inventory.InventorySlot;
+import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
 import com.lilithsthrone.utils.Util;
 
 /**
  * @since 0.1.0
- * @version 0.2.9
+ * @version 0.2.11
  * @author Innoxia
  */
 public enum ClothingSet {
 
-	// Hat, gloves, shirt, skirt/shorts, thigh-high boots
 	ENFORCER("Commanding Enforcer",
 			StatusEffect.SET_ENFORCER,
 			2,
@@ -112,7 +112,15 @@ public enum ClothingSet {
 			Util.newArrayListOfValues(
 					InventorySlot.TORSO_OVER,
 					InventorySlot.TORSO_UNDER,
+					InventorySlot.LEG,
 					InventorySlot.FOOT),
+			null,
+			null),
+
+	WEAPON_DAISHO("Daisho",
+			StatusEffect.SET_DAISHO,
+			2,
+			null,
 			null,
 			null),
 
@@ -146,16 +154,39 @@ public enum ClothingSet {
 			2,
 			null,
 			null,
-			null);
+			null),
+
+	DARK_SIREN("Dark Siren",
+			StatusEffect.SET_DARK_SIREN,
+			4,
+			Util.newArrayListOfValues(
+					InventorySlot.TORSO_OVER,
+					InventorySlot.NECK,
+					InventorySlot.EYES),
+			null,
+			null),
+
+	LYSSIETH_GUARD("Lyssieth's Guard",
+			StatusEffect.SET_LYSSIETH_GUARD,
+			4,
+			Util.newArrayListOfValues(
+					InventorySlot.FOOT,
+					InventorySlot.TORSO_OVER,
+					InventorySlot.LEG,
+					InventorySlot.HEAD),
+			null,
+			null)
+	
+	;
 
 	private String name;
 	private int numberRequiredForCompleteSet;
 	private List<InventorySlot> blockedSlotsCountingTowardsFullSet;
-	private List<SpecialAttack> specialAttacks;
+	private List<CombatMove> combatMoves;
 	private List<Spell> spells;
 	private StatusEffect associatedStatusEffect;
 
-	private ClothingSet(String name, StatusEffect associatedStatusEffect, int numberRequiredForCompleteSet, List<InventorySlot> blockedSlotsCountingTowardsFullSet, List<SpecialAttack> specialAttacks, List<Spell> spells) {
+	private ClothingSet(String name, StatusEffect associatedStatusEffect, int numberRequiredForCompleteSet, List<InventorySlot> blockedSlotsCountingTowardsFullSet, List<CombatMove> combatMoves, List<Spell> spells) {
 		this.name = name;
 		this.numberRequiredForCompleteSet = numberRequiredForCompleteSet;
 		
@@ -165,7 +196,7 @@ public enum ClothingSet {
 			this.blockedSlotsCountingTowardsFullSet = blockedSlotsCountingTowardsFullSet;
 		}
 		
-		this.specialAttacks = specialAttacks;
+		this.combatMoves = combatMoves;
 		this.spells = spells;
 		this.associatedStatusEffect = associatedStatusEffect;
 	}
@@ -174,7 +205,7 @@ public enum ClothingSet {
 		int setCount = 0;
 		
 		for(InventorySlot slot : this.getBlockedSlotsCountingTowardsFullSet()) {
-			if(slot.slotBlockedByRace(target) != null) {
+			if(slot.getBodyPartClothingBlock(target) != null) {
 				setCount++;
 			}
 		}
@@ -184,6 +215,21 @@ public enum ClothingSet {
 			if (c.getClothingType().getClothingSet() == this) {
 				setCount++;
 				atLeastOneClothingFound = true;
+			}
+		}
+		
+		for(AbstractWeapon weapon : target.getMainWeaponArray()) {
+			if(weapon!=null && weapon.getWeaponType().getClothingSet() == this) {
+				setCount++;
+				atLeastOneClothingFound = true;
+				break; // Only one main weapon should be counted.
+			}
+		}
+		for(AbstractWeapon weapon : target.getOffhandWeaponArray()) {
+			if(weapon!=null && weapon.getWeaponType().getClothingSet() == this) {
+				setCount++;
+				atLeastOneClothingFound = true;
+				break; // Only one offhand weapon should be counted.
 			}
 		}
 		
@@ -198,8 +244,8 @@ public enum ClothingSet {
 		return numberRequiredForCompleteSet;
 	}
 
-	public List<SpecialAttack> getSpecialAttacks() {
-		return specialAttacks;
+	public List<CombatMove> getCombatMoves() {
+		return combatMoves;
 	}
 
 	public List<Spell> getSpells() {

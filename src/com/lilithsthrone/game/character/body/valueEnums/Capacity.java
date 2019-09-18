@@ -4,10 +4,10 @@ import com.lilithsthrone.game.character.body.Penis;
 import com.lilithsthrone.utils.Colour;
 
 /**
- * Measured in inches of penis size that could fit comfortably within this capacity.
+ * Measured in cm of penis size that could fit comfortably within this capacity.
  * 
  * @since 0.1.0
- * @version 0.1.83
+ * @version 0.3.4.5
  * @author Innoxia
  */
 public enum Capacity {
@@ -29,7 +29,9 @@ public enum Capacity {
 
 	
 	private String descriptor;
-	private PenisSize sizeTooSmall, maximumSizeComfortable, maximumSizeComfortableWithLube;
+	private PenisSize sizeTooSmall;
+	private PenisSize maximumSizeComfortable;
+	private PenisSize maximumSizeComfortableWithLube;
 	private Colour colour;
 
 	private Capacity(String descriptor, PenisSize sizeTooSmall, PenisSize maximumSizeComfortable, PenisSize maximumSizeComfortableWithLube, Colour colour) {
@@ -50,7 +52,7 @@ public enum Capacity {
 	}
 
 	public int getMedianValue() {
-		return maximumSizeComfortable.getMedianValue();//.getMinimumValue() + (maximumSizeComfortable.getMaximumValue() - maximumSizeComfortable.getMinimumValue()) / 2;
+		return maximumSizeComfortable.getMedianValue();
 	}
 
 	public static Capacity getCapacityFromValue(float capacity) {
@@ -62,9 +64,6 @@ public enum Capacity {
 		return SEVEN_GAPING;
 	}
 
-	/**
-	 * This should only really be used for calculating what size to stretch a demonic orifice to.
-	 */
 	public static Capacity getCapacityToFitPenis(PenisSize size) {
 		for(Capacity c : Capacity.values()) {
 			if(size==c.getMaximumSizeComfortable()) {
@@ -75,7 +74,11 @@ public enum Capacity {
 	}
 	
 	private static float calculatePenisSizeUsed(int penisSize, boolean twoPenisesInVagina) {
-		return twoPenisesInVagina ? penisSize * Penis.TWO_PENIS_SIZE_MULTIPLIER : penisSize;
+		return Math.min(
+				PenisSize.SEVEN_STALLION.getMaximumValue(),
+				twoPenisesInVagina
+					? penisSize * Penis.TWO_PENIS_SIZE_MULTIPLIER
+					: penisSize);
 	}
 
 	public static boolean isPenisSizeTooSmall(int capacity, int penisSize, boolean twoPenisesInVagina) {

@@ -1,10 +1,13 @@
 package com.lilithsthrone.game.character.quests;
 
+import java.time.LocalTime;
+
 import com.lilithsthrone.main.Main;
+import com.lilithsthrone.utils.Units;
 
 /**
  * @since 0.1.0
- * @version 0.1.99
+ * @version 0.3.4
  * @author Innoxia
  */
 public enum Quest {
@@ -26,7 +29,7 @@ public enum Quest {
 		@Override
 		public String getCompletedDescription() {
 			return "Your evening at the museum turned out to be far more eventful than you'd have liked." + " A mysterious demon named Lilith tricked you into being pulled through a magical portal and into a parallel universe."
-					+ " After waking up in the middle of an unfamiliar street, you were saved from a dire situation by the half-demon '" + Main.game.getLilaya().getName() + "'."
+					+ " After waking up in the middle of an unfamiliar street, you were saved from a dire situation by the half-demon 'Lilaya'."
 					+ " She seems to be this universe's version of your aunt Lily, and, in return for agreeing to help her with her experiments, she's allowed you to stay at her home.";
 		}
 	},
@@ -44,7 +47,7 @@ public enum Quest {
 
 		@Override
 		public String getCompletedDescription() {
-			return Main.game.getLilaya().getName() + " ran some more tests on you, but she's unable to progress with her research without the help of her old colleague, Arthur.";
+			return "Lilaya ran some more tests on you, but she's unable to progress with her research without the help of her old colleague, Arthur.";
 		}
 	},
 
@@ -174,7 +177,7 @@ public enum Quest {
 		}
 	},
 	
-	MAIN_1_I_ARTHURS_TALE(QuestType.MAIN, 10, 30) {
+	MAIN_1_I_ARTHURS_TALE(QuestType.MAIN, 1, 30) {
 		@Override
 		public String getName() {
 			return "The search for Arthur; Conclusion";
@@ -193,7 +196,7 @@ public enum Quest {
 		}
 	},
 	
-	MAIN_1_J_ARTHURS_ROOM(QuestType.MAIN, 10, 30) {
+	MAIN_1_J_ARTHURS_ROOM(QuestType.MAIN, 1, 30) {
 		@Override
 		public String getName() {
 			return "The search for Arthur; A room of his own";
@@ -212,10 +215,10 @@ public enum Quest {
 	},
 	
 	
-	MAIN_2_A_INTO_THE_DEPTHS(QuestType.MAIN, 12, 30) {
+	MAIN_2_A_INTO_THE_DEPTHS(QuestType.MAIN, 1, 10) {
 		@Override
 		public String getName() {
-			return "Into the depths; The world of Submission";
+			return "Into Submission";
 		}
 
 		@Override
@@ -228,7 +231,99 @@ public enum Quest {
 
 		@Override
 		public String getCompletedDescription() {
-			return "This is as far as the main quest goes for now! :3"; //TODO
+			return "Acting on Arthur's advice, you ventured down into Submission and discovered the location of Lyssieth's palace.";
+		}
+	},
+	
+	MAIN_2_B_SIRENS_CALL(QuestType.MAIN, 25, 300) {
+		@Override
+		public String getName() {
+			return "The Siren's Call";
+		}
+
+		@Override
+		public String getDescription() {
+			return "The guards at the gate to Lyssieth's palace told you that she's not receiving any visitors at the moment."
+					+ " The only way to gain an audience with her would be to take care of her troublesome daughter; 'The Dark Siren'."
+					+ " She's currently living in a stone fortress in one of the central tunnels here in Submission, from which she sends out gangs of imps to terrorise innocent citizens.</br>"
+					+ "If you're able to enslave her, either through combat or trickery, you'll have earned an audience with Lyssieth.";
+		}
+
+		@Override
+		public String getCompletedDescription() {
+			return "You managed to enslave Lyssieth's troublesome daughter, and so earned an audience with her!";
+		}
+	},
+	
+	MAIN_2_C_SIRENS_FALL(QuestType.MAIN, 1, 10) {
+		@Override
+		public String getName() {
+			return "The Siren's Fall";
+		}
+
+		@Override
+		public String getDescription() {
+			return "Return to Lyssieth's palace and report to the guards that you've enslaved 'The Dark Siren'."
+					+ " This should be enough to grant you an audience with Lyssieth.";
+		}
+
+		@Override
+		public String getCompletedDescription() {
+			return "For enslaving 'The Dark Siren', the guards at the gate to Lyssieth's palace gave you permission to enter and seek out an audience with her.";
+		}
+	},
+	
+	MAIN_2_D_MEETING_A_LILIN(QuestType.MAIN, 1, 100) {
+		@Override
+		public String getName() {
+			return "Meeting A Lilin";
+		}
+
+		@Override
+		public String getDescription() {
+			return "Travel to Lyssieth's throne room and try to finally get some answers about why you're here and how you can return to your old world.";
+		}
+
+		@Override
+		public String getCompletedDescription() {
+			return "Lyssieth revealed that this world is in fact your own, and that Lilith transformed it into a different reality when she was released from the mirror.";
+		}
+	},
+	
+	MAIN_3_A_FINDING_THE_YOUKO(QuestType.MAIN, 20, 250) {
+		@Override
+		public String getName() {
+			return "Finding the youko";
+		}
+
+		@Override
+		public String getDescription() {
+			return "[siren.Name] told you that you're going to need the help of the youko if you're to defeat the elder lilin pegataur, Lunette."
+					+ " She said that you should find and enlist the help of her old friend, [youkoGuide.name], who worked in her lab back when she was living in her citadel."
+					+ " [youkoGuide.Name] will have returned to the town of Elis, which is the settlement nearest to the Shinrin Forest, the youko's homeland.";
+		}
+
+		@Override
+		public String getCompletedDescription() {
+			return "You travelled to Elis, where you found the youko, [youkoGuide.name], in an inn called 'The Ninth Tail'."
+					+ " It turned out that she was having to work off a significant debt, and wouldn't be able to help you until it's paid off in full.";
+		}
+	},
+	
+	MAIN_3_B_DEBTS_PAID(QuestType.MAIN, 1, 100) {
+		@Override
+		public String getName() {
+			return "Debts paid";
+		}
+
+		@Override
+		public String getDescription() {
+			return "You need to help [youkoGuide.name] clear her debt, and in exchange she's promised to show you where the leader of all the youko lives.";
+		}
+
+		@Override
+		public String getCompletedDescription() {
+			return "You helped [youkoGuide.name] clear her debt, and, as agreed, she is ready and willing to take you to the youko leader's hideout.";
 		}
 	},
 
@@ -456,7 +551,7 @@ public enum Quest {
 		}
 	},
 	
-	RELATIONSHIP_NYAN_STOCK_ISSUES_AGREED_TO_HELP(QuestType.RELATIONSHIP, 10, 0) {
+	RELATIONSHIP_NYAN_STOCK_ISSUES_AGREED_TO_HELP(QuestType.RELATIONSHIP, 10, 50) {
 		@Override
 		public String getName() {
 			return "Confront the suppliers";
@@ -738,6 +833,221 @@ public enum Quest {
 			return "You told Claire that the Slime Queen is no longer a threat, and received the twenty-thousand flame reward.";
 		}
 	},
+	
+	
+	// Daddy:
+	
+	DADDY_START(QuestType.SIDE, 1, 5) {
+		@Override
+		public String getName() {
+			return "Meeting [daddy.name]";
+		}
+
+		@Override
+		public String getDescription() {
+			return "Rose has asked you to pay [daddy.name] a visit in order to convince [daddy.herHim] to leave Lilaya in peace."
+					+ " ([daddy.He] is only available at [daddy.his] apartment in Demon Home between "+Units.time(LocalTime.of(18, 00))+" and "+Units.time(LocalTime.of(21, 00))+".)";
+		}
+
+		@Override
+		public String getCompletedDescription() {
+			return "At Rose's behest, you met with [daddy.name] at [daddy.her] apartment in Demon Home.";
+		}
+	},
+	
+	DADDY_MEETING(QuestType.SIDE, 1, 5) {
+		@Override
+		public String getName() {
+			return "Dinner with [daddy.name]";
+		}
+
+		@Override
+		public String getDescription() {
+			return "[daddy.Name] is insisting upon explaining [daddy.her] motives over dinner. You're going to have to either accept [daddy.her] offer, or bluntly refuse [daddy.herHim] and insist that [daddy.she] leave Lilaya alone.";
+		}
+
+		@Override
+		public String getCompletedDescription() {
+			return "You gave [daddy.name] your answer in response to [daddy.her] request to take you out for dinner.";
+		}
+	},
+	
+	DADDY_REFUSED(QuestType.SIDE, 1, 5) {
+		@Override
+		public String getName() {
+			return "[daddy.Name] denied";
+		}
+
+		@Override
+		public String getDescription() {
+			return "You told [daddy.name] that you aren't at all interested in going out for a meal with [daddy.herHim], and that [daddy.sheIs] never to bother Lilaya again.";
+		}
+
+		@Override
+		public String getCompletedDescription() {
+			return "You told [daddy.name] that you aren't at all interested in going out for a meal with [daddy.herHim], and that [daddy.sheIs] never to bother Lilaya again.";
+		}
+	},
+	
+	DADDY_REFUSED_2(QuestType.SIDE, 1, 5) {
+		@Override
+		public String getName() {
+			return "[daddy.Name] denied";
+		}
+
+		@Override
+		public String getDescription() {
+			return "You told [daddy.name] that you aren't interested in convincing Lilaya to meet with [daddy.herHim], and that [daddy.she] should never bother your [lilaya.relation(pc)] again.";
+		}
+
+		@Override
+		public String getCompletedDescription() {
+			return "You told [daddy.name] that you aren't interested in convincing Lilaya to meet with [daddy.herHim], and that [daddy.she] should never bother your [lilaya.relation(pc)] again.";
+		}
+	},
+	
+	DADDY_ACCEPTED(QuestType.SIDE, 1, 5) {
+		@Override
+		public String getName() {
+			return "Convincing Lilaya";
+		}
+
+		@Override
+		public String getDescription() {
+			return "You agreed to convince Lilaya to meet with [daddy.name] for dinner, and to then help persuade her to ask Lyssieth to meet with [daddy.herHim].";
+		}
+
+		@Override
+		public String getCompletedDescription() {
+			return "You convinced Lilaya to meet with [daddy.name] for dinner, on the condition that you go with her. ";
+		}
+	},
+	
+	DADDY_LILAYA_MEETING(QuestType.SIDE, 1, 5) {
+		@Override
+		public String getName() {
+			return "Lilaya's date with [daddy.name]";
+		}
+
+		@Override
+		public String getDescription() {
+			return "Lilaya has agreed to go out for dinner with [daddy.name], so now you just need to accompany her and make sure the evening goes smoothly.";
+		}
+
+		@Override
+		public String getCompletedDescription() {
+			return "You went with Lilaya to meet [daddy.name] for dinner, and while she had bad news for [daddy.herHim] regarding Lyssieth's romantic preferences, she did seem to like [daddy.herHim] well enough...";
+		}
+	},
+	
+	
+	// Buying Brax:
+	
+	BUYING_BRAX_START(QuestType.SIDE, 1, 5) {
+		@Override
+		public String getName() {
+			return "Perfume collection";
+		}
+
+		@Override
+		public String getDescription() {
+			return "Candi said that she'd consider selling [brax.name] to you, but before she gives you a definite answer, she wants you to go and fetch her order of perfume from the shop 'Succubi's Secrets' in the shopping arcade.";
+		}
+
+		@Override
+		public String getCompletedDescription() {
+			return "You both paid for and collected Candi's order of perfume from Succubi's Secrets.";
+		}
+	},
+	
+	BUYING_BRAX_DELIVER_PERFUME(QuestType.SIDE, 1, 5) {
+		@Override
+		public String getName() {
+			return "Perfume delivery";
+		}
+
+		@Override
+		public String getDescription() {
+			return "Now that you've collected the bottles of perfume, you need to deliver them to Candi back at the Enforcer headquarters.";
+		}
+
+		@Override
+		public String getCompletedDescription() {
+			return "You delivered Candi's bottles of perfume to her.";
+		}
+	},
+	
+	BUYING_BRAX_LOLLIPOPS(QuestType.SIDE, 1, 5) {
+		@Override
+		public String getName() {
+			return "Lollipop contraband";
+		}
+
+		@Override
+		public String getDescription() {
+			return "Candi said she'd be willing to sell Brax to you, but she needs to think of how much [brax.sheIs] worth."
+					+ " She said that she'll have a price for you after you've fetched a box of contraband lollipops from the Harpy Nests' Enforcer checkpoint.";
+		}
+
+		@Override
+		public String getCompletedDescription() {
+			return "You retrieved the lollipops from the Harpy Nests' Enforcer checkpoint.";
+		}
+	},
+	
+	BUYING_BRAX_DELIVER_LOLLIPOPS(QuestType.SIDE, 1, 5) {
+		@Override
+		public String getName() {
+			return "Lollipops for Candi";
+		}
+
+		@Override
+		public String getDescription() {
+			return "Now that the box of contraband lollipops are in your possession, you need to return them to Candi back at the Enforcer headquarters.";
+		}
+
+		@Override
+		public String getCompletedDescription() {
+			return "You delivered the box of contraband lollipops to Candi, who seemed to pay no attention to the warnings stamped all over it.";
+		}
+	},
+	
+	BUYING_BRAX_LIPSTICK(QuestType.SIDE, 1, 5) {
+		@Override
+		public String getName() {
+			return "A wolf's weight in lipstick";
+		}
+
+		@Override
+		public String getDescription() {
+			return "Candi said that Brax is far too precious to be sold for mere flames, but she'd be willing to give [brax.herHim] to you in exchange for something just as valuable; a box of limited-edition lipsticks, branded as 'A Hundred Kisses'."
+					+ " Apparently, Candi has discovered the whereabouts of one of the only boxes left for sale, which is at a store in the shopping arcade called 'Ralph's Snacks'.";
+		}
+
+		@Override
+		public String getCompletedDescription() {
+			return "You retrieved the box of 'A Hundred Kisses' from Ralph.";
+		}
+	},
+	
+	BUYING_BRAX_DELIVER_LIPSTICK(QuestType.SIDE, 1, 5) {
+		@Override
+		public String getName() {
+			return "At the wolf's door";
+		}
+
+		@Override
+		public String getDescription() {
+			return "Now that you've secured the box of 'A Hundred Kisses', all that's left to do is deliver it to Candi in exchange for ownership of [brax.name].";
+		}
+
+		@Override
+		public String getCompletedDescription() {
+			return "You handed over the box of 'A Hundred Kisses' to Candi, and finally gained your prize; ownership of [brax.name].";
+		}
+	},
+	
+	
 	
 	;
 

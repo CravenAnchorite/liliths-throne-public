@@ -3,12 +3,14 @@ package com.lilithsthrone.rendering;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Colour;
+import com.lilithsthrone.utils.SvgUtil;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -23,7 +25,10 @@ public enum SVGImages {
 
 			displacedIcon, concealedIcon, cummedInIcon, feminineWarningIcon, masculineWarningIcon, jinxedIcon, tattooSwitchTattoo, tattooSwitchClothing, scarIcon,
 
-			menuIcon, inventoryIcon, inventoryIconDisabled, journalIcon, peopleIcon, zoomInIcon, zoomOutIcon, copyIcon, exportIcon, calendarIcon, informationIcon, addIcon,
+			menuIcon,
+			inventoryIcon, inventoryIconDisabled,
+			questInventoryIcon, questInventoryIconDisabled,
+			journalIcon, peopleIcon, zoomInIcon, zoomOutIcon, copyIcon, exportIcon, calendarIcon, informationIcon, addIcon,
 
 			diskSave, diskSaveDisabled, diskSaveConfirm, diskOverwrite, diskLoad, diskLoadConfirm, diskLoadDisabled, diskDelete, diskDeleteConfirm,
 			
@@ -38,7 +43,7 @@ public enum SVGImages {
 			playerMapIconFeminine,
 			playerMapDangerousIcon,
 
-			raceBackground, raceBackgroundHalf, raceBackgroundSlime, raceUnknown, raceDobermann, raceDobermannDesaturated,
+			raceBackground, raceBackgroundHalf, raceBackgroundSlime, raceBackgroundDemon, raceUnknown, raceDobermann, raceDobermannDesaturated,
 			
 			perkTreeArrow, spellOverlay,
 
@@ -52,6 +57,7 @@ public enum SVGImages {
 			responseCombat, responseSex, responseLocked, responseUnlocked, responseUnlockedDisabled, responseOption, responseOptionDisabled, responseCorruptionBypass,
 			responseSubResist, responseSubNormal, responseSubEager,
 			responseDomGentle, responseDomNormal, responseDomRough,
+			responseSexSwitch, responseSexAdditional,
 			
 			NPCWarningMale, NPCWarningFemale, NPCWarningDemon,
 
@@ -68,9 +74,6 @@ public enum SVGImages {
 			
 			transactionBuy, transactionBuyDisabled, transactionBid, transactionBidDisabled, transactionSell, transactionSellDisabled,
 			
-			foxTail1, foxTail2, foxTail3, foxTail4, foxTail5, foxTail6, foxTail7, foxTail8, foxTail9,
-			foxTailDesaturated1, foxTailDesaturated2, foxTailDesaturated3, foxTailDesaturated4, foxTailDesaturated5, foxTailDesaturated6, foxTailDesaturated7, foxTailDesaturated8, foxTailDesaturated9,
-			
 			// Effects:
 			creampie, creampieMasochist,
 			fluidIngested, fluidIngestedMasochist,
@@ -80,10 +83,22 @@ public enum SVGImages {
 			hypnoWatchBase, hypnoWatchGynephilic, hypnoWatchAmbiphilic, hypnoWatchAndrophilic,
 			
 			// Sex:
-			coverableAreaMouth, coverableAreaAnus, coverableAreaAss, coverableAreaBreasts, coverableAreaBreastsFlat, coverableAreaNipple, coverableAreaVagina, coverableAreaThighs, coverableAreaUrethraVagina, coverableAreaUrethraPenis,
-			penetrationTypeFinger, penetrationTypePenis, penetrationTypeTail, penetrationTypeTongue, penetrationTypeFoot,
+			coverableAreaMouth,
+			coverableAreaAnus, coverableAreaAss,
+			coverableAreaBreasts, coverableAreaBreastsFlat, coverableAreaNipple,
+			coverableAreaBreastsCrotch, coverableAreaUdders, coverableAreaNippleCrotch,
+			coverableAreaVagina, coverableAreaUrethraVagina,
+			coverableAreaMound,
+			coverableAreaThighs,
+			coverableAreaUrethraPenis,
+			
+			penetrationTypeFinger, penetrationTypePenis, penetrationTypeTail, penetrationTypeTongue, penetrationTypeFoot, penetrationTypeClit,
 			combinationStretching, combinationTooLoose, combinationWet, combinationDry,
-			stretching, holeTooBig;
+			stretching, holeTooBig,
+			activeSexBackground;
+
+	private Map<Integer, String> youkoTailsMap = new HashMap<>();
+	private Map<Integer, String> youkoTailsDesaturatedMap = new HashMap<>();
 	
 
 	private Map<Colour, String> refinedBackgroundMap = new EnumMap<>(Colour.class);
@@ -133,6 +148,13 @@ public enum SVGImages {
 			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/UIElements/inventory.svg");
 			inventoryIconDisabled = Util.inputStreamToString(is);
 			inventoryIconDisabled = setColour(inventoryIconDisabled, Colour.BASE_PITCH_BLACK);
+
+			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/UIElements/questInventory.svg");
+			questInventoryIcon = Util.inputStreamToString(is);
+			questInventoryIcon = setColour(questInventoryIcon, Colour.BASE_BLACK);
+			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/UIElements/questInventory.svg");
+			questInventoryIconDisabled = Util.inputStreamToString(is);
+			questInventoryIconDisabled = setColour(questInventoryIconDisabled, Colour.BASE_PITCH_BLACK);
 			
 			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/UIElements/itemsOnFloor.svg");
 			itemsOnFloorIcon = Util.inputStreamToString(is);
@@ -251,6 +273,9 @@ public enum SVGImages {
 
 			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceBackgroundSlime.svg");
 			raceBackgroundSlime = Util.inputStreamToString(is);
+
+			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceBackgroundDemon.svg");
+			raceBackgroundDemon = Util.inputStreamToString(is);
 			
 			
 			
@@ -365,7 +390,11 @@ public enum SVGImages {
 			responseDomNormal = Util.inputStreamToString(is);
 			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/UIElements/responseDomRough.svg");
 			responseDomRough = Util.inputStreamToString(is);
-			
+
+			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/UIElements/responseSexSwitch.svg");
+			responseSexSwitch = Util.inputStreamToString(is);
+			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/UIElements/responseSexAdditional.svg");
+			responseSexAdditional = Util.inputStreamToString(is);
 			
 			
 			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/UIElements/responseNPC.svg");
@@ -544,156 +573,31 @@ public enum SVGImages {
 			transactionSellDisabled = setColour(transactionSellDisabled, Colour.BASE_GREY);
 			
 			
+			
+			for(int i=1; i<=9; i++) {
+				is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceFoxTail"+i+".svg");
+				String svg = Util.inputStreamToString(is);
+				svg = SvgUtil.colourReplacement("foxTail"+i,
+						Colour.RACE_FOX_MORPH,
+						Colour.RACE_FOX_MORPH,
+						Colour.RACE_FOX_MORPH,
+						svg);
+				
+				youkoTailsMap.put(i, svg);
+				
 
-			
-			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceFoxTail1.svg");
-			foxTail1 = Util.inputStreamToString(is);
-			foxTail1 = Util.colourReplacement("foxTail1",
-					Colour.RACE_FOX_MORPH,
-					Colour.RACE_FOX_MORPH,
-					Colour.RACE_FOX_MORPH,
-					foxTail1);
-
-			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceFoxTail2.svg");
-			foxTail2 = Util.inputStreamToString(is);
-			foxTail2 = Util.colourReplacement("foxTail2",
-					Colour.RACE_FOX_MORPH,
-					Colour.RACE_FOX_MORPH,
-					Colour.RACE_FOX_MORPH,
-					foxTail2);
-			
-			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceFoxTail3.svg");
-			foxTail3 = Util.inputStreamToString(is);
-			foxTail3 = Util.colourReplacement("foxTail3",
-					Colour.RACE_FOX_MORPH,
-					Colour.RACE_FOX_MORPH,
-					Colour.RACE_FOX_MORPH,
-					foxTail3);
-			
-			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceFoxTail4.svg");
-			foxTail4 = Util.inputStreamToString(is);
-			foxTail4 = Util.colourReplacement("foxTail4",
-					Colour.RACE_FOX_MORPH,
-					Colour.RACE_FOX_MORPH,
-					Colour.RACE_FOX_MORPH,
-					foxTail4);
-			
-			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceFoxTail5.svg");
-			foxTail5 = Util.inputStreamToString(is);
-			foxTail5 = Util.colourReplacement("foxTail5",
-					Colour.RACE_FOX_MORPH,
-					Colour.RACE_FOX_MORPH,
-					Colour.RACE_FOX_MORPH,
-					foxTail5);
-			
-			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceFoxTail6.svg");
-			foxTail6 = Util.inputStreamToString(is);
-			foxTail6 = Util.colourReplacement("foxTail6",
-					Colour.RACE_FOX_MORPH,
-					Colour.RACE_FOX_MORPH,
-					Colour.RACE_FOX_MORPH,
-					foxTail6);
-			
-			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceFoxTail7.svg");
-			foxTail7 = Util.inputStreamToString(is);
-			foxTail7 = Util.colourReplacement("foxTail7",
-					Colour.RACE_FOX_MORPH,
-					Colour.RACE_FOX_MORPH,
-					Colour.RACE_FOX_MORPH,
-					foxTail7);
-			
-			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceFoxTail8.svg");
-			foxTail8 = Util.inputStreamToString(is);
-			foxTail8 = Util.colourReplacement("foxTail8",
-					Colour.RACE_FOX_MORPH,
-					Colour.RACE_FOX_MORPH,
-					Colour.RACE_FOX_MORPH,
-					foxTail8);
-			
-			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceFoxTail9.svg");
-			foxTail9 = Util.inputStreamToString(is);
-			foxTail9 = Util.colourReplacement("foxTail9",
-					Colour.RACE_FOX_MORPH,
-					Colour.RACE_FOX_MORPH,
-					Colour.RACE_FOX_MORPH,
-					foxTail9);
+				is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceFoxTail"+i+".svg");
+				svg = Util.inputStreamToString(is);
+				svg = SvgUtil.colourReplacement("foxTail"+i,
+						Colour.BASE_GREY,
+						Colour.BASE_GREY,
+						Colour.BASE_GREY,
+						svg);
+				
+				youkoTailsDesaturatedMap.put(i, svg);
+			}
 			
 
-			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceFoxTail1.svg");
-			foxTailDesaturated1 = Util.inputStreamToString(is);
-			foxTailDesaturated1 = Util.colourReplacement("foxTailDesaturated1",
-					Colour.BASE_GREY,
-					Colour.BASE_GREY,
-					Colour.BASE_GREY,
-					foxTailDesaturated1);
-
-			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceFoxTail2.svg");
-			foxTailDesaturated2 = Util.inputStreamToString(is);
-			foxTailDesaturated2 = Util.colourReplacement("foxTailDesaturated2",
-					Colour.BASE_GREY,
-					Colour.BASE_GREY,
-					Colour.BASE_GREY,
-					foxTailDesaturated2);
-			
-			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceFoxTail3.svg");
-			foxTailDesaturated3 = Util.inputStreamToString(is);
-			foxTailDesaturated3 = Util.colourReplacement("foxTailDesaturated3",
-					Colour.BASE_GREY,
-					Colour.BASE_GREY,
-					Colour.BASE_GREY,
-					foxTailDesaturated3);
-			
-			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceFoxTail4.svg");
-			foxTailDesaturated4 = Util.inputStreamToString(is);
-			foxTailDesaturated4 = Util.colourReplacement("foxTailDesaturated4",
-					Colour.BASE_GREY,
-					Colour.BASE_GREY,
-					Colour.BASE_GREY,
-					foxTailDesaturated4);
-			
-			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceFoxTail5.svg");
-			foxTailDesaturated5 = Util.inputStreamToString(is);
-			foxTailDesaturated5 = Util.colourReplacement("foxTailDesaturated5",
-					Colour.BASE_GREY,
-					Colour.BASE_GREY,
-					Colour.BASE_GREY,
-					foxTailDesaturated5);
-			
-			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceFoxTail6.svg");
-			foxTailDesaturated6 = Util.inputStreamToString(is);
-			foxTailDesaturated6 = Util.colourReplacement("foxTailDesaturated6",
-					Colour.BASE_GREY,
-					Colour.BASE_GREY,
-					Colour.BASE_GREY,
-					foxTailDesaturated6);
-			
-			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceFoxTail7.svg");
-			foxTailDesaturated7 = Util.inputStreamToString(is);
-			foxTailDesaturated7 = Util.colourReplacement("foxTailDesaturated7",
-					Colour.BASE_GREY,
-					Colour.BASE_GREY,
-					Colour.BASE_GREY,
-					foxTailDesaturated7);
-			
-			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceFoxTail8.svg");
-			foxTailDesaturated8 = Util.inputStreamToString(is);
-			foxTailDesaturated8 = Util.colourReplacement("foxTailDesaturated8",
-					Colour.BASE_GREY,
-					Colour.BASE_GREY,
-					Colour.BASE_GREY,
-					foxTailDesaturated8);
-			
-			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceFoxTail9.svg");
-			foxTailDesaturated9 = Util.inputStreamToString(is);
-			foxTailDesaturated9 = Util.colourReplacement("foxTailDesaturated9",
-					Colour.BASE_GREY,
-					Colour.BASE_GREY,
-					Colour.BASE_GREY,
-					foxTailDesaturated9);
-			
-			
-			
-			
 			// Effects:
 
 			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/creampie.svg");
@@ -742,6 +646,16 @@ public enum SVGImages {
 			coverableAreaNipple = Util.inputStreamToString(is);
 			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/sexEffects/coverableAreaVagina.svg");
 			coverableAreaVagina = Util.inputStreamToString(is);
+			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/sexEffects/coverableAreaMound.svg");
+			coverableAreaMound = Util.inputStreamToString(is);
+			
+
+			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/sexEffects/coverableAreaBreastsCrotch.svg");
+			coverableAreaBreastsCrotch = Util.inputStreamToString(is);
+			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/sexEffects/coverableAreaUdders.svg");
+			coverableAreaUdders = Util.inputStreamToString(is);
+			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/sexEffects/coverableAreaNippleCrotch.svg");
+			coverableAreaNippleCrotch = Util.inputStreamToString(is);
 
 			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/sexEffects/coverableAreaUrethraVagina.svg");
 			coverableAreaUrethraVagina = Util.inputStreamToString(is);
@@ -761,6 +675,9 @@ public enum SVGImages {
 			penetrationTypeTongue = Util.inputStreamToString(is);
 			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/sexEffects/penetrationTypeFoot.svg");
 			penetrationTypeFoot = Util.inputStreamToString(is);
+			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/sexEffects/penetrationTypeClit.svg");
+			penetrationTypeClit = Util.inputStreamToString(is);
+			
 			
 			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/sexEffects/combinationStretching.svg");
 			combinationStretching = Util.inputStreamToString(is);
@@ -776,6 +693,10 @@ public enum SVGImages {
 			stretching = Util.inputStreamToString(is);
 			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/sexEffects/holeTooBig.svg");
 			holeTooBig = Util.inputStreamToString(is);
+
+			is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/sexEffects/active_background.svg");
+			activeSexBackground = Util.inputStreamToString(is);
+			
 			
 			String tempString = "";
 			for(AbstractItemEffectType effect : ItemEffectType.getAllEffectTypes()) {
@@ -804,11 +725,7 @@ public enum SVGImages {
 
 	private String setColour(String stringSVG, Colour colourShade) {
 		String s = stringSVG;
-		s = s.replaceAll("#ff2a2a", colourShade.getShades()[0]);
-		s = s.replaceAll("#ff5555", colourShade.getShades()[1]);
-		s = s.replaceAll("#ff8080", colourShade.getShades()[2]);
-		s = s.replaceAll("#ffaaaa", colourShade.getShades()[3]);
-		s = s.replaceAll("#ffd5d5", colourShade.getShades()[4]);
+		s = SvgUtil.colourReplacement(null, colourShade, s);
 		return s;
 	}
 
@@ -858,6 +775,14 @@ public enum SVGImages {
 
 	public String getInventoryIconDisabled() {
 		return inventoryIconDisabled;
+	}
+
+	public String getQuestInventoryIcon() {
+		return questInventoryIcon;
+	}
+
+	public String getQuestInventoryIconDisabled() {
+		return questInventoryIconDisabled;
 	}
 
 	public String getJournalIcon() {
@@ -1091,6 +1016,14 @@ public enum SVGImages {
 		return responseDomRough;
 	}
 
+	public String getResponseSexSwitch() {
+		return responseSexSwitch;
+	}
+
+	public String getResponseSexAdditional() {
+		return responseSexAdditional;
+	}
+	
 	public String getNPCWarningMale() {
 		return NPCWarningMale;
 	}
@@ -1127,8 +1060,24 @@ public enum SVGImages {
 		return coverableAreaBreastsFlat;
 	}
 
+	public String getCoverableAreaBreastsCrotch() {
+		return coverableAreaBreastsCrotch;
+	}
+
+	public String getCoverableAreaUdders() {
+		return coverableAreaUdders;
+	}
+
+	public String getCoverableAreaNippleCrotch() {
+		return coverableAreaNippleCrotch;
+	}
+
 	public String getCoverableAreaVagina() {
 		return coverableAreaVagina;
+	}
+
+	public String getCoverableAreaMound() {
+		return coverableAreaMound;
 	}
 	
 	public String getCoverableAreaUrethraVagina() {
@@ -1163,6 +1112,10 @@ public enum SVGImages {
 		return penetrationTypeFoot;
 	}
 	
+	public String getPenetrationTypeClit() {
+		return penetrationTypeClit;
+	}
+	
 	public String getCombinationStretching() {
 		return combinationStretching;
 	}
@@ -1185,6 +1138,10 @@ public enum SVGImages {
 	
 	public String getHoleTooBig() {
 		return holeTooBig;
+	}
+
+	public String getActiveSexBackground() {
+		return activeSexBackground;
 	}
 
 	public Map<Colour, String> getRefinedBackgroundMap() {
@@ -1359,6 +1316,10 @@ public enum SVGImages {
 		return raceBackgroundSlime;
 	}
 
+	public String getRaceBackgroundDemon() {
+		return raceBackgroundDemon;
+	}
+
 	public String getRaceUnknown() {
 		return raceUnknown;
 	}
@@ -1475,76 +1436,12 @@ public enum SVGImages {
 		return fluidIngestedMasochist;
 	}
 
-	public String getFoxTail1() {
-		return foxTail1;
+	public String getFoxTail(int i) {
+		return youkoTailsMap.get(i);
 	}
 
-	public String getFoxTail2() {
-		return foxTail2;
-	}
-
-	public String getFoxTail3() {
-		return foxTail3;
-	}
-
-	public String getFoxTail4() {
-		return foxTail4;
-	}
-
-	public String getFoxTail5() {
-		return foxTail5;
-	}
-
-	public String getFoxTail6() {
-		return foxTail6;
-	}
-
-	public String getFoxTail7() {
-		return foxTail7;
-	}
-
-	public String getFoxTail8() {
-		return foxTail8;
-	}
-
-	public String getFoxTail9() {
-		return foxTail9;
-	}
-
-	public String getFoxTailDesaturated1() {
-		return foxTailDesaturated1;
-	}
-
-	public String getFoxTailDesaturated2() {
-		return foxTailDesaturated2;
-	}
-
-	public String getFoxTailDesaturated3() {
-		return foxTailDesaturated3;
-	}
-
-	public String getFoxTailDesaturated4() {
-		return foxTailDesaturated4;
-	}
-
-	public String getFoxTailDesaturated5() {
-		return foxTailDesaturated5;
-	}
-
-	public String getFoxTailDesaturated6() {
-		return foxTailDesaturated6;
-	}
-
-	public String getFoxTailDesaturated7() {
-		return foxTailDesaturated7;
-	}
-
-	public String getFoxTailDesaturated8() {
-		return foxTailDesaturated8;
-	}
-
-	public String getFoxTailDesaturated9() {
-		return foxTailDesaturated9;
+	public String getFoxTailDesaturated(int i) {
+		return youkoTailsDesaturatedMap.get(i);
 	}
 	
 }

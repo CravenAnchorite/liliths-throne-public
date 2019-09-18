@@ -1,24 +1,28 @@
 package com.lilithsthrone.game.sex.managers.dominion;
 
+import java.util.List;
 import java.util.Map;
 
 import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.sex.Sex;
-import com.lilithsthrone.game.sex.SexPositionType;
-import com.lilithsthrone.game.sex.SexPositionSlot;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
+import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
+import com.lilithsthrone.game.sex.positions.SexPositionUnique;
+import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.sexActions.SexActionInterface;
-import com.lilithsthrone.game.sex.sexActions.universal.RalphOral;
+import com.lilithsthrone.game.sex.sexActions.dominion.RalphOral;
+import com.lilithsthrone.utils.Util;
 
 /**
  * @since 0.1.6?
- * @version 0.1.97
+ * @version 0.3.4
  * @author Innoxia
  */
 public class SexManagerRalphDiscount extends SexManagerDefault {
 	
-	public SexManagerRalphDiscount(Map<GameCharacter, SexPositionSlot> dominants, Map<GameCharacter, SexPositionSlot> submissives) {
-		super(SexPositionType.UNDER_DESK_RALPH,
+	public SexManagerRalphDiscount(Map<GameCharacter, SexSlot> dominants, Map<GameCharacter, SexSlot> submissives) {
+		super(SexPositionUnique.UNDER_DESK_RALPH,
 				dominants,
 				submissives);
 	}
@@ -40,12 +44,18 @@ public class SexManagerRalphDiscount extends SexManagerDefault {
 	}
 
 	@Override
-	public boolean isAbleToRemoveOthersClothing(GameCharacter character){
+	public boolean isAbleToRemoveOthersClothing(GameCharacter character, AbstractClothing clothing){
 		return false;
 	}
 	
 	@Override
-	public boolean isPlayerAbleToSwapPositions() {
+	public List<AbstractSexPosition> getAllowedSexPositions() {
+		return Util.newArrayListOfValues(
+				SexPositionUnique.UNDER_DESK_RALPH);
+	}
+	
+	@Override
+	public boolean isSwapPositionAllowed(GameCharacter character, GameCharacter target) {
 		return false;
 	}
 	

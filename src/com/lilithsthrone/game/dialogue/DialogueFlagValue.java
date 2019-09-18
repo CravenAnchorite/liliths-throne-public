@@ -2,7 +2,7 @@ package com.lilithsthrone.game.dialogue;
 
 /**
  * @since 0.1.89
- * @version 0.2.11
+ * @version 0.3.3.10
  * @author Innoxia
  */
 public enum DialogueFlagValue {
@@ -24,6 +24,12 @@ public enum DialogueFlagValue {
 	visitedSubmission,
 	mommyFound,
 	
+	daddyFound,
+	rudeToDaddy,
+	flirtingWithDaddy,
+	talkedWithDaddy,
+	daddySendingReward,
+	
 	// Gym:
 	gymIntroduced,
 	gymHadTour,
@@ -40,17 +46,31 @@ public enum DialogueFlagValue {
 	nyanIntroduced,
 	kateIntroduced,
 	vickyIntroduced,
+	vanessaIntroduced,
 
 	roxyIntroduced,
 	axelIntroduced,
 	eponaIntroduced,
+	elizabethIntroduced,
 	
 	
 	// Red-light district:
 	prostitutionLicenseObtained,
+
+	
+	// City hall:
+	vanessaHelped,
+	vanessaDailyHelped,
+	vanessaDailyMassage,
+	vanessaMassaged,
+	vanessaFucked,
+	vanessaAskedAboutCatalogue,
+	vanessaAskedAboutSolitary,
 	
 	
 	// Shopping arcade:
+	ralphAskedAboutHundredKisses,
+	
 	nyanTalkedTo,
 	nyanComplimented,
 	nyanFlirtedWith,
@@ -73,10 +93,13 @@ public enum DialogueFlagValue {
 	lilayaDateTalk,
 	auntHomeJustEntered,
 	hadSexWithLilaya,
+	lilayaCondomBroke,
 	reactedToPregnancyLilaya,
 	waitingOnLilayaPregnancyResults,
+	waitingOnLilayaBirthNews,
 	essenceExtractionKnown,
 	roseToldOnYou,
+	lilayaReactedToPlayerAsDemon,
 	
 	readBook1,
 	readBook2,
@@ -90,7 +113,7 @@ public enum DialogueFlagValue {
 	givenLilayaPresent2,
 	givenLilayaPresent3,
 	
-	// Brax:
+	// Enforcer HQ:
 	braxEncountered,
 	accessToEnforcerHQ,
 	braxTransformedPlayer,
@@ -98,6 +121,7 @@ public enum DialogueFlagValue {
 	seenBraxAfterQuest,
 	feminisedBrax,
 	bimbofiedBrax,
+	candiHarpyTransformation,
 	
 	// Harpy Nests:
 	hasHarpyNestAccess,
@@ -111,6 +135,7 @@ public enum DialogueFlagValue {
 	
 	// Slaver Alley:
 	finchIntroduced,
+	statueTruthRevealed,
 	
 	// Zaranix:
 	zaranixDiscoveredHome,
@@ -138,6 +163,7 @@ public enum DialogueFlagValue {
 	slimeGuardsDefeated,
 	slimeRoyalGuardIntroduced,
 	slimeRoyalGuardDefeated,
+	slimeRoyalGuardDefeatReacted,
 	slimeQueenHelped,
 	slimeQueenConvinced,
 	slimeQueenForced,
@@ -157,14 +183,45 @@ public enum DialogueFlagValue {
 	krugerIntroduced,
 	
 	// Submission:
-	impFortressAlphaPacified,
-	impFortressDemonPacified,
-	impFortressFemalesPacified,
-	impFortressMalesPacified,
+	impCitadelEncountered,
+	impCitadelArcanistEncountered,
+	impCitadelArcanistAcceptedTF,
+	impCitadelTreasurySearched,
+	impCitadelLaboratorySearched,
 
-	impFortressAlphaEnslaved,
-	impFortressDemonEnslaved,
-	impFortressFemalesEnslaved,
-	impFortressMalesEnslaved,
+	impCitadelPrisonerMale,
+	impCitadelPrisonerFemale,
+	impCitadelPrisonerAlpha,
+	
+	impFortressAlphaGuardsPacified,
+	impFortressAlphaBossEncountered,
+	impFortressAlphaPacified,
+	impFortressAlphaDefeated,
+	
+	impFortressFemalesGuardsPacified,
+	impFortressFemalesBossEncountered,
+	impFortressFemalesPacified,
+	impFortressFemalesDefeated,
+	
+	impFortressMalesGuardsPacified,
+	impFortressMalesBossEncountered,
+	impFortressMalesPacified,
+	impFortressMalesDefeated,
+	
+	impFortressDemonBossEncountered,
+	impFortressDemonDefeated,
+	impFortressDemonImpsDefeated,
+	
+	elizabethAskedAboutUniforms,
+	elizabethAskedAboutSurname,
+	
+	lyssiethQuestionAsked1,
+	lyssiethQuestionAsked2,
+	lyssiethQuestionAsked3,
+	lyssiethQuestionAsked4,
+	lyssiethQuestionAsked5,
+
+	meraxisRepeatDemonTF,
+	
 	;
 }

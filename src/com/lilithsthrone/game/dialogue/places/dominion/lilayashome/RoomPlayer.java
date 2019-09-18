@@ -1,18 +1,18 @@
 package com.lilithsthrone.game.dialogue.places.dominion.lilayashome;
 
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
-import java.util.HashSet;
+import java.time.format.TextStyle;
 import java.util.Locale;
-import java.util.Set;
-
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.attributes.IntelligenceLevel;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
+import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
-import com.lilithsthrone.game.dialogue.DialogueNodeOld;
+import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.OccupantManagementDialogue;
 import com.lilithsthrone.game.dialogue.places.dominion.nightlife.NightlifeDistrict;
 import com.lilithsthrone.game.dialogue.responses.Response;
@@ -20,19 +20,17 @@ import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
 import com.lilithsthrone.game.dialogue.responses.ResponseSex;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.sex.Sex;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexPositionSlot;
-import com.lilithsthrone.game.sex.managers.universal.SMStanding;
+import com.lilithsthrone.game.sex.managers.universal.SMGeneric;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Colour;
+import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
 /**
  * @since 0.1.75
- * @version 0.2.8
+ * @version 0.3.3.10
  * @author Innoxia
  */
 public class RoomPlayer {
@@ -47,16 +45,18 @@ public class RoomPlayer {
 				: (int) ((60 * (minutesPassed<(60*7)?7:31)) - minutesPassed));
 
 		if (index == 1) {
-			return new Response("Rest", "Rest for four hours. As well as replenishing your energy and aura, you will also get the 'Well Rested' status effect.", AUNT_HOME_PLAYERS_ROOM_SLEEP){
+			return new Response("Rest",
+					"Rest for four hours. As well as replenishing your "+Attribute.HEALTH_MAXIMUM.getName()+" and "+Attribute.MANA_MAXIMUM.getName()+", you will also get the 'Well Rested' status effect.",
+					AUNT_HOME_PLAYERS_ROOM_SLEEP){
 				@Override
 				public void effects() {
 					Main.game.getPlayer().setHealth(Main.game.getPlayer().getAttributeValue(Attribute.HEALTH_MAXIMUM));
 					Main.game.getPlayer().setMana(Main.game.getPlayer().getAttributeValue(Attribute.MANA_MAXIMUM));
-					Main.game.getPlayer().setLust(0);
+					Main.game.getPlayer().setLustNoText(0);
 					if(Main.game.getPlayer().hasTrait(Perk.JOB_UNEMPLOYED, true)) {
-						Main.game.getPlayer().addStatusEffect(StatusEffect.WELL_RESTED_BOOSTED, (8 * 60) + 240);
+						Main.game.getPlayer().addStatusEffect(StatusEffect.WELL_RESTED_BOOSTED, (8*60*60) + 240);
 					} else {
-						Main.game.getPlayer().addStatusEffect(StatusEffect.WELL_RESTED, (6 * 60) + 240);
+						Main.game.getPlayer().addStatusEffect(StatusEffect.WELL_RESTED, (6*60*60) + 240);
 					}
 				}
 			};
@@ -64,127 +64,73 @@ public class RoomPlayer {
 		} else if (index == 2) {
 			return new Response("Rest until " + (Main.game.isDayTime() ? "Evening" : "Morning"),
 					"Rest for " + (sleepTimer >= 60 ? sleepTimer / 60 + " hours " : " ")
-					+ (sleepTimer % 60 != 0 ? sleepTimer % 60 + " minutes" : "")
-					+ " until " + (Main.game.isDayTime() ? "evening (21:00)." : "morning (07:00).")
-					+ " As well as replenishing your energy and aura, you will also get the 'Well Rested' status effect.", AUNT_HOME_PLAYERS_ROOM_SLEEP_LONG){
+						+ (sleepTimer % 60 != 0 ? sleepTimer % 60 + " minutes" : "")
+						+ " until " + (Main.game.isDayTime() ? "evening (21:00)." : "morning (07:00).")
+						+ " As well as replenishing your "+Attribute.HEALTH_MAXIMUM.getName()+" and "+Attribute.MANA_MAXIMUM.getName()+", you will also get the 'Well Rested' status effect.",
+					AUNT_HOME_PLAYERS_ROOM_SLEEP_LONG){
 				@Override
 				public void effects() {
 					Main.game.getPlayer().setHealth(Main.game.getPlayer().getAttributeValue(Attribute.HEALTH_MAXIMUM));
 					Main.game.getPlayer().setMana(Main.game.getPlayer().getAttributeValue(Attribute.MANA_MAXIMUM));
-					Main.game.getPlayer().setLust(0);
+					Main.game.getPlayer().setLustNoText(0);
 					if(Main.game.getPlayer().hasTrait(Perk.JOB_UNEMPLOYED, true)) {
-						Main.game.getPlayer().addStatusEffect(StatusEffect.WELL_RESTED_BOOSTED, (8 * 60) + sleepTimer);
+						Main.game.getPlayer().addStatusEffect(StatusEffect.WELL_RESTED_BOOSTED, (8*60*60) + sleepTimer*60);
 					} else {
-						Main.game.getPlayer().addStatusEffect(StatusEffect.WELL_RESTED, (6 * 60) + sleepTimer);
+						Main.game.getPlayer().addStatusEffect(StatusEffect.WELL_RESTED, (6*60*60) + sleepTimer*60);
 					}
 				}
 			};
 
 		} else if (index == 3) {
-			return new Response("Wash", "Use your room's en-suite to take a bath or shower. Rose will come and clean your clothes while you wash yourself.", AUNT_HOME_PLAYERS_ROOM_WASH){
+			return new Response("Quick wash",
+					"Use your room's en-suite to take a bath or shower. Rose will come and clean your clothes while you wash yourself."
+							+ " [style.italicsGood(This will clean <b>a maximum of "+Units.fluid(500)+"</b> of fluids out of all your orifices.)]"
+									+ " [style.italicsExcellent(This will clean all of your equipped clothing.)]",
+					AUNT_HOME_PLAYERS_ROOM_WASH){
 				@Override
 				public void effects() {
 					Main.game.getPlayer().setHealth(Main.game.getPlayer().getAttributeValue(Attribute.HEALTH_MAXIMUM));
 					Main.game.getPlayer().setMana(Main.game.getPlayer().getAttributeValue(Attribute.MANA_MAXIMUM));
 					
-					Set<SexAreaOrifice> dirtyOrifices = new HashSet<>();
-					for(SexAreaOrifice ot: SexAreaOrifice.values()) {
-						if(Main.game.getPlayer().getTotalFluidInArea(ot)>0) {
-							dirtyOrifices.add(ot);
-						}
-					}
 					
-					Main.game.getPlayer().washAllOrifices();
+					Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().washAllOrifices(false));
 					Main.game.getPlayer().calculateStatusEffects(0);
 					Main.game.getPlayer().cleanAllDirtySlots();
-					Main.game.getPlayer().cleanAllClothing();
-					
-					for(SexAreaOrifice orifice : SexAreaOrifice.values()) {
-						if(dirtyOrifices.contains(orifice)) {
-							switch(orifice) {
-								case ANUS:
-									if(Main.game.getPlayer().getTotalFluidInArea(orifice)>0) {
-										Main.game.getTextEndStringBuilder().append(formatWashingArea(false, "You wash as much of the cum out of your [pc.asshole] as you can, but there's so much in there that you're unable to fully clean it all out!"));
-									} else {
-										Main.game.getTextEndStringBuilder().append(formatWashingArea(true, "You wash all of the cum out of your [pc.asshole]."));
-									}
-									break;
-								case ASS:
-									if(Main.game.getPlayer().getTotalFluidInArea(orifice)>0) {
-										Main.game.getTextEndStringBuilder().append(formatWashingArea(false, "You wash as much of the cum off of your [pc.ass] as you can, but there's so much that's covering it, that you're unable to fully clean yourself!"));
-									} else {
-										Main.game.getTextEndStringBuilder().append(formatWashingArea(true, "You wash all of the cum off of your [pc.ass]."));
-									}
-									break;
-								case BREAST:
-									if(Main.game.getPlayer().getTotalFluidInArea(orifice)>0) {
-										Main.game.getTextEndStringBuilder().append(formatWashingArea(false, "You wash as much of the cum off of your [pc.breasts] as you can, but there's so much that's covering it, that you're unable to fully clean yourself!"));
-									} else {
-										Main.game.getTextEndStringBuilder().append(formatWashingArea(true, "You wash all of the cum off of your [pc.breasts]."));
-									}
-									break;
-								case MOUTH:
-									if(Main.game.getPlayer().getTotalFluidInArea(orifice)>0) {
-										Main.game.getTextEndStringBuilder().append(formatWashingArea(false, "The shower does nothing to clean the cum out of your stomach!"));
-									}
-									break;
-								case NIPPLE:
-									if(Main.game.getPlayer().getTotalFluidInArea(orifice)>0) {
-										Main.game.getTextEndStringBuilder().append(formatWashingArea(false, "You wash as much of the cum out of your [pc.nipples] as you can, but there's so much in there that you're unable to fully clean it all out!"));
-									} else {
-										Main.game.getTextEndStringBuilder().append(formatWashingArea(true, "You wash all of the cum out of your [pc.nipples]."));
-									}
-									break;
-								case THIGHS:
-									if(Main.game.getPlayer().getTotalFluidInArea(orifice)>0) {
-										Main.game.getTextEndStringBuilder().append(formatWashingArea(false, "You wash as much of the cum off of your [pc.thighs] as you can, but there's so much that's covering it, that you're unable to fully clean yourself!"));
-									} else {
-										Main.game.getTextEndStringBuilder().append(formatWashingArea(true, "You wash all of the cum off of your [pc.thighs]."));
-									}
-									break;
-								case URETHRA_PENIS:
-									if(Main.game.getPlayer().getTotalFluidInArea(orifice)>0) {
-										Main.game.getTextEndStringBuilder().append(formatWashingArea(false, "You wash as much of the cum out of your cock's urethra as you can, but there's so much in there that you're unable to fully clean it all out!"));
-									} else {
-										Main.game.getTextEndStringBuilder().append(formatWashingArea(true, "You wash all of the cum out of your cock's urethra."));
-									}
-									break;
-								case URETHRA_VAGINA:
-									if(Main.game.getPlayer().getTotalFluidInArea(orifice)>0) {
-										Main.game.getTextEndStringBuilder().append(formatWashingArea(false, "You wash as much of the cum out of your vagina's urethra as you can, but there's so much in there that you're unable to fully clean it all out!"));
-									} else {
-										Main.game.getTextEndStringBuilder().append(formatWashingArea(true, "You wash all of the cum out of your vagina's urethra."));
-									}
-									break;
-								case VAGINA:
-									if(Main.game.getPlayer().getTotalFluidInArea(orifice)>0) {
-										Main.game.getTextEndStringBuilder().append(formatWashingArea(false, "You wash as much of the cum out of your [pc.pussy] as you can, but there's so much in there that you're unable to fully clean it all out!"));
-									} else {
-										Main.game.getTextEndStringBuilder().append(formatWashingArea(true, "You wash all of the cum out of your [pc.pussy]."));
-									}
-									break;
-							}
-						}
-					}
-					
-					Main.game.getTextEndStringBuilder().append("<p>"
-								+ "<b style='color:"+ Colour.GENERIC_GOOD.toWebHexString()+ ";'>Your clothes have been cleaned, and you feel refreshed!</b>"
-							+ "</p>");
+					Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().cleanAllClothing(false));
+				}
+				@Override
+				public int getSecondsPassed() {
+					return 10*60;
 				}
 			};
 
 		} else if (index == 4) {
-			if(Main.game.getDialogueFlags().values.contains(DialogueFlagValue.knowsDate)) {
-				return new Response("Calendar", "Take another look at the enchanted calendar that's pinned up on one wall.", AUNT_HOME_PLAYERS_ROOM_CALENDAR);
-			} else {
-				return new Response("<span style='color:"+Colour.GENERIC_EXCELLENT.toWebHexString()+";'>Calendar</span>", "There's a calendar pinned up on one wall. Take a closer look at it.", AUNT_HOME_PLAYERS_ROOM_CALENDAR);
-			}
-			
+			return new Response("Thorough wash",
+					"Use your room's en-suite to take a bath or shower, in which you will thoroughly clean yourself. Rose will come and clean your clothes while you wash yourself."
+							+ " [style.italicsExcellent(This will clean <b>all</b> fluids out of all your orifices.)]"
+							+ " [style.italicsExcellent(This will clean <b>all</b> clothing in your inventory.)]",
+					AUNT_HOME_PLAYERS_ROOM_WASH){
+				@Override
+				public void effects() {
+					Main.game.getPlayer().setHealth(Main.game.getPlayer().getAttributeValue(Attribute.HEALTH_MAXIMUM));
+					Main.game.getPlayer().setMana(Main.game.getPlayer().getAttributeValue(Attribute.MANA_MAXIMUM));
+					
+					Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().washAllOrifices(true));
+					Main.game.getPlayer().calculateStatusEffects(0);
+					Main.game.getPlayer().cleanAllDirtySlots();
+					Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().cleanAllClothing(true));
+				}
+				@Override
+				public int getSecondsPassed() {
+					return 30*60;
+				}
+			};
+
 		} else if(index == 5) {
 			if(Main.game.getPlayer().isHasSlaverLicense()) {
 				return new Response("Slavery Overview", "Open the slave management screen.",  ROOM) {
 					@Override
-					public DialogueNodeOld getNextDialogue() {
+					public DialogueNode getNextDialogue() {
 						return OccupantManagementDialogue.getSlaveryOverviewDialogue();
 					}
 				};
@@ -208,19 +154,19 @@ public class RoomPlayer {
 				}
 			};
 
+		} else if (index == 10) {
+			if(Main.game.getDialogueFlags().values.contains(DialogueFlagValue.knowsDate)) {
+				return new Response("Calendar", "Take another look at the enchanted calendar that's pinned up on one wall.", AUNT_HOME_PLAYERS_ROOM_CALENDAR);
+			} else {
+				return new Response("<span style='color:"+Colour.GENERIC_EXCELLENT.toWebHexString()+";'>Calendar</span>", "There's a calendar pinned up on one wall. Take a closer look at it.", AUNT_HOME_PLAYERS_ROOM_CALENDAR);
+			}
+			
 		} else {
 			return null;
 		}
 	}
-	
-	private static String formatWashingArea(boolean isFullyCleaned, String input) {
-		return "<p style='color:"+(isFullyCleaned?Colour.GENERIC_GOOD.toWebHexString():Colour.CUM.toWebHexString())+";'><i>"
-					+ input
-				+ "</i></p>";
-	}
 
-	public static final DialogueNodeOld ROOM = new DialogueNodeOld("Your Room", "", false) {
-		private static final long serialVersionUID = 1L;
+	public static final DialogueNode ROOM = new DialogueNode("Your Room", "", false) {
 
 		@Override
 		public String getContent() {
@@ -243,12 +189,11 @@ public class RoomPlayer {
 		}
 	};
 	
-	public static final DialogueNodeOld AUNT_HOME_PLAYERS_ROOM_SLEEP = new DialogueNodeOld("Your Room", "", false) {
-		private static final long serialVersionUID = 1L;
+	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_SLEEP = new DialogueNode("Your Room", "", false) {
 
 		@Override
-		public int getMinutesPassed() {
-			return 240;
+		public int getSecondsPassed() {
+			return 240*60;
 		}
 
 		@Override
@@ -281,12 +226,11 @@ public class RoomPlayer {
 			return false;
 		}
 	};
-	public static final DialogueNodeOld AUNT_HOME_PLAYERS_ROOM_SLEEP_LONG = new DialogueNodeOld("Your Room", "", false) {
-		private static final long serialVersionUID = 1L;
+	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_SLEEP_LONG = new DialogueNode("Your Room", "", false) {
 
 		@Override
-		public int getMinutesPassed() {
-			return sleepTimer;
+		public int getSecondsPassed() {
+			return sleepTimer*60;
 		}
 
 		@Override
@@ -320,13 +264,7 @@ public class RoomPlayer {
 		}
 	};
 	
-	public static final DialogueNodeOld AUNT_HOME_PLAYERS_ROOM_WASH = new DialogueNodeOld("Your Room", "", false) {
-		private static final long serialVersionUID = 1L;
-
-		@Override
-		public int getMinutesPassed() {
-			return 20;
-		}
+	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_WASH = new DialogueNode("Your Room", "", false) {
 
 		@Override
 		public String getContent() {
@@ -350,8 +288,7 @@ public class RoomPlayer {
 		}
 	};
 
-	public static final DialogueNodeOld AUNT_HOME_PLAYERS_ROOM_CALENDAR = new DialogueNodeOld("Your Room", "", false) {
-		private static final long serialVersionUID = 1L;
+	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR = new DialogueNode("Your Room", "", false) {
 
 		@Override
 		public String getContent() {
@@ -384,12 +321,7 @@ public class RoomPlayer {
 			}
 			
 			UtilText.nodeContentSB.append(" and see that it's the <b style='color:"+Colour.BASE_BLUE_LIGHT.toWebHexString()+";'>"
-						+ Main.game.getDateNow().format(DateTimeFormatter.ofPattern("d", Locale.ENGLISH))
-						+ Util.getDayOfMonthSuffix(Main.game.getDateNow().getDayOfMonth())
-						+ " "
-						+ Main.game.getDateNow().format(DateTimeFormatter.ofPattern("MMMM", Locale.ENGLISH))
-						+ ", "
-						+ Main.game.getDateNow().format(DateTimeFormatter.ofPattern("yyyy", Locale.ENGLISH))
+						+ Units.date(Main.game.getDateNow(), Units.DateType.LONG)
 					+"</b>. From a quick calculation "+(Main.game.getPlayer().getAttributeValue(Attribute.MAJOR_ARCANE)<IntelligenceLevel.ONE_AVERAGE.getMaximumValue()?"(with some help from your phone's calculator)":"")
 					+ ", you figure out that it's been <b style='color:"+Colour.GENERIC_EXCELLENT.toWebHexString()+";'>"+Main.game.getDayNumber()+" day"+(Main.game.getDayNumber()>1?"s":"")+"</b> since you appeared in this world."
 					+ "</p>");
@@ -415,43 +347,243 @@ public class RoomPlayer {
 		public Response getResponse(int responseTab, int index) {
 			if (index == 0) {
 				return new Response("Back", "Step away from the calendar.", ROOM);
-				
 			} else if(index==1) {
-				return new Response("October", "Read the information on October's page.", AUNT_HOME_PLAYERS_ROOM_CALENDAR_OCTOBER);
-				
+				return new Response("January", "Read the information on January's page. [style.italicsMinorBad(There are currently no special events during January.)]", null);
 			} else if(index==2) {
+				return new Response("February", "Read the information on February page. [style.italicsMinorBad(There are currently no special events during February.)]", null);
+			} else if(index==3) {
+				return new Response("March", "Read the information on March's page. [style.italicsMinorBad(There are currently no special events during March.)]", null);
+			} else if(index==4) {
+				return new Response("April", "Read the information on April's page. [style.italicsMinorBad(There are currently no special events during April.)]", null);
+			} else if(index==5) {
+				return new Response("May", "Read the information on May's page.", AUNT_HOME_PLAYERS_ROOM_CALENDAR_MAY);
+			} else if(index==6) {
+				return new Response("June", "Read the information on June's page.", AUNT_HOME_PLAYERS_ROOM_CALENDAR_JUNE);
+			} else if(index==7) {
+				return new Response("July", "Read the information on July's page. [style.italicsMinorBad(There are currently no special events during July.)]", null);
+			} else if(index==8) {
+				return new Response("August", "Read the information on August's page. [style.italicsMinorBad(There are currently no special events during August.)]", null);
+			} else if(index==9) {
+				return new Response("September", "Read the information on September's page. [style.italicsMinorBad(There are currently no special events during September.)]", null);
+			} else if(index==10) {
+				return new Response("October", "Read the information on October's page.", AUNT_HOME_PLAYERS_ROOM_CALENDAR_OCTOBER);
+			} else if(index==11) {
+				return new Response("November", "Read the information on November's page. [style.italicsMinorBad(There are currently no special events during November.)]", null);
+			} else if(index==12) {
 				return new Response("December", "Read the information on December's page.", AUNT_HOME_PLAYERS_ROOM_CALENDAR_DECEMBER);
-				
 			} else {
 				return null;
 			}
 		}
 	};
 	
-	public static final DialogueNodeOld AUNT_HOME_PLAYERS_ROOM_CALENDAR_OCTOBER = new DialogueNodeOld("Your Room", "", false) {
-		private static final long serialVersionUID = 1L;
+	/** Calendar's associated animal-morphs are based on the twelve animals of the Chinese zodiac, with the Monkey being replaced with a demon, the Rooster with a harpy, and the Snake with a lamia.
+	 *  The ordering of the demon and harpy have also been switched, so that October has demons.<br/>
+	 *  There is also a 20% chance of giving a different, random animal-morph for each month.<br/>
+	 * Animals are:<br/>
+	 * Rat, Cow, Tiger, Rabbit, Dragon, Lamia (Snake), Horse, Sheep/Goat, Harpy (Rooster), Demon (Monkey), Dog, Pig
+	 */
+	private static String getCalendarImageDescription(Month month) {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<p>"
+				+ "Flicking through the calendar until you're looking at the page for "+month.getDisplayName(TextStyle.FULL, Locale.ENGLISH)+", you see that this month's image is now of ");
+		
+		if(Util.random.nextInt()<15) {
+			if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
+				sb.append(UtilText.returnStringAtRandom(
+						"a handsome merman, who's busily flexing his muscles while perched on a wave-swept rock.",
+						"muscular reindeer-boy, who's grinning as he presents his huge cock to you."));
+			} else {
+				sb.append(UtilText.returnStringAtRandom(
+						"a beautiful mermaid, who's happily showing off her exposed breasts while perched on a wave-swept rock.",
+						"a curvy reindeer-girl, who's bending over a wooden table and presenting her wet pussy to you."));
+			}
+			
+		} else {
+			switch(month) {
+				case JANUARY:
+					if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
+						sb.append("a toned "+Subspecies.RAT_MORPH.getSingularMaleName(null)+", who's grinning mischievously at you while stroking his fat, erect cock.");
+					} else {
+						sb.append("a horny "+Subspecies.RAT_MORPH.getSingularFemaleName(null)+", who's bent over a table in order to present her dripping pussy to you.");
+					}
+					break;
+				case FEBRUARY:
+					if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
+						sb.append("a topless "+Subspecies.COW_MORPH.getSingularMaleName(null)+"."
+								+ " His huge muscles are flexing as he carries a felled tree over one shoulder, while between his legs, you can't help but notice that he's got a massive bulge pressing out against the fabric of his shorts.");
+					} else {
+						sb.append("a black-and-white "+Subspecies.COW_MORPH.getSingularFemaleName(null)+", who's sitting on a small milking stool."
+								+ " With a happy smile on her face, she's busily pinching and tugging at at her engorged nipples, causing a stream of milk to flow out into a metal bucket.");
+					}
+					break;
+				case MARCH:
+					if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
+						sb.append("a fierce-looking "+Subspecies.CAT_MORPH_TIGER.getSingularMaleName(null)+"."
+								+ " Striking a dominant pose, he's flashing you a toothy grin, clearly excited by the fact that his huge feline cock is fully on display.");
+					} else {
+						sb.append("a fierce-looking "+Subspecies.CAT_MORPH_TIGER.getSingularFemaleName(null)+"."
+								+ " Striking a dominant pose, she's flashing you a toothy grin, clearly excited by the fact that her large breasts and tight pussy are fully on display.");
+					}
+					break;
+				case APRIL:
+					if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
+						sb.append("a handsome "+Subspecies.RABBIT_MORPH.getSingularMaleName(null)+", who's holding his massive cock in one hand while giving you a suggestive wink.");
+					} else {
+						sb.append("three blushing "+Subspecies.RABBIT_MORPH.getPluralFemaleName(null)+", who are down on all fours, side-by-side, presenting their pussies to you.");
+					}
+					break;
+				case MAY:
+					if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
+						sb.append("a powerful dragon, who's sitting on a golden throne perched on the top of a huge pile of treasure."
+								+ " His huge, scaly cock is fully on display, and with a grin on his face, he's giving you an expectant look, as though he's waiting for you to climb up and get a taste of it.");
+					} else {
+						sb.append("a powerful dragoness, who's sitting on a golden throne perched on the top of a huge pile of treasure."
+								+ " Her wet, scaly pussy is fully on display, and with a grin on her face, she's giving you an expectant look, as though she's waiting for you to climb up and get a taste of it.");
+					}
+					break;
+				case JUNE:
+					if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
+						sb.append("an exotic-looking male lamia."
+								+ " He's quite clearly turned on and eager to have sex with someone, for his twin-cocks have pushed out from his cloaca; their heads already glistening in the sun from the slimy precum they're starting to exude.");
+					} else {
+						sb.append("an exotic-looking female lamia."
+								+ " She's quite clearly turned on and eager to have sex with someone, for she's reaching down to spread her cloaca and present her dripping-wet pussy to you.");
+					}
+					break;
+				case JULY:
+					if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
+						sb.append("an impressively-endowed "+Subspecies.HORSE_MORPH.getSingularMaleName(null)+", who's flexing his muscles as he presents his fully-erect flared cock to you.");
+					} else {
+						sb.append("a fit "+Subspecies.HORSE_MORPH.getPluralFemaleName(null)+", who's leaning against a fence, flicking her tail to one side in order to present her animalistic-pussy to you.");
+					}
+					break;
+				case AUGUST:
+					if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
+						sb.append("a sheep-boy and goat-boy, standing side-by-side and presenting their erect cocks as they wink playfully at you.");
+					} else {
+						sb.append("a wooly sheep-girl and goat-girl, who are lying back and spreading their legs, presenting you with their tight, wet pussies.");
+					}
+					break;
+				case SEPTEMBER:
+					if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
+						sb.append("an unusually-masculine harpy."
+								+ " Although the size of his cock is nothing to write home about, he's extremely handsome, and you feel your heart beating faster as you see him winking at you.");
+					} else {
+						sb.append("a beautiful female harpy."
+								+ " Although she's willingly presenting her wet pussy to you, the look on her face is one of condescending superiority,"
+									+ " and you get the impression that she'd make some kind of outrageous demand in exchange for allowing you to have sex with her.");
+					}
+					break;
+				case OCTOBER:
+					if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
+						sb.append("a fit, handsome "+Subspecies.DEMON.getSingularMaleName(null)+", who's suggestively winking at you as he runs his fingers over his huge, erect cock.");
+					} else {
+						sb.append("a fit, beautiful "+Subspecies.DEMON.getSingularFemaleName(null)+", wearing nothing but a witch's hat, who's suggestively winking at you as she runs her fingers over her wet pussy and huge breasts.");
+					}
+					break;
+				case NOVEMBER:
+					if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
+						sb.append("an energetic-looking "+Subspecies.DOG_MORPH.getSingularMaleName(null)+", who's smiling at you as he strokes his erect, knotted dog-cock.");
+					} else {
+						sb.append("an excited-looking "+Subspecies.DOG_MORPH.getPluralFemaleName(null)+", who's down on all fours, raising her hips in order to present you with her wet pussy.");
+					}
+					break;
+				case DECEMBER:
+					if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
+						sb.append("a muscular boar-boy, who's grinning at you in anticipation as he strokes his huge cock and pair of massive, cum-filled balls.");
+					} else {
+						sb.append("a pretty, blushing pig-girl, who's leaning back against a wall and reaching down to spread her puffy pink pussy to you.");
+					}
+					break;
+			}
+		}
+		
+		sb.append(" After gazing at the picture for a few moments, you force yourself to look away and read the information that's written beneath:"
+				+ "</p>");
+		
+		return sb.toString();
+	}
+	
+	
+	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_MAY = new DialogueNode("Your Room", "", false) {
 
 		@Override
 		public String getContent() {
 			UtilText.nodeContentSB.setLength(0);
-			
-			if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
-				UtilText.nodeContentSB.append(
-						"<p>"
-							+ "Flicking through the calendar until you're looking at the page for October, you see that this month's image is now of a topless incubus flexing his muscles."
-							+ " After gazing at the picture for a few moments, you force yourself to look away and read the information that's written beneath:"
-						+ "</p>");
-			} else {
-				UtilText.nodeContentSB.append(
-						"<p>"
-							+ "Flicking through the calendar until you're looking at the page for October, you see that this month's image is now of a suggestively-posed succubus wearing nothing but a witch's hat."
-							+ " After gazing at the picture for a few moments, you force yourself to look away and read the information that's written beneath:"
-						+ "</p>");
-			}
+
+			UtilText.nodeContentSB.append(getCalendarImageDescription(Month.MAY));
 
 			UtilText.nodeContentSB.append(
 					"<h4 style='text-align:center;'>"
-							+ "<span style='color:"+Colour.BASE_ORANGE.toWebHexString()+";'>October</span>"
+							+ "<span style='color:"+Colour.BASE_BLUE_LIGHT.toWebHexString()+";'>May</span>"
+							+ "<br/>"
+							+ "<span style='color:"+Colour.BASE_PINK_LIGHT.toWebHexString()+";'>Mother's Week</span>"
+					+ "</h4>"
+					+ "<p><i>"
+						+ "The second week of May is a time in which to celebrate mothers, motherhood, and the nature of the maternal bond between mother and child."
+						+ " During this time, fertility-enhancing consumables are generously provided free of charge for all residents of Dominion, and are handed out by volunteers down the main boulevards."
+						+ " In this way, Lilith shows her love for mothers, and ensures that many more will be made!"
+					+ "</i></p>");
+			
+			return UtilText.nodeContentSB.toString();
+		}
+
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==5) {
+				return new Response("May", "You are already reading the calendar's page concerning the month of May.", null);
+			}
+			return AUNT_HOME_PLAYERS_ROOM_CALENDAR.getResponse(responseTab, index);
+		}
+	};
+	
+	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_JUNE = new DialogueNode("Your Room", "", false) {
+
+		@Override
+		public String getContent() {
+			UtilText.nodeContentSB.setLength(0);
+
+			UtilText.nodeContentSB.append(getCalendarImageDescription(Month.JUNE));
+
+			UtilText.nodeContentSB.append(
+					"<h4 style='text-align:center;'>"
+							+ "<span style='color:"+Colour.BASE_BLUE_LIGHT.toWebHexString()+";'>June</span>"
+							+ "<br/>"
+							+ "<span style='color:"+Colour.BASE_BLUE.toWebHexString()+";'>Father's Week</span>"
+					+ "</h4>"
+					+ "<p><i>"
+						+ "The third week of June is a time in which to celebrate fathers, fatherhood, and the nature of the paternal bond between father and child."
+						+ " During this time, fertility-enhancing consumables are generously provided free of charge for all residents of Dominion, and are handed out by volunteers down the main boulevards."
+						+ " In this way, Lilith shows her love for fathers, and ensures that many more will be made!"
+					+ "</i></p>");
+			
+			return UtilText.nodeContentSB.toString();
+		}
+
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==6) {
+				return new Response("June", "You are already reading the calendar's page concerning the month of June.", null);
+			}
+			return AUNT_HOME_PLAYERS_ROOM_CALENDAR.getResponse(responseTab, index);
+		}
+	};
+	
+	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_OCTOBER = new DialogueNode("Your Room", "", false) {
+
+		@Override
+		public String getContent() {
+			UtilText.nodeContentSB.setLength(0);
+
+			UtilText.nodeContentSB.append(getCalendarImageDescription(Month.OCTOBER));
+
+			UtilText.nodeContentSB.append(
+					"<h4 style='text-align:center;'>"
+							+ "<span style='color:"+Colour.BASE_BLUE_LIGHT.toWebHexString()+";'>October</span>"
 							+ "<br/>"
 							+ "<span style='color:"+Colour.GENERIC_ARCANE.toWebHexString()+";'>Lilith's Month</span>"
 					+ "</h4>"
@@ -473,45 +605,24 @@ public class RoomPlayer {
 
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			if (index == 0) {
-				return new Response("Back", "Stop reading about October.", AUNT_HOME_PLAYERS_ROOM_CALENDAR);
-				
-			} else if(index==1) {
-				return new Response("October", "You're already reading October's page!", null);
-				
-			} else if(index==2) {
-				return new Response("December", "Read the information on December's page.", AUNT_HOME_PLAYERS_ROOM_CALENDAR_DECEMBER);
-				
-			} else {
-				return null;
+			if(index==10) {
+				return new Response("October", "You are already reading the calendar's page concerning the month of October.", null);
 			}
+			return AUNT_HOME_PLAYERS_ROOM_CALENDAR.getResponse(responseTab, index);
 		}
 	};
 	
-	public static final DialogueNodeOld AUNT_HOME_PLAYERS_ROOM_CALENDAR_DECEMBER = new DialogueNodeOld("Your Room", "", false) {
-		private static final long serialVersionUID = 1L;
+	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_DECEMBER = new DialogueNode("Your Room", "", false) {
 
 		@Override
 		public String getContent() {
 			UtilText.nodeContentSB.setLength(0);
 			
-			if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
-				UtilText.nodeContentSB.append(
-						"<p>"
-							+ "You turn the calendar to the month of December, and discover that the model adorning this page is a muscular reindeer-boy, who's grinning as he presents his huge cock to the viewer."
-							+ " After gazing at the picture for a few moments, you force yourself to look away and read the information that's written beneath:"
-						+ "</p>");
-			} else {
-				UtilText.nodeContentSB.append(
-						"<p>"
-							+ "You turn the calendar to the month of December, and discover that the model adorning this page is a curvy reindeer-girl, who's bending over a wooden table and presenting her wet pussy to the viewer."
-							+ " After gazing at the picture for a few moments, you force yourself to look away and read the information that's written beneath:"
-						+ "</p>");
-			}
+			UtilText.nodeContentSB.append(getCalendarImageDescription(Month.DECEMBER));
 
 			UtilText.nodeContentSB.append(
 					"<h4 style='text-align:center;'>"
-							+ "<span style='color:"+Colour.BASE_RED.toWebHexString()+";'>December</span>"
+							+ "<span style='color:"+Colour.BASE_BLUE_LIGHT.toWebHexString()+";'>December</span>"
 							+ "<br/>"
 							+ "<span style='color:"+Colour.BASE_GOLD.toWebHexString()+";'>Yuletide</span>"
 					+ "</h4>"
@@ -536,29 +647,20 @@ public class RoomPlayer {
 
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			if (index == 0) {
-				return new Response("Back", "Stop reading about October.", AUNT_HOME_PLAYERS_ROOM_CALENDAR);
-				
-			} else if(index==1) {
-				return new Response("October", "Read the information on October's page.", AUNT_HOME_PLAYERS_ROOM_CALENDAR_OCTOBER);
-				
-			} else if(index==2) {
-				return new Response("December", "You're already reading December's page.", null);
-				
-			} else {
-				return null;
+			if(index==12) {
+				return new Response("December", "You are already reading the calendar's page concerning the month of December.", null);
 			}
+			return AUNT_HOME_PLAYERS_ROOM_CALENDAR.getResponse(responseTab, index);
 		}
 	};
 	
 
 	
-	public static final DialogueNodeOld AUNT_HOME_PLAYERS_ROOM_CLUBBER_TAKEN_HOME = new DialogueNodeOld("Your Room", "", true) {
-		private static final long serialVersionUID = 1L;
+	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CLUBBER_TAKEN_HOME = new DialogueNode("Your Room", "", true) {
 
 		@Override
-		public int getMinutesPassed() {
-			return 30;
+		public int getSecondsPassed() {
+			return 30*60;
 		}
 
 		@Override
@@ -572,20 +674,20 @@ public class RoomPlayer {
 			if(index==1) {
 				return new ResponseSex("Sex (dom)", UtilText.parse(NightlifeDistrict.getClubbersPresent(), "Have dominant sex with [npc.name]."),
 						true, true,
-						new SMStanding(
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexPositionSlot.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(new Value<>(NightlifeDistrict.getClubbersPresent().get(0), SexPositionSlot.STANDING_SUBMISSIVE))),
+						new SMGeneric(
+								Util.newArrayListOfValues(Main.game.getPlayer()),
+								Util.newArrayListOfValues(NightlifeDistrict.getClubbersPresent().get(0)),
 						null,
-						BACK_HOME_AFTER_CLUBBER_SEX, UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "AUNT_HOME_PLAYERS_ROOM_CLUBBER_TAKEN_HOME_SEX_AS_DOM", NightlifeDistrict.getClubbersPresent()));
+						null), BACK_HOME_AFTER_CLUBBER_SEX, UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "AUNT_HOME_PLAYERS_ROOM_CLUBBER_TAKEN_HOME_SEX_AS_DOM", NightlifeDistrict.getClubbersPresent()));
 				
 			} else if(index==2) {
 				return new ResponseSex("Sex (sub)", UtilText.parse(NightlifeDistrict.getClubbersPresent(), "Have submissive sex with [npc.name]."),
 						true, true,
-						new SMStanding(
-								Util.newHashMapOfValues(new Value<>(NightlifeDistrict.getClubbersPresent().get(0), SexPositionSlot.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexPositionSlot.STANDING_SUBMISSIVE))),
+						new SMGeneric(
+								Util.newArrayListOfValues(NightlifeDistrict.getClubbersPresent().get(0)),
+								Util.newArrayListOfValues(Main.game.getPlayer()),
 						null,
-						BACK_HOME_AFTER_CLUBBER_SEX, UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "AUNT_HOME_PLAYERS_ROOM_CLUBBER_TAKEN_HOME_SEX_AS_SUB", NightlifeDistrict.getClubbersPresent()));
+						null), BACK_HOME_AFTER_CLUBBER_SEX, UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "AUNT_HOME_PLAYERS_ROOM_CLUBBER_TAKEN_HOME_SEX_AS_SUB", NightlifeDistrict.getClubbersPresent()));
 				
 			} else if(index==4) {
 				return new Response("Say goodbye",
@@ -617,17 +719,16 @@ public class RoomPlayer {
 		}
 	};
 	
-	public static final DialogueNodeOld BACK_HOME_AFTER_CLUBBER_SEX = new DialogueNodeOld("Your Room", "", true) {
-		private static final long serialVersionUID = 1L;
+	public static final DialogueNode BACK_HOME_AFTER_CLUBBER_SEX = new DialogueNode("Your Room", "", true) {
 		
 		@Override
-		public int getMinutesPassed(){
-			return 15;
+		public int getSecondsPassed() {
+			return 15*60;
 		}
 		
 		@Override
 		public String getContent() {
-			if(Sex.getNumberOfOrgasms(NightlifeDistrict.getPartner())>0) {
+			if(Sex.getNumberOfOrgasms(NightlifeDistrict.getPartner())>=NightlifeDistrict.getPartner().getOrgasmsBeforeSatisfied()) {
 				return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "BACK_HOME_AFTER_CLUBBER_SEX", NightlifeDistrict.getClubbersPresent());
 			} else {
 				return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "BACK_HOME_AFTER_CLUBBER_SEX_NO_ORGASM", NightlifeDistrict.getClubbersPresent());
@@ -674,12 +775,11 @@ public class RoomPlayer {
 		}
 	};
 
-	public static final DialogueNodeOld BACK_HOME_AFTER_SEX = new DialogueNodeOld("Your Room", "", false) {
-		private static final long serialVersionUID = 1L;
+	public static final DialogueNode BACK_HOME_AFTER_SEX = new DialogueNode("Your Room", "", false) {
 		
 		@Override
-		public int getMinutesPassed(){
-			return 2;
+		public int getSecondsPassed() {
+			return 2*60;
 		}
 		
 		@Override
@@ -693,12 +793,11 @@ public class RoomPlayer {
 		}
 	};
 
-	public static final DialogueNodeOld AUNT_HOME_PLAYERS_ROOM_CLUBBER_TAKEN_HOME_SEND_HOME = new DialogueNodeOld("Your Room", "", false) {
-		private static final long serialVersionUID = 1L;
+	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CLUBBER_TAKEN_HOME_SEND_HOME = new DialogueNode("Your Room", "", false) {
 		
 		@Override
-		public int getMinutesPassed(){
-			return 2;
+		public int getSecondsPassed() {
+			return 2*60;
 		}
 		
 		@Override

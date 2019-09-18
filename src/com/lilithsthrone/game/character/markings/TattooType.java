@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.lilithsthrone.utils.ColourListPresets;
+import com.lilithsthrone.utils.Util;
 
 /**
  * @since 0.2.6
@@ -20,7 +21,7 @@ public class TattooType {
 			"none",
 			"none",
 			"This tattoo has no particular pattern, and simply displays either writing or a counter.",
-			ColourListPresets.JUST_GREY.getPresetColourList(),
+			ColourListPresets.JUST_GREY,
 			null,
 			null,
 			null);
@@ -29,16 +30,16 @@ public class TattooType {
 			"flowers",
 			"flowers",
 			"This tattoo depicts a flowing series of intertwined flowers.",
-			ColourListPresets.ALL.getPresetColourList(),
-			ColourListPresets.ALL.getPresetColourList(),
-			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.ALL,
+			ColourListPresets.ALL,
+			ColourListPresets.ALL,
 			null);
 
 	public static AbstractTattooType TRIBAL = new AbstractTattooType(
 			"tribal",
 			"tribal",
 			"A series of flowing lines and intricate patterns.",
-			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.ALL,
 			null,
 			null,
 			null);
@@ -47,16 +48,16 @@ public class TattooType {
 			"butterflies",
 			"butterflies",
 			"An artistic depiction of a trio of butterflies in mid-flight.",
-			ColourListPresets.ALL.getPresetColourList(),
-			ColourListPresets.ALL.getPresetColourList(),
-			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.ALL,
+			ColourListPresets.ALL,
+			ColourListPresets.ALL,
 			null);
 	
 	public static AbstractTattooType LINES = new AbstractTattooType(
 			"lines",
 			"lines",
 			"A series of flowing, swirling lines.",
-			ColourListPresets.ALL.getPresetColourList(),
+			ColourListPresets.ALL,
 			null,
 			null,
 			null);
@@ -65,6 +66,9 @@ public class TattooType {
 	private static Map<String, AbstractTattooType> idToTattooMap = new HashMap<>();
 	
 	public static AbstractTattooType getTattooTypeFromId(String id) {
+//		System.out.print("ID: "+id);
+		id = Util.getClosestStringMatch(id, idToTattooMap.keySet());
+//		System.out.println("  set to: "+id);
 		return idToTattooMap.get(id);
 	}
 	

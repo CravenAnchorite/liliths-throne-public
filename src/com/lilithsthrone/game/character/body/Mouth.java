@@ -1,6 +1,5 @@
 package com.lilithsthrone.game.character.body;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,15 +11,15 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.main.Main;
+import com.lilithsthrone.utils.Util;
 
 /**
  * @since 0.1.83
- * @version 0.1.83
+ * @version 0.3.1
  * @author Innoxia
  */
-public class Mouth implements BodyPartInterface, Serializable {
+public class Mouth implements BodyPartInterface {
 
-	private static final long serialVersionUID = 1L;
 	
 	protected MouthType type;
 	protected OrificeMouth orificeMouth;
@@ -69,9 +68,11 @@ public class Mouth implements BodyPartInterface, Serializable {
 		for(OrificeModifier om : orificeMouth.getOrificeModifiers()) {
 			descriptorList.add(om.getName());
 		}
+		descriptorList.add(owner.getCovering(owner.getMouthCovering()).getPrimaryColour().getName());
+		
 		descriptorList.add(type.getDescriptor(owner));
 		
-		return UtilText.returnStringAtRandom(descriptorList.toArray(new String[]{}));
+		return Util.randomItemFrom(descriptorList);
 	}
 	
 	public String getLipsNameSingular(GameCharacter gc) {
@@ -93,8 +94,8 @@ public class Mouth implements BodyPartInterface, Serializable {
 			descriptorList.add("soft");
 			descriptorList.add("delicate");
 		}
-		
-		return UtilText.returnStringAtRandom(descriptorList.toArray(new String[]{}));
+
+		return Util.randomItemFrom(descriptorList);
 	}
 
 	public void setType(MouthType type) {
@@ -111,6 +112,12 @@ public class Mouth implements BodyPartInterface, Serializable {
 
 	public String setLipSize(GameCharacter owner, int lipSize) {
 		int effectiveLipSize = Math.max(0, Math.min(lipSize, LipSize.getLargest()));
+		
+		if(owner==null) {
+			this.lipSize = effectiveLipSize;
+			return "";
+		}
+		
 		if(owner.getLipSizeValue() == effectiveLipSize) {
 			if(owner.isPlayer()) {
 				return "<p style='text-align:center;'>[style.colourDisabled(The size of your [pc.lips] doesn't change...)]</p>";
@@ -187,6 +194,14 @@ public class Mouth implements BodyPartInterface, Serializable {
 						+piercingUnequip);
 			}
 		}
+	}
+
+	@Override
+	public boolean isBestial(GameCharacter owner) {
+		if(owner==null) {
+			return false;
+		}
+		return owner.getLegConfiguration().getBestialParts().contains(Mouth.class) && getType().getRace().isBestialPartsAvailable();
 	}
 	
 }
